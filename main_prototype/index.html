@@ -297,10 +297,10 @@ tailwind.config = {
   .btn-cta:hover { background: #262626; }
   .btn-cta:active { transform: scale(0.97); }
 
-  /* Login CTA pulsing glow (design-spec: CTA glow = 0 0 8px → 0 0 20px primary) */
+  /* Login CTA pulsing glow */
   @keyframes ctaGlow {
-    0%, 100% { box-shadow: 0 0 8px rgba(34,197,94,0.3); }
-    50% { box-shadow: 0 0 20px rgba(34,197,94,0.5); }
+    0%, 100% { box-shadow: 0 0 8px rgba(242,242,242,0.1); }
+    50% { box-shadow: 0 0 20px rgba(242,242,242,0.2); }
   }
   .login-cta { animation: ctaGlow 2.5s ease-in-out infinite; }
 
@@ -5073,11 +5073,11 @@ function copyLinkFromPopup(btn) {
   navigator.clipboard.writeText('https://world.simple.app/ref/dark_rider').then(function() {
     btn.textContent = '✓ Скопировано';
     btn.style.background = 'hsl(240 5% 16%)';
-    btn.style.color = '#22c55e';
+    btn.style.color = '#f2f2f2';
     setTimeout(function() {
       btn.textContent = 'Скопировать';
-      btn.style.background = '#22c55e';
-      btn.style.color = '#000';
+      btn.style.background = '#1a1a1a';
+      btn.style.color = '#f2f2f2';
     }, 2000);
   });
 }
