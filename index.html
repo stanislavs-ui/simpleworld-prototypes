@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple World — Prototypes</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .container { max-width: 480px; width: 100%; padding: 40px 24px; }
+    h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
+    .card { display: block; background: #151520; border: 1px solid #2a2a3a; border-radius: 12px; padding: 20px; margin-bottom: 12px; text-decoration: none; color: inherit; transition: border-color 0.2s, background 0.2s; }
+    .card:hover { border-color: #4ade80; background: #1a1a28; }
+    .card h2 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+    .card p { font-size: 13px; color: #888; }
+    .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
+    .badge-main { background: #4ade8033; color: #4ade80; }
+    .badge-dark { background: #818cf833; color: #818cf8; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Simple World</h1>
+    <p class="subtitle">Prototypes & Wireframes</p>
+    <a class="card" href="./wireframes/">
+      <h2>Wireframes v3 <span class="badge badge-main">main</span></h2>
+      <p>Белый прототип — 115 экранов, полный user flow</p>
+    </a>
+    <a class="card" href="./dark/">
+      <h2>Dark Prototype <span class="badge badge-dark">dark</span></h2>
+      <p>Тёмная версия — game UI, серия Миры, квесты Алекса</p>
+    </a>
+    <a class="card" href="./dark/index-standalone.html">
+      <h2>Dark Standalone</h2>
+      <p>Автономная версия (без CDN зависимостей)</p>
+    </a>
+    <a class="card" href="./dark/desktop/">
+      <h2>Desktop Version</h2>
+      <p>Десктопная адаптация тёмного прототипа</p>
+    </a>
+  </div>
+</body>
+</html>
