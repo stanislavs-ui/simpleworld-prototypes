@@ -439,11 +439,11 @@ tailwind.config = {
         <div style="max-width: 520px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 32px;">
 
           <!-- Logo -->
-          <img src="../../../../assets/brand/logo-on-dark-transparent.png" alt="Simple World" style="height: 120px; object-fit: contain;" />
+          <img src="../../assets/brand/logo-on-dark-transparent.png" alt="Simple World" style="height: 120px; object-fit: contain;" />
 
           <!-- Globe icon with strike-through -->
           <div style="width: 200px; height: 200px; position: relative; display: flex; align-items: center; justify-content: center;">
-            <img src="../../../../assets/icons/geo-block-globe.jpg" alt="" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 40px rgba(255,80,80,0.15);" />
+            <img src="../../assets/icons/geo-block-globe.jpg" alt="" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 40px rgba(255,80,80,0.15);" />
             <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
               <div style="width: 110%; height: 4px; background: linear-gradient(90deg, transparent 0%, rgba(255,80,80,0.8) 15%, rgba(255,80,80,0.95) 50%, rgba(255,80,80,0.8) 85%, transparent 100%); transform: rotate(-45deg); box-shadow: 0 0 12px rgba(255,80,80,0.4);"></div>
             </div>
@@ -472,14 +472,14 @@ tailwind.config = {
       <!-- ==================== SCREEN 1: City Emergence (DESKTOP — full-bleed hero) ==================== -->
       <div class="screen full-bleed" id="s1" data-name="City Emergence" style="padding: 0; min-height: calc(100vh - 56px); overflow: hidden;">
         <!-- City background — fills entire viewport width -->
-        <div class="absolute inset-0 city-reveal" style="background: url('../../../../assets/banners/cities/city-fut-3b.jpg') center 35% / cover no-repeat; min-height: 100%;"></div>
+        <div class="absolute inset-0 city-reveal" style="background: url('../../assets/banners/cities/city-fut-3b.jpg') center 35% / cover no-repeat; min-height: 100%;"></div>
         <!-- Gradient overlays for depth -->
         <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 35%, transparent 55%);"></div>
         <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 15%);"></div>
 
         <!-- Logo + tagline — centered, large -->
         <div id="splash-content" style="position: absolute; bottom: 10%; left: 0; right: 0; z-index: 10; display: flex; flex-direction: column; align-items: center;">
-          <img class="title-reveal" src="../../../../assets/brand/logo-on-dark-transparent.png" alt="Simple World" style="height: 160px; object-fit: contain;" />
+          <img class="title-reveal" src="../../assets/brand/logo-on-dark-transparent.png" alt="Simple World" style="height: 160px; object-fit: contain;" />
           <p class="subtitle-reveal font-body tracking-wide" data-i18n="s1_tagline" style="color: hsl(0 0% 70%); font-size: 22px; margin-top: -4px; letter-spacing: 0.5px;">Мир, который строят его жители</p>
         </div>
       </div>
@@ -493,7 +493,7 @@ tailwind.config = {
           <!-- Alex — large, left side -->
           <div class="alex-avatar-enter" style="flex-shrink: 0; width: 280px; display: flex; justify-content: center; background: #000; border-radius: 20px; overflow: hidden;">
             <img alt="Алекс" style="height: 380px; object-fit: contain;"
-              src="../../../../assets/characters/alex-v41c-black.jpg"/>
+              src="../../assets/characters/alex-v41c-black.jpg"/>
           </div>
 
           <!-- Right side: chat + buttons -->
@@ -531,7 +531,7 @@ tailwind.config = {
 
           <!-- Logo small -->
           <div class="flex flex-col items-center mb-8">
-            <img src="../../../../assets/brand/logo-on-dark.png" alt="Simple World" style="height: 112px; object-fit: contain;" />
+            <img src="../../assets/brand/logo-on-dark.png" alt="Simple World" style="height: 112px; object-fit: contain;" />
           </div>
 
           <!-- Mini Alex line -->
@@ -593,7 +593,7 @@ tailwind.config = {
 
           <!-- Logo -->
           <div class="flex flex-col items-center mb-8">
-            <img src="../../../../assets/brand/logo-on-dark.png" alt="Simple World" style="height: 80px; object-fit: contain;" />
+            <img src="../../assets/brand/logo-on-dark.png" alt="Simple World" style="height: 80px; object-fit: contain;" />
           </div>
 
           <!-- Title -->
@@ -632,7 +632,7 @@ tailwind.config = {
       <!-- ==================== SCREEN 4: Alex Explains (copy-v3 Screen 3) ==================== -->
       <div class="screen" id="s4" data-name="Алекс объясняет мир"
         style="justify-content: flex-end; position: relative;
-               background: url('../../../../assets/city/worldmap-v1c.jpg') center top / cover no-repeat;">
+               background: url('../../assets/city/worldmap-v1c.jpg') center top / cover no-repeat;">
 
         <!-- Fog overlays -->
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; background: radial-gradient(ellipse 80% 60% at center 35%, transparent 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.85) 100%);"></div>
@@ -723,7 +723,7 @@ tailwind.config = {
           <!-- Mira — same as Alex: black bg image, no mask -->
           <div class="relative w-full overflow-hidden flex justify-center" style="height: 280px; margin: 0 -20px; width: calc(100% + 40px);">
             <img alt="Мира" class="h-full object-contain"
-              src="../../../../assets/characters/mira-rect5-3-dark.jpg"/>
+              src="../../assets/characters/mira-rect5-3-dark.jpg"/>
             <!-- Purple neon glow overlay -->
             <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at center 40%, rgba(138,43,226,0.25) 0%, transparent 70%); mix-blend-mode: screen;"></div>
           </div>
@@ -752,7 +752,7 @@ tailwind.config = {
           <!-- Alex compact -->
           <div class="relative w-full overflow-hidden flex justify-center" style="height: 280px; margin: 0 -20px; width: calc(100% + 40px);">
             <img alt="Алекс" class="h-full object-contain"
-              src="../../../../assets/characters/alex-v41c-black.jpg"/>
+              src="../../assets/characters/alex-v41c-black.jpg"/>
             <!-- no overlay -->
           </div>
 
@@ -793,7 +793,7 @@ tailwind.config = {
           <!-- Alex compact 280px -->
           <div class="relative w-full overflow-hidden flex justify-center" style="height: 280px; margin: 0 -20px; width: calc(100% + 40px);">
             <img alt="Алекс" class="h-full object-contain"
-              src="../../../../assets/characters/alex-v41c-black.jpg"/>
+              src="../../assets/characters/alex-v41c-black.jpg"/>
             <!-- no overlay -->
           </div>
 
@@ -969,7 +969,7 @@ tailwind.config = {
           </div>
 
           <!-- ── Карта мира (mini city, яркая) ── -->
-          <div id="cm-map" onclick="goTo(18)" style="border-radius: 14px; cursor: pointer; overflow: hidden; aspect-ratio: 1/1; width: 100%; background: url('../../../../assets/banners/cities/city-fut-3b.jpg') center 60% / cover no-repeat; position: relative; flex-shrink: 0;">
+          <div id="cm-map" onclick="goTo(18)" style="border-radius: 14px; cursor: pointer; overflow: hidden; aspect-ratio: 1/1; width: 100%; background: url('../../assets/banners/cities/city-fut-3b.jpg') center 60% / cover no-repeat; position: relative; flex-shrink: 0;">
             <!-- Soft top gradient for text readability -->
             <div style="position: absolute; top: 0; left: 0; right: 0; height: 36px; background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, transparent 100%);"></div>
             <!-- Label top-left -->
@@ -1206,7 +1206,7 @@ tailwind.config = {
               </div>
               <!-- Day 7 — key inside circle -->
               <div style="width: 34px; height: 34px; border-radius: 50%; background: hsl(240 5% 12%); border: 1.5px solid hsl(240 5% 20%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;">
-                <img src="../../../../assets/icons/key-game-4-dark.jpg" alt="🔑" style="width: 24px; height: 24px; object-fit: contain;"/>
+                <img src="../../assets/icons/key-game-4-dark.jpg" alt="🔑" style="width: 24px; height: 24px; object-fit: contain;"/>
               </div>
             </div>
 
@@ -1292,7 +1292,7 @@ tailwind.config = {
         </div>
 
         <!-- Full city image — full screen -->
-        <div style="position: absolute; inset: 0; background: url('../../../../assets/banners/cities/city-fut-3b.jpg') center 40% / cover no-repeat; background-color: #080c16;">
+        <div style="position: absolute; inset: 0; background: url('../../assets/banners/cities/city-fut-3b.jpg') center 40% / cover no-repeat; background-color: #080c16;">
 
           <!-- === Location pins on buildings === -->
 
@@ -1334,7 +1334,7 @@ tailwind.config = {
 
           <!-- Alex avatar -->
           <div class="flex justify-center" style="margin-bottom: 16px;">
-            <img alt="Алекс" src="../../../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
+            <img alt="Алекс" src="../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
           </div>
 
           <!-- Chat bubble — typewriter -->
@@ -1361,7 +1361,7 @@ tailwind.config = {
 
           <!-- Alex avatar -->
           <div class="flex justify-center" style="margin-bottom: 16px;">
-            <img alt="Алекс" src="../../../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
+            <img alt="Алекс" src="../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
           </div>
 
           <!-- Chat bubble — typewriter -->
@@ -1542,7 +1542,7 @@ tailwind.config = {
 
           <!-- Alex avatar -->
           <div class="flex justify-center" style="margin-bottom: 16px;">
-            <img alt="Алекс" src="../../../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
+            <img alt="Алекс" src="../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
           </div>
 
           <!-- Chat bubble — typewriter -->
@@ -1569,7 +1569,7 @@ tailwind.config = {
 
           <!-- Alex avatar -->
           <div class="flex justify-center" style="margin-bottom: 12px;">
-            <img alt="Алекс" src="../../../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
+            <img alt="Алекс" src="../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
           </div>
 
           <!-- Chat bubble — typewriter -->
@@ -1689,7 +1689,7 @@ tailwind.config = {
 
           <!-- Simple Wallet logo -->
           <div style="text-align: center; margin-bottom: 24px;">
-            <img src="../../../../assets/brand/simple-wallet-logo.png" alt="Simple" style="width: 100%; object-fit: contain; margin: 0 auto 16px; display: block;"/>
+            <img src="../../assets/brand/simple-wallet-logo.png" alt="Simple" style="width: 100%; object-fit: contain; margin: 0 auto 16px; display: block;"/>
             <div class="text-[14px] font-bold" data-i18n="s26_subtitle" style="color: #f2f2f2; margin-bottom: 8px;">Установи Simple Wallet и зарегистрируйся</div>
             <div class="text-[13px]" data-i18n="s26_desc" style="color: hsl(0 0% 50%); line-height: 1.5;">Simple Wallet связывает мир с реальной жизнью.<br>Карта, переводы, вывод — всё здесь.</div>
           </div>
@@ -1793,15 +1793,15 @@ tailwind.config = {
           <div style="text-align: center; margin-bottom: 24px;">
             <!-- Card image -->
             <div style="border-radius: 14px; overflow: hidden; margin-bottom: 16px; background: #000;">
-              <img src="../../../../assets/brand/simple-card-clean.jpg" alt="Simple Card" style="width: 100%; display: block;"/>
+              <img src="../../assets/brand/simple-card-clean.jpg" alt="Simple Card" style="width: 100%; display: block;"/>
             </div>
             <div class="text-[14px] font-bold" data-i18n="s28_subtitle" style="color: #f2f2f2; margin-bottom: 8px;">Мост между мирами</div>
             <div class="text-[13px]" data-i18n="s28_desc" style="color: hsl(0 0% 50%); line-height: 1.5;">С картой — полноценный житель обоих миров. Просто пользуйся.</div>
             <!-- Payment icons (official SVGs from simpleicons.org) -->
             <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 14px;">
-              <img src="../../../../assets/icons/visa-white.svg" alt="Visa" style="height: 28px;"/>
-              <img src="../../../../assets/icons/applepay-white.svg" alt="Apple Pay" style="height: 28px;"/>
-              <img src="../../../../assets/icons/googlepay-white.svg" alt="Google Pay" style="height: 28px;"/>
+              <img src="../../assets/icons/visa-white.svg" alt="Visa" style="height: 28px;"/>
+              <img src="../../assets/icons/applepay-white.svg" alt="Apple Pay" style="height: 28px;"/>
+              <img src="../../assets/icons/googlepay-white.svg" alt="Google Pay" style="height: 28px;"/>
             </div>
           </div>
           <div id="card-form">
@@ -1835,7 +1835,7 @@ tailwind.config = {
             <span class="text-[15px] font-bold" data-i18n="s29_title" style="color: #f2f2f2;">Пополнить запасы</span>
           </div>
           <div style="text-align: center; margin-bottom: 24px;">
-            <img src="../../../../assets/icons/deposit-final.jpg" alt="Депозит" style="width: 240px; height: 240px; object-fit: contain; margin: 0 auto 16px; display: block;"/>
+            <img src="../../assets/icons/deposit-final.jpg" alt="Депозит" style="width: 240px; height: 240px; object-fit: contain; margin: 0 auto 16px; display: block;"/>
             <div class="text-[14px] font-bold" data-i18n="s29_subtitle" style="color: #f2f2f2; margin-bottom: 8px;">Пополни кошелёк</div>
             <div class="text-[13px]" data-i18n="s29_desc" style="color: hsl(0 0% 50%); line-height: 1.5;">Сделай депозит на любую сумму от 5 USDT в Simple Wallet — и всё готово.</div>
           </div>
@@ -1871,7 +1871,7 @@ tailwind.config = {
           </div>
           <div style="text-align: center; margin-bottom: 24px;">
             <div style="border-radius: 14px; overflow: hidden; margin-bottom: 16px; background: #000;">
-              <img src="../../../../assets/brand/simple-card-clean.jpg" alt="Simple Card" style="width: 100%; display: block;"/>
+              <img src="../../assets/brand/simple-card-clean.jpg" alt="Simple Card" style="width: 100%; display: block;"/>
             </div>
             <div class="text-[14px] font-bold" data-i18n="s30_subtitle" style="color: #f2f2f2; margin-bottom: 8px;">Первое действие</div>
             <div class="text-[13px]" data-i18n="s30_desc" style="color: hsl(0 0% 50%); line-height: 1.5;">Оплати что угодно картой от 5 USDT.<br>Один раз — и мир поймёт, что ты здесь всерьёз.</div>
@@ -1910,7 +1910,7 @@ tailwind.config = {
 
           <!-- Alex avatar -->
           <div class="flex justify-center" style="margin-bottom: 16px;">
-            <img alt="Алекс" src="../../../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
+            <img alt="Алекс" src="../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
           </div>
 
           <!-- Chat bubble — typewriter -->
@@ -1937,7 +1937,7 @@ tailwind.config = {
 
           <!-- Alex avatar -->
           <div class="flex justify-center" style="margin-bottom: 16px;">
-            <img alt="Алекс" src="../../../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
+            <img alt="Алекс" src="../../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
           </div>
 
           <!-- Chat bubble — typewriter -->
@@ -1965,7 +1965,7 @@ tailwind.config = {
           <!-- Mira avatar -->
           <div class="relative w-full overflow-hidden flex justify-center" style="height: 240px; margin: 0 -20px; width: calc(100% + 40px);">
             <img alt="Мира" class="h-full object-contain"
-              src="../../../../assets/characters/mira-rect5-3-dark.jpg"/>
+              src="../../assets/characters/mira-rect5-3-dark.jpg"/>
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 40%);"></div>
           </div>
 
@@ -2037,13 +2037,13 @@ tailwind.config = {
       <div class="screen" id="sT1" data-name="Maintenance" style="justify-content: space-between; align-items: center; padding-top: 24px; padding-bottom: 16px;">
 
         <!-- Header — logo -->
-        <img src="../../../../assets/brand/logo-on-dark-transparent.png" alt="Simple World" style="height: 90px; object-fit: contain; flex-shrink: 0;" />
+        <img src="../../assets/brand/logo-on-dark-transparent.png" alt="Simple World" style="height: 90px; object-fit: contain; flex-shrink: 0;" />
 
         <!-- Center — icon + message -->
         <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; flex-shrink: 0;">
           <!-- Maintenance icon -->
           <div style="width: 140px; height: 140px; display: flex; align-items: center; justify-content: center;">
-            <img src="../../../../assets/icons/maintenance-icon.jpg" alt="" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover;" />
+            <img src="../../assets/icons/maintenance-icon.jpg" alt="" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover;" />
           </div>
           <!-- Text -->
           <div style="text-align: center; padding: 0 8px;">
@@ -2069,13 +2069,13 @@ tailwind.config = {
       <div class="screen" id="sT2" data-name="Blocked" style="justify-content: space-between; align-items: center; padding-top: 24px; padding-bottom: 16px;">
 
         <!-- Header — logo -->
-        <img src="../../../../assets/brand/logo-on-dark-transparent.png" alt="Simple World" style="height: 90px; object-fit: contain; flex-shrink: 0;" />
+        <img src="../../assets/brand/logo-on-dark-transparent.png" alt="Simple World" style="height: 90px; object-fit: contain; flex-shrink: 0;" />
 
         <!-- Center — icon + message -->
         <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; flex-shrink: 0;">
           <!-- Blocked icon -->
           <div style="width: 140px; height: 140px; display: flex; align-items: center; justify-content: center;">
-            <img src="../../../../assets/icons/blocked-icon.jpg" alt="" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover;" />
+            <img src="../../assets/icons/blocked-icon.jpg" alt="" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover;" />
           </div>
           <!-- Text -->
           <div style="text-align: center; padding: 0 8px;">
@@ -2108,14 +2108,14 @@ tailwind.config = {
           </div>
           <div style="text-align: center; margin-bottom: 24px;">
             <div style="border-radius: 14px; overflow: hidden; margin-bottom: 16px; background: #000;">
-              <img src="../../../../assets/brand/simple-card-clean.jpg" alt="Simple Card" style="width: 100%; display: block;"/>
+              <img src="../../assets/brand/simple-card-clean.jpg" alt="Simple Card" style="width: 100%; display: block;"/>
             </div>
             <div class="text-[14px] font-bold" data-i18n="s29t_subtitle" style="color: #f2f2f2; margin-bottom: 8px;">Оживи карту</div>
             <div class="text-[13px]" data-i18n="s29t_desc" style="color: hsl(0 0% 50%); line-height: 1.5;">Пополни карту от 5 USDT — и она готова.<br>Дальше — Apple Pay, покупки, кешбэк. Всё настоящее.</div>
             <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 14px;">
-              <img src="../../../../assets/icons/visa-white.svg" alt="Visa" style="height: 28px;"/>
-              <img src="../../../../assets/icons/applepay-white.svg" alt="Apple Pay" style="height: 28px;"/>
-              <img src="../../../../assets/icons/googlepay-white.svg" alt="Google Pay" style="height: 28px;"/>
+              <img src="../../assets/icons/visa-white.svg" alt="Visa" style="height: 28px;"/>
+              <img src="../../assets/icons/applepay-white.svg" alt="Apple Pay" style="height: 28px;"/>
+              <img src="../../assets/icons/googlepay-white.svg" alt="Google Pay" style="height: 28px;"/>
             </div>
           </div>
           <div id="topup-form">
