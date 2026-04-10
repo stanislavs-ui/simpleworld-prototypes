@@ -2506,24 +2506,14 @@ tailwind.config = {
 
             <!-- Referral link -->
             <div style="margin-top: 4px;">
-              <div style="font-size: 10px; font-weight: 600; color: hsl(0 0% 55%); margin-bottom: 5px; text-align: center;">Твоя ссылка:</div>
+              <div style="font-size: 10px; font-weight: 600; color: hsl(0 0% 55%); margin-bottom: 5px; text-align: center;">Приглашение в Simple World:</div>
               <div style="background: hsl(240 5% 10%); border: 1px solid hsl(240 5% 20%); border-radius: 10px; padding: 8px 10px; font-size: 10px; color: hsl(0 0% 45%); text-align: center; font-family: monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                 world.simple.app/ref/dark_rider
               </div>
             </div>
 
-            <!-- Share buttons -->
-            <div style="display: flex; justify-content: center; gap: 12px; margin-top: 10px;">
-              <div style="width: 38px; height: 38px; border-radius: 50%; background: hsl(240 5% 12%); border: 1px solid hsl(240 5% 22%); display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              </div>
-              <div style="width: 38px; height: 38px; border-radius: 50%; background: hsl(240 5% 12%); border: 1px solid hsl(240 5% 22%); display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-              </div>
-              <div onclick="copyMiraLink(this.querySelector('svg'))" style="width: 38px; height: 38px; border-radius: 50%; background: hsl(240 5% 12%); border: 1px solid hsl(240 5% 22%); display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              </div>
-            </div>
+            <!-- Copy button -->
+            <button class="btn-cta" onclick="copyMiraLink(this)" style="margin-top: 10px; text-align: center; font-size: 13px;">Скопировать</button>
 
             <!-- Footer note -->
             <div style="font-size: 10px; color: hsl(0 0% 35%); text-align: center; margin-top: 10px; font-style: italic;">
