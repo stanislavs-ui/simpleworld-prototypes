@@ -2446,17 +2446,22 @@ tailwind.config = {
             <div class="font-headline text-[16px] font-bold" data-i18n="income_title" style="color: #f2f2f2;">Мой доход</div>
           </div>
 
-          <!-- Stats: Earned + Invited -->
+          <!-- Stats: Earned + My invites + Friends' invites -->
           <div style="display: flex; gap: 10px; margin-bottom: 16px;">
             <div style="flex: 1; background: hsl(240 5% 8%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 14px; text-align: center;">
-              <div class="text-[10px] font-bold" style="color: hsl(0 0% 45%); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Твой доход</div>
+              <div class="text-[10px] font-bold" style="color: hsl(0 0% 45%); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Доход</div>
               <div class="font-label" style="font-size: 24px; font-weight: 800; color: #f2f2f2;">0.00</div>
               <div class="text-[10px]" style="color: hsl(0 0% 35%); margin-top: 2px;">USDT</div>
             </div>
             <div style="flex: 1; background: hsl(240 5% 8%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 14px; text-align: center;">
-              <div class="text-[10px] font-bold" style="color: hsl(0 0% 45%); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Жителей привёл</div>
+              <div class="text-[10px] font-bold" style="color: hsl(0 0% 45%); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Твои</div>
               <div class="font-label" style="font-size: 24px; font-weight: 800; color: #f2f2f2;">0</div>
-              <div class="text-[10px]" style="color: hsl(0 0% 35%); margin-top: 2px;">из них активных: 0</div>
+              <div class="text-[10px]" style="color: hsl(0 0% 35%); margin-top: 2px;">приглашений</div>
+            </div>
+            <div style="flex: 1; background: hsl(240 5% 8%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 14px; text-align: center;">
+              <div class="text-[10px] font-bold" style="color: hsl(0 0% 45%); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Их друзья</div>
+              <div class="font-label" style="font-size: 24px; font-weight: 800; color: #f2f2f2;">0</div>
+              <div class="text-[10px]" style="color: hsl(0 0% 35%); margin-top: 2px;">приглашений</div>
             </div>
           </div>
 
@@ -2464,45 +2469,64 @@ tailwind.config = {
           <div style="background: hsl(240 5% 8%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 16px; margin-bottom: 16px;">
             <div class="text-[12px] font-bold" style="color: #f2f2f2; margin-bottom: 14px;">Как работает доход</div>
 
-            <!-- Scheme diagram -->
-            <div style="display: flex; align-items: center; justify-content: center; gap: 0; position: relative; padding: 8px 0 24px;">
-              <!-- You -->
-              <div style="display: flex; flex-direction: column; align-items: center; z-index: 1;">
-                <div style="width: 52px; height: 52px; border-radius: 50%; background: hsl(240 5% 14%); border: 2px solid #a78bfa; display: flex; align-items: center; justify-content: center; font-size: 20px;">👤</div>
-                <div class="font-label text-[10px] font-bold" style="color: #a78bfa; margin-top: 6px;">Ты</div>
-              </div>
+            <!-- Scheme diagram — single clean SVG -->
+            <svg viewBox="0 0 320 180" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background circles with glow -->
+              <defs>
+                <filter id="glow1"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <linearGradient id="arrow1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#a78bfa" stop-opacity="0.8"/><stop offset="100%" stop-color="#a78bfa" stop-opacity="0.2"/></linearGradient>
+                <linearGradient id="arrow2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#7c6cc4" stop-opacity="0.5"/><stop offset="100%" stop-color="#7c6cc4" stop-opacity="0.1"/></linearGradient>
+              </defs>
 
-              <!-- Arrow 1 -->
-              <div style="display: flex; flex-direction: column; align-items: center; margin: 0 6px;">
-                <div style="font-size: 9px; color: #a78bfa; font-weight: 700; background: hsla(270 60% 60% / 0.12); padding: 2px 8px; border-radius: 6px; margin-bottom: 4px;">доход</div>
-                <svg width="40" height="12" viewBox="0 0 40 12"><path d="M2 10 C10 10, 10 2, 20 2 C30 2, 30 10, 38 10" stroke="#a78bfa" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/><path d="M4 7 L2 10 L6 10" fill="#a78bfa"/></svg>
-                <svg width="40" height="12" viewBox="0 0 40 12" style="margin-top: 2px;"><path d="M2 2 C10 2, 10 10, 20 10 C30 10, 30 2, 38 2" stroke="hsl(0 0% 25%)" stroke-width="1" fill="none"/><path d="M36 0 L38 2 L36 5" fill="hsl(0 0% 25%)"/></svg>
-              </div>
+              <!-- Curved arrows: income flowing BACK to You -->
+              <!-- From Friend back to You -->
+              <path d="M125 68 C100 20, 70 20, 60 58" stroke="url(#arrow1)" stroke-width="2" fill="none" stroke-dasharray="5 3"/>
+              <polygon points="58,53 55,62 63,60" fill="#a78bfa"/>
+              <rect x="72" y="26" rx="4" ry="4" width="38" height="16" fill="rgba(167,139,250,0.15)"/>
+              <text x="91" y="37" text-anchor="middle" font-size="9" font-weight="700" fill="#a78bfa" font-family="DM Sans, sans-serif">доход</text>
 
-              <!-- Friend LVL 1 -->
-              <div style="display: flex; flex-direction: column; align-items: center; z-index: 1;">
-                <div style="width: 52px; height: 52px; border-radius: 50%; background: hsl(240 5% 14%); border: 2px solid hsl(240 5% 25%); display: flex; align-items: center; justify-content: center; font-size: 20px;">👤</div>
-                <div class="font-label text-[10px] font-bold" style="color: hsl(0 0% 50%); margin-top: 6px;">Друг</div>
-              </div>
+              <!-- From Friend of Friend back to You -->
+              <path d="M235 68 C220 -5, 80 -5, 60 52" stroke="url(#arrow2)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+              <polygon points="58,48 53,56 61,55" fill="#7c6cc4" opacity="0.7"/>
+              <rect x="130" y="2" rx="4" ry="4" width="38" height="16" fill="rgba(167,139,250,0.08)"/>
+              <text x="149" y="13" text-anchor="middle" font-size="9" font-weight="600" fill="#7c6cc4" font-family="DM Sans, sans-serif">доход</text>
 
-              <!-- Arrow 2 -->
-              <div style="display: flex; flex-direction: column; align-items: center; margin: 0 6px;">
-                <div style="font-size: 9px; color: hsl(0 0% 40%); font-weight: 700; background: hsla(0 0% 50% / 0.08); padding: 2px 8px; border-radius: 6px; margin-bottom: 4px;">доход</div>
-                <svg width="40" height="12" viewBox="0 0 40 12"><path d="M2 10 C10 10, 10 2, 20 2 C30 2, 30 10, 38 10" stroke="hsl(0 0% 30%)" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/><path d="M4 7 L2 10 L6 10" fill="hsl(0 0% 30%)"/></svg>
-                <svg width="40" height="12" viewBox="0 0 40 12" style="margin-top: 2px;"><path d="M2 2 C10 2, 10 10, 20 10 C30 10, 30 2, 38 2" stroke="hsl(0 0% 20%)" stroke-width="1" fill="none"/><path d="M36 0 L38 2 L36 5" fill="hsl(0 0% 20%)"/></svg>
-              </div>
+              <!-- Forward arrows: invitation chain -->
+              <line x1="78" y1="95" x2="120" y2="95" stroke="#333" stroke-width="1.5"/>
+              <polygon points="118,92 123,95 118,98" fill="#444"/>
+              <line x1="188" y1="95" x2="230" y2="95" stroke="#282828" stroke-width="1"/>
+              <polygon points="228,92.5 233,95 228,97.5" fill="#333"/>
 
-              <!-- Friend LVL 2 -->
-              <div style="display: flex; flex-direction: column; align-items: center; z-index: 1;">
-                <div style="width: 52px; height: 52px; border-radius: 50%; background: hsl(240 5% 14%); border: 2px solid hsl(240 5% 20%); display: flex; align-items: center; justify-content: center; font-size: 20px; opacity: 0.6;">👤</div>
-                <div class="font-label text-[10px] font-bold" style="color: hsl(0 0% 35%); margin-top: 6px;">Друг друга</div>
-              </div>
-            </div>
+              <!-- You circle -->
+              <circle cx="50" cy="88" r="28" fill="#1a1a22" stroke="#a78bfa" stroke-width="2" filter="url(#glow1)"/>
+              <text x="50" y="84" text-anchor="middle" font-size="22">👤</text>
+              <text x="50" y="100" text-anchor="middle" font-size="7" fill="#a78bfa" font-weight="700" font-family="DM Sans, sans-serif" text-transform="uppercase" letter-spacing="1">ТЫ</text>
+
+              <!-- Friend circle -->
+              <circle cx="160" cy="88" r="28" fill="#1a1a22" stroke="#333" stroke-width="1.5"/>
+              <text x="160" y="84" text-anchor="middle" font-size="22">👤</text>
+              <text x="160" y="100" text-anchor="middle" font-size="7" fill="#666" font-weight="600" font-family="DM Sans, sans-serif">ДРУГ</text>
+
+              <!-- Friend of friend circle -->
+              <circle cx="264" cy="88" r="28" fill="#1a1a22" stroke="#282828" stroke-width="1" opacity="0.7"/>
+              <text x="264" y="84" text-anchor="middle" font-size="22" opacity="0.6">👤</text>
+              <text x="264" y="100" text-anchor="middle" font-size="6" fill="#444" font-weight="600" font-family="DM Sans, sans-serif">ДРУГ ДРУГА</text>
+
+              <!-- Bottom labels -->
+              <text x="50" y="132" text-anchor="middle" font-size="9" fill="#a78bfa" font-weight="600" font-family="DM Sans, sans-serif">пригласил →</text>
+              <text x="160" y="132" text-anchor="middle" font-size="9" fill="#555" font-weight="600" font-family="DM Sans, sans-serif">пригласил →</text>
+
+              <!-- Card payment icons under friends -->
+              <rect x="140" y="142" rx="3" ry="3" width="40" height="18" fill="rgba(255,255,255,0.04)" stroke="#282828" stroke-width="0.5"/>
+              <text x="160" y="154" text-anchor="middle" font-size="7" fill="#444" font-family="DM Sans, sans-serif">💳 платит</text>
+              <rect x="244" y="142" rx="3" ry="3" width="40" height="18" fill="rgba(255,255,255,0.04)" stroke="#222" stroke-width="0.5"/>
+              <text x="264" y="154" text-anchor="middle" font-size="7" fill="#333" font-family="DM Sans, sans-serif">💳 платит</text>
+            </svg>
 
             <!-- Explanation -->
-            <div style="background: hsla(270 60% 60% / 0.06); border-radius: 10px; padding: 12px; margin-top: 4px;">
+            <div style="background: hsla(270 60% 60% / 0.06); border-radius: 10px; padding: 12px; margin-top: 12px;">
               <div class="text-[12px]" style="color: hsl(0 0% 60%); line-height: 1.6;">
-                Твои друзья платят картой — тебе капает часть с каждой покупки. И с покупок <i>их</i> друзей тоже.
+                Твои друзья платят картой — тебе капает часть с каждой транзакции. И с транзакций <i>их</i> друзей тоже.
               </div>
               <div class="text-[11px]" style="color: hsl(0 0% 40%); margin-top: 8px;">
                 Чем больше жителей — тем больше доход. Каждый день. Автоматически.
