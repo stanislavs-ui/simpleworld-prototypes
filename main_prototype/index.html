@@ -2441,112 +2441,105 @@ tailwind.config = {
         <div class="flex flex-col w-full" style="padding-top: 4px;">
 
           <!-- Header -->
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
             <span onclick="goToId('sRoadmap')" style="cursor: pointer; font-size: 18px; color: hsl(0 0% 50%);">←</span>
-            <div class="font-headline text-[16px] font-bold" data-i18n="income_title" style="color: #f2f2f2;">Приглашения</div>
+            <div class="font-headline text-[15px] font-bold" style="color: #f2f2f2;">Вознаграждение</div>
           </div>
 
-          <!-- ===== PROMO CARD (like Simple Wallet referral screen) ===== -->
-          <div style="background: hsla(270 40% 20% / 0.3); border: 1px solid hsla(270 40% 40% / 0.2); border-radius: 18px; padding: 20px; margin-bottom: 20px;">
+          <!-- ===== PROMO CARD ===== -->
+          <div style="background: hsla(270 40% 20% / 0.3); border: 1px solid hsla(270 40% 40% / 0.2); border-radius: 14px; padding: 14px; margin-bottom: 14px;">
 
             <!-- Headline -->
-            <div style="font-size: 20px; font-weight: 800; color: #f2f2f2; line-height: 1.35; margin-bottom: 12px;">
-              Получай <span style="color: #a78bfa;">кешбэк</span> за каждую транзакцию, которую делают твои друзья
+            <div style="font-size: 15px; font-weight: 800; color: #f2f2f2; line-height: 1.35; margin-bottom: 10px;">
+              Получай <span style="color: #a78bfa;">долю</span> с каждой транзакции, которую делают твои друзья
             </div>
 
-            <!-- Two levels explained -->
-            <div style="font-size: 13px; color: hsl(0 0% 65%); line-height: 1.6; margin-bottom: 20px;">
-              <span style="display: inline-block; background: #a78bfa; color: #000; font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 6px; margin-right: 4px;">LVL 1</span> от приглашённых друзей<br>
-              <span style="display: inline-block; background: hsla(270 60% 60% / 0.3); color: #a78bfa; font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 6px; margin-right: 4px; margin-top: 6px;">LVL 2</span> от их приглашённых друзей
+            <!-- Two levels -->
+            <div style="font-size: 11px; color: hsl(0 0% 60%); line-height: 1.7; margin-bottom: 14px;">
+              <span style="display: inline-block; background: #a78bfa; color: #000; font-weight: 700; font-size: 9px; padding: 1px 6px; border-radius: 4px; margin-right: 3px;">LVL 1</span> от приглашённых друзей<br>
+              <span style="display: inline-block; background: hsla(270 60% 60% / 0.3); color: #a78bfa; font-weight: 700; font-size: 9px; padding: 1px 6px; border-radius: 4px; margin-right: 3px; margin-top: 4px;">LVL 2</span> от их приглашённых друзей
             </div>
 
-            <!-- Diagram: 3 circles with arrows -->
-            <div style="display: flex; align-items: center; justify-content: center; gap: 0; padding: 4px 0 16px; position: relative;">
+            <!-- Diagram: 3 circles -->
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0; padding: 2px 0 10px; position: relative;">
 
-              <!-- Curved arrows going back to YOU (drawn behind circles) -->
-              <svg style="position: absolute; top: -10px; left: 0; right: 0; width: 100%; height: 70px; pointer-events: none;" viewBox="0 0 300 70" preserveAspectRatio="xMidYMid meet">
-                <!-- LVL1 → You -->
-                <path d="M150 55 C130 15, 80 15, 55 45" stroke="#a78bfa" stroke-width="1.5" fill="none" opacity="0.6"/>
-                <polygon points="55,42 52,49 58,48" fill="#a78bfa" opacity="0.6"/>
-                <!-- LVL2 → You -->
-                <path d="M245 55 C230 5, 75 5, 55 38" stroke="#a78bfa" stroke-width="1" fill="none" opacity="0.3" stroke-dasharray="4 3"/>
-                <polygon points="55,35 51,42 57,41" fill="#a78bfa" opacity="0.3"/>
+              <!-- Curved arrows -->
+              <svg style="position: absolute; top: -8px; left: 0; right: 0; width: 100%; height: 50px; pointer-events: none;" viewBox="0 0 300 50" preserveAspectRatio="xMidYMid meet">
+                <path d="M150 40 C130 10, 80 10, 55 32" stroke="#a78bfa" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <polygon points="55,30 52,36 57,35" fill="#a78bfa" opacity="0.5"/>
+                <path d="M245 40 C230 2, 75 2, 55 26" stroke="#a78bfa" stroke-width="1" fill="none" opacity="0.25" stroke-dasharray="3 2"/>
+                <polygon points="55,24 51,30 56,29" fill="#a78bfa" opacity="0.25"/>
               </svg>
 
               <!-- You -->
               <div style="display: flex; flex-direction: column; align-items: center; z-index: 1; flex: 1;">
-                <div style="width: 56px; height: 56px; border-radius: 50%; background: hsl(240 5% 12%); border: 2px solid #a78bfa; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 16px rgba(167,139,250,0.25);">
-                  <span style="font-size: 24px;">😊</span>
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: hsl(240 5% 12%); border: 2px solid #a78bfa; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 12px rgba(167,139,250,0.2);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
                 </div>
-                <div style="margin-top: 6px; background: #a78bfa; color: #000; font-size: 9px; font-weight: 800; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.5px;">ТЫ</div>
+                <div style="margin-top: 4px; background: #a78bfa; color: #000; font-size: 8px; font-weight: 800; padding: 1px 8px; border-radius: 3px; letter-spacing: 0.5px;">ТЫ</div>
               </div>
 
-              <!-- Arrow → -->
-              <div style="color: hsl(0 0% 35%); font-size: 16px; margin: 0 -4px; z-index: 1;">→</div>
+              <div style="color: hsl(0 0% 30%); font-size: 14px; margin: 0 -2px; z-index: 1;">→</div>
 
               <!-- Friend LVL1 -->
               <div style="display: flex; flex-direction: column; align-items: center; z-index: 1; flex: 1;">
-                <div style="width: 56px; height: 56px; border-radius: 50%; background: hsl(240 5% 12%); border: 2px solid hsl(240 5% 22%); display: flex; align-items: center; justify-content: center;">
-                  <span style="font-size: 24px;">👤</span>
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: hsl(240 5% 12%); border: 1.5px solid hsl(240 5% 22%); display: flex; align-items: center; justify-content: center;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
                 </div>
-                <div style="margin-top: 6px; background: hsla(270 60% 60% / 0.2); color: #a78bfa; font-size: 9px; font-weight: 700; padding: 2px 10px; border-radius: 4px;">LVL 1</div>
+                <div style="margin-top: 4px; background: hsla(270 60% 60% / 0.2); color: #a78bfa; font-size: 8px; font-weight: 700; padding: 1px 8px; border-radius: 3px;">LVL 1</div>
               </div>
 
-              <!-- Arrow → -->
-              <div style="color: hsl(0 0% 25%); font-size: 16px; margin: 0 -4px; z-index: 1;">→</div>
+              <div style="color: hsl(0 0% 22%); font-size: 14px; margin: 0 -2px; z-index: 1;">→</div>
 
               <!-- Friend LVL2 -->
               <div style="display: flex; flex-direction: column; align-items: center; z-index: 1; flex: 1;">
-                <div style="width: 56px; height: 56px; border-radius: 50%; background: hsl(240 5% 12%); border: 2px solid hsl(240 5% 18%); display: flex; align-items: center; justify-content: center; opacity: 0.7;">
-                  <span style="font-size: 24px;">👤</span>
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: hsl(240 5% 12%); border: 1.5px solid hsl(240 5% 18%); display: flex; align-items: center; justify-content: center; opacity: 0.6;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
                 </div>
-                <div style="margin-top: 6px; background: hsla(0 0% 50% / 0.1); color: hsl(0 0% 45%); font-size: 9px; font-weight: 700; padding: 2px 10px; border-radius: 4px;">LVL 2</div>
+                <div style="margin-top: 4px; background: hsla(0 0% 50% / 0.1); color: hsl(0 0% 40%); font-size: 8px; font-weight: 700; padding: 1px 8px; border-radius: 3px;">LVL 2</div>
               </div>
             </div>
 
             <!-- Referral link -->
-            <div style="margin-top: 8px;">
-              <div style="font-size: 13px; font-weight: 600; color: #f2f2f2; margin-bottom: 8px; text-align: center;">Твоя ссылка для приглашения:</div>
-              <div style="background: hsl(240 5% 10%); border: 1px solid hsl(240 5% 20%); border-radius: 12px; padding: 12px 14px; font-size: 13px; color: hsl(0 0% 50%); text-align: center; font-family: monospace;">
-                https://world.simple.app/ref/dark_rider
+            <div style="margin-top: 6px;">
+              <div style="font-size: 11px; font-weight: 600; color: hsl(0 0% 65%); margin-bottom: 6px; text-align: center;">Твоя ссылка:</div>
+              <div style="background: hsl(240 5% 10%); border: 1px solid hsl(240 5% 20%); border-radius: 10px; padding: 9px 10px; font-size: 11px; color: hsl(0 0% 45%); text-align: center; font-family: monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                world.simple.app/ref/dark_rider
               </div>
             </div>
 
             <!-- Share buttons -->
-            <div style="display: flex; justify-content: center; gap: 16px; margin-top: 14px;">
-              <div style="width: 48px; height: 48px; border-radius: 50%; background: hsl(240 5% 12%); border: 1px solid hsl(240 5% 22%); display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <div style="display: flex; justify-content: center; gap: 12px; margin-top: 10px;">
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: hsl(240 5% 12%); border: 1px solid hsl(240 5% 22%); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               </div>
-              <div style="width: 48px; height: 48px; border-radius: 50%; background: hsl(240 5% 12%); border: 1px solid hsl(240 5% 22%); display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: hsl(240 5% 12%); border: 1px solid hsl(240 5% 22%); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
               </div>
-              <div onclick="copyMiraLink(this.querySelector('svg'))" style="width: 48px; height: 48px; border-radius: 50%; background: hsl(240 5% 12%); border: 1px solid hsl(240 5% 22%); display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <div onclick="copyMiraLink(this.querySelector('svg'))" style="width: 40px; height: 40px; border-radius: 50%; background: hsl(240 5% 12%); border: 1px solid hsl(240 5% 22%); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               </div>
             </div>
 
             <!-- Footer note -->
-            <div style="font-size: 11px; color: hsl(0 0% 40%); text-align: center; margin-top: 14px; font-style: italic;">
+            <div style="font-size: 10px; color: hsl(0 0% 38%); text-align: center; margin-top: 10px; font-style: italic;">
               *Ты зарабатываешь каждый раз, когда они платят криптокартой
             </div>
           </div>
 
-          <!-- ===== REWARD SUMMARY ===== -->
-          <div style="text-align: center; margin-bottom: 16px;">
-            <div style="font-size: 13px; color: hsl(0 0% 55%);">Вознаграждение</div>
-            <div style="font-size: 28px; font-weight: 800; color: #a78bfa; margin: 4px 0;">0.00 USDT</div>
-            <div style="font-size: 11px; color: hsl(0 0% 40%);">Всего получено: 0 USDT · Приглашено: 0</div>
+          <!-- ===== REWARD + COUNTERS ===== -->
+          <div style="text-align: center; margin-bottom: 10px;">
+            <div style="font-size: 22px; font-weight: 800; color: #a78bfa;">0.00 USDT</div>
           </div>
 
-          <!-- ===== TWO COUNTERS ===== -->
-          <div style="display: flex; border-top: 1px solid hsl(240 5% 16%); padding-top: 14px; margin-bottom: 20px;">
+          <div style="display: flex; border-top: 1px solid hsl(240 5% 16%); border-bottom: 1px solid hsl(240 5% 16%); padding: 10px 0; margin-bottom: 14px;">
             <div style="flex: 1; text-align: center; border-right: 1px solid hsl(240 5% 16%);">
-              <div style="font-size: 11px; color: hsl(0 0% 50%);">Твои приглашения</div>
-              <div style="font-size: 24px; font-weight: 800; color: #f2f2f2; margin-top: 4px;">0</div>
+              <div style="font-size: 10px; color: hsl(0 0% 45%);">Твои приглашения</div>
+              <div style="font-size: 20px; font-weight: 800; color: #f2f2f2; margin-top: 2px;">0</div>
             </div>
             <div style="flex: 1; text-align: center;">
-              <div style="font-size: 11px; color: hsl(0 0% 50%);">Приглашения друзей</div>
-              <div style="font-size: 24px; font-weight: 800; color: #f2f2f2; margin-top: 4px;">0</div>
+              <div style="font-size: 10px; color: hsl(0 0% 45%);">Приглашения друзей</div>
+              <div style="font-size: 20px; font-weight: 800; color: #f2f2f2; margin-top: 2px;">0</div>
             </div>
           </div>
 
