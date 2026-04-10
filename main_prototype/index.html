@@ -3498,13 +3498,13 @@ tailwind.config = {
             <img alt="Алекс" src="../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
           </div>
-          <div class="w-full bubble-anim" style="margin-top: -12px; position: relative; z-index: 1;">
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
             <div class="bubble alex-bubble" style="padding-top: 10px;">
               <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #eab308;">АЛЕКС</div>
-              <span style="font-size: 14px;">Привет! Жду тебя в хабе — у меня есть для тебя небольшое задание.</span>
+              <span style="font-size: 14px;"><span id="tw-gate1"></span><span id="tw-cursor-gate1" style="display:inline-block;width:2px;height:16px;background:#eab308;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
             </div>
           </div>
-          <div class="w-full actions-anim" style="margin-top: 12px;">
+          <div class="w-full" id="gate1-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
             <button class="btn-cta" onclick="goToId('sGate2')">Что за задание?</button>
           </div>
         </div>
@@ -3517,13 +3517,13 @@ tailwind.config = {
             <img alt="Мира" class="h-full object-contain" src="../assets/characters/mira-rect5-3-dark.jpg"/>
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
           </div>
-          <div class="w-full bubble-anim" style="margin-top: -12px; position: relative; z-index: 1;">
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
             <div class="bubble mira-bubble" style="padding-top: 10px;">
               <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #a78bfa;">МИРА</div>
-              <span style="font-size: 14px;">Алекс, что ты тут делаешь? Это моя локация! Не отвлекай нас.</span>
+              <span style="font-size: 14px;"><span id="tw-gate2"></span><span id="tw-cursor-gate2" style="display:inline-block;width:2px;height:16px;background:#a78bfa;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
             </div>
           </div>
-          <div class="w-full actions-anim" style="margin-top: 12px;">
+          <div class="w-full" id="gate2-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
             <button class="btn-cta" onclick="goToId('sGate3')">Далее</button>
           </div>
         </div>
@@ -3536,13 +3536,13 @@ tailwind.config = {
             <img alt="Алекс" src="../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
           </div>
-          <div class="w-full bubble-anim" style="margin-top: -12px; position: relative; z-index: 1;">
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
             <div class="bubble alex-bubble" style="padding-top: 10px;">
               <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #eab308;">АЛЕКС</div>
-              <span style="font-size: 14px;">Мира, прости, но мои задания нужно выполнять. Они полезны — без них не собрать Ауру. А без Ауры наш друг не сможет получить свою награду.</span>
+              <span style="font-size: 14px;"><span id="tw-gate3"></span><span id="tw-cursor-gate3" style="display:inline-block;width:2px;height:16px;background:#eab308;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
             </div>
           </div>
-          <div class="w-full actions-anim" style="margin-top: 12px;">
+          <div class="w-full" id="gate3-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
             <button class="btn-cta" onclick="goToId('sGate4')">Далее</button>
           </div>
         </div>
@@ -3555,13 +3555,13 @@ tailwind.config = {
             <img alt="Мира" class="h-full object-contain" src="../assets/characters/mira-rect5-3-dark.jpg"/>
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
           </div>
-          <div class="w-full bubble-anim" style="margin-top: -12px; position: relative; z-index: 1;">
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
             <div class="bubble mira-bubble" style="padding-top: 10px;">
               <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #a78bfa;">МИРА</div>
-              <span style="font-size: 14px;">Окей, Алекс, пусть будет по-твоему. Мы поможем с заданиями, с тебя — Аура.<br><br>Но встрянешь ещё раз — я тебе устрою!</span>
+              <span style="font-size: 14px;"><span id="tw-gate4"></span><span id="tw-cursor-gate4" style="display:inline-block;width:2px;height:16px;background:#a78bfa;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
             </div>
           </div>
-          <div class="w-full actions-anim" style="margin-top: 12px;">
+          <div class="w-full" id="gate4-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
             <button class="btn-cta" onclick="goToId('sGate5')">Далее</button>
           </div>
         </div>
@@ -3574,13 +3574,13 @@ tailwind.config = {
             <img alt="Мира" class="h-full object-contain" src="../assets/characters/mira-rect5-3-dark.jpg"/>
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
           </div>
-          <div class="w-full bubble-anim" style="margin-top: -12px; position: relative; z-index: 1;">
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
             <div class="bubble mira-bubble" style="padding-top: 10px;">
               <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #a78bfa;">МИРА</div>
-              <span style="font-size: 14px;">Чтобы перейти к следующему дню, тебе нужно сходить в хаб к Алексу и помочь ему с заданием.<br><br>Я буду ждать тебя здесь.</span>
+              <span style="font-size: 14px;"><span id="tw-gate5"></span><span id="tw-cursor-gate5" style="display:inline-block;width:2px;height:16px;background:#a78bfa;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
             </div>
           </div>
-          <div class="w-full actions-anim" style="margin-top: 12px;">
+          <div class="w-full" id="gate5-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
             <button class="btn-cta" onclick="goTo(12)">В хаб</button>
           </div>
         </div>
@@ -5004,6 +5004,13 @@ function registerTypewriterById(screenId, config) {
   if (idx >= 0) typewriterScreens[idx] = config;
 }
 // sD1a now uses static text — no typewriter needed
+
+// Gate dialogue typewriters
+registerTypewriterById('sGate1', { text: 'Привет! Жду тебя в хабе — у меня есть для тебя небольшое задание.', el: 'tw-gate1', cursor: 'tw-cursor-gate1', actions: 'gate1-actions' });
+registerTypewriterById('sGate2', { text: 'Алекс, что ты тут делаешь? Это моя локация! Не отвлекай нас.', el: 'tw-gate2', cursor: 'tw-cursor-gate2', actions: 'gate2-actions' });
+registerTypewriterById('sGate3', { text: 'Мира, прости, но мои задания нужно выполнять. Они полезны — без них не собрать Ауру. А без Ауры наш друг не сможет получить свою награду.', el: 'tw-gate3', cursor: 'tw-cursor-gate3', actions: 'gate3-actions' });
+registerTypewriterById('sGate4', { text: 'Окей, Алекс, пусть будет по-твоему. Мы поможем с заданиями, с тебя — Аура.\n\nНо встрянешь ещё раз — я тебе устрою!', el: 'tw-gate4', cursor: 'tw-cursor-gate4', actions: 'gate4-actions' });
+registerTypewriterById('sGate5', { text: 'Чтобы перейти к следующему дню, тебе нужно сходить в хаб к Алексу и помочь ему с заданием.\n\nЯ буду ждать тебя здесь.', el: 'tw-gate5', cursor: 'tw-cursor-gate5', actions: 'gate5-actions' });
 
 function runTypewriter(screenIndex) {
   const cfg = typewriterScreens[screenIndex];
