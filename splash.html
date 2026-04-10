@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Simple World - Splash</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#22c55e",
+                        secondary: "#6366f1",
+                        accent: "#eab308",
+                        neutral: {
+                            950: "#000000",
+                            900: "#141414",
+                            800: "#262626",
+                            400: "#888888"
+                        }
+                    },
+                    fontFamily: {
+                        "headline": ["DM Sans", "sans-serif"],
+                        "body": ["DM Sans", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "14px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glow-green {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+        }
+        .glow-indigo {
+            filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.3));
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary selection:text-black overflow-hidden">
+<main class="relative min-h-screen w-full max-w-[375px] mx-auto flex flex-col items-center justify-between px-6 pt-20 pb-12 overflow-hidden bg-black">
+<!-- Background Ambient Glows -->
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<!-- Center Visual Section -->
+<div class="relative w-full flex-1 flex flex-col items-center justify-center">
+<!-- Mysterious City Visual -->
+<div class="relative w-full aspect-square max-w-[320px]">
+<img alt="Mysterious city silhouette" class="w-full h-full object-cover rounded-full glow-indigo opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXkDEkaVxc9RQrOzrXnfFqlawjRP55AsSvPnb1kRZZ02JThDRB59koUn72eLwsFpMrGXTAa2hiS3ie9PLSQlTGqg1KOfOXWh28S9vA0w4RbeQqVI9wgtshUJ05aQ5G5Cb1d8JQj4KuWsWb5oCB0PPytDaN02f5jOma2SilpTOhBopsPJ9wVWRUrP-IZtyjY1dOhZ98VDgZv-lR5VM7LsedJI8CDZNCFVlxKmzyMfxYcQ6tLFl-UMOe50hnRwIMd6g0c26nInWp49I"/>
+<div class="absolute inset-0 rounded-full border border-white/5 scale-110"></div>
+<div class="absolute inset-0 rounded-full border border-primary/10 scale-125 blur-sm"></div>
+</div>
+<!-- Title & Subtitle -->
+<div class="mt-12 text-center">
+<h1 class="font-headline text-[32px] font-bold tracking-[1px] text-white leading-tight">
+                    Simple World
+                </h1>
+<p class="mt-4 font-body text-[15px] text-neutral-400 font-medium max-w-[240px] mx-auto leading-relaxed">
+                    Мир, который строят его жители
+                </p>
+</div>
+</div>
+<!-- Bottom CTA -->
+<div class="w-full">
+<button class="w-full h-[56px] bg-primary text-black font-headline font-bold text-[16px] rounded-2xl glow-green active:scale-95 transition-all duration-200 flex items-center justify-center gap-2">
+                Далее
+                <span class="material-symbols-outlined text-[20px] font-bold">arrow_forward</span>
+</button>
+</div>
+</main>
+</body></html>
