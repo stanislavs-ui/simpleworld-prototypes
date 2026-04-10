@@ -3489,6 +3489,103 @@ tailwind.config = {
 
         </div>
       </div>
+      <!-- ==================== ALEX GATE: Dialogue when day locked ==================== -->
+
+      <!-- Gate 1: Alex appears -->
+      <div class="screen screen-pinned" id="sGate1" data-name="Алекс: жду в хабе" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 220px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Алекс" src="../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
+            <div class="bubble alex-bubble" style="padding-top: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #eab308;">АЛЕКС</div>
+              <span style="font-size: 14px;">Привет! Жду тебя в хабе — у меня есть для тебя небольшое задание.</span>
+            </div>
+          </div>
+          <div class="w-full" style="margin-top: 12px;">
+            <button class="btn-cta" onclick="goToId('sGate2')">Что за задание?</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gate 2: Mira interrupts -->
+      <div class="screen screen-pinned" id="sGate2" data-name="Мира: моя локация!" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 220px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Мира" class="h-full object-contain" src="../assets/characters/mira-rect5-3-dark.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
+            <div class="bubble mira-bubble" style="padding-top: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #a78bfa;">МИРА</div>
+              <span style="font-size: 14px;">Алекс, что ты тут делаешь? Это моя локация! Не отвлекай нас.</span>
+            </div>
+          </div>
+          <div class="w-full" style="margin-top: 12px;">
+            <button class="btn-cta" onclick="goToId('sGate3')">Далее</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gate 3: Alex explains -->
+      <div class="screen screen-pinned" id="sGate3" data-name="Алекс: задания нужны" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 220px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Алекс" src="../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
+            <div class="bubble alex-bubble" style="padding-top: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #eab308;">АЛЕКС</div>
+              <span style="font-size: 14px;">Мира, прости, но мои задания нужно выполнять. Они полезны — без них не собрать Ауру. А без Ауры наш друг не сможет получить свою награду.</span>
+            </div>
+          </div>
+          <div class="w-full" style="margin-top: 12px;">
+            <button class="btn-cta" onclick="goToId('sGate4')">Далее</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gate 4: Mira concedes -->
+      <div class="screen screen-pinned" id="sGate4" data-name="Мира: окей, с тебя аура" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 220px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Мира" class="h-full object-contain" src="../assets/characters/mira-rect5-3-dark.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
+            <div class="bubble mira-bubble" style="padding-top: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #a78bfa;">МИРА</div>
+              <span style="font-size: 14px;">Окей, Алекс, пусть будет по-твоему. Мы поможем с заданиями, с тебя — Аура.<br><br>Но встрянешь ещё раз — я тебя устрою.</span>
+            </div>
+          </div>
+          <div class="w-full" style="margin-top: 12px;">
+            <button class="btn-cta" onclick="goToId('sGate5')">Далее</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gate 5: Mira sends to hub -->
+      <div class="screen screen-pinned" id="sGate5" data-name="Мира: сходи в хаб" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 220px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Мира" class="h-full object-contain" src="../assets/characters/mira-rect5-3-dark.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
+            <div class="bubble mira-bubble" style="padding-top: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #a78bfa;">МИРА</div>
+              <span style="font-size: 14px;">Чтобы перейти к следующему дню, тебе нужно сходить в хаб к Алексу и помочь ему с заданием.<br><br>Я буду ждать тебя здесь.</span>
+            </div>
+          </div>
+          <div class="w-full" style="margin-top: 12px;">
+            <button class="btn-cta" onclick="goTo(12)">В хаб</button>
+          </div>
+        </div>
+      </div>
+
       <!-- ==================== SCREEN T1: Maintenance ==================== -->
       <div class="screen" id="sT1" data-name="Maintenance" style="justify-content: space-between; align-items: center; padding-top: 24px; padding-bottom: 16px;">
 
@@ -5513,26 +5610,8 @@ function checkAlexGate(day) {
 }
 
 function showAlexGateToast(day) {
-  var existing = document.getElementById('alex-gate-toast');
-  if (existing) existing.remove();
-
-  var card = document.getElementById('mira-day-' + day);
-  if (!card) return;
-
-  var toast = document.createElement('div');
-  toast.id = 'alex-gate-toast';
-  toast.style.cssText = 'position:absolute;left:0;right:0;z-index:50;margin-top:4px;animation:slideInUp 0.25s ease-out;cursor:pointer;';
-  toast.innerHTML = '<div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.25);backdrop-filter:blur(12px);border-radius:12px;padding:10px 14px;">' +
-    '<div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#a78bfa;margin-bottom:4px;">МИРА</div>' +
-    '<div style="font-size:13px;color:#e0e0e0;line-height:1.4;">Сначала выполни задание от Алекса.<br>Он ждёт тебя в Хабе.</div>' +
-    '</div>';
-  toast.onclick = function() { toast.remove(); };
-
-  // Insert right after the day card
-  card.style.position = 'relative';
-  card.parentElement.insertBefore(toast, card.nextSibling);
-
-  setTimeout(function() { if (toast.parentElement) toast.remove(); }, 4000);
+  // Navigate to the Alex-Mira gate dialogue
+  goToId('sGate1');
 }
 
 // === Hub routing — check progress before entering ===
