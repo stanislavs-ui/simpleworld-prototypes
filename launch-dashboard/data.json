@@ -1,0 +1,69 @@
+{
+  "updated_at": "2026-04-20T08:38:00Z",
+  "overview": {
+    "total_all_time": 91,
+    "today": 61,
+    "last_15min": 0,
+    "last_5min": 0,
+    "linked_today": 3,
+    "tg_sub_today": 5,
+    "via_ref_today": 1,
+    "blocked_today": 0
+  },
+  "by_5min": [
+    { "bucket": "08:05", "regs": 22, "linked": 0 },
+    { "bucket": "08:00", "regs": 33, "linked": 2 }
+  ],
+  "by_country_today": [
+    { "country": "UA", "regs": 33 },
+    { "country": "NG", "regs": 8 },
+    { "country": "IN", "regs": 3 },
+    { "country": "PL", "regs": 3 },
+    { "country": "KZ", "regs": 2 },
+    { "country": "UZ", "regs": 2 },
+    { "country": "IT", "regs": 1 },
+    { "country": "AM", "regs": 1 },
+    { "country": "NL", "regs": 1 },
+    { "country": "PK", "regs": 1 },
+    { "country": "KE", "regs": 1 },
+    { "country": "BD", "regs": 1 }
+  ],
+  "by_language_today": [
+    { "lang": "ru", "regs": 29 },
+    { "lang": "en", "regs": 21 },
+    { "lang": "??", "regs": 11 }
+  ],
+  "funnel_today": {
+    "registered": 61,
+    "dashboard_viewed": 59,
+    "quest1_completed": 7,
+    "quest2_viewed": 9,
+    "quest2_claimed": 0,
+    "meet_mira_accepted": 0,
+    "linked_to_wallet": 3,
+    "tg_subscribed": 5
+  },
+  "by_utm_60min": [
+    { "utm_source": "organic", "sessions": 275, "events": 449 },
+    { "utm_source": "simpletappush", "sessions": 171, "events": 933 },
+    { "utm_source": "simpletgchannelmain", "sessions": 79, "events": 640 },
+    { "utm_source": "simpletapmain", "sessions": 37, "events": 203 }
+  ],
+  "sessions_country_60min": [
+    { "country": "UA", "sessions": 148 },
+    { "country": "NG", "sessions": 40 },
+    { "country": "PL", "sessions": 14 },
+    { "country": "IN", "sessions": 9 },
+    { "country": "NL", "sessions": 8 },
+    { "country": "DE", "sessions": 8 },
+    { "country": "ES", "sessions": 6 },
+    { "country": "UZ", "sessions": 5 },
+    { "country": "RU", "sessions": 4 },
+    { "country": "KE", "sessions": 3 },
+    { "country": "KZ", "sessions": 3 },
+    { "country": "TR", "sessions": 3 },
+    { "country": "PT", "sessions": 3 },
+    { "country": "MY", "sessions": 2 },
+    { "country": "FI", "sessions": 2 }
+  ]
+}

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="60">
+<title>Simple World — Launch Live</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #14141b;
+    --surface-2: #1c1c26;
+    --border: #262632;
+    --text: #edeef2;
+    --muted: #7a7a8a;
+    --accent: #22d67c;
+    --red: #ff5c5c;
+    --gold: #ffc25a;
+    --indigo: #8b7cff;
+    --cyan: #5ec8e6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif; font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  body { min-height: 100vh; padding: 24px; max-width: 1400px; margin: 0 auto; }
+
+  header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; gap: 20px; flex-wrap: wrap; }
+  header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+  header h1 .accent { color: var(--accent); }
+  .meta { text-align: right; font-size: 13px; color: var(--muted); }
+  .meta .updated { color: var(--text); font-variant-numeric: tabular-nums; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-right: 6px; animation: pulse 1.5s infinite; vertical-align: middle; }
+  @keyframes pulse { 0%, 100% { opacity: 1 } 50% { opacity: 0.3 } }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+  .kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; font-weight: 600; }
+  .kpi .value { font-size: 42px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -1.5px; }
+  .kpi .sub { color: var(--muted); font-size: 12px; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .kpi.accent .value { color: var(--accent); }
+  .kpi.gold .value { color: var(--gold); }
+  .kpi.indigo .value { color: var(--indigo); }
+  .kpi.cyan .value { color: var(--cyan); }
+
+  .row { display: grid; gap: 16px; margin-bottom: 16px; }
+  @media (min-width: 900px) { .row.cols-2 { grid-template-columns: 1fr 1fr; } .row.cols-3 { grid-template-columns: 1.3fr 1fr 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; }
+  .card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 14px; font-weight: 600; }
+
+  /* 5-min chart */
+  .bars-timeline { display: flex; align-items: flex-end; gap: 3px; height: 180px; padding: 6px 0; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 20px; }
+  .bar { width: 100%; background: linear-gradient(180deg, var(--accent) 0%, #1a9158 100%); border-radius: 3px 3px 0 0; min-height: 2px; transition: height 0.3s; position: relative; }
+  .bar-val { font-size: 11px; color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .bar-label { font-size: 10px; color: var(--muted); font-variant-numeric: tabular-nums; writing-mode: vertical-rl; transform: rotate(180deg); }
+
+  /* funnel */
+  .funnel { display: flex; flex-direction: column; gap: 6px; }
+  .funnel-row { display: grid; grid-template-columns: 180px 1fr 60px 60px; gap: 10px; align-items: center; font-size: 13px; }
+  .funnel-row .name { color: var(--text); font-weight: 500; }
+  .funnel-row .fbar-wrap { background: var(--surface-2); border-radius: 4px; height: 22px; position: relative; overflow: hidden; }
+  .funnel-row .fbar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--cyan)); border-radius: 4px; transition: width 0.5s; }
+  .funnel-row .cnt { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; color: var(--text); }
+  .funnel-row .pct { color: var(--muted); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+  .funnel-row.zero .fbar { background: var(--surface-2); }
+  .funnel-row.zero .cnt { color: var(--muted); }
+
+  /* tables */
+  table.data { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.data th { text-align: left; color: var(--muted); font-weight: 600; padding: 8px 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+  table.data td { padding: 8px 10px; border-bottom: 1px solid var(--surface-2); font-variant-numeric: tabular-nums; }
+  table.data tr:last-child td { border-bottom: none; }
+  table.data td.num { text-align: right; font-weight: 600; }
+  table.data td.bar-cell { width: 40%; padding-right: 20px; }
+  .mini-bar { background: var(--surface-2); border-radius: 3px; height: 6px; position: relative; overflow: hidden; }
+  .mini-bar-fill { height: 100%; background: var(--accent); border-radius: 3px; }
+
+  .utm-row .mini-bar-fill { background: var(--indigo); }
+  .country-row .mini-bar-fill { background: var(--gold); }
+
+  .flag { font-size: 14px; margin-right: 6px; }
+  .empty { color: var(--muted); font-size: 12px; text-align: center; padding: 20px 0; }
+
+  footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; display: flex; justify-content: space-between; }
+  footer a { color: var(--cyan); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🌍 Simple World — <span class="accent">Launch Live</span></h1>
+    <div style="color: var(--muted); font-size: 13px; margin-top: 4px;">Real-time аналитика запуска · prod (postgres-tapalka)</div>
+  </div>
+  <div class="meta">
+    <div><span class="dot"></span>Обновлено: <span class="updated" id="updated">—</span> UTC</div>
+    <div style="margin-top: 4px;">Авторефреш каждые 60 сек</div>
+  </div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi accent">
+    <div class="label">Регистраций сегодня</div>
+    <div class="value" id="kpi-today">—</div>
+    <div class="sub">всего за всё время: <span id="kpi-total">—</span></div>
+  </div>
+  <div class="kpi cyan">
+    <div class="label">За последние 15 мин</div>
+    <div class="value" id="kpi-15min">—</div>
+    <div class="sub">за 5 мин: <span id="kpi-5min">—</span></div>
+  </div>
+  <div class="kpi gold">
+    <div class="label">Linked to Wallet 🔗</div>
+    <div class="value" id="kpi-linked">—</div>
+    <div class="sub">gate D139 (linked rate ключ)</div>
+  </div>
+  <div class="kpi indigo">
+    <div class="label">TG канал ✈️</div>
+    <div class="value" id="kpi-tg">—</div>
+    <div class="sub">подписались сегодня</div>
+  </div>
+  <div class="kpi">
+    <div class="label">По рефералу</div>
+    <div class="value" id="kpi-ref">—</div>
+    <div class="sub">пришли сегодня по ссылкам</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Блок / фрод</div>
+    <div class="value" id="kpi-block">—</div>
+    <div class="sub">заблокированы сегодня</div>
+  </div>
+</div>
+
+<div class="row cols-2">
+  <div class="card">
+    <h2>📈 Регистрации по 5-мин окнам (последние 2 часа UTC)</h2>
+    <div class="bars-timeline" id="bars-timeline"></div>
+  </div>
+  <div class="card">
+    <h2>🪜 Воронка сегодня</h2>
+    <div class="funnel" id="funnel"></div>
+  </div>
+</div>
+
+<div class="row cols-3">
+  <div class="card">
+    <h2>🎯 UTM-источники (sessions за 60 мин)</h2>
+    <table class="data" id="utm-table">
+      <thead><tr><th>Источник</th><th class="num">Sessions</th><th class="num">Events</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h2>🌍 Гео — регистрации сегодня</h2>
+    <table class="data" id="country-regs-table">
+      <thead><tr><th>Страна</th><th class="num">Regs</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h2>🌐 Гео — sessions (60 мин)</h2>
+    <table class="data" id="country-sessions-table">
+      <thead><tr><th>Страна</th><th class="num">Sessions</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row cols-2">
+  <div class="card">
+    <h2>🗣️ Язык интерфейса (сегодня)</h2>
+    <table class="data" id="lang-table">
+      <thead><tr><th>Язык</th><th class="num">Regs</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h2>💡 Как читать</h2>
+    <div style="font-size: 13px; color: var(--text); line-height: 1.7;">
+      <p style="margin-bottom: 10px;">• <strong style="color: var(--accent);">Linked to Wallet</strong> — главный бизнес-gate (D139). Без линковки юзер не монетизируется.</p>
+      <p style="margin-bottom: 10px;">• <strong style="color: var(--gold);">Quest 1 / Quest 2</strong> — прохождение онбординга с Алексом.</p>
+      <p style="margin-bottom: 10px;">• <strong style="color: var(--indigo);">Meet Mira</strong> — переход к серии Миры (10 дней).</p>
+      <p style="margin-bottom: 10px;">• <strong>UTM атрибуция</strong> — работает через события (Properties.utm_source). В <code>users.UtmSource</code> не пишется — это баг фронта.</p>
+      <p>• <strong>"??" / "organic"</strong> — direct-трафик или без разметки.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>Simple World · запуск 20 апреля 2026</div>
+  <div>Source: <code>postgres-tapalka · SimpleDeficeWorld.users + analytics_events</code></div>
+</footer>
+
+<script>
+  const FLAGS = {
+    UA: "🇺🇦", RU: "🇷🇺", BY: "🇧🇾", KZ: "🇰🇿", UZ: "🇺🇿", GE: "🇬🇪", MD: "🇲🇩", AZ: "🇦🇿", AM: "🇦🇲",
+    NG: "🇳🇬", IN: "🇮🇳", PL: "🇵🇱", DE: "🇩🇪", NL: "🇳🇱", ES: "🇪🇸", IT: "🇮🇹", FR: "🇫🇷", GB: "🇬🇧",
+    PT: "🇵🇹", TR: "🇹🇷", FI: "🇫🇮", EE: "🇪🇪", CZ: "🇨🇿", HU: "🇭🇺", RO: "🇷🇴", SE: "🇸🇪", NO: "🇳🇴",
+    KE: "🇰🇪", ET: "🇪🇹", DZ: "🇩🇿", MA: "🇲🇦", EG: "🇪🇬", ZA: "🇿🇦",
+    ID: "🇮🇩", MY: "🇲🇾", PH: "🇵🇭", BD: "🇧🇩", PK: "🇵🇰", VN: "🇻🇳", TH: "🇹🇭",
+    AE: "🇦🇪", SA: "🇸🇦", LU: "🇱🇺", XX: "🏳️", "??": "🏳️"
+  };
+
+  const FUNNEL_STEPS = [
+    { key: "registered",         label: "Регистрация",     color: "accent"  },
+    { key: "dashboard_viewed",   label: "Dashboard открыт", color: "accent" },
+    { key: "quest1_completed",   label: "Quest 1 завершён", color: "gold"   },
+    { key: "quest2_viewed",      label: "Quest 2 открыт",   color: "gold"   },
+    { key: "quest2_claimed",     label: "Quest 2 claimed",  color: "gold"   },
+    { key: "linked_to_wallet",   label: "Linked to Wallet", color: "accent" },
+    { key: "tg_subscribed",      label: "TG подписка",      color: "indigo" },
+    { key: "meet_mira_accepted", label: "К Мире (серия 1)", color: "indigo" }
+  ];
+
+  function fmt(n) { return n == null ? "—" : Number(n).toLocaleString("en-US").replace(/,/g, " "); }
+  function flag(code) { return FLAGS[code] || "🏳️"; }
+
+  async function load() {
+    try {
+      const r = await fetch(`data.json?t=${Date.now()}`);
+      const d = await r.json();
+      render(d);
+    } catch (e) {
+      console.error("load failed", e);
+    }
+  }
+
+  function render(d) {
+    const ov = d.overview || {};
+    document.getElementById("updated").textContent = (d.updated_at || "").replace("T", " ").replace(/\..*$/, "").replace("Z", "");
+    document.getElementById("kpi-today").textContent = fmt(ov.today);
+    document.getElementById("kpi-total").textContent = fmt(ov.total_all_time);
+    document.getElementById("kpi-15min").textContent = fmt(ov.last_15min);
+    document.getElementById("kpi-5min").textContent = fmt(ov.last_5min);
+    document.getElementById("kpi-linked").textContent = fmt(ov.linked_today);
+    document.getElementById("kpi-tg").textContent = fmt(ov.tg_sub_today);
+    document.getElementById("kpi-ref").textContent = fmt(ov.via_ref_today);
+    document.getElementById("kpi-block").textContent = fmt(ov.blocked_today);
+
+    // timeline bars
+    const bars = (d.by_5min || []).slice().reverse();
+    const max = Math.max(1, ...bars.map(b => b.regs));
+    const tl = document.getElementById("bars-timeline");
+    tl.innerHTML = "";
+    if (!bars.length) { tl.innerHTML = '<div class="empty">Нет данных за период</div>'; }
+    bars.forEach(b => {
+      const col = document.createElement("div");
+      col.className = "bar-col";
+      col.innerHTML = `
+        <div class="bar-val">${b.regs}</div>
+        <div class="bar" style="height: ${(b.regs / max) * 150}px" title="${b.bucket} — ${b.regs} регистраций, ${b.linked} linked"></div>
+        <div class="bar-label">${b.bucket}</div>
+      `;
+      tl.appendChild(col);
+    });
+
+    // funnel
+    const fun = d.funnel_today || {};
+    const baseline = Math.max(1, fun.registered || 1);
+    const fEl = document.getElementById("funnel");
+    fEl.innerHTML = "";
+    FUNNEL_STEPS.forEach(step => {
+      const v = fun[step.key] || 0;
+      const pct = (v / baseline) * 100;
+      const row = document.createElement("div");
+      row.className = "funnel-row" + (v === 0 ? " zero" : "");
+      row.innerHTML = `
+        <div class="name">${step.label}</div>
+        <div class="fbar-wrap"><div class="fbar" style="width: ${pct}%"></div></div>
+        <div class="cnt">${fmt(v)}</div>
+        <div class="pct">${pct.toFixed(0)}%</div>
+      `;
+      fEl.appendChild(row);
+    });
+
+    // UTM
+    renderTable("utm-table", d.by_utm_60min, ["utm_source", "sessions", "events"], (row, max) => `
+      <td>
+        <div>${row.utm_source}</div>
+        <div class="mini-bar" style="margin-top:4px;"><div class="mini-bar-fill" style="width:${(row.sessions/max)*100}%; background: var(--indigo);"></div></div>
+      </td>
+      <td class="num">${fmt(row.sessions)}</td>
+      <td class="num">${fmt(row.events)}</td>
+    `, r => r.sessions, "utm-row");
+
+    // Country regs today
+    renderTable("country-regs-table", d.by_country_today, ["country", "regs"], (row, max) => `
+      <td><span class="flag">${flag(row.country)}</span>${row.country}
+        <div class="mini-bar" style="margin-top:4px;"><div class="mini-bar-fill" style="width:${(row.regs/max)*100}%; background: var(--gold);"></div></div>
+      </td>
+      <td class="num">${fmt(row.regs)}</td>
+    `, r => r.regs, "country-row");
+
+    // Country sessions 60min
+    renderTable("country-sessions-table", d.sessions_country_60min, ["country", "sessions"], (row, max) => `
+      <td><span class="flag">${flag(row.country)}</span>${row.country}
+        <div class="mini-bar" style="margin-top:4px;"><div class="mini-bar-fill" style="width:${(row.sessions/max)*100}%; background: var(--cyan);"></div></div>
+      </td>
+      <td class="num">${fmt(row.sessions)}</td>
+    `, r => r.sessions, "");
+
+    // Language
+    renderTable("lang-table", d.by_language_today, ["lang", "regs"], (row, max) => `
+      <td>${row.lang === "??" ? "не определён" : row.lang.toUpperCase()}
+        <div class="mini-bar" style="margin-top:4px;"><div class="mini-bar-fill" style="width:${(row.regs/max)*100}%;"></div></div>
+      </td>
+      <td class="num">${fmt(row.regs)}</td>
+    `, r => r.regs, "");
+  }
+
+  function renderTable(id, rows, cols, rowHtml, valFn, rowClass) {
+    const tbody = document.querySelector(`#${id} tbody`);
+    tbody.innerHTML = "";
+    if (!rows || !rows.length) { tbody.innerHTML = `<tr><td colspan="${cols.length}" class="empty">Нет данных</td></tr>`; return; }
+    const max = Math.max(1, ...rows.map(valFn));
+    rows.forEach(r => {
+      const tr = document.createElement("tr");
+      if (rowClass) tr.className = rowClass;
+      tr.innerHTML = rowHtml(r, max);
+      tbody.appendChild(tr);
+    });
+  }
+
+  load();
+  setInterval(load, 30_000);
+</script>
+
+</body>
+</html>
