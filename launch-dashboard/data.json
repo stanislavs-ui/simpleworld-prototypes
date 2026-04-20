@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-20T08:38:00Z",
+  "updated_at": "2026-04-20 08:43:06 UTC",
   "overview": {
     "total_all_time": 91,
     "today": 61,
@@ -26,7 +26,10 @@
     { "country": "NL", "regs": 1 },
     { "country": "PK", "regs": 1 },
     { "country": "KE", "regs": 1 },
-    { "country": "BD", "regs": 1 }
+    { "country": "BD", "regs": 1 },
+    { "country": "DE", "regs": 1 },
+    { "country": "EE", "regs": 1 },
+    { "country": "ET", "regs": 1 }
   ],
   "by_language_today": [
     { "lang": "ru", "regs": 29 },
