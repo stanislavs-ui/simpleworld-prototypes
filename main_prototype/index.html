@@ -647,17 +647,18 @@ tailwind.config = {
             </div>
           </div>
 
+          <!-- Top bar: login shortcut + lang switcher (above typewriter for returning users) -->
+          <div class="w-full" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px;">
+            <button id="s2-btn-login" data-i18n="s2_btn_login" onclick="goTo(4)" style="padding: 8px 14px; background: transparent; color: #eab308; border: 1px solid rgba(234, 179, 8, 0.5); border-radius: 10px; font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer;">Уже в мире? Войти</button>
+            <div style="display: inline-flex; background: #1a1a1a; border: 1px solid #333; border-radius: 20px; padding: 3px; gap: 2px;">
+              <button id="lang-ru" onclick="switchLang('ru')" style="background: #333; color: #f2f2f2; border: none; border-radius: 16px; padding: 6px 14px; font-size: 12px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; cursor: pointer; transition: all 0.2s;">RU</button>
+              <button id="lang-en" onclick="switchLang('en')" style="background: transparent; color: #666; border: none; border-radius: 16px; padding: 6px 14px; font-size: 12px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; cursor: pointer; transition: all 0.2s;">EN</button>
+            </div>
+          </div>
+
           <!-- Reply buttons -->
           <div class="w-full" id="s2-actions" style="opacity: 0; transform: translateY(10px); transition: all 0.5s ease-out; margin-top: 8px;">
             <button class="btn-reply" id="s2-btn-peek" data-i18n="s2_btn_peek" onclick="goTo(6)">Заглянуть</button>
-            <button class="btn-ghost" id="s2-btn-login" data-i18n="s2_btn_login" onclick="goTo(4)" style="margin-top: 10px;">Уже в мире? Войти</button>
-            <!-- Language switcher -->
-            <div style="display: flex; justify-content: center; margin-top: 14px;">
-              <div style="display: inline-flex; background: #1a1a1a; border: 1px solid #333; border-radius: 20px; padding: 3px; gap: 2px;">
-                <button id="lang-ru" onclick="switchLang('ru')" style="background: #333; color: #f2f2f2; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; cursor: pointer; transition: all 0.2s;">RU</button>
-                <button id="lang-en" onclick="switchLang('en')" style="background: transparent; color: #666; border: none; border-radius: 16px; padding: 6px 16px; font-size: 12px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; cursor: pointer; transition: all 0.2s;">EN</button>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -933,6 +934,7 @@ tailwind.config = {
             <button class="btn-cta" style="margin-top: 16px;" onclick="var v=document.getElementById('nickname-input').value.toLowerCase(); var err=document.getElementById('nick-error'); var inp=document.getElementById('nickname-input'); var taken=['blackfox','ghostlab','zeroday','nxwave','alex','mira']; if(v.length<3){err.textContent=currentLang==='en'?'Minimum 3 characters':'Минимум 3 символа'; err.style.display='block'; inp.style.borderColor='oklch(0.577 0.245 27.325)'; inp.style.boxShadow='0 0 16px rgba(255,50,50,0.15)'}else if(v.length>20){err.textContent=currentLang==='en'?'Maximum 20 characters':'Максимум 20 символов'; err.style.display='block'; inp.style.borderColor='oklch(0.577 0.245 27.325)'; inp.style.boxShadow='0 0 16px rgba(255,50,50,0.15)'}else if(taken.includes(v)){err.textContent=currentLang==='en'?'This nickname is taken':'Этот никнейм уже занят'; err.style.display='block'; inp.style.borderColor='oklch(0.577 0.245 27.325)'; inp.style.boxShadow='0 0 16px rgba(255,50,50,0.15)'}else{goTo(10)}">
               <span id="nick-btn-text" data-i18n="s8_btn_next">Далее →</span>
             </button>
+            <button onclick="goTo(4)" style="margin-top: 10px; width: 100%; padding: 12px; background: transparent; color: #eab308; border: 1px solid rgba(234, 179, 8, 0.5); border-radius: 10px; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; text-align: center;" data-i18n="login_already_have_account">Уже есть аккаунт — войти</button>
           </div>
 
         </div>
@@ -975,6 +977,9 @@ tailwind.config = {
               Войти в мир
             </button>
             <div id="reg-error" style="display: none; font-size: 12px; color: oklch(0.577 0.245 27.325); margin-top: 8px; text-align: center;"></div>
+
+            <!-- Login shortcut (gold outline, above OR divider) -->
+            <button onclick="goTo(4)" data-i18n="login_already_have_account" style="margin-top: 10px; width: 100%; padding: 12px; background: transparent; color: #eab308; border: 1px solid rgba(234, 179, 8, 0.5); border-radius: 10px; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; text-align: center;">Уже есть аккаунт — войти</button>
 
             <!-- Divider -->
             <div class="flex items-center gap-3 w-full" style="margin-top: 16px;">
@@ -4473,6 +4478,7 @@ const i18n = {
   },
   en: {
     // Screen 0
+    login_already_have_account: "Already have an account — log in",
     s0_title: "Simple World is not yet available in your region",
     s0_subtitle: "We're expanding. Leave your email — we'll notify you when we launch.",
     s0_email_placeholder: "Email",
