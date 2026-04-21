@@ -502,6 +502,7 @@ tailwind.config = {
   <div class="sidebar-item" onclick="goTo(28)">27. Подтвердить себя</div>
   <div class="sidebar-item" onclick="goTo(29)">28. Получить карту</div>
   <div class="sidebar-item" onclick="goTo(30)">29. Пополнить запасы</div>
+  <div class="sidebar-item" onclick="goToId('s29_instr')">29a. Инструкция (депозит)</div>
   <div class="sidebar-item" onclick="goToId('s29_1')">29.1 Пополнить карту</div>
   <div class="sidebar-item" onclick="goTo(31)">30. Первые покупки</div>
   <div class="sidebar-item" onclick="goTo(32)">31. +3 USDC Награда</div>
@@ -2002,6 +2003,7 @@ tailwind.config = {
           </div>
           <div id="deposit-form">
             <button class="btn-reply" data-i18n="s29_btn_go" onclick="document.getElementById('deposit-form').style.display='none'; document.getElementById('deposit-check').style.display='block';" style="text-align: center;">Перейти в Simple Wallet</button>
+            <button class="btn-ghost" onclick="goToId('s29_instr')" style="margin-top: 6px;">Инструкция: где найти некастодиальный кошелёк →</button>
           </div>
           <div id="deposit-check" style="display: none;">
             <div class="text-[13px]" data-i18n="s29_check_desc" style="color: hsl(0 0% 50%); text-align: center; line-height: 1.6; margin-bottom: 16px;">Пополнил? Проверим.</div>
@@ -2018,6 +2020,42 @@ tailwind.config = {
             </div>
             <button class="btn-reply" data-i18n="s29_btn_back" onclick="completeQ2Task('deposit'); goTo(26);" style="text-align: center;">← Назад к квесту</button>
           </div>
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN s29_instr: Инструкция к депозиту ==================== -->
+      <div class="screen" id="s29_instr" data-name="Инструкция: некастодиальный кошелёк" style="justify-content: flex-start;">
+        <div class="flex flex-col w-full" style="padding-top: 4px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+            <div onclick="goToId('s29')" style="cursor: pointer; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </div>
+            <span class="text-[15px] font-bold" style="color: #f2f2f2;">Как найти некастодиальный кошелёк</span>
+          </div>
+
+          <div style="color: hsl(0 0% 65%); font-size: 13px; line-height: 1.6; margin-bottom: 14px;">
+            <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+              <span style="color: #a78bfa; font-weight: 700; flex-shrink: 0;">1.</span>
+              <span>Откройте вкладку «Главная» в Simple Wallet.</span>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <span style="color: #a78bfa; font-weight: 700; flex-shrink: 0;">2.</span>
+              <span>Нажмите на ваш кошелёк в левом верхнем углу (скриншот 1).</span>
+            </div>
+          </div>
+
+          <img src="../assets/quest2/deposit-help-01-wallet-pill.jpg" alt="Скриншот 1 — нажмите на кошелёк в левом верхнем углу" style="width: 100%; border-radius: 12px; margin-bottom: 18px; border: 1px solid hsl(240 5% 16%); display: block;"/>
+
+          <div style="color: hsl(0 0% 65%); font-size: 13px; line-height: 1.6; margin-bottom: 14px;">
+            <div style="display: flex; gap: 10px;">
+              <span style="color: #a78bfa; font-weight: 700; flex-shrink: 0;">3.</span>
+              <span>Выберите ваш некастодиальный кошелёк (обведён красным на скриншоте 2). Если его ещё нет — нажмите «Создать новый кошелёк».</span>
+            </div>
+          </div>
+
+          <img src="../assets/quest2/deposit-help-02-self-custody-list.jpg" alt="Скриншот 2 — выберите некастодиальный кошелёк" style="width: 100%; border-radius: 12px; margin-bottom: 20px; border: 1px solid hsl(240 5% 16%); display: block;"/>
+
+          <button class="btn-reply" onclick="goToId('s29')" style="text-align: center;">← Вернуться к депозиту</button>
         </div>
       </div>
 
