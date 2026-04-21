@@ -1999,18 +1999,13 @@ tailwind.config = {
           <div style="text-align: center; margin-bottom: 24px;">
             <img src="../assets/icons/deposit-final.jpg" alt="Депозит" style="width: 240px; height: 240px; object-fit: contain; margin: 0 auto 16px; display: block;"/>
             <div class="text-[14px] font-bold" data-i18n="s29_subtitle" style="color: #f2f2f2; margin-bottom: 8px;">Пополни кошелёк</div>
-            <div class="text-[13px]" data-i18n="s29_desc" style="color: hsl(0 0% 50%); line-height: 1.5;">Сделай депозит в USDC на баланс твоего Self-Custodial кошелька из любого внешнего кошелька/биржи на любую сумму от 5 USDC – и всё готово</div>
+            <div class="text-[13px]" data-i18n="s29_desc" style="color: hsl(0 0% 50%); line-height: 1.5;">Сделай депозит в USDC на баланс твоего некастодиального кошелька из любого внешнего кошелька/биржи на любую сумму от 5 USDC – и всё готово</div>
           </div>
 
-          <!-- Help card: "Don't know where Self-Custodial wallet is?" -->
-          <div onclick="goToId('s29_instr')" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; margin-bottom: 12px; background: hsla(270 60% 60% / 0.08); border: 1px solid hsla(270 60% 60% / 0.25); border-radius: 12px; cursor: pointer; transition: background 0.15s;" onmouseover="this.style.background='hsla(270 60% 60% / 0.14)'" onmouseout="this.style.background='hsla(270 60% 60% / 0.08)'">
-            <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: hsla(270 60% 60% / 0.18); display: flex; align-items: center; justify-content: center;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            </div>
-            <div style="flex: 1;">
-              <div style="font-size: 12px; font-weight: 600; color: #f2f2f2; margin-bottom: 2px;">Не знаешь, где некастодиальный кошелёк?</div>
-              <div style="font-size: 11px; color: #a78bfa;">Смотреть инструкцию →</div>
-            </div>
+          <!-- Help card: link to instruction -->
+          <div onclick="goToId('s29_instr')" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 14px; margin-bottom: 12px; background: hsla(270 60% 60% / 0.08); border: 1px solid hsla(270 60% 60% / 0.25); border-radius: 12px; cursor: pointer; transition: background 0.15s;" onmouseover="this.style.background='hsla(270 60% 60% / 0.14)'" onmouseout="this.style.background='hsla(270 60% 60% / 0.08)'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span style="font-size: 13px; font-weight: 600; color: #a78bfa;">Смотреть инструкцию →</span>
           </div>
 
           <div id="deposit-form">
@@ -4250,7 +4245,7 @@ const i18n = {
     // Screen 29 (Top up)
     s29_title: "Пополнить запасы",
     s29_subtitle: "Пополни кошелёк",
-    s29_desc: "Сделай депозит в USDC на баланс твоего Self-Custodial кошелька из любого внешнего кошелька/биржи на любую сумму от 5 USDC – и всё готово",
+    s29_desc: "Сделай депозит в USDC на баланс твоего некастодиального кошелька из любого внешнего кошелька/биржи на любую сумму от 5 USDC – и всё готово",
     s29_check_desc: "Пополнил? Проверим.",
     s29_not_done: "Пополнение не найдено. Пополни кошелёк от 5 USDC и попробуй ещё раз.",
     s29_btn_go: "Перейти в Simple Wallet",
