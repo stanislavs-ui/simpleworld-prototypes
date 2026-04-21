@@ -2001,9 +2001,20 @@ tailwind.config = {
             <div class="text-[14px] font-bold" data-i18n="s29_subtitle" style="color: #f2f2f2; margin-bottom: 8px;">Пополни кошелёк</div>
             <div class="text-[13px]" data-i18n="s29_desc" style="color: hsl(0 0% 50%); line-height: 1.5;">Сделай депозит в USDC на баланс твоего Self-Custodial кошелька из любого внешнего кошелька/биржи на любую сумму от 5 USDC – и всё готово</div>
           </div>
+
+          <!-- Help card: "Don't know where Self-Custodial wallet is?" -->
+          <div onclick="goToId('s29_instr')" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; margin-bottom: 12px; background: hsla(270 60% 60% / 0.08); border: 1px solid hsla(270 60% 60% / 0.25); border-radius: 12px; cursor: pointer; transition: background 0.15s;" onmouseover="this.style.background='hsla(270 60% 60% / 0.14)'" onmouseout="this.style.background='hsla(270 60% 60% / 0.08)'">
+            <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: hsla(270 60% 60% / 0.18); display: flex; align-items: center; justify-content: center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-size: 12px; font-weight: 600; color: #f2f2f2; margin-bottom: 2px;">Не знаешь, где некастодиальный кошелёк?</div>
+              <div style="font-size: 11px; color: #a78bfa;">Смотреть инструкцию →</div>
+            </div>
+          </div>
+
           <div id="deposit-form">
             <button class="btn-reply" data-i18n="s29_btn_go" onclick="document.getElementById('deposit-form').style.display='none'; document.getElementById('deposit-check').style.display='block';" style="text-align: center;">Перейти в Simple Wallet</button>
-            <button class="btn-ghost" onclick="goToId('s29_instr')" style="margin-top: 6px;">Инструкция: где найти некастодиальный кошелёк →</button>
           </div>
           <div id="deposit-check" style="display: none;">
             <div class="text-[13px]" data-i18n="s29_check_desc" style="color: hsl(0 0% 50%); text-align: center; line-height: 1.6; margin-bottom: 16px;">Пополнил? Проверим.</div>
