@@ -5577,15 +5577,16 @@ goTo = function(n) {
   }
 
   // CoachMarks for sRoadmap: show ONCE on first entry (no Mira days done)
-  if (screens[current] && screens[current].id === 'sRoadmap') {
-    var cmrOv = document.getElementById('coachmark-overlay-r');
-    if (cmrOv) {
-      if (!localStorage.getItem('sw-cmr-done') && miraDaysDone.length === 0) {
-        cmrOv.style.display = '';
-        localStorage.setItem('sw-cmr-done', '1');
-      } else {
-        cmrOv.style.display = 'none';
-      }
+  // IMPORTANT: overlay lives on .phone (sibling of phone-content) so it covers any screen — we MUST hide on non-roadmap screens.
+  var cmrOv = document.getElementById('coachmark-overlay-r');
+  if (cmrOv) {
+    if (screens[current] && screens[current].id === 'sRoadmap'
+        && !localStorage.getItem('sw-cmr-done')
+        && miraDaysDone.length === 0) {
+      cmrOv.style.display = '';
+      localStorage.setItem('sw-cmr-done', '1');
+    } else {
+      cmrOv.style.display = 'none';
     }
   }
 
