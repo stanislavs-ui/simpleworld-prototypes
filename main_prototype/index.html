@@ -5576,7 +5576,7 @@ goTo = function(n) {
     }
   }
 
-  // CoachMarks for sRoadmap: show ONCE on first entry (no Mira days done), then REMOVE forever
+  // CoachMarks for sRoadmap: show ONCE on first entry (no Mira days done)
   if (screens[current] && screens[current].id === 'sRoadmap') {
     var cmrOv = document.getElementById('coachmark-overlay-r');
     if (cmrOv) {
@@ -5584,7 +5584,7 @@ goTo = function(n) {
         cmrOv.style.display = '';
         localStorage.setItem('sw-cmr-done', '1');
       } else {
-        cmrOv.remove();
+        cmrOv.style.display = 'none';
       }
     }
   }
@@ -6113,8 +6113,20 @@ function skipCoachMarksRoadmap() {
     var el = document.getElementById(s.el);
     if (el) { el.style.position = ''; el.style.zIndex = ''; }
   });
+  // Hide (not remove) — so "Reset demo" can re-show the overlay
   var cmEl = document.getElementById('coachmark-overlay-r');
-  if (cmEl) cmEl.remove();
+  if (cmEl) {
+    cmEl.style.display = 'none';
+    // Reset intro bubble state so re-entry starts from step -1 (intro)
+    var txtEl = document.getElementById('cmr-text');
+    if (txtEl) txtEl.textContent = i18n[currentLang].cmr_intro;
+    var btnEl = document.getElementById('cmr-next-btn');
+    if (btnEl) btnEl.textContent = i18n[currentLang].cm_start;
+    var bdrop = document.getElementById('cmr-backdrop');
+    if (bdrop) { bdrop.innerHTML = ''; bdrop.style.background = 'rgba(0,0,0,0.85)'; }
+    var tt = document.getElementById('cmr-tooltip');
+    if (tt) { tt.style.top = '50%'; tt.style.bottom = ''; tt.style.transform = 'translateY(-50%)'; }
+  }
   cmrStep = -1;
   cmrPrevEl = null;
   localStorage.setItem('sw-cmr-done', '1');
