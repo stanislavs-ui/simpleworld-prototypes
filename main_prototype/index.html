@@ -2247,7 +2247,7 @@ tailwind.config = {
       </div>
 
       <!-- ==================== SCREEN: Roadmap серии Миры ==================== -->
-      <div class="screen" id="sRoadmap" data-name="Квесты Миры" style="justify-content: flex-start;">
+      <div class="screen" id="sRoadmap" data-name="Квесты Миры" style="justify-content: flex-start; position: relative;">
         <div class="flex flex-col w-full" style="padding-top: 4px;">
 
           <!-- Header -->
@@ -2255,10 +2255,10 @@ tailwind.config = {
             <span onclick="goTo(12)" style="cursor: pointer; font-size: 18px; color: hsl(0 0% 50%);">←</span>
             <div class="font-headline text-[16px] font-bold" data-i18n="roadmap_title" style="color: #f2f2f2;">Квесты Миры</div>
             <div style="margin-left: auto; display: flex; gap: 6px;">
-              <div onclick="goToId('sIncome')" style="cursor: pointer; width: 36px; height: 36px; border-radius: 10px; background: hsl(240 5% 10%); border: 1px solid hsl(240 5% 18%); display: flex; align-items: center; justify-content: center;" title="Мой доход">
+              <div id="cmr-btn-income" onclick="goToId('sIncome')" style="cursor: pointer; width: 36px; height: 36px; border-radius: 10px; background: hsl(240 5% 10%); border: 1px solid hsl(240 5% 18%); display: flex; align-items: center; justify-content: center;" title="Мой доход">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 8-10 13L2 11z"/><path d="M2 11h20"/><path d="M12 24 6 3"/><path d="M12 24l6-21"/><path d="M10 3l-4 8"/><path d="M14 3l4 8"/></svg>
               </div>
-              <div onclick="showLinkPopup()" style="cursor: pointer; width: 36px; height: 36px; border-radius: 10px; background: hsl(240 5% 10%); border: 1px solid hsl(240 5% 18%); display: flex; align-items: center; justify-content: center;" title="Моя ссылка">
+              <div id="cmr-btn-link" onclick="showLinkPopup()" style="cursor: pointer; width: 36px; height: 36px; border-radius: 10px; background: hsl(240 5% 10%); border: 1px solid hsl(240 5% 18%); display: flex; align-items: center; justify-content: center;" title="Моя ссылка">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
               </div>
             </div>
@@ -2281,6 +2281,9 @@ tailwind.config = {
             <div class="mira-seg" id="mira-seg-9" style="flex:1;height:6px;border-radius:3px;background:hsl(240 5% 14%);transition:background 0.4s;"></div>
             <div class="mira-seg" id="mira-seg-10" style="flex:1;height:6px;border-radius:3px;background:hsl(240 5% 14%);transition:background 0.4s;"></div>
           </div>
+
+          <!-- 10-day list (wrapped for coach-mark spotlight) -->
+          <div id="cmr-days-list">
 
           <!-- Day 1 — active -->
           <div class="mira-day-card active" id="mira-day-1" onclick="goToId('sD1a')">
@@ -2392,6 +2395,23 @@ tailwind.config = {
             </div>
           </div>
 
+          </div><!-- /cmr-days-list -->
+
+        </div>
+
+        <!-- CoachMark overlay for sRoadmap — 3 steps (days, income, link) -->
+        <div id="coachmark-overlay-r" style="position: absolute; top: 0; left: -20px; right: -20px; bottom: 0; z-index: 20; display: none;">
+          <div id="cmr-backdrop" style="position: absolute; inset: 0; background: rgba(0,0,0,0.85);"></div>
+          <div id="cmr-tooltip" style="position: absolute; left: 20px; right: 20px; z-index: 22; top: 50%; transform: translateY(-50%);">
+            <div class="bubble alex-bubble" style="padding: 12px 16px; background: rgba(234,179,8,0.1); border-color: rgba(234,179,8,0.25); backdrop-filter: blur(12px);">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" data-i18n="cm_alex_label" style="color: #eab308;">АЛЕКС</div>
+              <div id="cmr-text" class="text-[14px] leading-relaxed" data-i18n="cmr_intro" style="color: #e0e0e0;">Это Квесты Миры. Давай покажу как устроен экран.</div>
+            </div>
+            <div style="display: flex; gap: 8px; margin-top: 10px;">
+              <button class="btn-ghost" data-i18n="cm_skip" onclick="skipCoachMarksRoadmap()" style="flex: 1; padding: 12px;">Пропустить</button>
+              <button class="btn-reply" onclick="nextCoachMarkRoadmap()" id="cmr-next-btn" data-i18n="cm_start" style="flex: 2; text-align: center;">Давай</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -4075,6 +4095,7 @@ function resetAllQuests() {
   alexTasksDone = [];
   localStorage.removeItem('sw-alex-tasks');
   localStorage.removeItem('sw-coachmarks-done');
+  localStorage.removeItem('sw-cmr-done');
   currentAlexDay = 0;
   updateMiraRoadmap();
   updateAlexHomeCard();
@@ -4082,6 +4103,8 @@ function resetAllQuests() {
   // Restore coachmarks
   var cmOverlay = document.getElementById('coachmark-overlay');
   if (cmOverlay) cmOverlay.style.display = '';
+  var cmROverlay = document.getElementById('coachmark-overlay-r');
+  if (cmROverlay) cmROverlay.style.display = '';
 
   // Reset all form states
   ['wallet-form','wallet-check','wallet-success','card-form','card-check','card-success','deposit-form','deposit-check','deposit-success','topup-form','topup-check','topup-success','txn-form','txn-check','txn-success-2','tg-form','tg-check','tg-success','verify-step-email','verify-step-code','verify-step-done'].forEach(id => {
@@ -4416,6 +4439,11 @@ const i18n = {
     cm_step4: "Заходи каждый день. 7 дней подряд — и сокровищница откроется для тебя.",
     cm_step5: "Каждую пятницу — 500 USDC на всех, кто выполнил ритуал.",
     cm_step6: "Город пока в тумане. Чем больше делаешь — тем больше открывается.",
+    // CoachMarks for sRoadmap (Mira quests list)
+    cmr_intro: "Это Квесты Миры. Давай покажу как устроен экран.",
+    cmr_step0: "Твой путь — 10 дней. Каждый день — задача от Миры. Закроешь день — откроется следующий.",
+    cmr_step1: "Мой доход. Сколько уже заработал по реферальной ссылке и что готово к выплате.",
+    cmr_step2: "Моя ссылка. Поделись ей — и жители из твоего круга начнут приходить в мир.",
     // Typewriter texts
     tw_s2: "Эй. Ты вовремя.\n\nТут кое-что происходит.\nХочешь увидеть?",
     tw_s5: "Это Simple World.\nЗдесь люди строят кое-что своё.\n\nЗарабатывают. Реально.\nНе баллы. Не токены. Деньги.\n\nНо это не главное.\nГлавное — как.",
@@ -4879,6 +4907,11 @@ const i18n = {
     cm_step4: "Come back every day. 7 days in a row — and the treasury opens for you.",
     cm_step5: "Every Friday — 500 USDC for everyone who completed the ritual.",
     cm_step6: "The city is still in fog. The more you do — the more opens up.",
+    // CoachMarks for sRoadmap (Mira quests list)
+    cmr_intro: "These are Mira's quests. Let me show you how this screen works.",
+    cmr_step0: "Your path — 10 days. Each day is a task from Mira. Close a day — next one unlocks.",
+    cmr_step1: "My income. How much you've earned from your referral link and what's ready to claim.",
+    cmr_step2: "My link. Share it — and people from your circle start arriving into the world.",
     // Typewriter texts
     tw_s2: "Hey. You're right on time.\n\nSomething is happening here.\nWant to see?",
     tw_s5: "This is Simple World.\nPeople are building something here.\n\nEarning. For real.\nNot points. Not tokens. Money.\n\nBut that's not the main thing.\nIt's how.",
@@ -5107,6 +5140,12 @@ function switchLang(lang) {
   // 6) Update coachSteps texts
   for (var ci = 0; ci < coachSteps.length; ci++) {
     coachSteps[ci].text = i18n[lang]['cm_step' + ci];
+  }
+  // 6b) Update sRoadmap coachStepsRoadmap texts
+  if (typeof coachStepsRoadmap !== 'undefined') {
+    for (var cri = 0; cri < coachStepsRoadmap.length; cri++) {
+      coachStepsRoadmap[cri].text = i18n[lang]['cmr_step' + cri];
+    }
   }
 
   // 7) Sync both language toggle buttons (s2 and profile)
@@ -5533,6 +5572,19 @@ goTo = function(n) {
         localStorage.setItem('sw-coachmarks-done', '1');
       } else {
         cmOv.remove();
+      }
+    }
+  }
+
+  // CoachMarks for sRoadmap: show ONCE on first entry (no Mira days done), then REMOVE forever
+  if (screens[current] && screens[current].id === 'sRoadmap') {
+    var cmrOv = document.getElementById('coachmark-overlay-r');
+    if (cmrOv) {
+      if (!localStorage.getItem('sw-cmr-done') && miraDaysDone.length === 0) {
+        cmrOv.style.display = '';
+        localStorage.setItem('sw-cmr-done', '1');
+      } else {
+        cmrOv.remove();
       }
     }
   }
@@ -5974,6 +6026,84 @@ function skipCoachMarks() {
   cmPrevEl = null;
   // Remember that coachmarks were seen
   localStorage.setItem('sw-coachmarks-done', '1');
+}
+
+// === CoachMarks for sRoadmap (Mira quests list) ===
+const coachStepsRoadmap = [
+  { el: 'cmr-days-list', text: i18n[currentLang].cmr_step0 },
+  { el: 'cmr-btn-income', text: i18n[currentLang].cmr_step1 },
+  { el: 'cmr-btn-link',   text: i18n[currentLang].cmr_step2 }
+];
+let cmrStep = -1;
+let cmrPrevEl = null;
+
+function nextCoachMarkRoadmap() {
+  cmrStep++;
+
+  if (cmrPrevEl) {
+    cmrPrevEl.style.position = '';
+    cmrPrevEl.style.zIndex = '';
+  }
+
+  if (cmrStep >= coachStepsRoadmap.length) { skipCoachMarksRoadmap(); return; }
+
+  var s = coachStepsRoadmap[cmrStep];
+  var el = document.getElementById(s.el);
+  var tooltip = document.getElementById('cmr-tooltip');
+  var backdrop = document.getElementById('cmr-backdrop');
+  var btn = document.getElementById('cmr-next-btn');
+
+  backdrop.style.background = 'rgba(0,0,0,0.8)';
+
+  if (el) {
+    el.style.position = 'relative';
+    el.style.zIndex = '25';
+    cmrPrevEl = el;
+
+    var screenEl = document.getElementById('sRoadmap');
+    var screenRect = screenEl.getBoundingClientRect();
+    var elRect = el.getBoundingClientRect();
+    var pad = 6;
+    var x1 = elRect.left - screenRect.left + 20 - pad;
+    var y1 = elRect.top - screenRect.top - pad;
+    var x2 = x1 + elRect.width + pad * 2;
+    var y2 = y1 + elRect.height + pad * 2;
+    var rx = 12;
+    var w = screenRect.width + 40;
+    var h = screenRect.height;
+    backdrop.innerHTML = '<svg width="'+w+'" height="'+h+'" style="position:absolute;inset:0;"><defs><mask id="cmr-mask"><rect width="'+w+'" height="'+h+'" fill="white"/><rect x="'+x1+'" y="'+y1+'" width="'+(x2-x1)+'" height="'+(y2-y1)+'" rx="'+rx+'" fill="black"/></mask></defs><rect width="'+w+'" height="'+h+'" fill="rgba(0,0,0,0.82)" mask="url(#cmr-mask)"/></svg>';
+    backdrop.style.background = 'none';
+
+    // Tooltip position:
+    // - step 0 (tall days list): pin tooltip at bottom of screen (safe position inside viewport)
+    // - steps 1,2 (small buttons in header): tooltip BELOW the button
+    var screenHeight = screenRect.height;
+    if (s.el === 'cmr-days-list') {
+      tooltip.style.top = '';
+      tooltip.style.bottom = '16px';
+      tooltip.style.transform = '';
+    } else {
+      var elBottom = elRect.bottom - screenRect.top;
+      tooltip.style.top = (elBottom + 12) + 'px';
+      tooltip.style.bottom = '';
+      tooltip.style.transform = '';
+    }
+  }
+
+  document.getElementById('cmr-text').textContent = s.text;
+  btn.textContent = cmrStep < coachStepsRoadmap.length - 1 ? i18n[currentLang].cm_next : i18n[currentLang].cm_done;
+}
+
+function skipCoachMarksRoadmap() {
+  coachStepsRoadmap.forEach(function(s) {
+    var el = document.getElementById(s.el);
+    if (el) { el.style.position = ''; el.style.zIndex = ''; }
+  });
+  var cmEl = document.getElementById('coachmark-overlay-r');
+  if (cmEl) cmEl.remove();
+  cmrStep = -1;
+  cmrPrevEl = null;
+  localStorage.setItem('sw-cmr-done', '1');
 }
 
 // CoachMarks now start hidden (display:none in HTML) and only show via goTo wrapper
