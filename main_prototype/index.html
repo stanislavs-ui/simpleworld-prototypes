@@ -5117,12 +5117,14 @@ function switchLang(lang) {
     }
   });
 
-  // 3) Update typewriterScreens texts
-  var twMap = { 5: 'tw_s5', 6: 'tw_s6', 7: 'tw_s7', 8: 'tw_s8', 9: 'tw_s9', 10: 'tw_s10', 18: 'tw_s18', 19: 'tw_s19', 23: 'tw_s23', 24: 'tw_s24', 31: 'tw_s31', 32: 'tw_s32', 33: 'tw_s33', 34: 'tw_s34' };
-  // sD1a uses static text now — no twMap entry needed
-  Object.keys(twMap).forEach(function(k) {
-    if (typewriterScreens[k]) {
-      typewriterScreens[k].text = i18n[lang][twMap[k]];
+  // 3) Update typewriterScreens texts — resolved via screen ID to survive DOM insertions
+  var twIdMap = { s5:'tw_s5', s6:'tw_s6', s7:'tw_s7', s8:'tw_s8', s9:'tw_s9', s10:'tw_s10', s18:'tw_s18', s19:'tw_s19', s23:'tw_s23', s24:'tw_s24', s31:'tw_s31', s32:'tw_s32', s33:'tw_s33', s34:'tw_s34' };
+  Object.keys(twIdMap).forEach(function(sid) {
+    var target = document.getElementById(sid);
+    if (!target) return;
+    var idx = Array.from(screens).indexOf(target);
+    if (idx >= 0 && typewriterScreens[idx]) {
+      typewriterScreens[idx].text = i18n[lang][twIdMap[sid]];
     }
   });
 
@@ -5217,23 +5219,8 @@ function startTypewriter() {
 }
 
 // === Universal typewriter system ===
-// Register all screens with typewriter here. New screens auto-work.
-const typewriterScreens = {
-  5: { text: i18n[currentLang].tw_s5, el: 'typewriter-s4', cursor: 'typewriter-cursor-s4', actions: 's4-actions' },
-  6: { text: i18n[currentLang].tw_s6, el: 'typewriter-s5', cursor: 'typewriter-cursor-s5', actions: 's5-actions' },
-  7: { text: i18n[currentLang].tw_s7, el: 'typewriter-s6', cursor: 'typewriter-cursor-s6', actions: 's6-actions' },
-  8: { text: i18n[currentLang].tw_s8, el: 'typewriter-s7', cursor: 'typewriter-cursor-s7', actions: 's7-actions' },
-  9: { text: i18n[currentLang].tw_s9, el: 'typewriter-s8', cursor: 'typewriter-cursor-s8', actions: 's8-actions' },
-  10: { text: i18n[currentLang].tw_s10, el: 'typewriter-s10', cursor: 'typewriter-cursor-s10', actions: 's10-actions' },
-  18: { text: i18n[currentLang].tw_s18, el: 'typewriter-s18', cursor: 'typewriter-cursor-s18', actions: 's18-actions' },
-  19: { text: i18n[currentLang].tw_s19, el: 'typewriter-s19', cursor: 'typewriter-cursor-s19', actions: 's19-actions' },
-  23: { text: i18n[currentLang].tw_s23, el: 'typewriter-s23', cursor: 'typewriter-cursor-s23', actions: 's23-actions' },
-  24: { text: i18n[currentLang].tw_s24, el: 'typewriter-s24', cursor: 'typewriter-cursor-s24', actions: 's24-actions' },
-  31: { text: i18n[currentLang].tw_s31, el: 'typewriter-s31', cursor: 'typewriter-cursor-s31', actions: 's31-actions' },
-  32: { text: i18n[currentLang].tw_s32, el: 'typewriter-s32', cursor: 'typewriter-cursor-s32', actions: 's32-actions' },
-  33: { text: i18n[currentLang].tw_s33, el: 'typewriter-s33', cursor: 'typewriter-cursor-s33', actions: 's33-actions' },
-  34: { text: i18n[currentLang].tw_s34, el: 'typewriter-s34', cursor: 'typewriter-cursor-s34', actions: 's34-actions', extra: 's34-calc' },
-};
+// Register all screens with typewriter here. Hardcoded numeric keys are brittle — NEW screens should always use registerTypewriterById.
+const typewriterScreens = {};
 
 // Register typewriter by screen ID (resolves index at runtime — safe across screen additions)
 function registerTypewriterById(screenId, config) {
@@ -5242,6 +5229,22 @@ function registerTypewriterById(screenId, config) {
   const idx = Array.from(screens).indexOf(target);
   if (idx >= 0) typewriterScreens[idx] = config;
 }
+
+// Core screens (previously hardcoded by index) — now resolved by ID to survive DOM insertions
+registerTypewriterById('s5',  { text: i18n[currentLang].tw_s5,  el: 'typewriter-s4',  cursor: 'typewriter-cursor-s4',  actions: 's4-actions' });
+registerTypewriterById('s6',  { text: i18n[currentLang].tw_s6,  el: 'typewriter-s5',  cursor: 'typewriter-cursor-s5',  actions: 's5-actions' });
+registerTypewriterById('s7',  { text: i18n[currentLang].tw_s7,  el: 'typewriter-s6',  cursor: 'typewriter-cursor-s6',  actions: 's6-actions' });
+registerTypewriterById('s8',  { text: i18n[currentLang].tw_s8,  el: 'typewriter-s7',  cursor: 'typewriter-cursor-s7',  actions: 's7-actions' });
+registerTypewriterById('s9',  { text: i18n[currentLang].tw_s9,  el: 'typewriter-s8',  cursor: 'typewriter-cursor-s8',  actions: 's8-actions' });
+registerTypewriterById('s10', { text: i18n[currentLang].tw_s10, el: 'typewriter-s10', cursor: 'typewriter-cursor-s10', actions: 's10-actions' });
+registerTypewriterById('s18', { text: i18n[currentLang].tw_s18, el: 'typewriter-s18', cursor: 'typewriter-cursor-s18', actions: 's18-actions' });
+registerTypewriterById('s19', { text: i18n[currentLang].tw_s19, el: 'typewriter-s19', cursor: 'typewriter-cursor-s19', actions: 's19-actions' });
+registerTypewriterById('s23', { text: i18n[currentLang].tw_s23, el: 'typewriter-s23', cursor: 'typewriter-cursor-s23', actions: 's23-actions' });
+registerTypewriterById('s24', { text: i18n[currentLang].tw_s24, el: 'typewriter-s24', cursor: 'typewriter-cursor-s24', actions: 's24-actions' });
+registerTypewriterById('s31', { text: i18n[currentLang].tw_s31, el: 'typewriter-s31', cursor: 'typewriter-cursor-s31', actions: 's31-actions' });
+registerTypewriterById('s32', { text: i18n[currentLang].tw_s32, el: 'typewriter-s32', cursor: 'typewriter-cursor-s32', actions: 's32-actions' });
+registerTypewriterById('s33', { text: i18n[currentLang].tw_s33, el: 'typewriter-s33', cursor: 'typewriter-cursor-s33', actions: 's33-actions' });
+registerTypewriterById('s34', { text: i18n[currentLang].tw_s34, el: 'typewriter-s34', cursor: 'typewriter-cursor-s34', actions: 's34-actions', extra: 's34-calc' });
 // sD1a now uses static text — no typewriter needed
 
 // Gate dialogue typewriters
