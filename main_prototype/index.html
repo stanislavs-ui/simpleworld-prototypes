@@ -2247,15 +2247,15 @@ tailwind.config = {
       </div>
 
       <!-- ==================== SCREEN: Roadmap серии Миры ==================== -->
-      <div class="screen" id="sRoadmap" data-name="Квесты Миры" style="justify-content: flex-start; position: relative;">
+      <div class="screen" id="sRoadmap" data-name="Квест Миры" style="justify-content: flex-start; position: relative;">
         <div class="flex flex-col w-full" style="padding-top: 4px;">
 
           <!-- Header -->
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
             <span onclick="goTo(12)" style="cursor: pointer; font-size: 18px; color: hsl(0 0% 50%);">←</span>
-            <div class="font-headline text-[16px] font-bold" data-i18n="roadmap_title" style="color: #f2f2f2;">Квесты Миры</div>
+            <div class="font-headline text-[16px] font-bold" data-i18n="roadmap_title" style="color: #f2f2f2;">Квест Миры</div>
             <div style="margin-left: auto; display: flex; gap: 6px;">
-              <div id="cmr-btn-income" onclick="goToId('sIncome')" style="cursor: pointer; width: 36px; height: 36px; border-radius: 10px; background: hsl(240 5% 10%); border: 1px solid hsl(240 5% 18%); display: flex; align-items: center; justify-content: center;" title="Мой доход">
+              <div id="cmr-btn-income" onclick="goToId('sIncome')" style="cursor: pointer; width: 36px; height: 36px; border-radius: 10px; background: hsl(240 5% 10%); border: 1px solid hsl(240 5% 18%); display: flex; align-items: center; justify-content: center;" title="Твой доход">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 8-10 13L2 11z"/><path d="M2 11h20"/><path d="M12 24 6 3"/><path d="M12 24l6-21"/><path d="M10 3l-4 8"/><path d="M14 3l4 8"/></svg>
               </div>
               <div id="cmr-btn-link" onclick="showLinkPopup()" style="cursor: pointer; width: 36px; height: 36px; border-radius: 10px; background: hsl(240 5% 10%); border: 1px solid hsl(240 5% 18%); display: flex; align-items: center; justify-content: center;" title="Моя ссылка">
@@ -3947,7 +3947,7 @@ tailwind.config = {
       <div id="cmr-tooltip" style="position: absolute; left: 20px; right: 20px; z-index: 52; top: 50%; transform: translateY(-50%);">
         <div class="bubble alex-bubble" style="padding: 12px 16px; background: #141414; border: 1px solid rgba(234,179,8,0.35); box-shadow: 0 8px 24px rgba(0,0,0,0.6);">
           <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" data-i18n="cm_alex_label" style="color: #eab308;">АЛЕКС</div>
-          <div id="cmr-text" class="text-[14px] leading-relaxed" data-i18n="cmr_intro" style="color: #e0e0e0;">Это Квесты Миры. Давай покажу как устроен экран.</div>
+          <div id="cmr-text" class="text-[14px] leading-relaxed" data-i18n="cmr_intro" style="color: #e0e0e0;">Это Квест Миры. Давай покажу как здесь всё устроено.</div>
         </div>
         <div style="display: flex; gap: 8px; margin-top: 10px;">
           <button class="btn-ghost" data-i18n="cm_skip" onclick="skipCoachMarksRoadmap()" style="flex: 1; padding: 12px;">Пропустить</button>
@@ -4221,7 +4221,7 @@ const i18n = {
     s11_treasury: "Сокровищница",
     s11_every_week: "Каждую неделю",
     s11_academy: "Академия",
-    s11_academy_desc: "Квесты Миры · 10 дней",
+    s11_academy_desc: "Квест Миры · 10 дней",
     s11_world_map: "Карта мира",
     // Screen 12 (Profile)
     s12_title: "Профиль",
@@ -4440,10 +4440,10 @@ const i18n = {
     cm_step5: "Каждую пятницу — 500 USDC на всех, кто выполнил ритуал.",
     cm_step6: "Город пока в тумане. Чем больше делаешь — тем больше открывается.",
     // CoachMarks for sRoadmap (Mira quests list)
-    cmr_intro: "Это Квесты Миры. Давай покажу как устроен экран.",
+    cmr_intro: "Это Квест Миры. Давай покажу как здесь всё устроено.",
     cmr_step0: "Всего 10 дней. Пройдёшь один — следующий будет доступен только завтра.",
     cmr_step1: "Твой доход. Сколько принесли жители, которых ты привёл в мир.",
-    cmr_step2: "Твоё приглашение в Simple World. Отправь его знакомым — они станут жителями твоего круга.",
+    cmr_step2: "Твоё приглашение в Simple World. Отправь его знакомым.",
     // Typewriter texts
     tw_s2: "Эй. Ты вовремя.\n\nТут кое-что происходит.\nХочешь увидеть?",
     tw_s5: "Это Simple World.\nЗдесь люди строят кое-что своё.\n\nЗарабатывают. Реально.\nНе баллы. Не токены. Деньги.\n\nНо это не главное.\nГлавное — как.",
@@ -4481,12 +4481,12 @@ const i18n = {
     academy_title: "Академия",
     academy_mira_label: "МИРА",
     academy_mira_text: "Ты в Академии. Здесь — знания, снаряжение и путь вперёд.",
-    academy_roadmap_title: "Квесты Миры",
+    academy_roadmap_title: "Квест Миры",
     academy_roadmap_desc: "10 дней. Прогресс и задания.",
-    academy_income_title: "Мой доход",
+    academy_income_title: "Твой доход",
     academy_income_desc: "Жители, доход, калькулятор.",
     // Roadmap
-    roadmap_title: "Квесты Миры",
+    roadmap_title: "Квест Миры",
     roadmap_mira_label: "МИРА",
     roadmap_mira_text: "10 дней. Одно действие в день. Без теории — только практика.",
     roadmap_progress: "День 1 из 10",
@@ -4502,7 +4502,7 @@ const i18n = {
     roadmap_d9_title: "День 9: Помоги своим",
     roadmap_d10_title: "День 10: Итог",
     // Income
-    income_title: "Мой доход",
+    income_title: "Твой доход",
     income_clicks: "Переходов",
     income_registered: "Зарегались",
     income_active: "Активных",
@@ -4688,7 +4688,7 @@ const i18n = {
     s11_treasury: "Treasury",
     s11_every_week: "Every week",
     s11_academy: "Academy",
-    s11_academy_desc: "Mira's Quests · 10 days",
+    s11_academy_desc: "Mira's Quest · 10 days",
     s11_world_map: "World map",
     // Screen 12 (Profile)
     s12_title: "Profile",
@@ -4735,7 +4735,7 @@ const i18n = {
     s14w_success_cta: "Continue →",
     // Screen 14.3 (Alex — first withdraw, Mira path)
     s14w_alex_mira_text: "First withdrawal. Remember this moment — the path that began with an empty screen is now behind you.<br><br>Mira said she'll be waiting on the second round. Seems she doesn't doubt you. And she's almost never wrong.",
-    s14w_alex_mira_cta: "To Mira's quests →",
+    s14w_alex_mira_cta: "To Mira's quest →",
     s14w_alex_mira_alt: "See the alternative response",
     // Screen 14.4 (Alex — first withdraw, Wait path)
     s14w_alex_wait_text: "First withdrawal. The path is done.<br><br>A colleague you don't know yet is actively preparing quests for you. Almost ready — thanks for your patience.",
@@ -4908,10 +4908,10 @@ const i18n = {
     cm_step5: "Every Friday — 500 USDC for everyone who completed the ritual.",
     cm_step6: "The city is still in fog. The more you do — the more opens up.",
     // CoachMarks for sRoadmap (Mira quests list)
-    cmr_intro: "These are Mira's quests. Let me show you how this screen works.",
+    cmr_intro: "This is Mira's quest. Let me show you how it works.",
     cmr_step0: "10 days in total. Finish one — the next becomes available only tomorrow.",
     cmr_step1: "Your income. What the residents you've brought into the world have earned for you.",
-    cmr_step2: "Your invite to Simple World. Send it to people you know — they'll become residents of your circle.",
+    cmr_step2: "Your invite to Simple World. Send it to people you know.",
     // Typewriter texts
     tw_s2: "Hey. You're right on time.\n\nSomething is happening here.\nWant to see?",
     tw_s5: "This is Simple World.\nPeople are building something here.\n\nEarning. For real.\nNot points. Not tokens. Money.\n\nBut that's not the main thing.\nIt's how.",
@@ -4949,12 +4949,12 @@ const i18n = {
     academy_title: "Academy",
     academy_mira_label: "MIRA",
     academy_mira_text: "You're in the Academy. Knowledge, gear, and the path forward.",
-    academy_roadmap_title: "Mira's Quests",
+    academy_roadmap_title: "Mira's Quest",
     academy_roadmap_desc: "10 days. Progress and quests.",
-    academy_income_title: "My Income",
+    academy_income_title: "Your Income",
     academy_income_desc: "Residents, income, calculator.",
     // Roadmap
-    roadmap_title: "Mira's Quests",
+    roadmap_title: "Mira's Quest",
     roadmap_mira_label: "MIRA",
     roadmap_mira_text: "10 days. One action per day. No theory — just practice.",
     roadmap_progress: "Day 1 of 10",
@@ -4970,7 +4970,7 @@ const i18n = {
     roadmap_d9_title: "Day 9: Help Your People",
     roadmap_d10_title: "Day 10: Summary",
     // Income
-    income_title: "My Income",
+    income_title: "Your Income",
     income_clicks: "Clicks",
     income_registered: "Registered",
     income_active: "Active",
