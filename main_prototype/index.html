@@ -3889,16 +3889,16 @@ tailwind.config = {
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
           </div>
 
-          <!-- Chat bubble -->
+          <!-- Chat bubble — typewriter -->
           <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
             <div class="bubble alex-bubble" style="padding-top: 12px;">
               <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #eab308;">АЛЕКС</div>
-              <span data-i18n="s14w_alex_mira_text" style="font-size: 14px;">Первый вывод. Запомни этот момент — путь, который начинался с пустого экрана, теперь позади.<br><br>Мира сказала, что будет ждать тебя на втором круге. Удачи — она не из тех, кто раздаёт её просто так.</span>
+              <span style="font-size: 14px;"><span id="tw-s14w-alex-mira"></span><span id="tw-cursor-s14w-alex-mira" style="display:inline-block;width:2px;height:16px;background:#eab308;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
             </div>
           </div>
 
           <!-- Actions -->
-          <div class="w-full" style="margin-top: 16px;">
+          <div class="w-full" id="s14w-alex-mira-actions" style="margin-top: 16px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
             <button class="btn-cta" data-i18n="s14w_alex_mira_cta" onclick="goTo(12)">К заданиям Миры →</button>
             <button class="btn-ghost" data-i18n="s14w_alex_mira_alt" onclick="goToId('s14w_alex_wait')" style="margin-top: 10px;">Посмотреть альтернативный ответ</button>
           </div>
@@ -3916,16 +3916,16 @@ tailwind.config = {
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
           </div>
 
-          <!-- Chat bubble -->
+          <!-- Chat bubble — typewriter -->
           <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
             <div class="bubble alex-bubble" style="padding-top: 12px;">
               <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #eab308;">АЛЕКС</div>
-              <span data-i18n="s14w_alex_wait_text" style="font-size: 14px;">Первый вывод. Путь пройден.<br><br>Наш коллега, которого ты ещё не знаешь, уже вовсю готовит для тебя задания. Осталось немного — спасибо, что подождёшь.</span>
+              <span style="font-size: 14px;"><span id="tw-s14w-alex-wait"></span><span id="tw-cursor-s14w-alex-wait" style="display:inline-block;width:2px;height:16px;background:#eab308;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
             </div>
           </div>
 
           <!-- Actions -->
-          <div class="w-full" style="margin-top: 16px;">
+          <div class="w-full" id="s14w-alex-wait-actions" style="margin-top: 16px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
             <button class="btn-cta" data-i18n="s14w_alex_wait_cta" onclick="goTo(12)">На главную →</button>
             <button class="btn-ghost" data-i18n="s14w_alex_wait_back" onclick="goToId('s14w_alex_mira')" style="margin-top: 10px;">← Вернуться к варианту Миры</button>
           </div>
@@ -5212,6 +5212,10 @@ registerTypewriterById('sGate3', { text: 'Мира, прости, но мои з
 registerTypewriterById('sGate4', { text: 'Окей, Алекс, пусть будет по-твоему. Мы поможем с заданиями, с тебя — Аура.\n\nНо встрянешь ещё раз — я тебе устрою!', el: 'tw-gate4', cursor: 'tw-cursor-gate4', actions: 'gate4-actions' });
 registerTypewriterById('sGate5', { text: 'Чтобы перейти к следующему дню, тебе нужно сходить в хаб к Алексу и помочь ему с заданием.\n\nЯ буду ждать тебя здесь.', el: 'tw-gate5', cursor: 'tw-cursor-gate5', actions: 'gate5-actions' });
 registerTypewriterById('sGateMira', { text: 'Для того чтобы перейти к следующему дню, помоги Алексу с его заданиями в хабе.', el: 'tw-gateMira', cursor: 'tw-cursor-gateMira', actions: 'gateMira-actions' });
+
+// First withdrawal — Alex reacts, two paths (Mira second round / wait for new character)
+registerTypewriterById('s14w_alex_mira', { text: 'Первый вывод. Запомни этот момент — путь, который начинался с пустого экрана, теперь позади.\n\nМира сказала, что будет ждать тебя на втором круге.', el: 'tw-s14w-alex-mira', cursor: 'tw-cursor-s14w-alex-mira', actions: 's14w-alex-mira-actions' });
+registerTypewriterById('s14w_alex_wait', { text: 'Первый вывод. Путь пройден.\n\nНаш коллега, которого ты ещё не знаешь, уже вовсю готовит для тебя задания. Осталось немного — спасибо, что подождёшь.', el: 'tw-s14w-alex-wait', cursor: 'tw-cursor-s14w-alex-wait', actions: 's14w-alex-wait-actions' });
 
 function runTypewriter(screenIndex) {
   const cfg = typewriterScreens[screenIndex];
