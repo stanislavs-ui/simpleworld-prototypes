@@ -485,6 +485,9 @@ tailwind.config = {
   <div class="sidebar-item" onclick="goTo(14)">13. Почта</div>
   <div class="sidebar-item" onclick="goTo(15)">14. Хранилище</div>
   <div class="sidebar-item" onclick="goToId('s14_1')">14.1 Вывод средств</div>
+  <div class="sidebar-item" onclick="goToId('s14w_success')">14.2 Успешный вывод</div>
+  <div class="sidebar-item" onclick="goToId('s14w_alex_mira')">14.3 Алекс: 1-й вывод (Мира)</div>
+  <div class="sidebar-item" onclick="goToId('s14w_alex_wait')">14.4 Алекс: 1-й вывод (Wait)</div>
   <div class="sidebar-item" onclick="goTo(16)">15. Ритуал</div>
   <div class="sidebar-item" onclick="goTo(17)">16. Сокровищница</div>
   <div class="sidebar-item" onclick="goTo(18)">17. Карта мира</div>
@@ -3827,10 +3830,105 @@ tailwind.config = {
           </div>
 
           <!-- Withdraw CTA -->
-          <button class="btn-cta" data-i18n="s14w_btn_withdraw" style="margin-top: auto;">Забрать →</button>
+          <button class="btn-cta" data-i18n="s14w_btn_withdraw" style="margin-top: auto;" onclick="goToId('s14w_success')">Забрать →</button>
 
           <!-- Support -->
           <a href="mailto:support@simple.app" class="text-[11px]" data-i18n="support_line" style="color: hsl(0 0% 30%); text-align: center; margin-top: 12px; text-decoration: none; display: block;">Есть вопросы? support@simple.app</a>
+
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN 14.2: Успешный вывод ==================== -->
+      <div class="screen screen-pinned" id="s14w_success" data-name="Успешный вывод" style="justify-content: center;">
+        <div class="flex flex-col w-full" style="align-items: center;">
+
+          <!-- Check icon -->
+          <div style="width: 64px; height: 64px; border-radius: 50%; background: hsl(142 40% 15%); border: 2px solid #22c55e; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+
+          <!-- Title -->
+          <div class="text-[17px] font-bold" data-i18n="s14w_success_title" style="color: #f2f2f2; text-align: center; margin-bottom: 20px;">Запрос принят</div>
+
+          <!-- Amount card -->
+          <div style="width: 100%; background: hsl(240 5% 8%); border: 2px solid rgba(34,197,94,0.3); border-radius: 14px; padding: 18px; margin-bottom: 16px;">
+
+            <!-- Amount -->
+            <div style="text-align: center; margin-bottom: 14px;">
+              <div class="font-label text-[9px] font-bold tracking-[1.5px] uppercase" data-i18n="s14w_success_amount_label" style="color: hsl(0 0% 40%);">Сумма</div>
+              <div class="font-label text-[28px] font-extrabold" style="color: #22c55e; margin-top: 4px;">8.50 USDC</div>
+            </div>
+
+            <!-- Divider -->
+            <div style="height: 1px; background: hsl(240 5% 16%); margin: 10px 0;"></div>
+
+            <!-- Destination -->
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div class="text-[11px] font-label" data-i18n="s14w_success_to_label" style="color: hsl(0 0% 50%);">Куда</div>
+              <div class="text-[12px] font-bold" style="color: #f2f2f2;">Simple Wallet</div>
+            </div>
+
+          </div>
+
+          <!-- ETA -->
+          <div class="text-[12px]" data-i18n="s14w_success_eta" style="color: hsl(0 0% 50%); text-align: center;">Обычно приходит за 1–2 минуты</div>
+
+          <!-- CTA -->
+          <button class="btn-cta" data-i18n="s14w_success_cta" style="margin-top: auto; width: 100%;" onclick="goToId('s14w_alex_mira')">Продолжить →</button>
+
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN 14.3: Алекс — первый вывод, Mira path ==================== -->
+      <div class="screen screen-pinned" id="s14w_alex_mira" data-name="Алекс: 1-й вывод (Мира)" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+
+          <!-- Alex avatar -->
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 220px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Алекс" src="../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
+          </div>
+
+          <!-- Chat bubble -->
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
+            <div class="bubble alex-bubble" style="padding-top: 12px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #eab308;">АЛЕКС</div>
+              <span data-i18n="s14w_alex_mira_text" style="font-size: 14px;">Первый вывод. Запомни этот момент — путь, который начинался с пустого экрана, теперь позади.<br><br>Мира сказала, что будет ждать тебя на втором круге. Удачи — она не из тех, кто раздаёт её просто так.</span>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="w-full" style="margin-top: 16px;">
+            <button class="btn-cta" data-i18n="s14w_alex_mira_cta" onclick="goTo(12)">К заданиям Миры →</button>
+            <button class="btn-ghost" data-i18n="s14w_alex_mira_alt" onclick="goToId('s14w_alex_wait')" style="margin-top: 10px;">Посмотреть альтернативный ответ</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN 14.4: Алекс — первый вывод, Wait path ==================== -->
+      <div class="screen screen-pinned" id="s14w_alex_wait" data-name="Алекс: 1-й вывод (Wait)" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+
+          <!-- Alex avatar -->
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 220px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Алекс" src="../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
+          </div>
+
+          <!-- Chat bubble -->
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
+            <div class="bubble alex-bubble" style="padding-top: 12px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #eab308;">АЛЕКС</div>
+              <span data-i18n="s14w_alex_wait_text" style="font-size: 14px;">Первый вывод. Путь пройден.<br><br>Наш коллега, которого ты ещё не знаешь, уже вовсю готовит для тебя задания. Осталось немного — спасибо, что подождёшь.</span>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="w-full" style="margin-top: 16px;">
+            <button class="btn-cta" data-i18n="s14w_alex_wait_cta" onclick="goTo(12)">На главную →</button>
+            <button class="btn-ghost" data-i18n="s14w_alex_wait_back" onclick="goToId('s14w_alex_mira')" style="margin-top: 10px;">← Вернуться к варианту Миры</button>
+          </div>
 
         </div>
       </div>
@@ -4139,6 +4237,20 @@ const i18n = {
     s14w_btn_other_wallet: "Вставить другой кошелёк",
     s14w_btn_use_simple: "Использовать Simple Wallet",
     s14w_btn_withdraw: "Забрать →",
+    // Screen 14.2 (Withdraw success)
+    s14w_success_title: "Запрос принят",
+    s14w_success_amount_label: "Сумма",
+    s14w_success_to_label: "Куда",
+    s14w_success_eta: "Обычно приходит за 1–2 минуты",
+    s14w_success_cta: "Продолжить →",
+    // Screen 14.3 (Alex — first withdraw, Mira path)
+    s14w_alex_mira_text: "Первый вывод. Запомни этот момент — путь, который начинался с пустого экрана, теперь позади.<br><br>Мира сказала, что будет ждать тебя на втором круге. Удачи — она не из тех, кто раздаёт её просто так.",
+    s14w_alex_mira_cta: "К заданиям Миры →",
+    s14w_alex_mira_alt: "Посмотреть альтернативный ответ",
+    // Screen 14.4 (Alex — first withdraw, Wait path)
+    s14w_alex_wait_text: "Первый вывод. Путь пройден.<br><br>Наш коллега, которого ты ещё не знаешь, уже вовсю готовит для тебя задания. Осталось немного — спасибо, что подождёшь.",
+    s14w_alex_wait_cta: "На главную →",
+    s14w_alex_wait_back: "← Вернуться к варианту Миры",
     // Screen 15 (Ritual)
     s15_title: "Ритуал",
     s15_progress: "1 из 7",
@@ -4587,6 +4699,20 @@ const i18n = {
     s14w_btn_other_wallet: "Use a different wallet",
     s14w_btn_use_simple: "Use Simple Wallet",
     s14w_btn_withdraw: "Withdraw →",
+    // Screen 14.2 (Withdraw success)
+    s14w_success_title: "Request accepted",
+    s14w_success_amount_label: "Amount",
+    s14w_success_to_label: "To",
+    s14w_success_eta: "Usually arrives in 1–2 minutes",
+    s14w_success_cta: "Continue →",
+    // Screen 14.3 (Alex — first withdraw, Mira path)
+    s14w_alex_mira_text: "First withdrawal. Remember this moment — the path that began with an empty screen is now behind you.<br><br>Mira said she'll be waiting on the second round. Good luck — she's not the type to hand it out easily.",
+    s14w_alex_mira_cta: "To Mira's quests →",
+    s14w_alex_mira_alt: "See the alternative response",
+    // Screen 14.4 (Alex — first withdraw, Wait path)
+    s14w_alex_wait_text: "First withdrawal. The path is done.<br><br>A colleague you don't know yet is actively preparing quests for you. Almost ready — thanks for your patience.",
+    s14w_alex_wait_cta: "Home →",
+    s14w_alex_wait_back: "← Back to Mira's path",
     // Screen 15 (Ritual)
     s15_title: "Ritual",
     s15_progress: "1 of 7",
