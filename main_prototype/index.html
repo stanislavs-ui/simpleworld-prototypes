@@ -3945,7 +3945,7 @@ tailwind.config = {
     <div id="coachmark-overlay-r" style="position: absolute; inset: 0; z-index: 50; display: none; pointer-events: auto;">
       <div id="cmr-backdrop" style="position: absolute; inset: 0; background: rgba(0,0,0,0.85);"></div>
       <div id="cmr-tooltip" style="position: absolute; left: 20px; right: 20px; z-index: 52; top: 50%; transform: translateY(-50%);">
-        <div class="bubble alex-bubble" style="padding: 12px 16px; background: rgba(234,179,8,0.1); border-color: rgba(234,179,8,0.25); backdrop-filter: blur(12px);">
+        <div class="bubble alex-bubble" style="padding: 12px 16px; background: #141414; border: 1px solid rgba(234,179,8,0.35); box-shadow: 0 8px 24px rgba(0,0,0,0.6);">
           <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" data-i18n="cm_alex_label" style="color: #eab308;">АЛЕКС</div>
           <div id="cmr-text" class="text-[14px] leading-relaxed" data-i18n="cmr_intro" style="color: #e0e0e0;">Это Квесты Миры. Давай покажу как устроен экран.</div>
         </div>
@@ -4441,7 +4441,7 @@ const i18n = {
     cm_step6: "Город пока в тумане. Чем больше делаешь — тем больше открывается.",
     // CoachMarks for sRoadmap (Mira quests list)
     cmr_intro: "Это Квесты Миры. Давай покажу как устроен экран.",
-    cmr_step0: "Твой путь — 10 дней. Каждый день — задача от Миры. Закроешь день — откроется следующий.",
+    cmr_step0: "Всего 10 дней — 10 заданий от Миры. Начни с первого. Закроешь день — откроется следующий.",
     cmr_step1: "Мой доход. Сколько уже заработал по реферальной ссылке и что готово к выплате.",
     cmr_step2: "Моя ссылка. Поделись ей — и жители из твоего круга начнут приходить в мир.",
     // Typewriter texts
@@ -4909,7 +4909,7 @@ const i18n = {
     cm_step6: "The city is still in fog. The more you do — the more opens up.",
     // CoachMarks for sRoadmap (Mira quests list)
     cmr_intro: "These are Mira's quests. Let me show you how this screen works.",
-    cmr_step0: "Your path — 10 days. Each day is a task from Mira. Close a day — next one unlocks.",
+    cmr_step0: "10 days — 10 tasks from Mira. Start with the first. Close a day — next one unlocks.",
     cmr_step1: "My income. How much you've earned from your referral link and what's ready to claim.",
     cmr_step2: "My link. Share it — and people from your circle start arriving into the world.",
     // Typewriter texts
@@ -6034,7 +6034,7 @@ function skipCoachMarks() {
 
 // === CoachMarks for sRoadmap (Mira quests list) ===
 const coachStepsRoadmap = [
-  { el: 'cmr-days-list', text: i18n[currentLang].cmr_step0 },
+  { el: 'mira-day-1',    text: i18n[currentLang].cmr_step0 },
   { el: 'cmr-btn-income', text: i18n[currentLang].cmr_step1 },
   { el: 'cmr-btn-link',   text: i18n[currentLang].cmr_step2 }
 ];
@@ -6093,19 +6093,11 @@ function nextCoachMarkRoadmap() {
     backdrop.innerHTML = '<svg width="'+w+'" height="'+h+'" style="position:absolute;inset:0;"><defs><mask id="cmr-mask"><rect width="'+w+'" height="'+h+'" fill="white"/><rect x="'+x1+'" y="'+y1+'" width="'+(x2-x1)+'" height="'+(y2-y1)+'" rx="'+rx+'" fill="black"/></mask></defs><rect width="'+w+'" height="'+h+'" fill="rgba(0,0,0,0.82)" mask="url(#cmr-mask)"/></svg>';
     backdrop.style.background = 'none';
 
-    // Tooltip position:
-    // - step 0 (tall days list): pin tooltip at bottom of phone viewport
-    // - steps 1,2 (buttons in header): tooltip BELOW the button
-    if (s.el === 'cmr-days-list') {
-      tooltip.style.top = '';
-      tooltip.style.bottom = '40px';
-      tooltip.style.transform = '';
-    } else {
-      var elBottomInPhone = elRect.bottom - phoneRect.top;
-      tooltip.style.top = (elBottomInPhone + 12) + 'px';
-      tooltip.style.bottom = '';
-      tooltip.style.transform = '';
-    }
+    // Tooltip position — always below the spotlighted element
+    var elBottomInPhone = elRect.bottom - phoneRect.top;
+    tooltip.style.top = (elBottomInPhone + 12) + 'px';
+    tooltip.style.bottom = '';
+    tooltip.style.transform = '';
   }
 
   document.getElementById('cmr-text').textContent = s.text;
