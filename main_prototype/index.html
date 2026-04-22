@@ -2398,21 +2398,6 @@ tailwind.config = {
           </div><!-- /cmr-days-list -->
 
         </div>
-
-        <!-- CoachMark overlay for sRoadmap — 3 steps (days, income, link) -->
-        <div id="coachmark-overlay-r" style="position: absolute; top: 0; left: -20px; right: -20px; bottom: 0; z-index: 20; display: none;">
-          <div id="cmr-backdrop" style="position: absolute; inset: 0; background: rgba(0,0,0,0.85);"></div>
-          <div id="cmr-tooltip" style="position: absolute; left: 20px; right: 20px; z-index: 22; top: 50%; transform: translateY(-50%);">
-            <div class="bubble alex-bubble" style="padding: 12px 16px; background: rgba(234,179,8,0.1); border-color: rgba(234,179,8,0.25); backdrop-filter: blur(12px);">
-              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" data-i18n="cm_alex_label" style="color: #eab308;">АЛЕКС</div>
-              <div id="cmr-text" class="text-[14px] leading-relaxed" data-i18n="cmr_intro" style="color: #e0e0e0;">Это Квесты Миры. Давай покажу как устроен экран.</div>
-            </div>
-            <div style="display: flex; gap: 8px; margin-top: 10px;">
-              <button class="btn-ghost" data-i18n="cm_skip" onclick="skipCoachMarksRoadmap()" style="flex: 1; padding: 12px;">Пропустить</button>
-              <button class="btn-reply" onclick="nextCoachMarkRoadmap()" id="cmr-next-btn" data-i18n="cm_start" style="flex: 2; text-align: center;">Давай</button>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- ==================== ALEX TASK: Задание Алекса ==================== -->
@@ -3955,6 +3940,21 @@ tailwind.config = {
 
     </div>
     <div class="phone-home"></div>
+
+    <!-- CoachMark overlay for sRoadmap (pinned to .phone viewport, not scrollable content) -->
+    <div id="coachmark-overlay-r" style="position: absolute; inset: 0; z-index: 50; display: none; pointer-events: auto;">
+      <div id="cmr-backdrop" style="position: absolute; inset: 0; background: rgba(0,0,0,0.85);"></div>
+      <div id="cmr-tooltip" style="position: absolute; left: 20px; right: 20px; z-index: 52; top: 50%; transform: translateY(-50%);">
+        <div class="bubble alex-bubble" style="padding: 12px 16px; background: rgba(234,179,8,0.1); border-color: rgba(234,179,8,0.25); backdrop-filter: blur(12px);">
+          <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" data-i18n="cm_alex_label" style="color: #eab308;">АЛЕКС</div>
+          <div id="cmr-text" class="text-[14px] leading-relaxed" data-i18n="cmr_intro" style="color: #e0e0e0;">Это Квесты Миры. Давай покажу как устроен экран.</div>
+        </div>
+        <div style="display: flex; gap: 8px; margin-top: 10px;">
+          <button class="btn-ghost" data-i18n="cm_skip" onclick="skipCoachMarksRoadmap()" style="flex: 1; padding: 12px;">Пропустить</button>
+          <button class="btn-reply" onclick="nextCoachMarkRoadmap()" id="cmr-next-btn" data-i18n="cm_start" style="flex: 2; text-align: center;">Давай</button>
+        </div>
+      </div>
+    </div>
   </div>
   </div><!-- /phone-bezel -->
 
@@ -6056,35 +6056,49 @@ function nextCoachMarkRoadmap() {
   backdrop.style.background = 'rgba(0,0,0,0.8)';
 
   if (el) {
+    // Scroll element into view inside the phone-content scroll container
+    // (important for step 0: the full days list exceeds viewport — we want at least the top of the list visible)
+    var phoneContent = document.querySelector('.phone-content');
+    if (phoneContent) {
+      if (s.el === 'cmr-days-list') {
+        // Scroll to top so days list starts at visible top
+        phoneContent.scrollTop = 0;
+      } else {
+        // For buttons — scroll so header is visible
+        phoneContent.scrollTop = 0;
+      }
+    }
+
+    // Raise target so it sits above the backdrop
     el.style.position = 'relative';
-    el.style.zIndex = '25';
+    el.style.zIndex = '51';
     cmrPrevEl = el;
 
-    var screenEl = document.getElementById('sRoadmap');
-    var screenRect = screenEl.getBoundingClientRect();
+    // Compute hole position relative to .phone (overlay's positioning root)
+    var phoneEl = document.querySelector('.phone');
+    var phoneRect = phoneEl.getBoundingClientRect();
     var elRect = el.getBoundingClientRect();
     var pad = 6;
-    var x1 = elRect.left - screenRect.left + 20 - pad;
-    var y1 = elRect.top - screenRect.top - pad;
+    var x1 = elRect.left - phoneRect.left - pad;
+    var y1 = elRect.top - phoneRect.top - pad;
     var x2 = x1 + elRect.width + pad * 2;
     var y2 = y1 + elRect.height + pad * 2;
     var rx = 12;
-    var w = screenRect.width + 40;
-    var h = screenRect.height;
+    var w = phoneRect.width;
+    var h = phoneRect.height;
     backdrop.innerHTML = '<svg width="'+w+'" height="'+h+'" style="position:absolute;inset:0;"><defs><mask id="cmr-mask"><rect width="'+w+'" height="'+h+'" fill="white"/><rect x="'+x1+'" y="'+y1+'" width="'+(x2-x1)+'" height="'+(y2-y1)+'" rx="'+rx+'" fill="black"/></mask></defs><rect width="'+w+'" height="'+h+'" fill="rgba(0,0,0,0.82)" mask="url(#cmr-mask)"/></svg>';
     backdrop.style.background = 'none';
 
     // Tooltip position:
-    // - step 0 (tall days list): pin tooltip at bottom of screen (safe position inside viewport)
-    // - steps 1,2 (small buttons in header): tooltip BELOW the button
-    var screenHeight = screenRect.height;
+    // - step 0 (tall days list): pin tooltip at bottom of phone viewport
+    // - steps 1,2 (buttons in header): tooltip BELOW the button
     if (s.el === 'cmr-days-list') {
       tooltip.style.top = '';
-      tooltip.style.bottom = '16px';
+      tooltip.style.bottom = '40px';
       tooltip.style.transform = '';
     } else {
-      var elBottom = elRect.bottom - screenRect.top;
-      tooltip.style.top = (elBottom + 12) + 'px';
+      var elBottomInPhone = elRect.bottom - phoneRect.top;
+      tooltip.style.top = (elBottomInPhone + 12) + 'px';
       tooltip.style.bottom = '';
       tooltip.style.transform = '';
     }
