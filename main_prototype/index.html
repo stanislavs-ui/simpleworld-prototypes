@@ -3968,11 +3968,11 @@ tailwind.config = {
             <div style="width: 100%; height: 8px; background: hsl(240 5% 14%); border-radius: 4px; overflow: hidden;">
               <div id="sAura-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #9333ea, #c084fc); border-radius: 4px; box-shadow: 0 0 10px rgba(168,85,247,0.4); transition: width 0.5s ease-out;"></div>
             </div>
-            <div class="text-[12px]" data-i18n="sAura_subtitle" style="color: hsl(0 0% 50%); line-height: 1.5; margin-top: 14px;">Сила, от которой открывается Хранилище.</div>
+            <div class="text-[12px]" data-i18n="sAura_subtitle" style="color: hsl(0 0% 50%); line-height: 1.5; margin-top: 14px;">Сила, которая открывает доступ к Хранилищу.</div>
           </div>
 
           <!-- How to get -->
-          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px; margin-bottom: 10px;">
+          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px;">
             <div class="text-[12px] font-bold" data-i18n="sAura_how_title" style="color: #f2f2f2; margin-bottom: 10px;">Как её получать</div>
             <div class="text-[12px]" data-i18n="sAura_how_p1" style="color: hsl(0 0% 50%); line-height: 1.7;">
               Пройди первые два квеста Алекса.
@@ -3986,12 +3986,6 @@ tailwind.config = {
             <div class="text-[12px]" data-i18n="sAura_how_p4" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
               100 Ауры — и ты получишь доступ к твоему Хранилищу.
             </div>
-          </div>
-
-          <!-- Adaptive status -->
-          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px;">
-            <div class="text-[12px] font-bold" data-i18n="sAura_status_title" style="color: #f2f2f2; margin-bottom: 10px;">Что сейчас</div>
-            <div id="sAura-status-text" class="text-[12px]" style="color: hsl(0 0% 65%); line-height: 1.7;">В начале пути. Выполни первые два квеста Алекса.</div>
           </div>
 
           <a href="mailto:support@simple.app" class="text-[11px]" data-i18n="support_line" style="color: hsl(0 0% 30%); text-align: center; margin-top: 24px; text-decoration: none; display: block;">Есть вопросы? support@simple.app</a>
@@ -4348,18 +4342,12 @@ const i18n = {
     s15_bonus_desc: "20 апреля — день запуска проекта. Каждый новый житель разово, единоразово получил бонус +2 ритуала за регистрацию.",
     // Screen sAura (Aura explainer)
     sAura_title: "Аура",
-    sAura_subtitle: "Сила, от которой открывается Хранилище.",
+    sAura_subtitle: "Сила, которая открывает доступ к Хранилищу.",
     sAura_how_title: "Как её получать",
     sAura_how_p1: "Пройди первые два квеста Алекса.",
     sAura_how_p2: "Закрой первый день в квесте у Миры.",
     sAura_how_p3: "Алекс подкинет соц-задания — за каждое +10 Ауры.",
     sAura_how_p4: "100 Ауры — и ты получишь доступ к твоему Хранилищу.",
-    sAura_status_title: "Что сейчас",
-    sAura_st_start: "В начале пути. Выполни первые два квеста Алекса.",
-    sAura_st_need_mira1: "Пройди первый день в квесте у Миры — после этого Алекс откроет соц-задания.",
-    sAura_st_ready_social: "У Алекса появились соц-задания. Выполни — получишь +10 Ауры.",
-    sAura_st_in_progress: "{current} из 100. Ещё {left} соц-заданий — и Аура полная.",
-    sAura_st_full: "Аура полная. Можно идти в Хранилище.",
     // Screen 16 (Treasury)
     s16_title: "Сокровищница",
     s16_countdown_label: "До открытия сокровищницы",
@@ -4831,18 +4819,12 @@ const i18n = {
     s15_bonus_desc: "April 20 — launch day of the project. Every new resident got a one-time +2 rituals bonus at registration.",
     // Screen sAura (Aura explainer)
     sAura_title: "Aura",
-    sAura_subtitle: "The force that opens the Vault.",
+    sAura_subtitle: "The force that opens access to the Vault.",
     sAura_how_title: "How to get it",
     sAura_how_p1: "Complete Alex's first two quests.",
     sAura_how_p2: "Finish the first day of Mira's quest.",
     sAura_how_p3: "Alex will hand out social tasks — +10 Aura for each.",
     sAura_how_p4: "100 Aura — and you unlock your Vault.",
-    sAura_status_title: "Where you are",
-    sAura_st_start: "At the very beginning. Complete Alex's first two quests.",
-    sAura_st_need_mira1: "Finish the first day of Mira's quest — after that Alex will unlock social tasks.",
-    sAura_st_ready_social: "Alex has social tasks ready for you. Complete one — get +10 Aura.",
-    sAura_st_in_progress: "{current} of 100. {left} more social tasks — and Aura is full.",
-    sAura_st_full: "Aura is full. Time to head to the Vault.",
     // Screen 16 (Treasury)
     s16_title: "Treasury",
     s16_countdown_label: "Treasury opens in",
@@ -6035,42 +6017,14 @@ function updateHomeProgress() {
   }
 }
 
-// === Aura screen: progress + adaptive status ===
+// === Aura screen: sync progress bar with current state ===
 function updateAuraScreen() {
-  var miraDone = miraDaysDone.length;
-  var alexDone = alexTasksDone.length;
-  var aura = alexDone * 10;
+  var aura = alexTasksDone.length * 10;
   if (aura > 100) aura = 100;
-
   var valEl = document.getElementById('sAura-value');
   if (valEl) valEl.innerHTML = aura + ' <span style="color: hsl(0 0% 35%); font-weight: 600;">/ 100</span>';
   var barEl = document.getElementById('sAura-bar');
   if (barEl) barEl.style.width = aura + '%';
-
-  var statusEl = document.getElementById('sAura-status-text');
-  if (!statusEl) return;
-
-  var lang = currentLang;
-  var q1Done = q1State && q1State.email && q1State.tg;
-  var q2Done = typeof q2State !== 'undefined' && q2State.txn;
-  var firstTwoQuestsDone = q1Done && q2Done;
-
-  var key, text;
-  if (!firstTwoQuestsDone) {
-    key = 'sAura_st_start';
-  } else if (miraDone === 0) {
-    key = 'sAura_st_need_mira1';
-  } else if (aura === 0) {
-    key = 'sAura_st_ready_social';
-  } else if (aura < 100) {
-    var left = Math.ceil((100 - aura) / 10);
-    text = i18n[lang].sAura_st_in_progress.replace('{current}', aura).replace('{left}', left);
-  } else {
-    key = 'sAura_st_full';
-  }
-
-  if (!text) text = i18n[lang][key];
-  statusEl.textContent = text;
 }
 
 // Initialize Mira roadmap state from localStorage
