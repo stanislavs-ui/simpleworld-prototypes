@@ -489,7 +489,8 @@ tailwind.config = {
   <div class="sidebar-item" onclick="goToId('s14w_alex_mira')">14.3 Алекс: 1-й вывод (Мира)</div>
   <div class="sidebar-item" onclick="goToId('s14w_alex_wait')">14.4 Алекс: 1-й вывод (Wait)</div>
   <div class="sidebar-item" onclick="goTo(16)">15. Ритуал</div>
-  <div class="sidebar-item" onclick="goTo(17)">16. Сокровищница</div>
+  <div class="sidebar-item" onclick="goToId('sAura')">15a. Аура</div>
+  <div class="sidebar-item" onclick="goToId('s16')">16. Сокровищница</div>
   <div class="sidebar-item" onclick="goTo(18)">17. Карта мира</div>
   <div class="sidebar-section">Квест #1</div>
   <div class="sidebar-item" onclick="goTo(19)">18. Алекс: Добро пожаловать</div>
@@ -1081,7 +1082,7 @@ tailwind.config = {
           </div>
 
           <!-- ── Аура (progress) — фиолетовая шкала ── -->
-          <div id="cm-aura" style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 14px 16px;">
+          <div id="cm-aura" onclick="goToId('sAura')" style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 14px 16px; cursor: pointer;">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
               <div style="display: flex; align-items: center; gap: 8px;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/></svg>
@@ -1390,16 +1391,24 @@ tailwind.config = {
           <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px;">
             <div class="text-[12px] font-bold" data-i18n="s15_how_title" style="color: #f2f2f2; margin-bottom: 10px;">Как работает ритуал</div>
             <div class="text-[12px]" data-i18n="s15_how_p1" style="color: hsl(0 0% 50%); line-height: 1.7;">
-              День за днём — путь к ключу.
+              Проходишь один день в квесте у Миры — получаешь один ритуал.
             </div>
             <div class="text-[12px]" data-i18n="s15_how_p2" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
-              Зашёл сегодня — шаг вперёд.<br>Пропустил день — шаг назад.
+              7 ритуалов — и ты забираешь ключ.
             </div>
             <div class="text-[12px]" data-i18n="s15_how_p3" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
-              Семь дней подряд — забираешь ключ.
+              Ключ открывает Сокровищницу — каждую пятницу в полдень.
             </div>
             <div class="text-[12px]" data-i18n="s15_how_p4" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
-              Дальше — следующий круг.<br>Каждую неделю — ещё один ключ.
+              Дальше следующий круг: новые дни, новый ключ.
+            </div>
+          </div>
+
+          <!-- Launch bonus -->
+          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px; margin-top: 10px;">
+            <div class="text-[12px] font-bold" data-i18n="s15_bonus_title" style="color: #f2f2f2; margin-bottom: 10px;">Бонус запуска</div>
+            <div class="text-[12px]" data-i18n="s15_bonus_desc" style="color: hsl(0 0% 50%); line-height: 1.7;">
+              20 апреля — день запуска проекта. Каждый новый житель разово, единоразово получил бонус +2 ритуала за регистрацию.
             </div>
           </div>
 
@@ -2872,7 +2881,7 @@ tailwind.config = {
           <div class="w-full" style="margin-top: -16px; position: relative; z-index: 1;">
             <div class="bubble mira-bubble" style="padding-top: 12px; background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.3);">
               <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #a78bfa;">МИРА</div>
-              <span data-i18n="d4a_text" style="font-size: 14px;">Четвёртый день подряд. Мне нравится. Кстати — каждый день, когда ты заходишь, засчитывается в ритуал. 7 дней подряд = ключ к Сокровищнице. Там реальные USDC. Так что не пропадай.<br><br>Ты уже написал нескольким людям. Кто-то мог не ответить — это нормально. Не значит «нет». Скорее — не увидел или забыл.<br><br>Одно короткое напоминание. Без давления.</span>
+              <span data-i18n="d4a_text" style="font-size: 14px;">Четвёртый день подряд. Мне нравится. Кстати — каждый день, что ты проходишь со мной, даёт один ритуал. 7 ритуалов = ключ к Сокровищнице. Там реальные USDC. Так что не пропадай.<br><br>Ты уже написал нескольким людям. Кто-то мог не ответить — это нормально. Не значит «нет». Скорее — не увидел или забыл.<br><br>Одно короткое напоминание. Без давления.</span>
             </div>
           </div>
           <div class="w-full" style="margin-top: 16px;">
@@ -3938,6 +3947,58 @@ tailwind.config = {
         </div>
       </div>
 
+      <!-- ==================== SCREEN sAura: Аура ==================== -->
+      <div class="screen" id="sAura" data-name="Аура" style="justify-content: flex-start;">
+        <div class="flex flex-col w-full" style="padding-top: 4px;">
+
+          <!-- Back header -->
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+            <div onclick="goTo(12)" style="cursor: pointer; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </div>
+            <span class="text-[15px] font-bold" data-i18n="sAura_title" style="color: #f2f2f2;">Аура</span>
+          </div>
+
+          <!-- Progress card — big aura bar -->
+          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 20px; margin-bottom: 12px; text-align: center;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/></svg>
+              <span id="sAura-value" class="font-label text-[22px] font-extrabold" style="color: #f2f2f2;">0 <span style="color: hsl(0 0% 35%); font-weight: 600;">/ 100</span></span>
+            </div>
+            <div style="width: 100%; height: 8px; background: hsl(240 5% 14%); border-radius: 4px; overflow: hidden;">
+              <div id="sAura-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #9333ea, #c084fc); border-radius: 4px; box-shadow: 0 0 10px rgba(168,85,247,0.4); transition: width 0.5s ease-out;"></div>
+            </div>
+            <div class="text-[12px]" data-i18n="sAura_subtitle" style="color: hsl(0 0% 50%); line-height: 1.5; margin-top: 14px;">Сила, от которой открывается Хранилище.</div>
+          </div>
+
+          <!-- How to get -->
+          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px; margin-bottom: 10px;">
+            <div class="text-[12px] font-bold" data-i18n="sAura_how_title" style="color: #f2f2f2; margin-bottom: 10px;">Как её получать</div>
+            <div class="text-[12px]" data-i18n="sAura_how_p1" style="color: hsl(0 0% 50%); line-height: 1.7;">
+              Пройди первые два квеста Алекса.
+            </div>
+            <div class="text-[12px]" data-i18n="sAura_how_p2" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
+              Закрой первый день в квесте у Миры.
+            </div>
+            <div class="text-[12px]" data-i18n="sAura_how_p3" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
+              Алекс подкинет соц-задания — за каждое +10 Ауры.
+            </div>
+            <div class="text-[12px]" data-i18n="sAura_how_p4" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
+              100 Ауры — и ты получишь доступ к твоему Хранилищу.
+            </div>
+          </div>
+
+          <!-- Adaptive status -->
+          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px;">
+            <div class="text-[12px] font-bold" data-i18n="sAura_status_title" style="color: #f2f2f2; margin-bottom: 10px;">Что сейчас</div>
+            <div id="sAura-status-text" class="text-[12px]" style="color: hsl(0 0% 65%); line-height: 1.7;">В начале пути. Выполни первые два квеста Алекса.</div>
+          </div>
+
+          <a href="mailto:support@simple.app" class="text-[11px]" data-i18n="support_line" style="color: hsl(0 0% 30%); text-align: center; margin-top: 24px; text-decoration: none; display: block;">Есть вопросы? support@simple.app</a>
+
+        </div>
+      </div>
+
     </div>
     <div class="phone-home"></div>
 
@@ -4279,10 +4340,26 @@ const i18n = {
     s15_progress: "1 из 7",
     s15_btn_claim: "Забрать ключ",
     s15_how_title: "Как работает ритуал",
-    s15_how_p1: "День за днём — путь к ключу.",
-    s15_how_p2: "Зашёл сегодня — шаг вперёд.\nПропустил день — шаг назад.",
-    s15_how_p3: "Семь дней подряд — забираешь ключ.",
-    s15_how_p4: "Дальше — следующий круг.\nКаждую неделю — ещё один ключ.",
+    s15_how_p1: "Проходишь один день в квесте у Миры — получаешь один ритуал.",
+    s15_how_p2: "7 ритуалов — и ты забираешь ключ.",
+    s15_how_p3: "Ключ открывает Сокровищницу — каждую пятницу в полдень.",
+    s15_how_p4: "Дальше следующий круг: новые дни, новый ключ.",
+    s15_bonus_title: "Бонус запуска",
+    s15_bonus_desc: "20 апреля — день запуска проекта. Каждый новый житель разово, единоразово получил бонус +2 ритуала за регистрацию.",
+    // Screen sAura (Aura explainer)
+    sAura_title: "Аура",
+    sAura_subtitle: "Сила, от которой открывается Хранилище.",
+    sAura_how_title: "Как её получать",
+    sAura_how_p1: "Пройди первые два квеста Алекса.",
+    sAura_how_p2: "Закрой первый день в квесте у Миры.",
+    sAura_how_p3: "Алекс подкинет соц-задания — за каждое +10 Ауры.",
+    sAura_how_p4: "100 Ауры — и ты получишь доступ к твоему Хранилищу.",
+    sAura_status_title: "Что сейчас",
+    sAura_st_start: "В начале пути. Выполни первые два квеста Алекса.",
+    sAura_st_need_mira1: "Пройди первый день в квесте у Миры — после этого Алекс откроет соц-задания.",
+    sAura_st_ready_social: "У Алекса появились соц-задания. Выполни — получишь +10 Ауры.",
+    sAura_st_in_progress: "{current} из 100. Ещё {left} соц-заданий — и Аура полная.",
+    sAura_st_full: "Аура полная. Можно идти в Хранилище.",
     // Screen 16 (Treasury)
     s16_title: "Сокровищница",
     s16_countdown_label: "До открытия сокровищницы",
@@ -4541,7 +4618,7 @@ const i18n = {
     d3d_text: "Видишь? Не нужно никого уговаривать. Ответил честно — и всё.\n\nКто хочет — зайдёт. Кто не хочет — его право. Ты сделал свою часть.",
     d3d_btn_done: "Завершить день →",
     // Day 4
-    d4a_text: "Четвёртый день подряд. Мне нравится. Кстати — каждый день, когда ты заходишь, засчитывается в ритуал. 7 дней подряд = ключ к Сокровищнице. Там реальные USDC. Так что не пропадай.\n\nТы уже написал нескольким людям. Кто-то мог не ответить — это нормально. Не значит «нет». Скорее — не увидел или забыл.\n\nОдно короткое напоминание. Без давления.",
+    d4a_text: "Четвёртый день подряд. Мне нравится. Кстати — каждый день, что ты проходишь со мной, даёт один ритуал. 7 ритуалов = ключ к Сокровищнице. Там реальные USDC. Так что не пропадай.\n\nТы уже написал нескольким людям. Кто-то мог не ответить — это нормально. Не значит «нет». Скорее — не увидел или забыл.\n\nОдно короткое напоминание. Без давления.",
     d4a_btn_next: "Что написать?",
     d4b_text: "Вот так:\n\n«Привет, видел моё сообщение? Без напряга, просто если интересно — глянь ссылку. Если нет — ок, без вопросов 👌»\n\nКоротко. Легко. Человек сам решит.\nНаписал — нажми.",
     d4b_btn_copy: "📋 Забрать текст",
@@ -4746,10 +4823,26 @@ const i18n = {
     s15_progress: "1 of 7",
     s15_btn_claim: "Claim key",
     s15_how_title: "How the ritual works",
-    s15_how_p1: "Day by day — the path to the key.",
-    s15_how_p2: "Logged in today — step forward.\nMissed a day — step back.",
-    s15_how_p3: "Seven days in a row — claim the key.",
-    s15_how_p4: "Then — the next round.\nEvery week — another key.",
+    s15_how_p1: "Complete one day of Mira's quest — get one ritual.",
+    s15_how_p2: "Seven rituals — and you claim the key.",
+    s15_how_p3: "The key opens the Vault — every Friday at noon.",
+    s15_how_p4: "Then the next round: new days, new key.",
+    s15_bonus_title: "Launch bonus",
+    s15_bonus_desc: "April 20 — launch day of the project. Every new resident got a one-time +2 rituals bonus at registration.",
+    // Screen sAura (Aura explainer)
+    sAura_title: "Aura",
+    sAura_subtitle: "The force that opens the Vault.",
+    sAura_how_title: "How to get it",
+    sAura_how_p1: "Complete Alex's first two quests.",
+    sAura_how_p2: "Finish the first day of Mira's quest.",
+    sAura_how_p3: "Alex will hand out social tasks — +10 Aura for each.",
+    sAura_how_p4: "100 Aura — and you unlock your Vault.",
+    sAura_status_title: "Where you are",
+    sAura_st_start: "At the very beginning. Complete Alex's first two quests.",
+    sAura_st_need_mira1: "Finish the first day of Mira's quest — after that Alex will unlock social tasks.",
+    sAura_st_ready_social: "Alex has social tasks ready for you. Complete one — get +10 Aura.",
+    sAura_st_in_progress: "{current} of 100. {left} more social tasks — and Aura is full.",
+    sAura_st_full: "Aura is full. Time to head to the Vault.",
     // Screen 16 (Treasury)
     s16_title: "Treasury",
     s16_countdown_label: "Treasury opens in",
@@ -5009,7 +5102,7 @@ const i18n = {
     d3d_text: "See? No need to convince anyone. You answered honestly — that's it.\n\nWho wants in — will come. Who doesn't — their call. You did your part.",
     d3d_btn_done: "Complete day →",
     // Day 4
-    d4a_text: "Fourth day in a row. I like it. By the way — every day you log in counts toward the ritual. 7 days in a row = key to the Vault. Real USDC in there. So don't disappear.\n\nYou've already written to a few people. Some might not have replied — that's fine. Doesn't mean \"no.\" More like — didn't see it or forgot.\n\nOne short reminder. No pressure.",
+    d4a_text: "Fourth day in a row. I like it. By the way — every day you spend with me counts as one ritual. Seven rituals = key to the Vault. Real USDC in there. Don't disappear.\n\nYou've already written to a few people. Some might not have replied — that's fine. Doesn't mean \"no.\" More like — didn't see it or forgot.\n\nOne short reminder. No pressure.",
     d4a_btn_next: "What to write?",
     d4b_text: "Like this:\n\n\"Hey, did you see my message? No pressure, just if you're curious — check the link. If not — cool, no worries 👌\"\n\nShort. Easy. They decide.\nWrote it — tap.",
     d4b_btn_copy: "📋 Copy text",
@@ -5149,6 +5242,8 @@ function switchLang(lang) {
       coachStepsRoadmap[cri].text = i18n[lang]['cmr_step' + cri];
     }
   }
+  // 6c) Re-render computed Aura screen status with new language
+  if (typeof updateAuraScreen === 'function') updateAuraScreen();
 
   // 7) Sync both language toggle buttons (s2 and profile)
   ['lang-ru', 'prof-lang-ru', 'map-lang-ru', 'lb-lang-ru'].forEach(function(id) {
@@ -5601,6 +5696,11 @@ goTo = function(n) {
     }
   }
 
+  // Refresh Aura screen state on every entry
+  if (screens[current] && screens[current].id === 'sAura') {
+    if (typeof updateAuraScreen === 'function') updateAuraScreen();
+  }
+
   if (current === 2) startTypewriter(); // Screen 3 — Alex Appears (legacy typewriter)
   runTypewriter(current); // Universal: checks if screen has typewriter config
 
@@ -5933,6 +6033,44 @@ function updateHomeProgress() {
       dots[i].style.borderColor = i < miraDone ? '#22c55e' : 'hsl(240 5% 22%)';
     }
   }
+}
+
+// === Aura screen: progress + adaptive status ===
+function updateAuraScreen() {
+  var miraDone = miraDaysDone.length;
+  var alexDone = alexTasksDone.length;
+  var aura = alexDone * 10;
+  if (aura > 100) aura = 100;
+
+  var valEl = document.getElementById('sAura-value');
+  if (valEl) valEl.innerHTML = aura + ' <span style="color: hsl(0 0% 35%); font-weight: 600;">/ 100</span>';
+  var barEl = document.getElementById('sAura-bar');
+  if (barEl) barEl.style.width = aura + '%';
+
+  var statusEl = document.getElementById('sAura-status-text');
+  if (!statusEl) return;
+
+  var lang = currentLang;
+  var q1Done = q1State && q1State.email && q1State.tg;
+  var q2Done = typeof q2State !== 'undefined' && q2State.txn;
+  var firstTwoQuestsDone = q1Done && q2Done;
+
+  var key, text;
+  if (!firstTwoQuestsDone) {
+    key = 'sAura_st_start';
+  } else if (miraDone === 0) {
+    key = 'sAura_st_need_mira1';
+  } else if (aura === 0) {
+    key = 'sAura_st_ready_social';
+  } else if (aura < 100) {
+    var left = Math.ceil((100 - aura) / 10);
+    text = i18n[lang].sAura_st_in_progress.replace('{current}', aura).replace('{left}', left);
+  } else {
+    key = 'sAura_st_full';
+  }
+
+  if (!text) text = i18n[lang][key];
+  statusEl.textContent = text;
 }
 
 // Initialize Mira roadmap state from localStorage
