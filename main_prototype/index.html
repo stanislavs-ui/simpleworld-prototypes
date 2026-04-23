@@ -1309,7 +1309,12 @@ tailwind.config = {
 
       <!-- ==================== SCREEN 14: Хранилище ==================== -->
       <div class="screen" id="s14" data-name="Хранилище" style="justify-content: flex-start;">
-        <div class="flex flex-col w-full" style="padding-top: 4px;">
+        <div class="flex flex-col w-full" style="padding-top: 4px; position: relative;">
+
+          <!-- Post-treasure toast (hidden by default) -->
+          <div id="vault-toast" style="position: absolute; top: 0; left: 0; right: 0; background: linear-gradient(135deg, hsl(142 40% 14%), hsl(142 40% 18%)); border: 1px solid hsl(142 40% 35%); border-radius: 12px; padding: 12px 16px; color: #22c55e; font-weight: 600; text-align: center; font-size: 13px; opacity: 0; transform: translateY(-12px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; pointer-events: none; z-index: 10; box-shadow: 0 6px 20px rgba(34,197,94,0.25);">
+            <span id="vault-toast-text">+12.50 USDC зачислено</span>
+          </div>
 
           <!-- Back header -->
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
@@ -4041,11 +4046,8 @@ tailwind.config = {
       <div class="screen" id="s16_opened" data-name="Сокровищница открыта" style="justify-content: flex-start;">
         <div class="flex flex-col w-full" style="padding-top: 4px;">
 
-          <!-- Back header -->
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-            <div onclick="goToId('s16')" style="cursor: pointer; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            </div>
+          <!-- Screen title (no back arrow — terminal screen) -->
+          <div style="text-align: center; margin-bottom: 8px;">
             <span class="text-[15px] font-bold" data-i18n="s16o_title" style="color: #f2f2f2;">Сокровищница</span>
           </div>
 
@@ -4056,15 +4058,19 @@ tailwind.config = {
 
           <!-- Amount reveal -->
           <div class="treasure-reveal" style="text-align: center; margin-top: 4px;">
-            <div class="font-label text-[10px] font-bold" data-i18n="s16o_eyebrow" style="color: hsl(0 0% 55%); letter-spacing: 1.8px; text-transform: uppercase; margin-bottom: 6px;">Награда получена</div>
-            <div class="text-[22px] font-bold" data-i18n="s16o_congrats" style="color: #f2f2f2; margin-bottom: 10px;">Поздравляем!</div>
-            <div class="font-label font-extrabold" id="s16o-amount" style="font-size: 40px; color: #f2f2f2; letter-spacing: -0.5px;">12.50 USDC</div>
+            <div class="text-[18px] font-bold" data-i18n="s16o_eyebrow" style="color: #f2f2f2; margin-bottom: 10px; letter-spacing: 0.3px;">Награда получена</div>
+            <div class="font-label font-extrabold treasure-amount" id="s16o-amount" style="font-size: 40px; color: #f2f2f2; letter-spacing: -0.5px; text-shadow: 0 0 24px rgba(234,179,8,0.35), 0 2px 8px rgba(0,0,0,0.4);">0.00 USDC</div>
+            <div class="text-[11px]" data-i18n="s16o_formula" style="color: hsl(0 0% 50%); margin-top: 8px; line-height: 1.5;">500 USDC ÷ 40 участников = твоя доля</div>
           </div>
 
-          <!-- CTA -->
+          <!-- CTA + Share -->
           <div class="treasure-cta-wrap" style="margin-top: 16px;">
-            <button class="btn-cta" data-i18n="s16o_btn_claim" onclick="claimTreasure()" style="text-align: center;">Перейти в Хранилище</button>
-            <div class="text-[11px]" data-i18n="s16o_reset_note" style="color: #f2f2f2; margin-top: 12px; text-align: center; line-height: 1.5;">Ключ использован. Ритуалы обнулились. Чтобы получить новый ключ, собери 7 новых ритуалов.</div>
+            <button class="btn-cta" data-i18n="s16o_btn_claim" onclick="claimTreasure()" style="text-align: center;">В Хранилище</button>
+            <button class="btn-reply" data-i18n="s16o_btn_share" onclick="shareTreasure()" style="text-align: center; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+              <span>Поделиться</span>
+            </button>
+            <div class="text-[11px]" data-i18n="s16o_reset_note" style="color: #f2f2f2; margin-top: 12px; text-align: center; line-height: 1.5;">Ключ использован. 7 новых ритуалов — и получишь следующий.</div>
           </div>
 
           <a href="mailto:support@simple.app" class="text-[11px]" data-i18n="support_line" style="color: #f2f2f2; text-align: center; margin-top: 20px; text-decoration: none; display: block;">Техническая поддержка — support@simple.app</a>
@@ -4151,9 +4157,11 @@ function goTo(n) {
   curBubbles.forEach(el => setTimeout(() => el.classList.add('show'), 300));
   curActions.forEach(el => setTimeout(() => el.classList.add('show'), 800));
 
-  // Treasure-opened screen: restart chest video from the start each visit
+  // Treasure-opened screen: restart chest video + animate amount counter
   if (screens[current].id === 's16_opened') {
     var chestVid = screens[current].querySelector('.chest-video');
+    var amtEl = document.getElementById('s16o-amount');
+    if (amtEl) amtEl.textContent = '0.00 USDC';
     if (chestVid) {
       try {
         chestVid.currentTime = 0;
@@ -4161,6 +4169,14 @@ function goTo(n) {
         if (pPlay && pPlay.catch) pPlay.catch(function(){});
       } catch (e) {}
     }
+    // Trigger counter animation in sync with the reveal CSS (delay 3.0s)
+    setTimeout(function () { animateAmount(amtEl, TREASURE_AMOUNT, 1200); }, 3000);
+  }
+
+  // Хранилище: if we just claimed treasure, show a celebratory toast
+  if (screens[current].id === 's14' && pendingTreasureToast) {
+    pendingTreasureToast = false;
+    setTimeout(showVaultToast, 400);
   }
 }
 
@@ -4297,6 +4313,9 @@ function renderKeyState() {
   }
 }
 
+var TREASURE_AMOUNT = 12.50; // demo value — comes from backend in prod
+var pendingTreasureToast = false;
+
 function openTreasure() {
   if (!hasKey) return;
   var idx = Array.from(screens).findIndex(s => s.id === 's16_opened');
@@ -4308,10 +4327,49 @@ function claimTreasure() {
   hasKey = false;
   try { localStorage.setItem('sw-has-key', '0'); } catch (e) {}
   renderKeyState();
-  // Navigate to Хранилище (s14 — screen index 15 in 1-based numeric goTo)
+  pendingTreasureToast = true; // goTo hook will show toast once we land on s14
   var idx = Array.from(screens).findIndex(s => s.id === 's14');
-  if (idx < 0) idx = 14; // fallback: position 15 → index 14
+  if (idx < 0) idx = 14;
   goTo(idx + 1);
+}
+
+function shareTreasure() {
+  var amount = (TREASURE_AMOUNT).toFixed(2);
+  var text = 'Я получил ' + amount + ' USDC из Сокровищницы Simple World!';
+  var url = 'https://simple.world';
+  try {
+    if (navigator.share) {
+      navigator.share({ text: text, url: url }).catch(function(){});
+    } else {
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text + ' ' + url), '_blank');
+    }
+  } catch (e) {}
+}
+
+function animateAmount(el, target, duration) {
+  if (!el) return;
+  var start = performance.now();
+  function step(now) {
+    var t = Math.min(1, (now - start) / duration);
+    var eased = 1 - Math.pow(1 - t, 3);
+    var val = target * eased;
+    el.textContent = val.toFixed(2) + ' USDC';
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function showVaultToast() {
+  var toast = document.getElementById('vault-toast');
+  var txt = document.getElementById('vault-toast-text');
+  if (!toast) return;
+  if (txt) txt.textContent = '+' + TREASURE_AMOUNT.toFixed(2) + ' USDC зачислено';
+  toast.style.opacity = '1';
+  toast.style.transform = 'translateY(0)';
+  setTimeout(function () {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(-12px)';
+  }, 3200);
 }
 
 // Restore key state on load
@@ -4518,10 +4576,10 @@ const i18n = {
     s16_has_key: "У тебя есть ключ. Открой сокровищницу.",
     s16o_title: "Сокровищница",
     s16o_eyebrow: "Награда получена",
-    s16o_congrats: "Поздравляем!",
-    s16o_caption: "Твоя награда зачислена в Хранилище.",
-    s16o_btn_claim: "Перейти в Хранилище",
-    s16o_reset_note: "Ключ использован. Ритуалы обнулились. Чтобы получить новый ключ, собери 7 новых ритуалов.",
+    s16o_formula: "500 USDC ÷ 40 участников = твоя доля",
+    s16o_btn_claim: "В Хранилище",
+    s16o_btn_share: "Поделиться",
+    s16o_reset_note: "Ключ использован. 7 новых ритуалов — и получишь следующий.",
     s16_inside_title: "Что внутри",
     s16_inside_desc: "Каждую пятницу в полдень сокровищницу можно открыть ключом.\nВнутри — 500 USDC. Их делят между собой все, кто открыл.\n\nЧем меньше людей с ключом — тем больше достанется тебе.",
     // Screen 17 (World map)
@@ -5003,10 +5061,10 @@ const i18n = {
     s16_has_key: "You have a key. Open the treasure.",
     s16o_title: "Treasure",
     s16o_eyebrow: "Reward earned",
-    s16o_congrats: "Congratulations!",
-    s16o_caption: "Your reward has been credited to the Vault.",
-    s16o_btn_claim: "Go to Vault",
-    s16o_reset_note: "Key used. Rituals reset. To get a new key, earn 7 new rituals.",
+    s16o_formula: "500 USDC ÷ 40 participants = your share",
+    s16o_btn_claim: "To Vault",
+    s16o_btn_share: "Share",
+    s16o_reset_note: "Key used. 7 new rituals — and you'll get the next one.",
     s16_inside_title: "What's inside",
     s16_inside_desc: "Every Friday at noon the treasury can be opened with a key.\nInside — 500 USDC. Split among everyone who opened it.\n\nFewer people with keys — more you get.",
     // Screen 17 (World map)
