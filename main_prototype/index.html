@@ -464,6 +464,17 @@ tailwind.config = {
     object-fit: cover;
     border-radius: 16px;
   }
+  /* Vignette — сливает углы видео с фоном экрана, чтобы не было «наклейки» */
+  .treasure-stage::after {
+    content: '';
+    position: absolute; inset: 0;
+    pointer-events: none;
+    border-radius: 16px;
+    background:
+      radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.5) 75%, #000 100%),
+      linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 15%, transparent 85%, rgba(0,0,0,0.2) 100%);
+    box-shadow: inset 0 0 40px 12px #000;
+  }
   .treasure-reveal { opacity: 0; transform: translateY(12px); }
   .screen.active .treasure-reveal { animation: revealUp 0.6s ease-out 3.2s forwards; }
   .treasure-cta-wrap { opacity: 0; transform: translateY(12px); }
@@ -4040,7 +4051,7 @@ tailwind.config = {
 
           <!-- Chest stage -->
           <div class="treasure-stage">
-            <video class="chest-video" src="../assets/treasure/chest-opening.mp4" autoplay muted playsinline loop></video>
+            <video class="chest-video" src="../assets/treasure/chest-opening.mp4" autoplay muted playsinline></video>
           </div>
 
           <!-- Amount reveal -->
@@ -4138,6 +4149,14 @@ function goTo(n) {
   const curActions = screens[current].querySelectorAll('.actions-anim');
   curBubbles.forEach(el => setTimeout(() => el.classList.add('show'), 300));
   curActions.forEach(el => setTimeout(() => el.classList.add('show'), 800));
+
+  // Treasure-opened screen: restart chest video from the start each visit
+  if (screens[current].id === 's16_opened') {
+    var chestVid = screens[current].querySelector('.chest-video');
+    if (chestVid) {
+      try { chestVid.currentTime = 0; var p = chestVid.play(); if (p && p.catch) p.catch(function(){}); } catch (e) {}
+    }
+  }
 }
 
 function startVerifyTimer() {
