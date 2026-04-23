@@ -1448,8 +1448,9 @@ tailwind.config = {
           <!-- Amount + button -->
           <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 24px; text-align: center; margin-bottom: 12px;">
             <div class="font-label text-[28px] font-extrabold" style="color: #f2f2f2;">500 USDC</div>
-            <button class="btn-cta" data-i18n="s16_btn_open" disabled style="opacity: 0.4; cursor: not-allowed; margin-top: 16px;">Открыть ключом</button>
-            <div class="text-[11px]" data-i18n="s16_no_key" style="color: hsl(0 0% 40%); margin-top: 8px;">У тебя пока нет ключа. Заверши ритуал — и забери его</div>
+            <button id="s16-open-btn" class="btn-cta" data-i18n="s16_btn_open" disabled onclick="try{openTreasure()}catch(e){alert(e.message)}" style="opacity: 0.4; cursor: not-allowed; margin-top: 16px;">Открыть ключом</button>
+            <div id="s16-no-key" class="text-[11px]" data-i18n="s16_no_key" style="color: hsl(0 0% 40%); margin-top: 8px;">У тебя пока нет ключа. Заверши ритуал — и забери его</div>
+            <div id="s16-has-key" class="text-[11px]" data-i18n="s16_has_key" style="display: none; color: #22c55e; margin-top: 8px; font-weight: 600;">🔑 У тебя есть ключ — открой сундук</div>
           </div>
 
           <!-- How it works -->
@@ -4026,6 +4027,7 @@ tailwind.config = {
   <div id="demo-panel" style="display: flex; flex-direction: column; gap: 8px; align-self: flex-start; margin-top: 60px; min-width: 160px; position: relative; z-index: 999;">
     <div style="font-family: 'Space Grotesk', sans-serif; font-size: 10px; font-weight: 700; color: hsl(0 0% 35%); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;">Демо</div>
     <button onclick="try{completeNextTask()}catch(e){alert(e.message)}" style="padding: 10px 14px; background: hsl(142 40% 15%); border: 1px solid hsl(142 40% 25%); border-radius: 8px; color: #22c55e; font-size: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; cursor: pointer; text-align: left;">⚡ Пройти задание</button>
+    <button onclick="try{grantKey()}catch(e){alert(e.message)}" style="padding: 10px 14px; background: hsl(43 74% 12%); border: 1px solid hsl(43 74% 25%); border-radius: 8px; color: #eab308; font-size: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; cursor: pointer; text-align: left;">🔑 Выдать ключ</button>
     <button onclick="try{resetAllQuests()}catch(e){alert(e.message)}" style="padding: 10px 14px; background: hsl(0 30% 12%); border: 1px solid hsl(0 30% 22%); border-radius: 8px; color: hsl(0 60% 60%); font-size: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; cursor: pointer; text-align: left;">↺ Сбросить квесты</button>
   </div>
 
@@ -4101,6 +4103,7 @@ var q2State = { wallet: false, verify: false, card: false, deposit: false, topup
 var q2Tasks = ['wallet', 'verify', 'card', 'deposit', 'topup', 'txn'];
 var q2Screens = { wallet: 27, verify: 28, card: 29, deposit: 30, topup: 's29_1', txn: 31 };
 var checkSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>';
+var hasKey = false;
 
 function completeNextTask() {
   // Try Q1 first
@@ -4177,6 +4180,53 @@ function resetAllQuests() {
     if (id.endsWith('-form') || id === 'verify-step-email') el.style.display = 'block';
     else el.style.display = 'none';
   });
+
+  // Reset treasure key
+  hasKey = false;
+  localStorage.removeItem('sw-has-key');
+  renderKeyState();
+}
+
+function grantKey() {
+  hasKey = true;
+  try { localStorage.setItem('sw-has-key', '1'); } catch (e) {}
+  renderKeyState();
+  // Jump to s16 so user can see the result
+  var s16idx = Array.from(screens).findIndex(s => s.id === 's16');
+  if (s16idx >= 0) goTo(s16idx + 1);
+}
+
+function renderKeyState() {
+  var btn = document.getElementById('s16-open-btn');
+  var noKey = document.getElementById('s16-no-key');
+  var yesKey = document.getElementById('s16-has-key');
+  if (!btn) return;
+  if (hasKey) {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor = 'pointer';
+    if (noKey) noKey.style.display = 'none';
+    if (yesKey) yesKey.style.display = 'block';
+  } else {
+    btn.disabled = true;
+    btn.style.opacity = '0.4';
+    btn.style.cursor = 'not-allowed';
+    if (noKey) noKey.style.display = 'block';
+    if (yesKey) yesKey.style.display = 'none';
+  }
+}
+
+function openTreasure() {
+  if (!hasKey) return;
+  alert('Экран открытой сокровищницы — в разработке.\n\nЗдесь появится: анимация открытия → расчёт доли → payout (USDC).');
+}
+
+// Restore key state on load
+try { if (localStorage.getItem('sw-has-key') === '1') { hasKey = true; } } catch (e) {}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', renderKeyState);
+} else {
+  renderKeyState();
 }
 
 function checkTask(checkId, successId, forceResult) {
@@ -4365,6 +4415,7 @@ const i18n = {
     s16_countdown_time: "Пятница, полдень (12:00 UTC)",
     s16_btn_open: "Открыть ключом",
     s16_no_key: "У тебя пока нет ключа. Заверши ритуал — и забери его",
+    s16_has_key: "🔑 У тебя есть ключ — открой сундук",
     s16_inside_title: "Что внутри",
     s16_inside_desc: "Каждую пятницу в полдень сокровищницу можно открыть ключом.\nВнутри — 500 USDC. Их делят между собой все, кто открыл.\n\nЧем меньше людей с ключом — тем больше достанется тебе.",
     // Screen 17 (World map)
@@ -4843,6 +4894,7 @@ const i18n = {
     s16_countdown_time: "Friday, noon (12:00 UTC)",
     s16_btn_open: "Open with key",
     s16_no_key: "You don't have a key yet. Complete the ritual — and claim it",
+    s16_has_key: "🔑 You have a key — open the chest",
     s16_inside_title: "What's inside",
     s16_inside_desc: "Every Friday at noon the treasury can be opened with a key.\nInside — 500 USDC. Split among everyone who opened it.\n\nFewer people with keys — more you get.",
     // Screen 17 (World map)
