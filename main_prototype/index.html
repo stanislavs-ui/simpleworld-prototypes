@@ -463,10 +463,7 @@ tailwind.config = {
     width: 100%; height: 100%;
     object-fit: cover;
     border-radius: 16px;
-    opacity: 1;
-    transition: opacity 0.8s ease-out;
   }
-  .chest-video.chest-video-faded { opacity: 0.7; }
   /* Vignette — сливает углы видео с фоном экрана, чтобы не было «наклейки» */
   .treasure-stage::after {
     content: '';
@@ -479,9 +476,9 @@ tailwind.config = {
     box-shadow: inset 0 0 40px 12px #000;
   }
   .treasure-reveal { opacity: 0; transform: translateY(12px); }
-  .screen.active .treasure-reveal { animation: revealUp 0.6s ease-out 3.2s forwards; }
+  .screen.active .treasure-reveal { animation: revealUp 0.6s ease-out 3.0s forwards; }
   .treasure-cta-wrap { opacity: 0; transform: translateY(12px); }
-  .screen.active .treasure-cta-wrap { animation: revealUp 0.5s ease-out 3.8s forwards; }
+  .screen.active .treasure-cta-wrap { animation: revealUp 0.5s ease-out 3.5s forwards; }
 
   @keyframes revealUp {
     0% { opacity: 0; transform: translateY(12px); }
@@ -4062,11 +4059,10 @@ tailwind.config = {
             <div class="font-label text-[10px] font-bold" data-i18n="s16o_eyebrow" style="color: hsl(0 0% 55%); letter-spacing: 1.8px; text-transform: uppercase; margin-bottom: 6px;">Награда получена</div>
             <div class="text-[22px] font-bold" data-i18n="s16o_congrats" style="color: #f2f2f2; margin-bottom: 10px;">Поздравляем!</div>
             <div class="font-label font-extrabold" id="s16o-amount" style="font-size: 40px; color: #f2f2f2; letter-spacing: -0.5px;">12.50 USDC</div>
-            <div class="text-[13px]" data-i18n="s16o_caption" style="color: hsl(0 0% 60%); margin-top: 12px; line-height: 1.5; padding: 0 16px;">Твоя награда зачислена в Хранилище.</div>
           </div>
 
           <!-- CTA -->
-          <div class="treasure-cta-wrap" style="margin-top: 28px;">
+          <div class="treasure-cta-wrap" style="margin-top: 16px;">
             <button class="btn-cta" data-i18n="s16o_btn_claim" onclick="claimTreasure()" style="text-align: center;">Перейти в Хранилище</button>
             <div class="text-[11px]" data-i18n="s16o_reset_note" style="color: #f2f2f2; margin-top: 12px; text-align: center; line-height: 1.5;">Ключ использован. Ритуалы обнулились. Чтобы получить новый ключ, собери 7 новых ритуалов.</div>
           </div>
@@ -4160,8 +4156,6 @@ function goTo(n) {
     var chestVid = screens[current].querySelector('.chest-video');
     if (chestVid) {
       try {
-        chestVid.classList.remove('chest-video-faded');
-        chestVid.playbackRate = 1.0;
         chestVid.currentTime = 0;
         var pPlay = chestVid.play();
         if (pPlay && pPlay.catch) pPlay.catch(function(){});
@@ -4328,16 +4322,12 @@ if (document.readyState === 'loading') {
   renderKeyState();
 }
 
-// Treasure-video: play at normal speed, pause at 3.8s + gentle opacity fade (no playback slowdown)
+// Treasure-video: clean freeze at 3.5s — before Kling end-of-clip artifacts (jitter / star)
 (function bindChestCutoff() {
   var vid = document.querySelector('#s16_opened .chest-video');
   if (!vid) return;
-  var CUTOFF = 3.8;
-  var FADE_START = 3.4;
+  var CUTOFF = 3.5;
   vid.addEventListener('timeupdate', function () {
-    if (vid.currentTime >= FADE_START) {
-      vid.classList.add('chest-video-faded');
-    }
     if (vid.currentTime >= CUTOFF) {
       vid.currentTime = CUTOFF;
       vid.pause();
