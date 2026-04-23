@@ -459,11 +459,18 @@ tailwind.config = {
     overflow: hidden;
     border-radius: 16px;
   }
-  .chest-video {
+  .chest-video, .chest-still {
+    position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
     border-radius: 16px;
   }
+  .chest-still {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+    pointer-events: none;
+  }
+  .chest-still.chest-still-shown { opacity: 1; }
   /* Vignette — сливает углы видео с фоном экрана, чтобы не было «наклейки» */
   .treasure-stage::after {
     content: '';
@@ -4052,6 +4059,7 @@ tailwind.config = {
           <!-- Chest stage -->
           <div class="treasure-stage">
             <video class="chest-video" src="../assets/treasure/chest-opening.mp4" autoplay muted playsinline></video>
+            <img class="chest-still" src="../assets/treasure/chest-open-cartoon.png" alt="" />
           </div>
 
           <!-- Amount reveal -->
@@ -4151,9 +4159,11 @@ function goTo(n) {
   curBubbles.forEach(el => setTimeout(() => el.classList.add('show'), 300));
   curActions.forEach(el => setTimeout(() => el.classList.add('show'), 800));
 
-  // Treasure-opened screen: restart chest video from the start each visit
+  // Treasure-opened screen: restart chest video from the start each visit, hide the static overlay
   if (screens[current].id === 's16_opened') {
     var chestVid = screens[current].querySelector('.chest-video');
+    var chestStill = screens[current].querySelector('.chest-still');
+    if (chestStill) chestStill.classList.remove('chest-still-shown');
     if (chestVid) {
       try {
         chestVid.currentTime = 0;
@@ -4322,12 +4332,18 @@ if (document.readyState === 'loading') {
   renderKeyState();
 }
 
-// Treasure-video: clean freeze at 3.0s — before Kling end-of-clip artifacts (jitter / star)
+// Treasure-video: cross-fade into a clean static chest-open image before Kling artifacts kick in.
+// Image is a separately-generated stable frame — so the settle state is artifact-free.
 (function bindChestCutoff() {
   var vid = document.querySelector('#s16_opened .chest-video');
+  var still = document.querySelector('#s16_opened .chest-still');
   if (!vid) return;
-  var CUTOFF = 3.0;
+  var FADE_START = 2.3; // start fading in the static image
+  var CUTOFF = 2.9;     // pause video once image is fully on top
   vid.addEventListener('timeupdate', function () {
+    if (vid.currentTime >= FADE_START && still) {
+      still.classList.add('chest-still-shown');
+    }
     if (vid.currentTime >= CUTOFF) {
       vid.currentTime = CUTOFF;
       vid.pause();
