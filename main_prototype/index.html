@@ -4317,6 +4317,19 @@ if (document.readyState === 'loading') {
   renderKeyState();
 }
 
+// Treasure-video: stop at 3.8s to cut the end-freeze and the final starburst
+(function bindChestCutoff() {
+  var vid = document.querySelector('#s16_opened .chest-video');
+  if (!vid) return;
+  var CUTOFF = 3.8;
+  vid.addEventListener('timeupdate', function () {
+    if (vid.currentTime >= CUTOFF) {
+      vid.currentTime = CUTOFF;
+      vid.pause();
+    }
+  });
+})();
+
 function checkTask(checkId, successId, forceResult) {
   const container = document.getElementById(checkId);
   const btns = container.querySelectorAll('.btn-cta, .btn-ghost-check');
