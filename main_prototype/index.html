@@ -463,7 +463,10 @@ tailwind.config = {
     width: 100%; height: 100%;
     object-fit: cover;
     border-radius: 16px;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
   }
+  .chest-video.chest-video-faded { opacity: 0.7; }
   /* Vignette — сливает углы видео с фоном экрана, чтобы не было «наклейки» */
   .treasure-stage::after {
     content: '';
@@ -4154,7 +4157,13 @@ function goTo(n) {
   if (screens[current].id === 's16_opened') {
     var chestVid = screens[current].querySelector('.chest-video');
     if (chestVid) {
-      try { chestVid.currentTime = 0; var p = chestVid.play(); if (p && p.catch) p.catch(function(){}); } catch (e) {}
+      try {
+        chestVid.classList.remove('chest-video-faded');
+        chestVid.playbackRate = 1.0;
+        chestVid.currentTime = 0;
+        var pPlay = chestVid.play();
+        if (pPlay && pPlay.catch) pPlay.catch(function(){});
+      } catch (e) {}
     }
   }
 }
@@ -4317,12 +4326,18 @@ if (document.readyState === 'loading') {
   renderKeyState();
 }
 
-// Treasure-video: stop at 3.8s to cut the end-freeze and the final starburst
+// Treasure-video: smooth ending — slow down + dim over the last 0.5s, then pause at 3.8s
 (function bindChestCutoff() {
   var vid = document.querySelector('#s16_opened .chest-video');
   if (!vid) return;
   var CUTOFF = 3.8;
+  var SLOWDOWN_START = 3.3;
   vid.addEventListener('timeupdate', function () {
+    if (vid.currentTime >= SLOWDOWN_START && vid.currentTime < CUTOFF) {
+      var p = (vid.currentTime - SLOWDOWN_START) / (CUTOFF - SLOWDOWN_START); // 0→1
+      vid.playbackRate = Math.max(0.25, 1 - p * 0.75);
+      vid.classList.add('chest-video-faded');
+    }
     if (vid.currentTime >= CUTOFF) {
       vid.currentTime = CUTOFF;
       vid.pause();
