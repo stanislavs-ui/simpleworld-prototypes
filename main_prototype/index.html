@@ -1553,7 +1553,7 @@ tailwind.config = {
           <!-- Amount + button -->
           <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 24px; text-align: center; margin-bottom: 12px;">
             <div class="font-label text-[28px] font-extrabold" style="color: #f2f2f2;">500 USDC</div>
-            <button id="s16-open-btn" class="btn-cta" data-i18n="s16_btn_open" disabled onclick="try{openTreasure()}catch(e){alert(e.message)}" style="opacity: 0.4; cursor: not-allowed; margin-top: 16px;">Открыть ключом</button>
+            <button id="s16-open-btn" class="btn-cta" data-i18n="s16_btn_open" disabled onclick="try{openTreasure()}catch(e){alert(e.message)}" style="opacity: 0.4; cursor: not-allowed; margin-top: 16px; text-align: center;">Открыть ключом</button>
             <div id="s16-no-key" class="text-[11px]" data-i18n="s16_no_key" style="color: hsl(0 0% 40%); margin-top: 8px;">У тебя пока нет ключа. Заверши ритуал — и забери его</div>
             <div id="s16-has-key" class="text-[11px]" data-i18n="s16_has_key" style="display: none; color: #f2f2f2; margin-top: 16px; font-weight: 600;">У тебя есть ключ. Открой сокровищницу.</div>
           </div>
@@ -4143,7 +4143,7 @@ tailwind.config = {
 
           <!-- CTA -->
           <div class="treasure-cta-wrap" style="margin-top: 28px;">
-            <button class="btn-cta" data-i18n="s16o_btn_claim" onclick="claimTreasure()">Забрать</button>
+            <button class="btn-cta" data-i18n="s16o_btn_claim" onclick="claimTreasure()" style="text-align: center;">Забрать</button>
             <div class="text-[11px]" data-i18n="s16o_reset_note" style="color: hsl(0 0% 40%); margin-top: 12px; text-align: center; line-height: 1.5;">Ключ сгорел. Ритуалы обнулились — следующий ключ через 7 новых.</div>
           </div>
 
