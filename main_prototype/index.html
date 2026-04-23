@@ -4060,20 +4060,14 @@ tailwind.config = {
           <div class="treasure-reveal" style="text-align: center; margin-top: 4px;">
             <div class="text-[18px] font-bold" data-i18n="s16o_eyebrow" style="color: #f2f2f2; margin-bottom: 10px; letter-spacing: 0.3px;">Награда получена</div>
             <div class="font-label font-extrabold treasure-amount" id="s16o-amount" style="font-size: 40px; color: #f2f2f2; letter-spacing: -0.5px; text-shadow: 0 0 24px rgba(234,179,8,0.35), 0 2px 8px rgba(0,0,0,0.4);">0.00 USDC</div>
-            <div class="text-[11px]" data-i18n="s16o_formula" style="color: hsl(0 0% 50%); margin-top: 8px; line-height: 1.5;">500 USDC ÷ 40 участников = твоя доля</div>
           </div>
 
-          <!-- CTA + Share -->
+          <!-- CTA + reset + support (все появляются одним fade-in блоком) -->
           <div class="treasure-cta-wrap" style="margin-top: 16px;">
             <button class="btn-cta" data-i18n="s16o_btn_claim" onclick="claimTreasure()" style="text-align: center;">В Хранилище</button>
-            <button class="btn-reply" data-i18n="s16o_btn_share" onclick="shareTreasure()" style="text-align: center; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 8px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-              <span>Поделиться</span>
-            </button>
             <div class="text-[11px]" data-i18n="s16o_reset_note" style="color: #f2f2f2; margin-top: 12px; text-align: center; line-height: 1.5;">Ключ использован. 7 новых ритуалов — и получишь следующий.</div>
+            <a href="mailto:support@simple.app" class="text-[11px]" data-i18n="support_line" style="color: #f2f2f2; text-align: center; margin-top: 20px; text-decoration: none; display: block;">Техническая поддержка — support@simple.app</a>
           </div>
-
-          <a href="mailto:support@simple.app" class="text-[11px]" data-i18n="support_line" style="color: #f2f2f2; text-align: center; margin-top: 20px; text-decoration: none; display: block;">Техническая поддержка — support@simple.app</a>
 
         </div>
       </div>
@@ -4333,19 +4327,6 @@ function claimTreasure() {
   goTo(idx + 1);
 }
 
-function shareTreasure() {
-  var amount = (TREASURE_AMOUNT).toFixed(2);
-  var text = 'Я получил ' + amount + ' USDC из Сокровищницы Simple World!';
-  var url = 'https://simple.world';
-  try {
-    if (navigator.share) {
-      navigator.share({ text: text, url: url }).catch(function(){});
-    } else {
-      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text + ' ' + url), '_blank');
-    }
-  } catch (e) {}
-}
-
 function animateAmount(el, target, duration) {
   if (!el) return;
   var start = performance.now();
@@ -4576,9 +4557,7 @@ const i18n = {
     s16_has_key: "У тебя есть ключ. Открой сокровищницу.",
     s16o_title: "Сокровищница",
     s16o_eyebrow: "Награда получена",
-    s16o_formula: "500 USDC ÷ 40 участников = твоя доля",
     s16o_btn_claim: "В Хранилище",
-    s16o_btn_share: "Поделиться",
     s16o_reset_note: "Ключ использован. 7 новых ритуалов — и получишь следующий.",
     s16_inside_title: "Что внутри",
     s16_inside_desc: "Каждую пятницу в полдень сокровищницу можно открыть ключом.\nВнутри — 500 USDC. Их делят между собой все, кто открыл.\n\nЧем меньше людей с ключом — тем больше достанется тебе.",
@@ -5061,9 +5040,7 @@ const i18n = {
     s16_has_key: "You have a key. Open the treasure.",
     s16o_title: "Treasure",
     s16o_eyebrow: "Reward earned",
-    s16o_formula: "500 USDC ÷ 40 participants = your share",
     s16o_btn_claim: "To Vault",
-    s16o_btn_share: "Share",
     s16o_reset_note: "Key used. 7 new rituals — and you'll get the next one.",
     s16_inside_title: "What's inside",
     s16_inside_desc: "Every Friday at noon the treasury can be opened with a key.\nInside — 500 USDC. Split among everyone who opened it.\n\nFewer people with keys — more you get.",
