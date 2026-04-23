@@ -50,11 +50,11 @@ tailwind.config = {
     padding: 8px 16px; display: flex; align-items: center; justify-content: space-between;
     font-family: "Space Grotesk", sans-serif;
   }
-  .proto-nav .info { font-size: 12px; color: #555; }
-  .proto-nav .info strong { color: #111; }
+  .proto-nav .info { font-size: 14px; color: #444; font-weight: 600; }
+  .proto-nav .info strong { color: #111; font-weight: 800; }
   .proto-nav button {
-    background: #1a1a1a; border: 1px solid #333; color: #ccc;
-    padding: 6px 16px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600;
+    background: #1a1a1a; border: 1px solid #333; color: #f2f2f2;
+    padding: 7px 18px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 700;
     font-family: inherit; transition: all 0.15s;
   }
   .proto-nav button:hover { background: #262626; color: #fff; }
@@ -68,11 +68,11 @@ tailwind.config = {
     font-family: "Space Grotesk", sans-serif;
   }
   .sidebar-header { padding: 12px 16px 16px; border-bottom: 1px solid #b8b8b8; }
-  .sidebar-header h2 { font-size: 13px; font-weight: 700; color: #111; }
-  .sidebar-header p { font-size: 11px; color: #666; margin-top: 2px; }
-  .sidebar-section { padding: 14px 16px 6px; color: #555; font-weight: 700; text-transform: uppercase; font-size: 9px; letter-spacing: 1.5px; }
+  .sidebar-header h2 { font-size: 15px; font-weight: 800; color: #111; }
+  .sidebar-header p { font-size: 12px; color: #555; margin-top: 2px; font-weight: 600; }
+  .sidebar-section { padding: 14px 16px 6px; color: #333; font-weight: 800; text-transform: uppercase; font-size: 11px; letter-spacing: 1.3px; }
   .sidebar-item {
-    padding: 6px 16px; cursor: pointer; color: #333; font-size: 12px; line-height: 1.4;
+    padding: 7px 16px; cursor: pointer; color: #222; font-size: 14px; line-height: 1.4; font-weight: 600;
     transition: all 0.1s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .sidebar-item:hover { background: #c0c0c0; color: #000; }
@@ -517,55 +517,55 @@ tailwind.config = {
   <div class="sidebar-section">Серия Миры</div>
   <div class="sidebar-item" onclick="goToId('sRoadmap')">35. Roadmap</div>
   <div class="sidebar-item" onclick="goToId('sIncome')">36. Твой доход</div>
-  <div class="sidebar-section" style="font-size: 8px; color: #eab308;">Алекс</div>
+  <div class="sidebar-section" style="font-size: 11px; color: #b45309;">Алекс</div>
   <div class="sidebar-item" onclick="openAlexTask()">⚡ Задание Алекса</div>
-  <div class="sidebar-section" style="font-size: 8px;">День 1</div>
+  <div class="sidebar-section" style="font-size: 10px;">День 1</div>
   <div class="sidebar-item" onclick="goToId('sD1a')">37. Задание</div>
   <div class="sidebar-item" onclick="goToId('sD1b')">38. Подсказка</div>
   <div class="sidebar-item" onclick="goToId('sD1c')">39. Скрипт</div>
   <div class="sidebar-item" onclick="goToId('sD1d')">40. Готово</div>
-  <div class="sidebar-section" style="font-size: 8px;">День 2</div>
+  <div class="sidebar-section" style="font-size: 10px;">День 2</div>
   <div class="sidebar-item" onclick="goToId('sD2a')">41. Скрипт</div>
   <div class="sidebar-item" onclick="goToId('sD2b')">42. Готово</div>
-  <div class="sidebar-section" style="font-size: 8px;">День 3</div>
+  <div class="sidebar-section" style="font-size: 10px;">День 3</div>
   <div class="sidebar-item" onclick="goToId('sD3a')">43. Задание</div>
   <div class="sidebar-item" onclick="goToId('sD3b')">44. Ответы</div>
   <div class="sidebar-item" onclick="goToId('sD3c')">45. Тишина</div>
   <div class="sidebar-item" onclick="goToId('sD3d')">46. Готово</div>
-  <div class="sidebar-section" style="font-size: 8px;">День 4</div>
+  <div class="sidebar-section" style="font-size: 10px;">День 4</div>
   <div class="sidebar-item" onclick="goToId('sD4a')">47. Задание</div>
   <div class="sidebar-item" onclick="goToId('sD4b')">48. Скрипт</div>
   <div class="sidebar-item" onclick="goToId('sD4c')">49. Готово</div>
-  <div class="sidebar-section" style="font-size: 8px;">День 5</div>
+  <div class="sidebar-section" style="font-size: 10px;">День 5</div>
   <div class="sidebar-item" onclick="goToId('sD5a')">50. Задание</div>
   <div class="sidebar-item" onclick="goToId('sD5b')">51. Подсказка</div>
   <div class="sidebar-item" onclick="goToId('sD5c')">52. Скрипт</div>
   <div class="sidebar-item" onclick="goToId('sD5d')">53. Готово</div>
-  <div class="sidebar-section" style="font-size: 8px;">День 6</div>
+  <div class="sidebar-section" style="font-size: 10px;">День 6</div>
   <div class="sidebar-item" onclick="goToId('sD6a')">54. Задание</div>
   <div class="sidebar-item" onclick="goToId('sD6b')">55. Антиспам</div>
   <div class="sidebar-item" onclick="goToId('sD6c')">56. Стратегия</div>
   <div class="sidebar-item" onclick="goToId('sD6d')">57. Шаблоны</div>
   <div class="sidebar-item" onclick="goToId('sD6e')">58. Готово</div>
-  <div class="sidebar-section" style="font-size: 8px;">День 7</div>
+  <div class="sidebar-section" style="font-size: 10px;">День 7</div>
   <div class="sidebar-item" onclick="goToId('sD7a')">59. Задание</div>
   <div class="sidebar-item" onclick="goToId('sD7b')">60. Площадка</div>
   <div class="sidebar-item" onclick="goToId('sD7c')">61. Действие</div>
   <div class="sidebar-item" onclick="goToId('sD7d')">62. Статистика</div>
   <div class="sidebar-item" onclick="goToId('sD7e')">63. Готово</div>
-  <div class="sidebar-section" style="font-size: 8px;">День 8</div>
+  <div class="sidebar-section" style="font-size: 10px;">День 8</div>
   <div class="sidebar-item" onclick="goToId('sD8a')">64. Задание</div>
   <div class="sidebar-item" onclick="goToId('sD8b')">65. Скрипт</div>
   <div class="sidebar-item" onclick="goToId('sD8c')">66. Все написал</div>
   <div class="sidebar-item" onclick="goToId('sD8d')">67. Пост</div>
   <div class="sidebar-item" onclick="goToId('sD8e')">68. Готово</div>
-  <div class="sidebar-section" style="font-size: 8px;">День 9</div>
+  <div class="sidebar-section" style="font-size: 10px;">День 9</div>
   <div class="sidebar-item" onclick="goToId('sD9a')">69. Задание</div>
   <div class="sidebar-item" onclick="goToId('sD9b')">70. Зарегались</div>
   <div class="sidebar-item" onclick="goToId('sD9c')">71. Никто</div>
   <div class="sidebar-item" onclick="goToId('sD9d')">72. Крипто</div>
   <div class="sidebar-item" onclick="goToId('sD9e')">73. Готово</div>
-  <div class="sidebar-section" style="font-size: 8px;">День 10</div>
+  <div class="sidebar-section" style="font-size: 10px;">День 10</div>
   <div class="sidebar-item" onclick="goToId('sD10a')">74. Финал</div>
   <div class="sidebar-item" onclick="goToId('sD10b')">75. Статистика</div>
   <div class="sidebar-item" onclick="goToId('sD10c')">76. Прощание</div>
