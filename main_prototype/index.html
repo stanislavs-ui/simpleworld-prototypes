@@ -398,6 +398,10 @@ tailwind.config = {
     border-color: rgba(167,139,250,0.2);
     background: rgba(167,139,250,0.04);
   }
+  .bubble.khloe-bubble {
+    border-color: rgba(16,185,129,0.25);
+    background: rgba(16,185,129,0.05);
+  }
 
   /* ========== MIRA SERIES ========== */
   .mira-avatar-sm {
@@ -454,6 +458,11 @@ tailwind.config = {
   }
 
   /* ========== TYPEWRITER CURSOR ========== */
+  @keyframes ritualPulse {
+    0%   { transform: scale(0.7); opacity: 0; }
+    50%  { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1);    opacity: 1; }
+  }
   @keyframes cursorBlink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
@@ -619,6 +628,12 @@ tailwind.config = {
   <div class="sidebar-item" onclick="goToId('sD10a')">74. Финал</div>
   <div class="sidebar-item" onclick="goToId('sD10b')">75. Статистика</div>
   <div class="sidebar-item" onclick="goToId('sD10c')">76. Прощание</div>
+  <div class="sidebar-section" style="font-size: 10px;">Финал → Хлоя</div>
+  <div class="sidebar-item" onclick="goToId('sD10d')">77. Алекс: с финалом</div>
+  <div class="sidebar-item" onclick="goToId('sD10e')">78. Хлоя: знакомство</div>
+  <div class="sidebar-item" onclick="goToId('sD10f')">79. Хлоя: правила ритуала</div>
+  <div class="sidebar-item" onclick="goToId('sD10g')">80. Хлоя: задание дня</div>
+  <div class="sidebar-item" onclick="goToId('sD10h')">81. Ритуал засчитан</div>
   <div class="sidebar-section">Технические</div>
   <div class="sidebar-item" onclick="goToId('sT1')">T1. Maintenance</div>
   <div class="sidebar-item" onclick="goToId('sT2')">T2. Blocked</div>
@@ -3601,14 +3616,8 @@ tailwind.config = {
               <span data-i18n="d10c_text" style="font-size: 14px;">Серия закончена. Путь — нет.<br><br>Алекс будет рядом — квест от него каждый день. А я... вернусь. Не скучай.</span>
             </div>
           </div>
-          <!-- Final reward card -->
-          <div style="background: hsl(240 5% 8%); border: 2px solid rgba(34,197,94,0.3); border-radius: 14px; padding: 16px; text-align: center; margin: 12px 0;">
-            <div class="text-[11px] font-bold" style="color: #22c55e; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px;">Награда серии</div>
-            <div style="font-size: 28px; font-weight: 800; color: #22c55e;">+3 USDC</div>
-            <div class="text-[10px]" style="color: hsl(0 0% 40%); margin-top: 4px;">Зачислено на баланс</div>
-          </div>
           <div class="w-full" style="margin-top: 16px;">
-            <button class="btn-reply" data-i18n="d10c_btn_home" onclick="completeMiraDay(10); goTo(12);" style="text-align: center;">Вернуться в профиль</button>
+            <button class="btn-cta" data-i18n="d10c_btn_next" onclick="completeMiraDay(10); goToId('sD10d');" style="text-align: center;">Далее</button>
           </div>
 
         </div>
@@ -4045,6 +4054,116 @@ tailwind.config = {
 
           <a href="mailto:support@simple.app" class="text-[11px]" data-i18n="support_line" style="color: hsl(0 0% 30%); text-align: center; margin-top: 24px; text-decoration: none; display: block;">Техническая поддержка — support@simple.app</a>
 
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN sD10d: Алекс — поздравление + анонс ==================== -->
+      <div class="screen screen-pinned" id="sD10d" data-name="Алекс: с финалом" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 220px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Алекс" src="../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
+            <div class="bubble alex-bubble" style="padding-top: 12px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #eab308;">АЛЕКС</div>
+              <span style="font-size: 14px;"><span id="tw-sD10d"></span><span id="tw-cursor-sD10d" style="display:inline-block;width:2px;height:16px;background:#eab308;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
+            </div>
+          </div>
+          <div class="w-full" id="sD10d-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
+            <button class="btn-cta" onclick="goToId('sD10e')">Далее</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN sD10e: Хлоя — знакомство ==================== -->
+      <div class="screen screen-pinned" id="sD10e" data-name="Хлоя: знакомство" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 260px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 25%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: -16px; position: relative; z-index: 1;">
+            <div class="bubble khloe-bubble" style="padding-top: 12px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
+              <span style="font-size: 14px;"><span id="tw-sD10e"></span><span id="tw-cursor-sD10e" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
+            </div>
+          </div>
+          <div class="w-full" id="sD10e-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
+            <button class="btn-cta" onclick="goToId('sD10f')">Далее</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN sD10f: Хлоя — объяснение механики ==================== -->
+      <div class="screen screen-pinned" id="sD10f" data-name="Хлоя: правила ритуала" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 260px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 25%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: -16px; position: relative; z-index: 1;">
+            <div class="bubble khloe-bubble" style="padding-top: 12px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
+              <span style="font-size: 14px;"><span id="tw-sD10f"></span><span id="tw-cursor-sD10f" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
+            </div>
+          </div>
+          <div class="w-full" id="sD10f-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
+            <button class="btn-cta" onclick="goToId('sD10g')">Далее</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN sD10g: Хлоя — первое задание ==================== -->
+      <div class="screen" id="sD10g" data-name="Хлоя: задание дня" style="justify-content: flex-start;">
+        <div class="flex flex-col w-full" style="padding-top: 4px;">
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 200px; margin: 0 -20px 0; width: calc(100% + 40px);">
+            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
+            <div class="bubble khloe-bubble" style="padding-top: 12px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
+              <span style="font-size: 14px;"><span id="tw-sD10g"></span><span id="tw-cursor-sD10g" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
+            </div>
+          </div>
+
+          <!-- Wallet Discovery task card -->
+          <div id="sD10g-task" style="margin-top: 14px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
+            <div onclick="completeRitualTask()" style="background: hsl(240 5% 8%); border: 1px solid rgba(16,185,129,0.25); border-radius: 14px; padding: 16px; cursor: pointer;">
+              <div class="text-[11px] font-bold" style="color: #10b981; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px;">Задание · SimpleWallet</div>
+              <div class="text-[16px] font-bold" style="color: #f2f2f2; margin-bottom: 4px;">Купить крипту</div>
+              <div class="text-[12px]" style="color: hsl(0 0% 55%); margin-bottom: 12px;">Купите крипту на сумму не менее $10</div>
+              <div style="height: 3px; background: hsl(240 5% 14%); border-radius: 2px; margin-bottom: 8px; overflow: hidden;">
+                <div style="height: 100%; width: 0%; background: #10b981;"></div>
+              </div>
+              <div class="text-[12px]" style="color: hsl(0 0% 70%); margin-bottom: 14px;"><span style="color: #f2f2f2; font-weight: 600;">0</span>/10 USD</div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span style="font-size: 18px;">🟢</span>
+                  <span class="text-[13px] font-bold" style="color: #10b981;">+1 ритуал</span>
+                </div>
+                <div class="text-[12px]" style="color: hsl(0 0% 60%);">Открыть в Wallet →</div>
+              </div>
+            </div>
+            <div class="text-[11px]" style="color: hsl(0 0% 40%); margin-top: 8px; text-align: center;">Тап по карточке открывает SimpleWallet</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN sD10h: Ритуал засчитан (анимация) ==================== -->
+      <div class="screen screen-pinned" id="sD10h" data-name="Ритуал засчитан" style="justify-content: center;">
+        <div class="flex flex-col items-center w-full" style="text-align: center;">
+          <div id="ritual-anim" style="width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, rgba(16,185,129,0.25) 0%, rgba(16,185,129,0) 70%); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; animation: ritualPulse 1.4s ease-out forwards;">
+            <div style="font-size: 72px; line-height: 1;">🟢</div>
+          </div>
+          <div class="text-[11px] font-bold" style="color: #10b981; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;">Ритуал засчитан</div>
+          <div id="ritual-counter" style="font-size: 48px; font-weight: 800; color: #f2f2f2; letter-spacing: -1px; margin-bottom: 6px;">+1</div>
+          <div class="text-[13px]" style="color: hsl(0 0% 60%); margin-bottom: 28px;">Всего ритуалов: <span id="ritual-total" style="color: #f2f2f2; font-weight: 700;">1</span></div>
+          <div class="w-full" id="sD10h-actions" style="opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
+            <button class="btn-cta" onclick="goTo(12)">На главную</button>
+          </div>
         </div>
       </div>
 
@@ -5607,6 +5726,12 @@ registerTypewriterById('sGateMira', { text: 'Для того чтобы пере
 registerTypewriterById('s14w_alex_mira', { text: 'Первый вывод. Запомни этот момент — путь, который начинался с пустого экрана, теперь позади.\n\nМира сказала, что будет ждать тебя на втором круге. Похоже, она в тебе не сомневается. А ошибается она крайне редко.', el: 'tw-s14w-alex-mira', cursor: 'tw-cursor-s14w-alex-mira', actions: 's14w-alex-mira-actions' });
 registerTypewriterById('s14w_alex_wait', { text: 'Первый вывод. Путь пройден.\n\nНаш коллега, которого ты ещё не знаешь, уже вовсю готовит для тебя задания. Осталось немного — спасибо, что подождёшь.', el: 'tw-s14w-alex-wait', cursor: 'tw-cursor-s14w-alex-wait', actions: 's14w-alex-wait-actions' });
 
+// ----- Финал Сезона I: переход к Хлое -----
+registerTypewriterById('sD10d', { text: 'Поздравляю — Сезон I пройден.\n\nХочу познакомить тебя с двумя моими друзьями. Один пока в пути — встретитесь чуть позже. А вторую представлю прямо сейчас.', el: 'tw-sD10d', cursor: 'tw-cursor-sD10d', actions: 'sD10d-actions' });
+registerTypewriterById('sD10e', { text: 'Спасибо, Алекс.\n\nПриятно познакомиться. Я Хлоя — буду присматривать за твоими ритуалами.', el: 'tw-sD10e', cursor: 'tw-cursor-sD10e', actions: 'sD10e-actions' });
+registerTypewriterById('sD10f', { text: 'Каждый день буду давать тебе по одному заданию.\n\nВыполнил — +1 ритуал. Не выполнил — ритуал сгорает. Всё просто.', el: 'tw-sD10f', cursor: 'tw-cursor-sD10f', actions: 'sD10f-actions' });
+registerTypewriterById('sD10g', { text: 'Сегодняшнее задание ждёт тебя в SimpleWallet.\n\nТапни по карточке, чтобы открыть.', el: 'tw-sD10g', cursor: 'tw-cursor-sD10g', actions: 'sD10g-task' });
+
 function runTypewriter(screenIndex) {
   const cfg = typewriterScreens[screenIndex];
   if (!cfg) return;
@@ -5693,6 +5818,23 @@ var alexTasks = [
   { day: 9, action: 'Задание 9 (TBD)', url: '#', text: 'У меня для тебя социальное задание. За него получишь +10 к Ауре.' },
   { day: 10, action: 'Задание 10 (TBD)', url: '#', text: 'У меня для тебя социальное задание. За него получишь +10 к Ауре.' }
 ];
+
+// ----- Хлоя: засчитать ритуал -----
+function completeRitualTask() {
+  var ritualsDone = parseInt(localStorage.getItem('sw-rituals-done') || '0', 10);
+  ritualsDone += 1;
+  localStorage.setItem('sw-rituals-done', String(ritualsDone));
+  goToId('sD10h');
+  setTimeout(function() {
+    var totalEl = document.getElementById('ritual-total');
+    if (totalEl) totalEl.textContent = String(ritualsDone);
+    var actions = document.getElementById('sD10h-actions');
+    if (actions) {
+      actions.style.opacity = '1';
+      actions.style.transform = 'translateY(0)';
+    }
+  }, 900);
+}
 
 function completeMiraDay(day) {
   if (!miraDaysDone.includes(day)) {
