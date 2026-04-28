@@ -458,11 +458,6 @@ tailwind.config = {
   }
 
   /* ========== TYPEWRITER CURSOR ========== */
-  @keyframes ritualPulse {
-    0%   { transform: scale(0.7); opacity: 0; }
-    50%  { transform: scale(1.05); opacity: 1; }
-    100% { transform: scale(1);    opacity: 1; }
-  }
   @keyframes cursorBlink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
@@ -632,14 +627,17 @@ tailwind.config = {
   <div class="sidebar-item" onclick="goToId('sD10d')">77. Алекс: с финалом</div>
   <div class="sidebar-item" onclick="goToId('sD10e')">78. Хлоя: знакомство</div>
   <div class="sidebar-item" onclick="goToId('sD10f')">79. Хлоя: правила ритуала</div>
-  <div class="sidebar-item" onclick="goToId('sD10g')">80. Хлоя: задание дня</div>
-  <div class="sidebar-item" onclick="goToId('sD10h')">81. Ритуал засчитан</div>
+  <div class="sidebar-item" onclick="goToId('sArena')">80. Арена: Хлоя (повтор правил)</div>
+  <div class="sidebar-item" onclick="goToId('sKhloeLocked')">81. Арена: сначала к Алексу</div>
+  <div class="sidebar-item" onclick="goToId('sKhloeAlexTask')">82. Алекс: задание для Хлои</div>
+  <div class="sidebar-item" onclick="goToId('sKhloeDay2')">83. Арена: +1 ритуал</div>
   <div class="sidebar-section">Технические</div>
   <div class="sidebar-item" onclick="goToId('sT1')">T1. Maintenance</div>
   <div class="sidebar-item" onclick="goToId('sT2')">T2. Blocked</div>
   <div class="sidebar-section">Демо-утилиты</div>
   <div class="sidebar-item" onclick="completeNextTask()" style="color: #22c55e;">⚡ Пройти задание</div>
   <div class="sidebar-item" onclick="resetAllQuests()" style="color: hsl(0 60% 55%);">↺ Сбросить квесты</div>
+  <div class="sidebar-item" onclick="advanceKhloeNextDay()" style="color: #10b981;">→ Следующий день</div>
 </div>
 
 <!-- ========== MAIN AREA ========== -->
@@ -1568,10 +1566,17 @@ tailwind.config = {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 3px auto 0; display: block;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </div>
 
-          <!-- Арена — locked, on bottom platform buildings -->
-          <div style="position: absolute; top: 65%; left: 35%; text-align: center; opacity: 0.6;">
+          <!-- Арена — locked state (default) -->
+          <div id="map-arena-locked" style="position: absolute; top: 65%; left: 35%; text-align: center; opacity: 0.6;">
             <div class="font-label text-[10px] font-bold" data-i18n="s17_arena" style="color: #f2f2f2; text-shadow: 0 1px 6px rgba(0,0,0,0.8);">Арена</div>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 3px auto 0; display: block;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+
+          <!-- Арена — active state (after meeting Khloe) -->
+          <div id="map-arena-active" onclick="enterArena()" style="position: absolute; top: 65%; left: 35%; transform: translate(-50%, -50%); cursor: pointer; text-align: center; display: none;">
+            <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 8px 16px; white-space: nowrap;">
+              <div class="font-label text-[11px] font-bold" data-i18n="s17_arena" style="color: #f2f2f2; text-shadow: 0 1px 6px rgba(0,0,0,0.8);">Арена</div>
+            </div>
           </div>
 
         </div>
@@ -4071,7 +4076,7 @@ tailwind.config = {
             </div>
           </div>
           <div class="w-full" id="sD10d-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
-            <button class="btn-cta" onclick="goToId('sD10e')">Далее</button>
+            <button class="btn-reply" onclick="goToId('sD10e')">Знакомь</button>
           </div>
         </div>
       </div>
@@ -4079,18 +4084,18 @@ tailwind.config = {
       <!-- ==================== SCREEN sD10e: Хлоя — знакомство ==================== -->
       <div class="screen screen-pinned" id="sD10e" data-name="Хлоя: знакомство" style="justify-content: center;">
         <div class="flex flex-col w-full">
-          <div class="relative w-full overflow-hidden flex justify-center" style="height: 260px; margin: 0 -20px; width: calc(100% + 40px);">
-            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald.jpg"/>
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 280px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald-bust.jpg"/>
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 25%);"></div>
           </div>
-          <div class="w-full" style="margin-top: -16px; position: relative; z-index: 1;">
-            <div class="bubble khloe-bubble" style="padding-top: 12px;">
+          <div class="w-full" style="margin-top: 8px;">
+            <div class="bubble khloe-bubble" style="padding-top: 10px; padding-bottom: 10px;">
               <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
               <span style="font-size: 14px;"><span id="tw-sD10e"></span><span id="tw-cursor-sD10e" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
             </div>
           </div>
           <div class="w-full" id="sD10e-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
-            <button class="btn-cta" onclick="goToId('sD10f')">Далее</button>
+            <button class="btn-reply" onclick="goToId('sD10f')">Привет, Хлоя</button>
           </div>
         </div>
       </div>
@@ -4098,71 +4103,133 @@ tailwind.config = {
       <!-- ==================== SCREEN sD10f: Хлоя — объяснение механики ==================== -->
       <div class="screen screen-pinned" id="sD10f" data-name="Хлоя: правила ритуала" style="justify-content: center;">
         <div class="flex flex-col w-full">
-          <div class="relative w-full overflow-hidden flex justify-center" style="height: 260px; margin: 0 -20px; width: calc(100% + 40px);">
-            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald.jpg"/>
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 280px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald-bust.jpg"/>
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 25%);"></div>
           </div>
-          <div class="w-full" style="margin-top: -16px; position: relative; z-index: 1;">
-            <div class="bubble khloe-bubble" style="padding-top: 12px;">
+          <div class="w-full" style="margin-top: 8px;">
+            <div class="bubble khloe-bubble" style="padding-top: 10px; padding-bottom: 10px;">
               <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
               <span style="font-size: 14px;"><span id="tw-sD10f"></span><span id="tw-cursor-sD10f" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
             </div>
           </div>
           <div class="w-full" id="sD10f-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
-            <button class="btn-cta" onclick="goToId('sD10g')">Далее</button>
+            <button class="btn-reply" onclick="localStorage.setItem('sw-khloe-met','1'); localStorage.setItem('sw-coachmarks-done','1'); localStorage.setItem('sw-cmr-done','1'); updateMapState(); goTo(12);">Хорошо</button>
           </div>
         </div>
       </div>
 
-      <!-- ==================== SCREEN sD10g: Хлоя — первое задание ==================== -->
-      <div class="screen" id="sD10g" data-name="Хлоя: задание дня" style="justify-content: flex-start;">
-        <div class="flex flex-col w-full" style="padding-top: 4px;">
-          <div class="relative w-full overflow-hidden flex justify-center" style="height: 200px; margin: 0 -20px 0; width: calc(100% + 40px);">
-            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald.jpg"/>
+      <!-- ==================== SCREEN sArena: Хлоя в Арене (повтор правил) ==================== -->
+      <div class="screen screen-pinned" id="sArena" data-name="Арена: Хлоя" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div onclick="goToId('s17')" style="cursor: pointer; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </div>
+            <span class="text-[15px] font-bold" style="color: #f2f2f2;">Арена</span>
+          </div>
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 280px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald-bust.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 25%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: 8px;">
+            <div class="bubble khloe-bubble" style="padding-top: 10px; padding-bottom: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
+              <span style="font-size: 14px;"><span id="tw-sArena"></span><span id="tw-cursor-sArena" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN sKhloeLocked: Хлоя — сначала к Алексу ==================== -->
+      <div class="screen screen-pinned" id="sKhloeLocked" data-name="Арена: сначала к Алексу" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div onclick="goToId('s17')" style="cursor: pointer; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </div>
+            <span class="text-[15px] font-bold" style="color: #f2f2f2;">Арена</span>
+          </div>
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 280px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald-bust.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 25%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: 8px;">
+            <div class="bubble khloe-bubble" style="padding-top: 10px; padding-bottom: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
+              <span style="font-size: 14px;"><span id="tw-sKhloeLocked"></span><span id="tw-cursor-sKhloeLocked" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
+            </div>
+          </div>
+          <div class="w-full" id="sKhloeLocked-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
+            <button class="btn-cta" onclick="goToId('sKhloeAlexTask')">В хаб</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN sKhloeDay2: Хлоя — +1 ритуал в честь знакомства ==================== -->
+      <div class="screen screen-pinned" id="sKhloeDay2" data-name="Арена: +1 ритуал" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div onclick="goToId('s17')" style="cursor: pointer; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </div>
+            <span class="text-[15px] font-bold" style="color: #f2f2f2;">Арена</span>
+          </div>
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 280px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald-bust.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 25%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: 8px;">
+            <div class="bubble khloe-bubble" style="padding-top: 10px; padding-bottom: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
+              <span style="font-size: 14px;"><span id="tw-sKhloeDay2"></span><span id="tw-cursor-sKhloeDay2" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
+            </div>
+          </div>
+          <div id="sKhloeDay2-reward" style="margin-top: 24px; display: flex; justify-content: center; opacity: 0; transform: translateY(6px); transition: opacity 0.5s ease, transform 0.5s ease;">
+            <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; background: rgba(16,185,129,0.10); border: 1px solid rgba(16,185,129,0.28); border-radius: 999px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="color: #f2f2f2; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">+1 ритуал</span>
+            </div>
+          </div>
+          <div class="w-full" id="sKhloeDay2-actions" style="margin-top: 14px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
+            <button class="btn-reply" onclick="completeKhloeDay2()">Спасибо</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN sKhloeAlexTask: Алекс — соц-задание для дня Хлои ==================== -->
+      <div class="screen screen-pinned" id="sKhloeAlexTask" data-name="Алекс: задание для Хлои" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div onclick="goTo(12)" style="cursor: pointer; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </div>
+            <span class="text-[15px] font-bold" style="color: #f2f2f2;">Хаб Алекса</span>
+          </div>
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 220px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Алекс" src="../assets/characters/alex-v41c-black.jpg" style="height: 200px; object-fit: contain;"/>
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 30%);"></div>
           </div>
           <div class="w-full" style="margin-top: -12px; position: relative; z-index: 1;">
-            <div class="bubble khloe-bubble" style="padding-top: 12px;">
-              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
-              <span style="font-size: 14px;"><span id="tw-sD10g"></span><span id="tw-cursor-sD10g" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
+            <div class="bubble alex-bubble" style="padding-top: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #eab308;">АЛЕКС</div>
+              <span style="font-size: 14px;"><span id="tw-sKhloeAlexTask"></span><span id="tw-cursor-sKhloeAlexTask" style="display:inline-block;width:2px;height:16px;background:#eab308;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
             </div>
           </div>
-
-          <!-- Wallet Discovery task card -->
-          <div id="sD10g-task" style="margin-top: 14px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
-            <div onclick="completeRitualTask()" style="background: hsl(240 5% 8%); border: 1px solid rgba(16,185,129,0.25); border-radius: 14px; padding: 16px; cursor: pointer;">
-              <div class="text-[11px] font-bold" style="color: #10b981; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px;">Задание · SimpleWallet</div>
-              <div class="text-[16px] font-bold" style="color: #f2f2f2; margin-bottom: 4px;">Купить крипту</div>
-              <div class="text-[12px]" style="color: hsl(0 0% 55%); margin-bottom: 12px;">Купите крипту на сумму не менее $10</div>
-              <div style="height: 3px; background: hsl(240 5% 14%); border-radius: 2px; margin-bottom: 8px; overflow: hidden;">
-                <div style="height: 100%; width: 0%; background: #10b981;"></div>
-              </div>
-              <div class="text-[12px]" style="color: hsl(0 0% 70%); margin-bottom: 14px;"><span style="color: #f2f2f2; font-weight: 600;">0</span>/10 USD</div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <span style="font-size: 18px;">🟢</span>
-                  <span class="text-[13px] font-bold" style="color: #10b981;">+1 ритуал</span>
-                </div>
-                <div class="text-[12px]" style="color: hsl(0 0% 60%);">Открыть в Wallet →</div>
-              </div>
+          <div class="w-full" id="sKhloeAlexTask-actions" style="margin-top: 12px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out; display: flex; flex-direction: column; gap: 8px;">
+            <a class="btn-cta" href="#" target="_blank" rel="noopener" style="text-align: center; text-decoration: none; display: block;">Лайкнуть пост</a>
+            <button class="btn-cta" id="sKhloeAlexTask-check" onclick="checkKhloeAlexTask()" style="background: hsl(240 5% 14%); color: #f2f2f2; border: 1px solid hsl(240 5% 22%);">Проверить</button>
+            <div id="sKhloeAlexTask-spinner" style="display: none; align-items: center; justify-content: center; gap: 10px; padding: 12px; color: hsl(0 0% 65%); font-size: 13px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+              <span>Проверяем...</span>
             </div>
-            <div class="text-[11px]" style="color: hsl(0 0% 40%); margin-top: 8px; text-align: center;">Тап по карточке открывает SimpleWallet</div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- ==================== SCREEN sD10h: Ритуал засчитан (анимация) ==================== -->
-      <div class="screen screen-pinned" id="sD10h" data-name="Ритуал засчитан" style="justify-content: center;">
-        <div class="flex flex-col items-center w-full" style="text-align: center;">
-          <div id="ritual-anim" style="width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, rgba(16,185,129,0.25) 0%, rgba(16,185,129,0) 70%); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; animation: ritualPulse 1.4s ease-out forwards;">
-            <div style="font-size: 72px; line-height: 1;">🟢</div>
-          </div>
-          <div class="text-[11px] font-bold" style="color: #10b981; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;">Ритуал засчитан</div>
-          <div id="ritual-counter" style="font-size: 48px; font-weight: 800; color: #f2f2f2; letter-spacing: -1px; margin-bottom: 6px;">+1</div>
-          <div class="text-[13px]" style="color: hsl(0 0% 60%); margin-bottom: 28px;">Всего ритуалов: <span id="ritual-total" style="color: #f2f2f2; font-weight: 700;">1</span></div>
-          <div class="w-full" id="sD10h-actions" style="opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
-            <button class="btn-cta" onclick="goTo(12)">На главную</button>
+            <div id="sKhloeAlexTask-done" style="display: none; padding: 14px; background: hsl(142 35% 12%); border: 1px solid hsl(142 35% 22%); border-radius: 10px; text-align: center;">
+              <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span style="color: #22c55e; font-size: 13px; font-weight: 700; letter-spacing: 0.3px;">Задание зачтено</span>
+              </div>
+              <button class="btn-reply" onclick="goTo(12)" style="margin-top: 0;">← Назад к квесту</button>
+            </div>
           </div>
         </div>
       </div>
@@ -4223,6 +4290,7 @@ tailwind.config = {
     <button onclick="try{completeNextTask()}catch(e){alert(e.message)}" style="padding: 10px 14px; background: hsl(142 40% 15%); border: 1px solid hsl(142 40% 25%); border-radius: 8px; color: #22c55e; font-size: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; cursor: pointer; text-align: left;">⚡ Пройти задание</button>
     <button onclick="try{grantKey()}catch(e){alert(e.message)}" style="padding: 10px 14px; background: hsl(43 74% 12%); border: 1px solid hsl(43 74% 25%); border-radius: 8px; color: #eab308; font-size: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; cursor: pointer; text-align: left;">🔑 Выдать ключ</button>
     <button onclick="try{resetAllQuests()}catch(e){alert(e.message)}" style="padding: 10px 14px; background: hsl(0 30% 12%); border: 1px solid hsl(0 30% 22%); border-radius: 8px; color: hsl(0 60% 60%); font-size: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; cursor: pointer; text-align: left;">↺ Сбросить квесты</button>
+    <button onclick="try{advanceKhloeNextDay()}catch(e){alert(e.message)}" style="padding: 10px 14px; background: hsl(160 35% 12%); border: 1px solid hsl(160 35% 24%); border-radius: 8px; color: #10b981; font-size: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; cursor: pointer; text-align: left;">→ Следующий день</button>
   </div>
 
 </div>
@@ -4372,13 +4440,19 @@ function resetAllQuests() {
   const q2hint = document.getElementById('q2-claim-hint');
   if (q2hint) q2hint.style.display = 'block';
 
-  // Reset Mira days + Alex tasks + coachmarks
+  // Reset Mira days + Alex tasks + coachmarks + Khloe meet
   miraDaysDone = [];
   localStorage.removeItem('sw-mira-days');
   alexTasksDone = [];
   localStorage.removeItem('sw-alex-tasks');
   localStorage.removeItem('sw-coachmarks-done');
   localStorage.removeItem('sw-cmr-done');
+  localStorage.removeItem('sw-khloe-met');
+  localStorage.removeItem('sw-khloe-next-day');
+  localStorage.removeItem('sw-khloe-alex-done');
+  localStorage.removeItem('sw-khloe-day2-claimed');
+  localStorage.removeItem('sw-rituals-done');
+  if (typeof updateMapState === 'function') updateMapState();
   currentAlexDay = 0;
   updateMiraRoadmap();
   updateAlexHomeCard();
@@ -5727,10 +5801,13 @@ registerTypewriterById('s14w_alex_mira', { text: 'Первый вывод. За�
 registerTypewriterById('s14w_alex_wait', { text: 'Первый вывод. Путь пройден.\n\nНаш коллега, которого ты ещё не знаешь, уже вовсю готовит для тебя задания. Осталось немного — спасибо, что подождёшь.', el: 'tw-s14w-alex-wait', cursor: 'tw-cursor-s14w-alex-wait', actions: 's14w-alex-wait-actions' });
 
 // ----- Финал Сезона I: переход к Хлое -----
-registerTypewriterById('sD10d', { text: 'Поздравляю — Сезон I пройден.\n\nХочу познакомить тебя с двумя моими друзьями. Один пока в пути — встретитесь чуть позже. А вторую представлю прямо сейчас.', el: 'tw-sD10d', cursor: 'tw-cursor-sD10d', actions: 'sD10d-actions' });
-registerTypewriterById('sD10e', { text: 'Спасибо, Алекс.\n\nПриятно познакомиться. Я Хлоя — буду присматривать за твоими ритуалами.', el: 'tw-sD10e', cursor: 'tw-cursor-sD10e', actions: 'sD10e-actions' });
-registerTypewriterById('sD10f', { text: 'Каждый день буду давать тебе по одному заданию.\n\nВыполнил — +1 ритуал. Не выполнил — ритуал сгорает. Всё просто.', el: 'tw-sD10f', cursor: 'tw-cursor-sD10f', actions: 'sD10f-actions' });
-registerTypewriterById('sD10g', { text: 'Сегодняшнее задание ждёт тебя в SimpleWallet.\n\nТапни по карточке, чтобы открыть.', el: 'tw-sD10g', cursor: 'tw-cursor-sD10g', actions: 'sD10g-task' });
+registerTypewriterById('sD10d', { text: 'Поздравляю с прохождением квеста Миры.\n\nХочу познакомить тебя с двумя новыми персонажами. Один пока в пути — встретитесь чуть позже. А вторая уже ждёт тебя.', el: 'tw-sD10d', cursor: 'tw-cursor-sD10d', actions: 'sD10d-actions' });
+registerTypewriterById('sD10e', { text: 'Спасибо, Алекс.\n\nПривет, приятно познакомиться. Я Хлоя — буду присматривать за твоими ритуалами.', el: 'tw-sD10e', cursor: 'tw-cursor-sD10e', actions: 'sD10e-actions' });
+registerTypewriterById('sD10f', { text: 'Каждый день я буду давать тебе задание. За каждое — один ритуал.\n\nВсё просто. Выполнил — получил. Не выполнил — ритуал сгорает.\n\nПриходи завтра — буду ждать тебя на Арене. Найдёшь её на карте мира.', el: 'tw-sD10f', cursor: 'tw-cursor-sD10f', actions: 'sD10f-actions' });
+registerTypewriterById('sArena', { text: 'Каждый день я буду давать тебе задание. За каждое — один ритуал.\n\nВсё просто. Выполнил — получил. Не выполнил — ритуал сгорает.\n\nПриходи завтра — буду ждать тебя на Арене. Найдёшь её на карте мира.', el: 'tw-sArena', cursor: 'tw-cursor-sArena' });
+registerTypewriterById('sKhloeLocked', { text: 'У меня готово для тебя задание. Но сначала помоги Алексу с его заданием в хабе.', el: 'tw-sKhloeLocked', cursor: 'tw-cursor-sKhloeLocked', actions: 'sKhloeLocked-actions' });
+registerTypewriterById('sKhloeDay2', { text: 'В честь нашего знакомства — один ритуал тебе сегодня в подарок.\n\nА настоящие задания начнём завтра.', el: 'tw-sKhloeDay2', cursor: 'tw-cursor-sKhloeDay2', actions: 'sKhloeDay2-reward', extra: 'sKhloeDay2-actions' });
+registerTypewriterById('sKhloeAlexTask', { text: 'У меня для тебя социальное задание. За него получишь +10 к Ауре.', el: 'tw-sKhloeAlexTask', cursor: 'tw-cursor-sKhloeAlexTask', actions: 'sKhloeAlexTask-actions' });
 
 function runTypewriter(screenIndex) {
   const cfg = typewriterScreens[screenIndex];
@@ -5819,21 +5896,61 @@ var alexTasks = [
   { day: 10, action: 'Задание 10 (TBD)', url: '#', text: 'У меня для тебя социальное задание. За него получишь +10 к Ауре.' }
 ];
 
-// ----- Хлоя: засчитать ритуал -----
-function completeRitualTask() {
-  var ritualsDone = parseInt(localStorage.getItem('sw-rituals-done') || '0', 10);
-  ritualsDone += 1;
-  localStorage.setItem('sw-rituals-done', String(ritualsDone));
-  goToId('sD10h');
+// ----- Карта мира: разблокировка локаций -----
+function updateMapState() {
+  var khloeMet = localStorage.getItem('sw-khloe-met') === '1';
+  var locked = document.getElementById('map-arena-locked');
+  var active = document.getElementById('map-arena-active');
+  if (locked) locked.style.display = khloeMet ? 'none' : '';
+  if (active) active.style.display = khloeMet ? '' : 'none';
+}
+
+// ----- Арена: маршрутизация по state Хлои -----
+// Триггер day-2: демо-кнопка "Следующий день" (sw-khloe-next-day=1).
+// Без неё — повтор правил (sArena), как на экране 79.
+function enterArena() {
+  if (localStorage.getItem('sw-khloe-next-day') !== '1') { goToId('sArena'); return; }
+  // Соц-задание Алекса в честь знакомства не сделано → залочено
+  if (localStorage.getItem('sw-khloe-alex-done') !== '1' && localStorage.getItem('sw-khloe-day2-claimed') !== '1') {
+    goToId('sKhloeLocked'); return;
+  }
+  // Алекс сделан, ритуал ещё не получен → подарок
+  if (localStorage.getItem('sw-khloe-alex-done') === '1' && localStorage.getItem('sw-khloe-day2-claimed') !== '1') {
+    goToId('sKhloeDay2'); return;
+  }
+  goToId('sArena');
+}
+
+// ----- Демо: ставит "следующий день" для цикла Хлои -----
+function advanceKhloeNextDay() {
+  localStorage.setItem('sw-khloe-next-day', '1');
+  // Сбрасываем зависимые шаги, чтобы цикл прошёлся с начала
+  localStorage.removeItem('sw-khloe-alex-done');
+  localStorage.removeItem('sw-khloe-day2-claimed');
+  alert('Следующий день. Заходи в Арену — там тебя ждёт Хлоя.');
+}
+
+// ----- Хлоя: подарок +1 ритуал в честь знакомства (day 2) -----
+function completeKhloeDay2() {
+  var n = parseInt(localStorage.getItem('sw-rituals-done') || '0', 10) + 1;
+  localStorage.setItem('sw-rituals-done', String(n));
+  localStorage.setItem('sw-khloe-day2-claimed', '1');
+  goTo(12);
+}
+
+// ----- Алекс: соц-задание в честь знакомства Хлои -----
+function checkKhloeAlexTask() {
+  var btn = document.getElementById('sKhloeAlexTask-check');
+  var spinner = document.getElementById('sKhloeAlexTask-spinner');
+  if (!btn || !spinner) return;
+  btn.style.display = 'none';
+  spinner.style.display = 'flex';
   setTimeout(function() {
-    var totalEl = document.getElementById('ritual-total');
-    if (totalEl) totalEl.textContent = String(ritualsDone);
-    var actions = document.getElementById('sD10h-actions');
-    if (actions) {
-      actions.style.opacity = '1';
-      actions.style.transform = 'translateY(0)';
-    }
-  }, 900);
+    localStorage.setItem('sw-khloe-alex-done', '1');
+    spinner.style.display = 'none';
+    var done = document.getElementById('sKhloeAlexTask-done');
+    if (done) done.style.display = 'block';
+  }, 1500);
 }
 
 function completeMiraDay(day) {
@@ -6094,6 +6211,11 @@ goTo = function(n) {
   // Refresh Aura screen state on every entry
   if (screens[current] && screens[current].id === 'sAura') {
     if (typeof updateAuraScreen === 'function') updateAuraScreen();
+  }
+
+  // Refresh world map state (Arena lock/unlock by sw-khloe-met)
+  if (screens[current] && screens[current].id === 's17') {
+    if (typeof updateMapState === 'function') updateMapState();
   }
 
   if (current === 2) startTypewriter(); // Screen 3 — Alex Appears (legacy typewriter)
@@ -6444,6 +6566,7 @@ function updateAuraScreen() {
 updateMiraRoadmap();
 updateAlexHomeCard();
 updateHomeProgress();
+updateMapState();
 
 // === CoachMarks for Screen 11 (Profile) ===
 const coachSteps = [
