@@ -645,6 +645,11 @@ tailwind.config = {
   <div class="sidebar-item" onclick="resetAllQuests()" style="color: hsl(0 60% 55%);">↺ Сбросить квесты</div>
   <div class="sidebar-item" onclick="advanceKhloeNextDay()" style="color: #10b981;">→ Следующий день</div>
   <div class="sidebar-item" onclick="toggleKhloeTaskFailMock()" style="color: #eab308;">🔁 Имитировать «не выполнено»</div>
+  <div class="sidebar-section" style="font-size: 10px;">Сокровищница — режимы</div>
+  <div class="sidebar-item" onclick="setTreasureMode('default')" style="color: #a3a3a3;">▸ Без ключа (стек &lt;7)</div>
+  <div class="sidebar-item" onclick="setTreasureMode('window-open')" style="color: #22c55e;">▸ Окно ключа открыто</div>
+  <div class="sidebar-item" onclick="setTreasureMode('window-closed')" style="color: #f97316;">▸ Окно закрыто (пропустил)</div>
+  <div class="sidebar-item" onclick="setTreasureMode('has-key')" style="color: #eab308;">▸ Ключ в инвентаре</div>
 </div>
 
 <!-- ========== MAIN AREA ========== -->
@@ -1462,19 +1467,33 @@ tailwind.config = {
           <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px;">
             <div class="text-[12px] font-bold" data-i18n="s15_how_title" style="color: #f2f2f2; margin-bottom: 10px;">Как работает ритуал</div>
             <div class="text-[12px]" data-i18n="s15_how_p1" style="color: hsl(0 0% 50%); line-height: 1.7;">
-              Проходишь один день в квесте у Миры — получаешь один ритуал. 1 пройденный день = 1 ритуал
+              Каждый день выполняй задание — получаешь один ритуал. Один день = один ритуал.
             </div>
             <div class="text-[12px]" data-i18n="s15_how_p2" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
-              7 ритуалов — и ты забираешь ключ.
+              Собери 7 ритуалов — и ты сможешь забрать ключ.
             </div>
             <div class="text-[12px]" data-i18n="s15_how_p3" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
-              Ключ открывает Сокровищницу — каждую пятницу в полдень.
+              Забрать ключ можно только в пятницу с 00:00 до 12:00 UTC. После этого окно закрывается до следующей пятницы.
             </div>
             <div class="text-[12px]" data-i18n="s15_how_p4" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
-              Дальше следующий круг: новые дни, новый ключ.
+              Когда забираешь ключ — все 7 ритуалов сгорают, а ключ остаётся в инвентаре. Открой им сокровищницу до следующей пятницы.
             </div>
             <div class="text-[12px]" data-i18n="s15_how_warn" style="color: #ef4444; line-height: 1.7; margin-top: 12px;">
-              <span style="font-weight: 700;">ВАЖНО:</span> за каждый пропущенный день в квесте у Миры — отнимается один ритуал.
+              <span style="font-weight: 700;">ВАЖНО:</span> каждый день без задания — минус один ритуал. Поэтому выполняй задание каждый день, чтобы удерживать собранные ритуалы.
+            </div>
+          </div>
+
+          <!-- Where to collect rituals -->
+          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px; margin-top: 10px;">
+            <div class="text-[12px] font-bold" data-i18n="s15_where_title" style="color: #f2f2f2; margin-bottom: 10px;">Где собрать ритуалы</div>
+            <div class="text-[12px]" data-i18n="s15_where_mira" style="color: hsl(0 0% 50%); line-height: 1.7;">
+              <span style="color: #f2f2f2; font-weight: 600;">У Миры</span> — пока она ведёт свой квест (первые дни в Simple World).
+            </div>
+            <div class="text-[12px]" data-i18n="s15_where_khloe" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
+              <span style="color: #f2f2f2; font-weight: 600;">У Хлои</span> — каждый день после выполнения её задания.
+            </div>
+            <div class="text-[12px]" data-i18n="s15_where_note" style="color: hsl(0 0% 40%); line-height: 1.6; margin-top: 10px; font-style: italic;">
+              Когда Мира заканчивает свой квест, ритуалы продолжает выдавать Хлоя — без перерыва.
             </div>
           </div>
 
@@ -1504,27 +1523,38 @@ tailwind.config = {
           </div>
 
           <!-- Countdown -->
-          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 20px; text-align: center; margin-bottom: 12px;">
-            <div class="font-label text-[9px] font-bold tracking-[1.5px] uppercase" data-i18n="s16_countdown_label" style="color: hsl(0 0% 40%);">До открытия сокровищницы</div>
-            <div class="font-label text-[24px] font-extrabold" data-i18n="s16_countdown_value" style="color: #f2f2f2; margin-top: 8px;">4 дня</div>
-            <div class="text-[11px]" data-i18n="s16_countdown_time" style="color: hsl(0 0% 40%); margin-top: 4px;">Пятница, полдень (12:00 UTC)</div>
+          <div id="s16-countdown" style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 20px; text-align: center; margin-bottom: 12px;">
+            <div id="s16-countdown-label" class="font-label text-[9px] font-bold tracking-[1.5px] uppercase" data-i18n="s16_countdown_label" style="color: hsl(0 0% 40%);">До окна ключа</div>
+            <div id="s16-countdown-value" class="font-label text-[24px] font-extrabold" data-i18n="s16_countdown_value" style="color: #f2f2f2; margin-top: 8px;">4 дня</div>
+            <div id="s16-countdown-time" class="text-[11px]" data-i18n="s16_countdown_time" style="color: hsl(0 0% 40%); margin-top: 4px;">Пятница, 00:00 UTC</div>
           </div>
 
           <!-- Amount + button -->
           <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 24px; text-align: center; margin-bottom: 12px;">
-            <div class="font-label text-[28px] font-extrabold" style="color: #f2f2f2;">500 USDC</div>
+            <div class="font-label text-[28px] font-extrabold" style="color: #f2f2f2;">100–1000 USDC</div>
+            <div class="text-[11px]" data-i18n="s16_amount_sub" style="color: hsl(0 0% 50%); margin-top: 6px; line-height: 1.5;">Сумма недели зависит от того, сколько активных жителей было в Simple World на этой неделе.</div>
             <button id="s16-open-btn" class="btn-cta" data-i18n="s16_btn_open" disabled onclick="try{openTreasure()}catch(e){alert(e.message)}" style="opacity: 0.4; cursor: not-allowed; margin-top: 16px; text-align: center;">Открыть ключом</button>
-            <div id="s16-no-key" class="text-[11px]" data-i18n="s16_no_key" style="color: hsl(0 0% 40%); margin-top: 8px;">У тебя пока нет ключа. Заверши ритуал — и забери его</div>
-            <div id="s16-has-key" class="text-[11px]" data-i18n="s16_has_key" style="display: none; color: #f2f2f2; margin-top: 16px; font-weight: 600;">У тебя есть ключ. Открой сокровищницу.</div>
+            <div id="s16-no-key" class="text-[11px]" data-i18n="s16_no_key" style="color: hsl(0 0% 40%); margin-top: 8px;">У тебя пока нет ключа. Собери 7 ритуалов и забери ключ в пятницу с 00:00 до 12:00 UTC.</div>
+            <div id="s16-has-key" class="text-[11px]" data-i18n="s16_has_key" style="display: none; color: #f2f2f2; margin-top: 16px; font-weight: 600;">У тебя есть ключ. Открой сокровищницу до следующей пятницы.</div>
+            <div id="s16-window-closed" class="text-[11px]" data-i18n="s16_window_closed" style="display: none; color: hsl(38 80% 60%); margin-top: 8px;">Окно ключа закрыто. Следующее окно — в пятницу с 00:00 до 12:00 UTC.</div>
+            <div id="s16-window-open" class="text-[11px]" data-i18n="s16_window_open" style="display: none; color: hsl(142 70% 55%); margin-top: 8px; font-weight: 600;">Окно ключа открыто. Забери ключ до 12:00 UTC.</div>
           </div>
 
           <!-- How it works -->
           <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px;">
             <div class="text-[12px] font-bold" data-i18n="s16_inside_title" style="color: #f2f2f2; margin-bottom: 8px;">Что внутри</div>
-            <div class="text-[12px]" data-i18n="s16_inside_desc" style="color: hsl(0 0% 50%); line-height: 1.6;">
-              Каждую пятницу в полдень сокровищницу можно открыть ключом.<br>
-              Внутри — 500 USDC. Их делят между собой все, кто открыл.<br><br>
-              Чем меньше людей с ключом — тем больше достанется тебе.
+            <div class="text-[12px]" data-i18n="s16_inside_desc" style="color: hsl(0 0% 50%); line-height: 1.7;">
+              Каждую неделю команда Simple World кладёт в сокровищницу от 100 до 1000 USDC. Сумма зависит от того, сколько активных жителей было в Simple World на этой неделе.<br><br>
+              Открой сокровищницу ключом — и получи свою часть пула.
+            </div>
+          </div>
+
+          <!-- How to get key -->
+          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px; margin-top: 10px;">
+            <div class="text-[12px] font-bold" data-i18n="s16_howkey_title" style="color: #f2f2f2; margin-bottom: 8px;">Как получить ключ</div>
+            <div class="text-[12px]" data-i18n="s16_howkey_desc" style="color: hsl(0 0% 50%); line-height: 1.7;">
+              Собери 7 ритуалов — по одному за каждый день, когда выполнишь задание у Миры или Хлои.<br><br>
+              Когда стек полный — забери ключ в пятницу с 00:00 до 12:00 UTC. После 12:00 окно закрывается до следующей пятницы.
             </div>
           </div>
 
@@ -4400,7 +4430,7 @@ tailwind.config = {
           <!-- CTA + reset + support (все появляются одним fade-in блоком) -->
           <div class="treasure-cta-wrap" style="margin-top: 16px;">
             <button class="btn-cta" data-i18n="s16o_btn_claim" onclick="claimTreasure()" style="text-align: center;">В Хранилище</button>
-            <div class="text-[11px]" data-i18n="s16o_reset_note" style="color: #f2f2f2; margin-top: 12px; text-align: center; line-height: 1.5;">Ключ использован. 7 новых ритуалов — и получишь следующий.</div>
+            <div class="text-[11px]" data-i18n="s16o_reset_note" style="color: #f2f2f2; margin-top: 12px; text-align: center; line-height: 1.5;">Ключ использован. Собери 7 новых ритуалов и забери следующий ключ в пятницу с 00:00 до 12:00 UTC.</div>
             <a href="mailto:support@simple.app" class="text-[11px]" data-i18n="support_line" style="color: #f2f2f2; text-align: center; margin-top: 20px; text-decoration: none; display: block;">Техническая поддержка — support@simple.app</a>
           </div>
 
@@ -4486,6 +4516,11 @@ function goTo(n) {
   const curActions = screens[current].querySelectorAll('.actions-anim');
   curBubbles.forEach(el => setTimeout(() => el.classList.add('show'), 300));
   curActions.forEach(el => setTimeout(() => el.classList.add('show'), 800));
+
+  // Treasure screen: apply current treasure mode (states: default / window-open / window-closed / has-key)
+  if (screens[current].id === 's16') {
+    try { applyTreasureMode(); } catch(e) { /* function may not be loaded yet on first paint */ }
+  }
 
   // Treasure-opened screen: restart chest video + animate amount counter
   if (screens[current].id === 's16_opened') {
@@ -4625,6 +4660,7 @@ function resetAllQuests() {
   try {
     localStorage.removeItem('sw-has-key');
     localStorage.removeItem('sw-treasure-claimed');
+    localStorage.removeItem('sw-treasure-mode');
   } catch (e) {}
   renderKeyState();
   // Restore empty Vault state
@@ -6279,6 +6315,78 @@ function toggleKhloeTaskFailMock() {
   } else {
     localStorage.setItem('sw-khloe-task-fail-mock', '1');
     alert('Имитация "не выполнено" ВКЛ. Следующее «Проверить» = inline-сообщение про задержку.');
+  }
+}
+
+// Демо: переключение состояния Сокровищницы (s16)
+// 'default' — нет ключа, стек <7
+// 'window-open' — пт 00–12 UTC, стек 7/7, можно забрать ключ
+// 'window-closed' — пт 12+ UTC, юзер не успел в окно
+// 'has-key' — ключ в инвентаре, можно открыть сундук
+function setTreasureMode(mode) {
+  localStorage.setItem('sw-treasure-mode', mode);
+  if (mode === 'has-key') {
+    localStorage.setItem('sw-has-key', '1');
+  } else {
+    localStorage.removeItem('sw-has-key');
+  }
+  applyTreasureMode();
+  goToId('s16');
+}
+
+function applyTreasureMode() {
+  var mode = localStorage.getItem('sw-treasure-mode') || 'default';
+  var hasKey = localStorage.getItem('sw-has-key') === '1';
+
+  var openBtn = document.getElementById('s16-open-btn');
+  var noKey = document.getElementById('s16-no-key');
+  var hasKeyMsg = document.getElementById('s16-has-key');
+  var windowClosed = document.getElementById('s16-window-closed');
+  var windowOpen = document.getElementById('s16-window-open');
+  var cdLabel = document.getElementById('s16-countdown-label');
+  var cdValue = document.getElementById('s16-countdown-value');
+  var cdTime = document.getElementById('s16-countdown-time');
+
+  if (!openBtn) return;
+
+  // Reset all states
+  if (noKey) noKey.style.display = 'none';
+  if (hasKeyMsg) hasKeyMsg.style.display = 'none';
+  if (windowClosed) windowClosed.style.display = 'none';
+  if (windowOpen) windowOpen.style.display = 'none';
+
+  if (mode === 'has-key' || hasKey) {
+    openBtn.disabled = false;
+    openBtn.style.opacity = '1';
+    openBtn.style.cursor = 'pointer';
+    if (hasKeyMsg) hasKeyMsg.style.display = 'block';
+    if (cdLabel) cdLabel.textContent = 'До закрытия окна сундука';
+    if (cdValue) cdValue.textContent = '6 дней 23 ч';
+    if (cdTime) cdTime.textContent = 'Следующая пятница, 11:59 UTC';
+  } else if (mode === 'window-open') {
+    openBtn.disabled = true;
+    openBtn.style.opacity = '0.4';
+    openBtn.style.cursor = 'not-allowed';
+    if (windowOpen) windowOpen.style.display = 'block';
+    if (cdLabel) cdLabel.textContent = 'Окно ключа закроется через';
+    if (cdValue) cdValue.textContent = '7 ч 23 мин';
+    if (cdTime) cdTime.textContent = 'Сегодня, 12:00 UTC';
+  } else if (mode === 'window-closed') {
+    openBtn.disabled = true;
+    openBtn.style.opacity = '0.4';
+    openBtn.style.cursor = 'not-allowed';
+    if (windowClosed) windowClosed.style.display = 'block';
+    if (cdLabel) cdLabel.textContent = 'До следующего окна ключа';
+    if (cdValue) cdValue.textContent = '6 дней 12 ч';
+    if (cdTime) cdTime.textContent = 'Пятница, 00:00 UTC';
+  } else {
+    openBtn.disabled = true;
+    openBtn.style.opacity = '0.4';
+    openBtn.style.cursor = 'not-allowed';
+    if (noKey) noKey.style.display = 'block';
+    if (cdLabel) cdLabel.textContent = 'До окна ключа';
+    if (cdValue) cdValue.textContent = '4 дня';
+    if (cdTime) cdTime.textContent = 'Пятница, 00:00 UTC';
   }
 }
 
