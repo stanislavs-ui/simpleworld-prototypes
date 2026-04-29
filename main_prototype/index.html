@@ -631,6 +631,12 @@ tailwind.config = {
   <div class="sidebar-item" onclick="goToId('sKhloeLocked')">81. Арена: сначала к Алексу</div>
   <div class="sidebar-item" onclick="goToId('sKhloeAlexTask')">82. Алекс: задание для Хлои</div>
   <div class="sidebar-item" onclick="goToId('sKhloeDay2')">83. Арена: +1 ритуал</div>
+  <div class="sidebar-section" style="font-size: 10px;">Хлоя задание</div>
+  <div class="sidebar-item" onclick="openKhloeTask('volume')">84. Хлоя задание: Объём</div>
+  <div class="sidebar-item" onclick="openKhloeTask('buy')">85. Хлоя задание: Покупка</div>
+  <div class="sidebar-item" onclick="openKhloeTask('deposit')">86. Хлоя задание: Пополнение</div>
+  <div class="sidebar-item" onclick="goToId('sKhloeRitualClaimed')">87. Хлоя: ритуал засчитан</div>
+  <div class="sidebar-item" onclick="goToId('sKhloeTaskDone')">88. Хлоя: уже сделано сегодня</div>
   <div class="sidebar-section">Технические</div>
   <div class="sidebar-item" onclick="goToId('sT1')">T1. Maintenance</div>
   <div class="sidebar-item" onclick="goToId('sT2')">T2. Blocked</div>
@@ -4234,6 +4240,129 @@ tailwind.config = {
         </div>
       </div>
 
+      <!-- ==================== SCREEN sKhloeTask: Хлоя — задание дня (3 типа: volume/buy/deposit) ==================== -->
+      <div class="screen screen-pinned" id="sKhloeTask" data-name="Хлоя: задание дня" style="justify-content: flex-start;">
+        <div class="flex flex-col w-full">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div onclick="goToId('s17')" style="cursor: pointer; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </div>
+            <span class="text-[15px] font-bold" style="color: #f2f2f2;">Арена</span>
+          </div>
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 280px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald-bust.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 25%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: 8px;">
+            <div class="bubble khloe-bubble" style="padding-top: 10px; padding-bottom: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
+              <span style="font-size: 14px;"><span id="tw-sKhloeTask"></span><span id="tw-cursor-sKhloeTask" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
+            </div>
+          </div>
+
+          <!-- Task Card — большой блок с заданием -->
+          <div id="sKhloeTask-card-anim" style="margin-top: 16px; opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease;">
+            <div id="sKhloeTask-card" data-task-type="volume" style="background: hsl(240 5% 11%); border: 1px solid hsl(142 35% 22%); border-radius: 16px; padding: 20px 18px; box-shadow: 0 0 24px rgba(16,185,129,0.15);">
+              <!-- Header: иконка + label -->
+              <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                <div id="sKhloeTask-icon-bg" style="width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, hsl(160 70% 25%), hsl(160 80% 35%)); border: 1px solid hsl(160 70% 40%); flex-shrink: 0;">
+                  <span id="sKhloeTask-icon" style="font-size: 28px; line-height: 1;">📊</span>
+                </div>
+                <div style="flex: 1;">
+                  <div id="sKhloeTask-label" style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: hsl(0 0% 55%); margin-bottom: 4px;">ОБЪЁМ ТОРГОВ</div>
+                  <div id="sKhloeTask-title" style="font-size: 20px; font-weight: 700; color: #f2f2f2; line-height: 1.25;">Сделай оборот на <span style="color:#10b981;">$20</span></div>
+                </div>
+              </div>
+
+              <!-- Divider + section title -->
+              <div style="display: flex; align-items: center; gap: 10px; margin: 18px 0 12px;">
+                <div style="flex: 1; height: 1px; background: hsl(240 5% 18%);"></div>
+                <span style="font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: hsl(0 0% 45%);">Как это сделать</span>
+                <div style="flex: 1; height: 1px; background: hsl(240 5% 18%);"></div>
+              </div>
+
+              <!-- Instructions list -->
+              <ul id="sKhloeTask-list" style="list-style: none; padding: 0; margin: 0 0 14px;">
+                <li style="position: relative; padding-left: 18px; font-size: 14px; color: hsl(0 0% 80%); line-height: 1.6; margin-bottom: 6px;"><span style="position: absolute; left: 0; top: 0; color: #10b981;">•</span>Открой Simple Wallet</li>
+              </ul>
+
+              <!-- Note (мелкий уточняющий текст) -->
+              <div id="sKhloeTask-note" style="font-size: 12px; color: hsl(0 0% 50%); line-height: 1.5; padding: 10px 12px; background: hsl(240 5% 8%); border-radius: 8px; border-left: 2px solid hsl(142 35% 30%);">
+                Считается оборот в обе стороны (купил → продал = двойной оборот).
+              </div>
+            </div>
+
+            <style>
+              #sKhloeTask-list li { position: relative; padding-left: 18px; font-size: 14px; color: hsl(0 0% 80%); line-height: 1.6; margin-bottom: 6px; list-style: none; }
+              #sKhloeTask-list li::before { content: '•'; position: absolute; left: 0; top: 0; color: #10b981; font-weight: bold; }
+            </style>
+          </div>
+
+          <!-- CTA buttons -->
+          <div class="w-full" id="sKhloeTask-actions" style="margin-top: 14px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out; display: flex; flex-direction: column; gap: 8px;">
+            <a class="btn-cta" href="https://simple.app" target="_blank" rel="noopener" style="text-align: center; text-decoration: none; display: block;">Открыть Simple Wallet</a>
+            <button class="btn-cta" id="sKhloeTask-check" onclick="checkKhloeTask()" style="background: hsl(240 5% 14%); color: #f2f2f2; border: 1px solid hsl(240 5% 22%);">Проверить</button>
+            <div id="sKhloeTask-spinner" style="display: none; align-items: center; justify-content: center; gap: 10px; padding: 12px; color: hsl(0 0% 65%); font-size: 13px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+              <span>Проверяем...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN sKhloeTaskDone: Хлоя — повторный заход в тот же день ==================== -->
+      <div class="screen screen-pinned" id="sKhloeTaskDone" data-name="Хлоя: уже сделано сегодня" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div onclick="goToId('s17')" style="cursor: pointer; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </div>
+            <span class="text-[15px] font-bold" style="color: #f2f2f2;">Арена</span>
+          </div>
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 280px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald-bust.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 25%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: 8px;">
+            <div class="bubble khloe-bubble" style="padding-top: 10px; padding-bottom: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
+              <span style="font-size: 14px;"><span id="tw-sKhloeTaskDone"></span><span id="tw-cursor-sKhloeTaskDone" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN sKhloeRitualClaimed: Хлоя — задание выполнено, +1 ритуал ==================== -->
+      <div class="screen screen-pinned" id="sKhloeRitualClaimed" data-name="Хлоя: ритуал засчитан" style="justify-content: center;">
+        <div class="flex flex-col w-full">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div onclick="goToId('s17')" style="cursor: pointer; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </div>
+            <span class="text-[15px] font-bold" style="color: #f2f2f2;">Арена</span>
+          </div>
+          <div class="relative w-full overflow-hidden flex justify-center" style="height: 280px; margin: 0 -20px; width: calc(100% + 40px);">
+            <img alt="Хлоя" class="h-full object-contain" src="../assets/characters/khloe-v1-emerald-bust.jpg"/>
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, hsl(240 5% 4%) 0%, transparent 25%);"></div>
+          </div>
+          <div class="w-full" style="margin-top: 8px;">
+            <div class="bubble khloe-bubble" style="padding-top: 10px; padding-bottom: 10px;">
+              <div class="font-label text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style="color: #10b981;">ХЛОЯ</div>
+              <span style="font-size: 14px;"><span id="tw-sKhloeRitualClaimed"></span><span id="tw-cursor-sKhloeRitualClaimed" style="display:inline-block;width:2px;height:16px;background:#10b981;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.8s infinite;"></span></span>
+            </div>
+          </div>
+          <div id="sKhloeRitualClaimed-reward" style="margin-top: 24px; display: flex; justify-content: center; opacity: 0; transform: translateY(6px); transition: opacity 0.5s ease, transform 0.5s ease;">
+            <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; background: rgba(16,185,129,0.10); border: 1px solid rgba(16,185,129,0.28); border-radius: 999px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="color: #f2f2f2; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">+1 ритуал</span>
+            </div>
+          </div>
+          <div class="w-full" id="sKhloeRitualClaimed-actions" style="margin-top: 14px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out;">
+            <button class="btn-reply" onclick="completeKhloeRitualClaim()">Спасибо</button>
+          </div>
+        </div>
+      </div>
+
       <!-- ==================== SCREEN s16_opened: Сокровищница открыта ==================== -->
       <div class="screen" id="s16_opened" data-name="Сокровищница открыта" style="justify-content: flex-start;">
         <div class="flex flex-col w-full" style="padding-top: 4px;">
@@ -4451,7 +4580,10 @@ function resetAllQuests() {
   localStorage.removeItem('sw-khloe-next-day');
   localStorage.removeItem('sw-khloe-alex-done');
   localStorage.removeItem('sw-khloe-day2-claimed');
+  localStorage.removeItem('sw-khloe-current-day');
   localStorage.removeItem('sw-rituals-done');
+  // Очистка флагов выполнения задания по дням 3..50 (с запасом)
+  for (var __i = 3; __i <= 50; __i++) localStorage.removeItem('sw-khloe-day-' + __i + '-claimed');
   if (typeof updateMapState === 'function') updateMapState();
   currentAlexDay = 0;
   updateMiraRoadmap();
@@ -5808,6 +5940,9 @@ registerTypewriterById('sArena', { text: 'Каждый день я буду да
 registerTypewriterById('sKhloeLocked', { text: 'У меня готово для тебя задание. Но сначала помоги Алексу с его заданием в хабе.', el: 'tw-sKhloeLocked', cursor: 'tw-cursor-sKhloeLocked', actions: 'sKhloeLocked-actions' });
 registerTypewriterById('sKhloeDay2', { text: 'В честь нашего знакомства — один ритуал тебе сегодня в подарок.\n\nА настоящие задания начнём завтра.', el: 'tw-sKhloeDay2', cursor: 'tw-cursor-sKhloeDay2', actions: 'sKhloeDay2-reward', extra: 'sKhloeDay2-actions' });
 registerTypewriterById('sKhloeAlexTask', { text: 'У меня для тебя социальное задание. За него получишь +10 к Ауре.', el: 'tw-sKhloeAlexTask', cursor: 'tw-cursor-sKhloeAlexTask', actions: 'sKhloeAlexTask-actions' });
+registerTypewriterById('sKhloeTask', { text: 'Привет! Вот твоё задание на сегодня.', el: 'tw-sKhloeTask', cursor: 'tw-cursor-sKhloeTask', actions: 'sKhloeTask-card-anim', extra: 'sKhloeTask-actions' });
+registerTypewriterById('sKhloeTaskDone', { text: 'Сегодня ритуал засчитан. Приходи завтра — будет новое задание.', el: 'tw-sKhloeTaskDone', cursor: 'tw-cursor-sKhloeTaskDone' });
+registerTypewriterById('sKhloeRitualClaimed', { text: 'Задание выполнено. +1 ритуал тебе в копилку.\n\nПриходи завтра — будет новое.', el: 'tw-sKhloeRitualClaimed', cursor: 'tw-cursor-sKhloeRitualClaimed', actions: 'sKhloeRitualClaimed-reward', extra: 'sKhloeRitualClaimed-actions' });
 
 function runTypewriter(screenIndex) {
   const cfg = typewriterScreens[screenIndex];
@@ -5906,28 +6041,58 @@ function updateMapState() {
 }
 
 // ----- Арена: маршрутизация по state Хлои -----
-// Триггер day-2: демо-кнопка "Следующий день" (sw-khloe-next-day=1).
-// Без неё — повтор правил (sArena), как на экране 79.
+// Логика дней:
+//   day 1 = онбординг закончился (после sD10f). Заход на Арену → sArena (повтор правил).
+//   day 2 = подарочный (через соц-задание Алекса).
+//   day 3+ = реальное задание из цикла [volume, buy, deposit] по индексу (N-3) mod 3.
+// Демо: кнопка "→ Следующий день" инкрементит sw-khloe-current-day и ставит sw-khloe-next-day=1.
 function enterArena() {
   if (localStorage.getItem('sw-khloe-next-day') !== '1') { goToId('sArena'); return; }
-  // Соц-задание Алекса в честь знакомства не сделано → залочено
-  if (localStorage.getItem('sw-khloe-alex-done') !== '1' && localStorage.getItem('sw-khloe-day2-claimed') !== '1') {
-    goToId('sKhloeLocked'); return;
+
+  var day = parseInt(localStorage.getItem('sw-khloe-current-day') || '2', 10);
+
+  // День 2 — подарочный (через соц-задание Алекса)
+  if (day === 2) {
+    if (localStorage.getItem('sw-khloe-alex-done') !== '1' && localStorage.getItem('sw-khloe-day2-claimed') !== '1') {
+      goToId('sKhloeLocked'); return;
+    }
+    if (localStorage.getItem('sw-khloe-alex-done') === '1' && localStorage.getItem('sw-khloe-day2-claimed') !== '1') {
+      goToId('sKhloeDay2'); return;
+    }
+    // День 2 уже выполнен → бабл "сегодня ритуал засчитан"
+    goToId('sKhloeTaskDone'); return;
   }
-  // Алекс сделан, ритуал ещё не получен → подарок
-  if (localStorage.getItem('sw-khloe-alex-done') === '1' && localStorage.getItem('sw-khloe-day2-claimed') !== '1') {
-    goToId('sKhloeDay2'); return;
+
+  // День 3+ — реальное задание из цикла
+  if (day >= 3) {
+    if (localStorage.getItem('sw-khloe-day-' + day + '-claimed') === '1') {
+      goToId('sKhloeTaskDone'); return;
+    }
+    var type = getKhloeTaskType(day);
+    applyKhloeTaskMode(type);
+    goToId('sKhloeTask');
+    return;
   }
+
   goToId('sArena');
 }
 
-// ----- Демо: ставит "следующий день" для цикла Хлои -----
+// ----- Демо: инкремент "следующего дня" Хлои -----
+// Первый клик: day 1 → 2 (подарочный, через Алекса).
+// Дальше: 2 → 3 → 4 → ... — каждый клик флипает день и сбрасывает зависимые флаги.
 function advanceKhloeNextDay() {
   localStorage.setItem('sw-khloe-next-day', '1');
-  // Сбрасываем зависимые шаги, чтобы цикл прошёлся с начала
-  localStorage.removeItem('sw-khloe-alex-done');
-  localStorage.removeItem('sw-khloe-day2-claimed');
-  alert('Следующий день. Заходи в Арену — там тебя ждёт Хлоя.');
+  var day = parseInt(localStorage.getItem('sw-khloe-current-day') || '1', 10);
+  day = day + 1;
+  localStorage.setItem('sw-khloe-current-day', String(day));
+  if (day === 2) {
+    // Ресет дня 2: снова через Алекса
+    localStorage.removeItem('sw-khloe-alex-done');
+    localStorage.removeItem('sw-khloe-day2-claimed');
+  }
+  // Для day >= 3 — день N имеет свой собственный ключ sw-khloe-day-N-claimed.
+  // Если предыдущий день не был выполнен — ритуал "сгорает" молча, на новый день флаг по умолчанию отсутствует.
+  alert('Теперь день ' + day + '. Заходи в Арену через карту мира.');
 }
 
 // ----- Хлоя: подарок +1 ритуал в честь знакомства (day 2) -----
@@ -5935,6 +6100,139 @@ function completeKhloeDay2() {
   var n = parseInt(localStorage.getItem('sw-rituals-done') || '0', 10) + 1;
   localStorage.setItem('sw-rituals-done', String(n));
   localStorage.setItem('sw-khloe-day2-claimed', '1');
+  goTo(12);
+}
+
+// ===== Хлоя: ежедневный цикл день 3+ (3 типа заданий по кругу) =====
+
+// Конфиг типов заданий. Иконка/цвет/инструкция/note — по решению Кима/Лиры на 29.04.
+var khloeTaskTypes = {
+  volume: {
+    icon: '📊',
+    iconBg: 'linear-gradient(135deg, hsl(160 70% 25%), hsl(160 80% 35%))',
+    iconBorder: 'hsl(160 70% 40%)',
+    label: 'ОБЪЁМ ТОРГОВ',
+    title: 'Сделай оборот на $20',
+    instructions: [
+      'Открой Simple Wallet',
+      'Перейди в раздел Trade',
+      'Соверши сделки на сумму $20 в любых парах',
+      'Можно несколько сделок — главное, чтобы суммарный оборот был $20'
+    ],
+    note: 'Считается оборот в обе стороны (купил → продал = двойной оборот).'
+  },
+  buy: {
+    icon: '💎',
+    iconBg: 'linear-gradient(135deg, hsl(265 60% 30%), hsl(265 75% 45%))',
+    iconBorder: 'hsl(265 60% 50%)',
+    label: 'ПОКУПКА КРИПТЫ',
+    title: 'Купи крипты на $10',
+    instructions: [
+      'Открой Simple Wallet',
+      'Зайди в раздел Buy',
+      'Купи любую криптовалюту на сумму $10',
+      'Если на балансе нет долларов — сначала пополни баланс'
+    ],
+    note: 'Учитывается сумма покупки, а не текущая стоимость купленного.'
+  },
+  deposit: {
+    icon: '💰',
+    iconBg: 'linear-gradient(135deg, hsl(40 70% 28%), hsl(40 85% 45%))',
+    iconBorder: 'hsl(40 70% 50%)',
+    label: 'ПОПОЛНЕНИЕ БАЛАНСА',
+    title: 'Пополни баланс на $10',
+    instructions: [
+      'Открой Simple Wallet',
+      'Зайди в раздел Wallet → Deposit',
+      'Пополни баланс на $10',
+      'Можно с внешнего кошелька (USDC/USDT) или с биржи (Binance, Bybit и др.)'
+    ],
+    note: 'Внутренние переводы между своими счетами Simple не считаются.'
+  }
+};
+
+// Цикл типов: для дня N (N >= 3) → индекс (N-3) mod 3.
+var khloeTaskCycle = ['volume', 'buy', 'deposit'];
+
+function getKhloeTaskType(day) {
+  var idx = ((day - 3) % khloeTaskCycle.length + khloeTaskCycle.length) % khloeTaskCycle.length;
+  return khloeTaskCycle[idx];
+}
+
+// Открыть экран задания. С аргументом — ручной выбор (sidebar). Без — auto по текущему дню.
+function openKhloeTask(type) {
+  if (!type) {
+    var day = parseInt(localStorage.getItem('sw-khloe-current-day') || '3', 10);
+    if (day < 3) day = 3;
+    type = getKhloeTaskType(day);
+  }
+  applyKhloeTaskMode(type);
+  goToId('sKhloeTask');
+}
+
+// Применить content на task card по типу.
+function applyKhloeTaskMode(type) {
+  var cfg = khloeTaskTypes[type] || khloeTaskTypes.volume;
+  var card = document.getElementById('sKhloeTask-card');
+  if (!card) return;
+  card.setAttribute('data-task-type', type);
+
+  var iconBg = document.getElementById('sKhloeTask-icon-bg');
+  if (iconBg) {
+    iconBg.style.background = cfg.iconBg;
+    iconBg.style.borderColor = cfg.iconBorder;
+  }
+  var icon = document.getElementById('sKhloeTask-icon');
+  if (icon) icon.textContent = cfg.icon;
+
+  var label = document.getElementById('sKhloeTask-label');
+  if (label) label.textContent = cfg.label;
+
+  var title = document.getElementById('sKhloeTask-title');
+  if (title) {
+    // Подсветить $XX зелёным
+    title.innerHTML = cfg.title.replace(/\$(\d+)/g, '<span style="color:#10b981;">$$$1</span>');
+  }
+
+  var list = document.getElementById('sKhloeTask-list');
+  if (list) {
+    list.innerHTML = '';
+    cfg.instructions.forEach(function(line) {
+      var li = document.createElement('li');
+      li.textContent = line;
+      list.appendChild(li);
+    });
+  }
+
+  var note = document.getElementById('sKhloeTask-note');
+  if (note) note.textContent = cfg.note;
+
+  // Reset spinner UI на случай повторного захода
+  var btn = document.getElementById('sKhloeTask-check');
+  var spinner = document.getElementById('sKhloeTask-spinner');
+  if (btn) btn.style.display = '';
+  if (spinner) spinner.style.display = 'none';
+}
+
+// Проверка задания (мок 1.5s, всегда успех в прототипе).
+function checkKhloeTask() {
+  var btn = document.getElementById('sKhloeTask-check');
+  var spinner = document.getElementById('sKhloeTask-spinner');
+  if (!btn || !spinner) return;
+  btn.style.display = 'none';
+  spinner.style.display = 'flex';
+  setTimeout(function() {
+    var day = parseInt(localStorage.getItem('sw-khloe-current-day') || '3', 10);
+    if (day < 3) day = 3;
+    localStorage.setItem('sw-khloe-day-' + day + '-claimed', '1');
+    goToId('sKhloeRitualClaimed');
+  }, 1500);
+}
+
+// Завершение ритуала: +1 ритуал, на Home.
+function completeKhloeRitualClaim() {
+  var n = parseInt(localStorage.getItem('sw-rituals-done') || '0', 10) + 1;
+  localStorage.setItem('sw-rituals-done', String(n));
   goTo(12);
 }
 
