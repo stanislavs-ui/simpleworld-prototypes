@@ -1435,23 +1435,23 @@ tailwind.config = {
               </div>
               <!-- Day 2 — empty -->
               <div style="width: 34px; height: 34px; border-radius: 50%; background: hsl(240 5% 12%); border: 1.5px solid hsl(240 5% 20%); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <span class="font-label text-[13px] font-bold" style="color: hsl(0 0% 30%);">2</span>
+                <span class="font-label text-[13px] font-bold" style="color: #fff;">2</span>
               </div>
               <!-- Day 3 -->
               <div style="width: 34px; height: 34px; border-radius: 50%; background: hsl(240 5% 12%); border: 1.5px solid hsl(240 5% 20%); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <span class="font-label text-[13px] font-bold" style="color: hsl(0 0% 30%);">3</span>
+                <span class="font-label text-[13px] font-bold" style="color: #fff;">3</span>
               </div>
               <!-- Day 4 -->
               <div style="width: 34px; height: 34px; border-radius: 50%; background: hsl(240 5% 12%); border: 1.5px solid hsl(240 5% 20%); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <span class="font-label text-[13px] font-bold" style="color: hsl(0 0% 30%);">4</span>
+                <span class="font-label text-[13px] font-bold" style="color: #fff;">4</span>
               </div>
               <!-- Day 5 -->
               <div style="width: 34px; height: 34px; border-radius: 50%; background: hsl(240 5% 12%); border: 1.5px solid hsl(240 5% 20%); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <span class="font-label text-[13px] font-bold" style="color: hsl(0 0% 30%);">5</span>
+                <span class="font-label text-[13px] font-bold" style="color: #fff;">5</span>
               </div>
               <!-- Day 6 -->
               <div style="width: 34px; height: 34px; border-radius: 50%; background: hsl(240 5% 12%); border: 1.5px solid hsl(240 5% 20%); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <span class="font-label text-[13px] font-bold" style="color: hsl(0 0% 30%);">6</span>
+                <span class="font-label text-[13px] font-bold" style="color: #fff;">6</span>
               </div>
               <!-- Day 7 — key inside circle -->
               <div style="width: 34px; height: 34px; border-radius: 50%; background: hsl(240 5% 12%); border: 1.5px solid hsl(240 5% 20%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;">
@@ -1460,7 +1460,7 @@ tailwind.config = {
             </div>
 
             <!-- Status -->
-            <div class="text-[13px] font-label font-bold" data-i18n="s15_progress" style="color: #f2f2f2; text-align: center; margin-top: 16px;">1 из 7</div>
+            <div class="font-label font-extrabold" data-i18n="s15_progress" style="color: #f2f2f2; text-align: center; margin-top: 16px; font-size: 26px; letter-spacing: -0.5px;">1 из 7</div>
           </div>
 
           <!-- Disabled button -->
@@ -1468,42 +1468,50 @@ tailwind.config = {
 
           <!-- How it works -->
           <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px;">
-            <div class="text-[12px] font-bold" data-i18n="s15_how_title" style="color: #f2f2f2; margin-bottom: 10px;">Как работает ритуал</div>
-            <div class="text-[12px]" data-i18n="s15_how_p1" style="color: hsl(0 0% 50%); line-height: 1.7;">
+            <div class="text-[12px] font-extrabold" data-i18n="s15_how_title" style="color: #f2f2f2; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1.2px;">Как работает ритуал</div>
+            <div class="text-[12px]" data-i18n="s15_how_p1" style="color: #f2f2f2; line-height: 1.7; padding-left: 14px; position: relative;">
+              <span style="position: absolute; left: 0; color: #10b981;">—</span>
               Каждый день выполняй задание — получаешь один ритуал. Один день = один ритуал.
             </div>
-            <div class="text-[12px]" data-i18n="s15_how_p2" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
+            <div class="text-[12px]" data-i18n="s15_how_p2" style="color: #f2f2f2; line-height: 1.7; margin-top: 10px; padding-left: 14px; position: relative;">
+              <span style="position: absolute; left: 0; color: #10b981;">—</span>
               Собери 7 ритуалов — и ты сможешь забрать ключ.
             </div>
-            <div class="text-[12px]" data-i18n="s15_how_p3" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
+            <div class="text-[12px]" data-i18n="s15_how_p3" style="color: #f2f2f2; line-height: 1.7; margin-top: 10px; padding-left: 14px; position: relative;">
+              <span style="position: absolute; left: 0; color: #10b981;">—</span>
               Забрать ключ можно только в пятницу с 00:00 до 12:00 UTC. После этого окно закрывается до следующей пятницы.
             </div>
-            <div class="text-[12px]" data-i18n="s15_how_p4" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
+            <div class="text-[12px]" data-i18n="s15_how_p4" style="color: #f2f2f2; line-height: 1.7; margin-top: 10px; padding-left: 14px; position: relative;">
+              <span style="position: absolute; left: 0; color: #10b981;">—</span>
               Когда забираешь ключ — все 7 ритуалов сгорают, а ключ остаётся в инвентаре. Открой им сокровищницу до следующей пятницы.
             </div>
-            <div class="text-[12px]" data-i18n="s15_how_warn" style="color: #ef4444; line-height: 1.7; margin-top: 12px;">
+            <div class="text-[12px]" data-i18n="s15_how_warn" style="color: #ef4444; line-height: 1.7; margin-top: 14px; padding-left: 14px; position: relative;">
+              <span style="position: absolute; left: 0; color: #ef4444;">—</span>
               <span style="font-weight: 700;">ВАЖНО:</span> каждый день без задания — минус один ритуал. Поэтому выполняй задание каждый день, чтобы удерживать собранные ритуалы.
             </div>
           </div>
 
           <!-- Where to collect rituals -->
           <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px; margin-top: 10px;">
-            <div class="text-[12px] font-bold" data-i18n="s15_where_title" style="color: #f2f2f2; margin-bottom: 10px;">Где собрать ритуалы</div>
-            <div class="text-[12px]" data-i18n="s15_where_mira" style="color: hsl(0 0% 50%); line-height: 1.7;">
-              <span style="color: #f2f2f2; font-weight: 600;">У Миры</span> — пока она ведёт свой квест (первые дни в Simple World).
+            <div class="text-[12px] font-extrabold" data-i18n="s15_where_title" style="color: #f2f2f2; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1.2px;">Где собрать ритуалы</div>
+            <div class="text-[12px]" data-i18n="s15_where_mira" style="color: #f2f2f2; line-height: 1.7; padding-left: 14px; position: relative;">
+              <span style="position: absolute; left: 0; color: #10b981;">—</span>
+              <span style="font-weight: 700;">У Миры</span> — пока она ведёт свой квест (первые дни в Simple World).
             </div>
-            <div class="text-[12px]" data-i18n="s15_where_khloe" style="color: hsl(0 0% 50%); line-height: 1.7; margin-top: 8px;">
-              <span style="color: #f2f2f2; font-weight: 600;">У Хлои</span> — каждый день после выполнения её задания.
+            <div class="text-[12px]" data-i18n="s15_where_khloe" style="color: #f2f2f2; line-height: 1.7; margin-top: 10px; padding-left: 14px; position: relative;">
+              <span style="position: absolute; left: 0; color: #10b981;">—</span>
+              <span style="font-weight: 700;">У Хлои</span> — каждый день после выполнения её задания.
             </div>
-            <div class="text-[12px]" data-i18n="s15_where_note" style="color: hsl(0 0% 40%); line-height: 1.6; margin-top: 10px; font-style: italic;">
+            <div class="text-[12px]" data-i18n="s15_where_note" style="color: hsl(0 0% 60%); line-height: 1.6; margin-top: 12px; font-style: italic; padding-left: 14px;">
               Когда Мира заканчивает свой квест, ритуалы продолжает выдавать Хлоя — без перерыва.
             </div>
           </div>
 
           <!-- Launch bonus -->
           <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px; margin-top: 10px;">
-            <div class="text-[12px] font-bold" data-i18n="s15_bonus_title" style="color: #f2f2f2; margin-bottom: 10px;">Бонусы</div>
-            <div class="text-[12px]" data-i18n="s15_bonus_desc" style="color: hsl(0 0% 50%); line-height: 1.7;">
+            <div class="text-[12px] font-extrabold" data-i18n="s15_bonus_title" style="color: #f2f2f2; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1.2px;">Бонусы</div>
+            <div class="text-[12px]" data-i18n="s15_bonus_desc" style="color: #f2f2f2; line-height: 1.7; padding-left: 14px; position: relative;">
+              <span style="position: absolute; left: 0; color: #10b981;">—</span>
               Следите за нашими обновлениями. Мы дарим вам дополнительные ритуалы за выполнение заданий и условий в наших социальных сетях, первым таким случаем стал запуск проекта 20 апреля, в этот день все новые жители получили 2 бонусных ритуала.
             </div>
           </div>
@@ -4734,6 +4742,7 @@ function resetAllQuests() {
   localStorage.removeItem('sw-rituals-done');
   // Очистка флагов выполнения задания по дням 3..50 (с запасом)
   for (var __i = 3; __i <= 50; __i++) localStorage.removeItem('sw-khloe-day-' + __i + '-claimed');
+  localStorage.removeItem('sw-ritual-last-checkin-date');
   if (typeof updateMapState === 'function') updateMapState();
   currentAlexDay = 0;
   updateMiraRoadmap();
@@ -6282,9 +6291,19 @@ function advanceKhloeNextDay() {
 }
 
 // ----- Хлоя: подарок +1 ритуал в честь знакомства (day 2) -----
+// Тап «Спасибо» = grant ритуала + check-in за сегодня. Если check-in на сегодня
+// уже был (юзер выполнил другой ритуал на Home раньше) — не дублируем.
+// BE-map: RitualService.CheckInAsync (CurrentDay++ + LastCheckInDate=todayUtc),
+// единый механизм с обычным daily check-in. Гарантирует, что ночной
+// DailyPenaltyJob не зачтёт сегодняшний день как пропущенный.
 function completeKhloeDay2() {
-  var n = parseInt(localStorage.getItem('sw-rituals-done') || '0', 10) + 1;
-  localStorage.setItem('sw-rituals-done', String(n));
+  var today = new Date().toISOString().slice(0, 10);
+  var lastCheckIn = localStorage.getItem('sw-ritual-last-checkin-date');
+  if (lastCheckIn !== today) {
+    var n = parseInt(localStorage.getItem('sw-rituals-done') || '0', 10) + 1;
+    localStorage.setItem('sw-rituals-done', String(n));
+    localStorage.setItem('sw-ritual-last-checkin-date', today);
+  }
   localStorage.setItem('sw-khloe-day2-claimed', '1');
   goTo(12);
 }
