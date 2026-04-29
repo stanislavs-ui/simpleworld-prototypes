@@ -1532,44 +1532,107 @@ tailwind.config = {
             <span class="text-[15px] font-bold" data-i18n="s16_title" style="color: #f2f2f2;">Сокровищница</span>
           </div>
 
-          <!-- Countdown (unified — всегда до пятницы 12 UTC) -->
-          <div id="s16-countdown" style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 20px; text-align: center; margin-bottom: 12px;">
-            <div id="s16-countdown-label" class="font-label text-[10px] font-extrabold tracking-[1.5px] uppercase" data-i18n="s16_countdown_label" style="color: hsl(0 0% 50%);">До открытия сокровищницы</div>
-            <div id="s16-countdown-value" class="font-label text-[26px] font-extrabold" data-i18n="s16_countdown_value" style="color: #f2f2f2; margin-top: 10px; letter-spacing: -0.5px;">4 дня</div>
-            <div id="s16-countdown-time" class="text-[11px]" data-i18n="s16_countdown_time" style="color: hsl(0 0% 50%); margin-top: 4px;">Пятница, 12 UTC</div>
+          <!-- HERO: chest illustration + amount + countdown + CTA -->
+          <div style="position: relative; background: linear-gradient(180deg, hsl(240 5% 9%) 0%, hsl(240 5% 6%) 100%); border: 1px solid hsl(43 70% 25%); border-radius: 18px; overflow: hidden; margin-bottom: 14px; box-shadow: 0 0 32px rgba(234,179,8,0.12);">
+            <!-- Hero illustration -->
+            <div style="position: relative; height: 140px; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at 50% 60%, hsl(43 70% 14%) 0%, hsl(240 5% 6%) 75%);">
+              <div style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 55%, rgba(234,179,8,0.20) 0%, transparent 65%); filter: blur(8px);"></div>
+              <svg width="110" height="110" viewBox="0 0 110 110" fill="none" style="position: relative; filter: drop-shadow(0 4px 16px rgba(234,179,8,0.45));">
+                <defs>
+                  <linearGradient id="chestLid" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#fde047"/>
+                    <stop offset="40%" stop-color="#facc15"/>
+                    <stop offset="100%" stop-color="#a16207"/>
+                  </linearGradient>
+                  <linearGradient id="chestBody" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#a16207"/>
+                    <stop offset="100%" stop-color="#451a03"/>
+                  </linearGradient>
+                  <radialGradient id="chestCoinGlow" cx="0.5" cy="0.5" r="0.6">
+                    <stop offset="0%" stop-color="#fef9c3" stop-opacity="0.95"/>
+                    <stop offset="60%" stop-color="#fbbf24" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#a16207" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+                <!-- Body -->
+                <rect x="14" y="48" width="82" height="48" rx="4" fill="url(#chestBody)" stroke="#451a03" stroke-width="1"/>
+                <rect x="14" y="48" width="82" height="6" fill="#7c3a00"/>
+                <!-- Coin glow inside chest top -->
+                <ellipse cx="55" cy="56" rx="36" ry="10" fill="url(#chestCoinGlow)"/>
+                <!-- Lid -->
+                <path d="M14 50 Q14 18 55 18 Q96 18 96 50 L96 54 L14 54 Z" fill="url(#chestLid)" stroke="#7c3a00" stroke-width="1"/>
+                <!-- Lid bands -->
+                <line x1="14" y1="32" x2="96" y2="32" stroke="#7c3a00" stroke-width="1" opacity="0.5"/>
+                <!-- Lock plate -->
+                <rect x="48" y="42" width="14" height="20" rx="2" fill="#7c3a00" stroke="#fef3c7" stroke-width="0.6"/>
+                <circle cx="55" cy="50" r="2.4" fill="#fef3c7"/>
+                <line x1="55" y1="52" x2="55" y2="58" stroke="#fef3c7" stroke-width="1.4" stroke-linecap="round"/>
+                <!-- Body bands -->
+                <rect x="14" y="76" width="82" height="3" fill="#451a03" opacity="0.7"/>
+                <!-- Hinges -->
+                <rect x="20" y="46" width="6" height="10" rx="1" fill="#fde047" opacity="0.6"/>
+                <rect x="84" y="46" width="6" height="10" rx="1" fill="#fde047" opacity="0.6"/>
+                <!-- Sparkles -->
+                <g opacity="0.85">
+                  <path d="M22 10 L24 16 L30 18 L24 20 L22 26 L20 20 L14 18 L20 16 Z" fill="#fde047"/>
+                  <path d="M88 8 L89 12 L93 13 L89 14 L88 18 L87 14 L83 13 L87 12 Z" fill="#fde047" opacity="0.7"/>
+                </g>
+              </svg>
+              <!-- Bottom fade -->
+              <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 30px; background: linear-gradient(to top, hsl(240 5% 9%), transparent);"></div>
+            </div>
+
+            <!-- Amount -->
+            <div style="padding: 6px 24px 22px; text-align: center;">
+              <div class="font-label text-[32px] font-extrabold" style="color: #f2f2f2; letter-spacing: -0.5px; line-height: 1.1;">100–<span style="color: #fbbf24;">1000</span> USDC</div>
+
+              <!-- Inline countdown row -->
+              <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 14px; padding: 10px 14px; background: hsl(240 5% 5%); border: 1px solid hsl(240 5% 14%); border-radius: 999px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span class="font-label text-[10px] font-extrabold tracking-[1.5px] uppercase" style="color: hsl(0 0% 60%);">До открытия</span>
+                </div>
+                <span id="s16-countdown-value" class="font-label text-[14px] font-extrabold" style="color: #f2f2f2;">4 дня</span>
+                <span style="width: 1px; height: 14px; background: hsl(240 5% 18%);"></span>
+                <span id="s16-countdown-time" class="text-[11px]" style="color: hsl(0 0% 60%);">Пт, 12 UTC</span>
+                <!-- Hidden legacy label for backward-compat -->
+                <span id="s16-countdown-label" style="display: none;"></span>
+              </div>
+
+              <button id="s16-open-btn" class="btn-cta" data-i18n="s16_btn_open" disabled onclick="try{openTreasure()}catch(e){alert(e.message)}" style="opacity: 0.4; cursor: not-allowed; margin-top: 16px; text-align: center;">Открыть ключом</button>
+              <div id="s16-no-key" class="text-[11px]" data-i18n="s16_no_key" style="color: hsl(0 0% 60%); margin-top: 10px; line-height: 1.5;">У тебя пока нет ключа. Собери 7 ритуалов и забери ключ в пятницу с 00:00 до 12:00 UTC.</div>
+              <div id="s16-has-key" class="text-[12px]" data-i18n="s16_has_key" style="display: none; color: #fbbf24; margin-top: 14px; font-weight: 700;">🗝 У тебя есть ключ. Открой сокровищницу.</div>
+              <div id="s16-window-closed" class="text-[11px]" data-i18n="s16_window_closed" style="display: none; color: hsl(38 80% 60%); margin-top: 10px; line-height: 1.5;">Окно ключа закрыто. Следующее окно — в пятницу с 00:00 до 12:00 UTC.</div>
+              <div id="s16-window-open" class="text-[12px]" data-i18n="s16_window_open" style="display: none; color: hsl(142 70% 55%); margin-top: 14px; font-weight: 700;">⚡ Окно ключа открыто. Забери ключ до 12:00 UTC.</div>
+            </div>
           </div>
 
-          <!-- Amount + button -->
-          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 24px; text-align: center; margin-bottom: 12px;">
-            <div class="font-label text-[28px] font-extrabold" style="color: #f2f2f2;">100–1000 USDC</div>
-            <div class="text-[12px]" data-i18n="s16_amount_sub" style="color: #f2f2f2; margin-top: 8px; line-height: 1.6;">Сумма пула зависит от того, сколько активных жителей было в Simple World на этой неделе.</div>
-            <button id="s16-open-btn" class="btn-cta" data-i18n="s16_btn_open" disabled onclick="try{openTreasure()}catch(e){alert(e.message)}" style="opacity: 0.4; cursor: not-allowed; margin-top: 16px; text-align: center;">Открыть ключом</button>
-            <div id="s16-no-key" class="text-[11px]" data-i18n="s16_no_key" style="color: hsl(0 0% 60%); margin-top: 10px;">У тебя пока нет ключа. Собери 7 ритуалов и забери ключ в пятницу с 00:00 до 12:00 UTC.</div>
-            <div id="s16-has-key" class="text-[11px]" data-i18n="s16_has_key" style="display: none; color: #f2f2f2; margin-top: 16px; font-weight: 700;">У тебя есть ключ. Открой сокровищницу.</div>
-            <div id="s16-window-closed" class="text-[11px]" data-i18n="s16_window_closed" style="display: none; color: hsl(38 80% 60%); margin-top: 10px;">Окно ключа закрыто. Следующее окно — в пятницу с 00:00 до 12:00 UTC.</div>
-            <div id="s16-window-open" class="text-[11px]" data-i18n="s16_window_open" style="display: none; color: hsl(142 70% 55%); margin-top: 10px; font-weight: 700;">Окно ключа открыто. Забери ключ до 12:00 UTC.</div>
-          </div>
-
-          <!-- How it works -->
-          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px;">
-            <div class="text-[12px] font-extrabold" data-i18n="s16_inside_title" style="color: #f2f2f2; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1.2px;">Что внутри</div>
+          <!-- ЧТО ВНУТРИ — gold accent -->
+          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-left: 3px solid #fbbf24; border-radius: 12px; padding: 16px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+              <div class="text-[12px] font-extrabold" data-i18n="s16_inside_title" style="color: #f2f2f2; text-transform: uppercase; letter-spacing: 1.2px;">Что внутри</div>
+            </div>
             <div class="text-[12px]" data-i18n="s16_inside_p1" style="color: #f2f2f2; line-height: 1.7; padding-left: 14px; position: relative;">
-              <span style="position: absolute; left: 0; color: #10b981;">—</span>
+              <span style="position: absolute; left: 0; color: #fbbf24;">—</span>
               Каждую неделю команда Simple World кладёт в сокровищницу от 100 до 1000 USDC.
             </div>
             <div class="text-[12px]" data-i18n="s16_inside_p2" style="color: #f2f2f2; line-height: 1.7; margin-top: 10px; padding-left: 14px; position: relative;">
-              <span style="position: absolute; left: 0; color: #10b981;">—</span>
+              <span style="position: absolute; left: 0; color: #fbbf24;">—</span>
               Сумма пула зависит от того, сколько активных жителей было в Simple World на этой неделе.
             </div>
             <div class="text-[12px]" data-i18n="s16_inside_p3" style="color: #f2f2f2; line-height: 1.7; margin-top: 10px; padding-left: 14px; position: relative;">
-              <span style="position: absolute; left: 0; color: #10b981;">—</span>
+              <span style="position: absolute; left: 0; color: #fbbf24;">—</span>
               Открой сокровищницу ключом — и получи свою часть пула.
             </div>
           </div>
 
-          <!-- How to get key -->
-          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px; padding: 16px; margin-top: 10px;">
-            <div class="text-[12px] font-extrabold" data-i18n="s16_howkey_title" style="color: #f2f2f2; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1.2px;">Как получить ключ</div>
+          <!-- КАК ПОЛУЧИТЬ КЛЮЧ — green accent -->
+          <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-left: 3px solid #10b981; border-radius: 12px; padding: 16px; margin-top: 12px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="m10.85 12.15 8.4-8.4"/><path d="m18 5 3 3"/><path d="m15 8 3 3"/></svg>
+              <div class="text-[12px] font-extrabold" data-i18n="s16_howkey_title" style="color: #f2f2f2; text-transform: uppercase; letter-spacing: 1.2px;">Как получить ключ</div>
+            </div>
             <div class="text-[12px]" data-i18n="s16_howkey_p1" style="color: #f2f2f2; line-height: 1.7; padding-left: 14px; position: relative;">
               <span style="position: absolute; left: 0; color: #10b981;">—</span>
               Собери 7 ритуалов — по одному за каждый день, когда выполнишь задание у Миры или Хлои.
