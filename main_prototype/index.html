@@ -637,6 +637,9 @@ tailwind.config = {
   <div class="sidebar-item" onclick="openKhloeTask('deposit')">86. Хлоя задание: Пополнение</div>
   <div class="sidebar-item" onclick="goToId('sKhloeRitualClaimed')">87. Хлоя: ритуал засчитан</div>
   <div class="sidebar-item" onclick="goToId('sKhloeTaskDone')">88. Хлоя: уже сделано сегодня</div>
+  <div class="sidebar-section" style="font-size: 10px;">Сокровищница — новая логика</div>
+  <div class="sidebar-item" onclick="goToId('sRitualBurned')">89. Ритуал сгорел (-1 за пропуск)</div>
+  <div class="sidebar-item" onclick="goToId('sKeyExpired')">90. Ключ сгорел (не открыл сундук)</div>
   <div class="sidebar-section">Технические</div>
   <div class="sidebar-item" onclick="goToId('sT1')">T1. Maintenance</div>
   <div class="sidebar-item" onclick="goToId('sT2')">T2. Blocked</div>
@@ -4437,6 +4440,103 @@ tailwind.config = {
         </div>
       </div>
 
+      <!-- ==================== SCREEN sRitualBurned: Ритуал сгорел (после пропуска дня) ==================== -->
+      <div class="screen" id="sRitualBurned" data-name="Ритуал сгорел" style="justify-content: center; align-items: center; padding-top: 8px;">
+        <div class="flex flex-col w-full" style="align-items: center; text-align: center;">
+
+          <!-- Visual: burning ritual icon -->
+          <div style="position: relative; width: 140px; height: 140px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
+            <div style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 55%, rgba(239,68,68,0.28) 0%, transparent 65%); filter: blur(12px);"></div>
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none" style="position: relative;">
+              <defs>
+                <radialGradient id="ritualBurnedGrad" cx="0.5" cy="0.5" r="0.5">
+                  <stop offset="0%" stop-color="#7f1d1d" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#1f0a0a" stop-opacity="0.3"/>
+                </radialGradient>
+              </defs>
+              <circle cx="60" cy="60" r="46" fill="url(#ritualBurnedGrad)" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
+              <text x="60" y="72" text-anchor="middle" font-size="36" font-weight="800" font-family="Inter, system-ui, sans-serif" fill="#ef4444" opacity="0.85">−1</text>
+            </svg>
+          </div>
+
+          <!-- Title -->
+          <div class="text-[20px] font-bold" style="color: #f2f2f2; margin-bottom: 10px;">Ритуал сгорел</div>
+
+          <!-- Body -->
+          <div class="text-[13px]" style="color: hsl(0 0% 60%); line-height: 1.7; max-width: 280px; margin-bottom: 8px;">
+            Ты пропустил день без задания. Один ритуал сгорел.
+          </div>
+
+          <!-- Stack chip -->
+          <div style="margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(239,68,68,0.10); border: 1px solid rgba(239,68,68,0.28); border-radius: 999px;">
+            <span style="color: hsl(0 0% 70%); font-size: 11px; font-weight: 600;">Стек ритуалов:</span>
+            <span style="color: #ef4444; font-size: 13px; font-weight: 800;">6 / 7</span>
+          </div>
+
+          <!-- Note -->
+          <div class="text-[12px]" style="color: hsl(0 0% 45%); line-height: 1.6; max-width: 280px; margin-top: 24px; font-style: italic;">
+            Выполни задание сегодня — и стек начнёт восстанавливаться.
+          </div>
+
+          <!-- CTAs -->
+          <div class="w-full" style="margin-top: 28px; display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn-cta" onclick="goToId('sArena')" style="text-align: center;">К заданию у Хлои</button>
+            <button class="btn-reply" onclick="goTo(12)">На главную</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== SCREEN sKeyExpired: Ключ сгорел (не открыл сундук за неделю) ==================== -->
+      <div class="screen" id="sKeyExpired" data-name="Ключ сгорел" style="justify-content: center; align-items: center; padding-top: 8px;">
+        <div class="flex flex-col w-full" style="align-items: center; text-align: center;">
+
+          <!-- Visual: shattered/burned key -->
+          <div style="position: relative; width: 160px; height: 160px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
+            <div style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 55%, rgba(127,29,29,0.35) 0%, transparent 60%); filter: blur(16px);"></div>
+            <svg width="140" height="140" viewBox="0 0 140 140" fill="none" style="position: relative; opacity: 0.85;">
+              <defs>
+                <linearGradient id="keyBurnedGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#7f1d1d"/>
+                  <stop offset="50%" stop-color="#a16207"/>
+                  <stop offset="100%" stop-color="#451a03"/>
+                </linearGradient>
+              </defs>
+              <!-- Key bow (broken — gap on top) -->
+              <circle cx="50" cy="50" r="22" fill="none" stroke="url(#keyBurnedGrad)" stroke-width="6" stroke-dasharray="80 200"/>
+              <circle cx="50" cy="50" r="10" fill="#1f0a0a"/>
+              <!-- Key shaft (cracked) -->
+              <line x1="65" y1="62" x2="115" y2="112" stroke="url(#keyBurnedGrad)" stroke-width="6" stroke-linecap="round"/>
+              <!-- Crack mark -->
+              <path d="M85 82 L92 78 L88 87 L96 84" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.7"/>
+              <!-- Tooth -->
+              <line x1="100" y1="97" x2="108" y2="89" stroke="url(#keyBurnedGrad)" stroke-width="6" stroke-linecap="round"/>
+              <!-- Smoke wisps -->
+              <path d="M50 25 Q48 15 55 8" stroke="#525252" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+              <path d="M55 22 Q60 14 53 5" stroke="#525252" stroke-width="1.2" fill="none" opacity="0.3" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Title -->
+          <div class="text-[22px] font-bold" style="color: #f2f2f2; margin-bottom: 12px;">Ключ сгорел</div>
+
+          <!-- Body -->
+          <div class="text-[13px]" style="color: hsl(0 0% 60%); line-height: 1.7; max-width: 300px; margin-bottom: 16px;">
+            Ты не открыл сокровищницу за неделю — ключ сгорел.
+          </div>
+
+          <div class="text-[12px]" style="color: hsl(0 0% 50%); line-height: 1.7; max-width: 300px; padding: 14px 16px; background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px;">
+            Не переживай — собери 7 новых ритуалов и забери следующий ключ в пятницу с 00:00 до 12:00 UTC.
+          </div>
+
+          <!-- CTA -->
+          <div class="w-full" style="margin-top: 28px;">
+            <button class="btn-cta" onclick="resetKeyAfterExpired()" style="text-align: center;">Понятно</button>
+          </div>
+
+        </div>
+      </div>
+
     </div>
     <div class="phone-home"></div>
 
@@ -4534,8 +4634,8 @@ function goTo(n) {
         if (pPlay && pPlay.catch) pPlay.catch(function(){});
       } catch (e) {}
     }
-    // Trigger counter animation in sync with the reveal CSS (delay 3.0s)
-    setTimeout(function () { animateAmount(amtEl, TREASURE_AMOUNT, 1200); }, 3000);
+    // Trigger roulette-style reveal in sync with the chest opening (delay 3.0s)
+    setTimeout(function () { rouletteAmount(amtEl, TREASURE_AMOUNT, 2200); }, 3000);
   }
 
   // Хранилище: if we just claimed treasure, refresh balance + history to show the credit
@@ -4758,6 +4858,41 @@ function animateAmount(el, target, duration) {
     var val = target * eased;
     el.textContent = val.toFixed(2) + ' USDC';
     if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// Roulette-style reveal: рандомные значения с замедлением, потом settle на target.
+// Имитирует «крутящийся барабан», подходит для динамической награды $100–$1000.
+function rouletteAmount(el, target, totalDuration) {
+  if (!el) return;
+  totalDuration = totalDuration || 2200;
+  var rollPhase = totalDuration * 0.65;
+  var settlePhase = totalDuration - rollPhase;
+  var start = performance.now();
+  var lastUpdate = 0;
+  var updateInterval = 40;
+
+  function step(now) {
+    var elapsed = now - start;
+    if (elapsed < rollPhase) {
+      if (now - lastUpdate >= updateInterval) {
+        var maxV = Math.max(target * 1.6, target + 5);
+        var minV = Math.max(1, target * 0.3);
+        var rolled = minV + Math.random() * (maxV - minV);
+        el.textContent = rolled.toFixed(2) + ' USDC';
+        lastUpdate = now;
+        var rollProgress = elapsed / rollPhase;
+        updateInterval = 40 + rollProgress * 100;
+      }
+      requestAnimationFrame(step);
+    } else {
+      var settleT = Math.min(1, (elapsed - rollPhase) / settlePhase);
+      var bounce = Math.sin(settleT * Math.PI * 2) * (1 - settleT) * target * 0.04;
+      el.textContent = (target + bounce).toFixed(2) + ' USDC';
+      if (settleT < 1) requestAnimationFrame(step);
+      else el.textContent = target.toFixed(2) + ' USDC';
+    }
   }
   requestAnimationFrame(step);
 }
@@ -6316,6 +6451,15 @@ function toggleKhloeTaskFailMock() {
     localStorage.setItem('sw-khloe-task-fail-mock', '1');
     alert('Имитация "не выполнено" ВКЛ. Следующее «Проверить» = inline-сообщение про задержку.');
   }
+}
+
+// После экрана "Ключ сгорел" — сбрасываем ключ и режим, возвращаем на главную
+function resetKeyAfterExpired() {
+  try {
+    localStorage.removeItem('sw-has-key');
+    localStorage.removeItem('sw-treasure-mode');
+  } catch (e) {}
+  goTo(12);
 }
 
 // Демо: переключение состояния Сокровищницы (s16)
