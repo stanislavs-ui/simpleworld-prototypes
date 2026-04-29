@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Сокровищница: новая логика ключа и ритуалов</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface-2: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e5e5e5;
+    --text-mute: #a3a3a3;
+    --green: #22c55e;
+    --green-dim: #16a34a;
+    --red: #ef4444;
+    --orange: #f97316;
+    --yellow: #eab308;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    line-height: 1.6;
+    padding: 48px 24px;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .meta-bar {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 32px;
+    font-size: 13px;
+    color: var(--text-mute);
+  }
+  .meta-bar strong { color: var(--text); }
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .pill-status { background: rgba(234,179,8,0.15); color: var(--yellow); border: 1px solid rgba(234,179,8,0.3); }
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 48px 0 16px;
+    color: #fff;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 28px 0 10px;
+    color: var(--green);
+  }
+  p { margin: 12px 0; }
+  ul, ol { padding-left: 22px; }
+  li { margin: 6px 0; }
+  strong { color: #fff; }
+  code {
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.92em;
+    color: var(--green);
+    font-family: "SF Mono", Menlo, Monaco, monospace;
+  }
+  .callout {
+    background: var(--surface);
+    border-left: 3px solid var(--red);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+  }
+  .callout.green { border-left-color: var(--green); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: var(--surface);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface-2);
+    font-weight: 600;
+    color: var(--text);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-mute);
+  }
+  tr:last-child td { border-bottom: none; }
+  td:first-child, th:first-child { padding-left: 18px; }
+  td:last-child, th:last-child { padding-right: 18px; }
+  .num { font-variant-numeric: tabular-nums; color: var(--text-mute); width: 36px; }
+  .day { font-weight: 600; color: var(--blue); }
+  .green-text { color: var(--green); font-weight: 600; }
+  .red-text { color: var(--red); font-weight: 600; }
+  .yellow-text { color: var(--yellow); font-weight: 600; }
+  .footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-mute);
+    text-align: center;
+  }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>🗝️ Сокровищница: новая логика ключа и ритуалов</h1>
+
+  <div class="meta-bar">
+    <div><strong>Дата:</strong> 2026-04-29</div>
+    <div><strong>Автор:</strong> Стас + команда SW</div>
+    <div><span class="pill pill-status">На согласование с бэком</span></div>
+  </div>
+
+  <h2>Зачем меняем</h2>
+  <div class="callout">
+    <strong>Проблема сейчас:</strong> юзеры собирают 7 ритуалов, не успевают забрать ключ в пятницу до 12 UTC — и стек 7 ритуалов «висит» неделями, потому что не сгорает. Юзер ничего не делает, ритуалы остаются, мотивации выполнять задания нет.
+  </div>
+  <div class="callout green">
+    <strong>Новая логика:</strong> ритуалы — это «слоты», которые надо <strong>удерживать активностью</strong>. Пропустил день — теряешь слот.
+  </div>
+
+  <h2>Правила</h2>
+
+  <h3>1. Стек ритуалов — кэп 7</h3>
+  <ul>
+    <li>Максимум <strong>7 ритуалов</strong> в стеке. Выше не растёт.</li>
+    <li>Выполнил задание при стеке 7 → ритуал «зачтён», но в стек не идёт (защита от decay в этот день, см. п.4).</li>
+  </ul>
+
+  <h3>2. Окно забора ключа — пятница 00:00–11:59 UTC</h3>
+  <ul>
+    <li>Юзер с 7 ритуалов может забрать ключ <strong>только в это окно</strong>.</li>
+    <li>При заборе ключа: <strong>все 7 ритуалов сгорают сразу</strong>, ключ кладётся в инвентарь.</li>
+    <li>Ключ лежит в инвентаре до открытия сундука.</li>
+  </ul>
+
+  <h3>3. Открытие сундука — пятница 12:00 UTC → следующая пятница 11:59 UTC</h3>
+  <ul>
+    <li>С ключом в инвентаре можно открыть сундук <strong>в любой момент</strong> этого окна (неделя).</li>
+    <li>Если не открыл до следующей пт 11:59 UTC — ключ <strong>сгорает</strong> <em>(open question, см. п.7)</em>.</li>
+  </ul>
+
+  <h3>4. Decay стека (если ключ не забрал)</h3>
+  <p>Если юзер <strong>не забрал ключ</strong> в пт 00–11 UTC (или не успел собрать 7):</p>
+  <ul>
+    <li>Стек <strong>остаётся как есть</strong> (например, 7 или 5).</li>
+    <li>За каждый день <strong>без</strong> выполненного задания → <span class="red-text">−1 ритуал</span> в стеке.</li>
+    <li>За каждый день <strong>с</strong> выполненным заданием → стек <span class="green-text">растёт до 7</span> или <strong>держится на 7</strong>.</li>
+  </ul>
+
+  <h3>5. Сброс таймера decay</h3>
+  <ul>
+    <li>Decay считается <strong>по календарным дням UTC</strong> (00:00–23:59).</li>
+    <li>Если задание выполнено в этот день → день засчитан, decay не происходит.</li>
+    <li>Если задание НЕ выполнено в течение дня → в 00:00 UTC следующего дня <span class="red-text">−1 ритуал</span>.</li>
+  </ul>
+
+  <h3>6. Cap при росте стека</h3>
+  <ul>
+    <li>Стек растёт от 0 до 7 по +1 за выполненное задание (1 в день).</li>
+    <li>При 7/7 выполненное задание = «защита от decay», но не +1.</li>
+  </ul>
+
+  <h2>Примеры</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>День</th>
+        <th>Действие</th>
+        <th>Стек до</th>
+        <th>Стек после</th>
+        <th>Комментарий</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="day">Пн</td><td>Выполнил task</td><td>0</td><td class="green-text">1</td><td>Старт</td></tr>
+      <tr><td class="day">Вт–Чт</td><td>Выполнял каждый день</td><td>1</td><td class="green-text">4</td><td>+1/день</td></tr>
+      <tr><td class="day">Пт 09:00 UTC</td><td>Стек 6, не успел до окна</td><td>6</td><td>6</td><td>Окно закрыто, ключа нет</td></tr>
+      <tr><td class="day">Сб</td><td>Выполнил task</td><td>6</td><td class="green-text">7</td><td>Догнал</td></tr>
+      <tr><td class="day">Вс</td><td>Пропустил</td><td>7</td><td class="red-text">6</td><td>Decay −1 (00 UTC пн)</td></tr>
+      <tr><td class="day">Пн</td><td>Выполнил</td><td>6</td><td class="green-text">7</td><td>Восстановил</td></tr>
+      <tr><td class="day">…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+      <tr><td class="day">Пт 05:00 UTC</td><td>Стек 7, забрал ключ</td><td>7</td><td class="yellow-text">0</td><td>Все ритуалы сгорели, ключ в инвентаре 🗝️</td></tr>
+      <tr><td class="day">Пт–Чт</td><td>Не делал task</td><td>0</td><td>0</td><td>Нечему сгорать (стек уже 0)</td></tr>
+      <tr><td class="day">Пт 14:00 UTC</td><td>Открыл сундук</td><td>—</td><td>—</td><td>🎁 Получил награду</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Edge cases / открытые вопросы для бэка</h2>
+  <table>
+    <thead>
+      <tr>
+        <th class="num">#</th>
+        <th>Вопрос</th>
+        <th>Предложенный ответ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="num">1</td>
+        <td>Что если юзер забрал ключ в пт 10:00 UTC, но не открыл сундук до след. пт 11:59 UTC?</td>
+        <td><strong class="red-text">Ключ сгорает.</strong> Юзер начинает с 0, заново копит 7. <em>(на согласование)</em></td>
+      </tr>
+      <tr>
+        <td class="num">2</td>
+        <td>Decay считается по UTC или по локальной TZ юзера?</td>
+        <td><strong class="green-text">UTC</strong> (как и окно ключа).</td>
+      </tr>
+      <tr>
+        <td class="num">3</td>
+        <td>Что если юзер выполнил task в 23:55 UTC, а в 00:01 UTC уже нового дня — это «сегодня» или «завтра»?</td>
+        <td><strong>По UTC времени выполнения</strong>. Пограничные случаи решает timestamp в БД.</td>
+      </tr>
+      <tr>
+        <td class="num">4</td>
+        <td>Что показывать юзеру при стеке 7/7 если он сделал task?</td>
+        <td>UI: «Ритуал засчитан. Стек полный — 7 из 7.» (Лира утвердит финальный текст)</td>
+      </tr>
+      <tr>
+        <td class="num">5</td>
+        <td>Push-нотификации?</td>
+        <td><strong class="green-text">Нужны:</strong> чт 18:00 UTC «завтра окно ключа», пт 08:00 UTC «3 часа до закрытия окна».</td>
+      </tr>
+      <tr>
+        <td class="num">6</td>
+        <td>Что если юзер забрал ключ, но забыл открыть сундук, и в пятницу окно нового ключа открылось — может ли он держать <strong>2 ключа</strong>?</td>
+        <td><strong class="red-text">Нет.</strong> Один ключ в инвентаре. Если есть старый ключ → не предлагаем забирать новый, пока не использует старый. <em>(на согласование)</em></td>
+      </tr>
+      <tr>
+        <td class="num">7</td>
+        <td>История ритуалов / ключей — нужно ли логировать каждый decay?</td>
+        <td><strong class="green-text">Да</strong>, для аудита и UX «История» (если будет такой раздел).</td>
+      </tr>
+      <tr>
+        <td class="num">8</td>
+        <td>Что если бэк лежит в момент окна ключа?</td>
+        <td>Окно <strong>продлеваем</strong> на время даунтайма (manual, через админку).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Что нужно от Антона</h2>
+  <ol>
+    <li><strong>Подтвердить логику</strong> или предложить корректировки (особенно по п.1, п.6).</li>
+    <li><strong>Оценить срок</strong> реализации:
+      <ul>
+        <li>Backend: cron на decay 00:00 UTC, валидация окна ключа, состояние ключа в инвентаре.</li>
+        <li>API: <code>GET /treasure/state</code> (стек, ключ, окно), <code>POST /treasure/claim-key</code>, <code>POST /treasure/open</code>.</li>
+      </ul>
+    </li>
+    <li><strong>Список миграций</strong>, если меняется схема (новые поля у user: <code>key_inventory</code>, <code>key_claimed_at</code>, <code>last_task_completed_date</code>).</li>
+  </ol>
+
+  <h2>Что меняется в прототипе</h2>
+  <p>После согласования с Антоном — Кай добавит:</p>
+  <ul>
+    <li>Новые экраны: «Окно ключа открыто» (пт 00–11 UTC), «Окно закрыто, ждём следующую пятницу», «Стек тает» (визуал decay).</li>
+    <li>Demo-toggles в sidebar: имитация дня недели, имитация UTC-времени, скип на конкретное состояние стека.</li>
+  </ul>
+
+  <div class="footer">
+    Simple World · команда SW · документ для согласования с Антоном
+  </div>
+
+</div>
+</body>
+</html>
