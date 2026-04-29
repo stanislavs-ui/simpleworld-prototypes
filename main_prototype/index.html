@@ -4260,52 +4260,59 @@ tailwind.config = {
             </div>
           </div>
 
-          <!-- Task Card — большой блок с заданием -->
+          <!-- Task Card — hero-illustration variant (29.04 v2) -->
           <div id="sKhloeTask-card-anim" style="margin-top: 16px; opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease;">
-            <div id="sKhloeTask-card" data-task-type="volume" style="background: hsl(240 5% 11%); border: 1px solid hsl(142 35% 22%); border-radius: 16px; padding: 20px 18px; box-shadow: 0 0 24px rgba(16,185,129,0.15);">
-              <!-- Header: иконка + label -->
-              <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
-                <div id="sKhloeTask-icon-bg" style="width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, hsl(160 70% 25%), hsl(160 80% 35%)); border: 1px solid hsl(160 70% 40%); flex-shrink: 0;">
-                  <span id="sKhloeTask-icon" style="font-size: 28px; line-height: 1;">📊</span>
-                </div>
-                <div style="flex: 1;">
-                  <div id="sKhloeTask-label" style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: hsl(0 0% 55%); margin-bottom: 4px;">ОБЪЁМ ТОРГОВ</div>
-                  <div id="sKhloeTask-title" style="font-size: 20px; font-weight: 700; color: #f2f2f2; line-height: 1.25;">Сделай оборот на <span style="color:#10b981;">$20</span></div>
-                </div>
+            <div id="sKhloeTask-card" data-task-type="volume" style="background: hsl(240 5% 11%); border: 1px solid hsl(142 35% 22%); border-radius: 18px; overflow: hidden; box-shadow: 0 0 32px rgba(16,185,129,0.18);">
+
+              <!-- Hero zone: full-width SVG placeholder, will be replaced with fal.ai illustration -->
+              <div id="sKhloeTask-hero" style="position: relative; height: 150px; background: radial-gradient(ellipse at 50% 60%, hsl(160 70% 18%) 0%, hsl(240 5% 8%) 75%); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <div id="sKhloeTask-hero-glow" style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 55%, rgba(16,185,129,0.22) 0%, transparent 65%); pointer-events: none;"></div>
+                <div id="sKhloeTask-hero-svg" style="position: relative; z-index: 1; filter: drop-shadow(0 0 16px rgba(16,185,129,0.5));"></div>
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 48px; background: linear-gradient(to bottom, transparent, hsl(240 5% 11%)); pointer-events: none;"></div>
               </div>
 
-              <!-- Divider + section title -->
-              <div style="display: flex; align-items: center; gap: 10px; margin: 18px 0 12px;">
-                <div style="flex: 1; height: 1px; background: hsl(240 5% 18%);"></div>
-                <span style="font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: hsl(0 0% 45%);">Как это сделать</span>
-                <div style="flex: 1; height: 1px; background: hsl(240 5% 18%);"></div>
+              <!-- Body -->
+              <div style="padding: 6px 20px 18px;">
+                <!-- Hero title block: subtitle + big amount -->
+                <div style="text-align: center; margin-bottom: 22px;">
+                  <div id="sKhloeTask-subtitle" style="font-size: 14px; color: hsl(0 0% 60%); margin-bottom: 6px; letter-spacing: 0.2px;">Объём торгов за день</div>
+                  <div id="sKhloeTask-amount" style="font-size: 38px; font-weight: 800; line-height: 1; letter-spacing: -0.5px;"><span style="color:#10b981;">$20</span></div>
+                </div>
+
+                <!-- 3 numbered steps -->
+                <ol id="sKhloeTask-steps" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;"></ol>
+
+                <!-- Expandable note -->
+                <details id="sKhloeTask-note-wrap" style="margin-top: 14px;">
+                  <summary style="cursor: pointer; font-size: 12px; color: hsl(160 70% 50%); user-select: none; list-style: none; display: inline-flex; align-items: center; gap: 4px;">
+                    <span>Подробнее</span>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </summary>
+                  <div id="sKhloeTask-note" style="font-size: 12px; color: hsl(0 0% 60%); line-height: 1.55; margin-top: 10px; padding: 10px 12px; background: hsl(240 5% 8%); border-radius: 8px;">
+                    Считается оборот в обе стороны (купил → продал = двойной оборот).
+                  </div>
+                </details>
               </div>
 
-              <!-- Instructions list -->
-              <ul id="sKhloeTask-list" style="list-style: none; padding: 0; margin: 0 0 14px;">
-                <li style="position: relative; padding-left: 18px; font-size: 14px; color: hsl(0 0% 80%); line-height: 1.6; margin-bottom: 6px;"><span style="position: absolute; left: 0; top: 0; color: #10b981;">•</span>Открой Simple Wallet</li>
-              </ul>
-
-              <!-- Note (мелкий уточняющий текст) -->
-              <div id="sKhloeTask-note" style="font-size: 12px; color: hsl(0 0% 50%); line-height: 1.5; padding: 10px 12px; background: hsl(240 5% 8%); border-radius: 8px; border-left: 2px solid hsl(142 35% 30%);">
-                Считается оборот в обе стороны (купил → продал = двойной оборот).
+              <!-- CTA inside card -->
+              <div style="padding: 0 20px 20px; display: flex; flex-direction: column; gap: 8px;">
+                <a class="btn-cta" href="https://simple.app" target="_blank" rel="noopener" style="text-align: center; text-decoration: none; display: block;">Открыть Simple Wallet</a>
+                <button class="btn-cta" id="sKhloeTask-check" onclick="checkKhloeTask()" style="background: hsl(240 5% 14%); color: #f2f2f2; border: 1px solid hsl(240 5% 22%);">Проверить</button>
+                <div id="sKhloeTask-spinner" style="display: none; align-items: center; justify-content: center; gap: 10px; padding: 12px; color: hsl(0 0% 65%); font-size: 13px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+                  <span>Проверяем...</span>
+                </div>
               </div>
             </div>
 
             <style>
-              #sKhloeTask-list li { position: relative; padding-left: 18px; font-size: 14px; color: hsl(0 0% 80%); line-height: 1.6; margin-bottom: 6px; list-style: none; }
-              #sKhloeTask-list li::before { content: '•'; position: absolute; left: 0; top: 0; color: #10b981; font-weight: bold; }
+              #sKhloeTask-steps li { position: relative; padding-left: 36px; font-size: 14px; color: hsl(0 0% 82%); line-height: 1.5; min-height: 28px; display: flex; align-items: center; }
+              #sKhloeTask-steps li::before { counter-increment: khloestep; content: '0' counter(khloestep); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: hsl(240 5% 8%); border: 1px solid hsl(142 35% 22%); color: hsl(160 70% 55%); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; line-height: 1; }
+              #sKhloeTask-steps { counter-reset: khloestep; }
+              #sKhloeTask-note-wrap[open] summary svg { transform: rotate(180deg); transition: transform 0.2s; }
+              #sKhloeTask-note-wrap summary svg { transition: transform 0.2s; }
+              #sKhloeTask-note-wrap summary::-webkit-details-marker { display: none; }
             </style>
-          </div>
-
-          <!-- CTA buttons -->
-          <div class="w-full" id="sKhloeTask-actions" style="margin-top: 14px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease-out; display: flex; flex-direction: column; gap: 8px;">
-            <a class="btn-cta" href="https://simple.app" target="_blank" rel="noopener" style="text-align: center; text-decoration: none; display: block;">Открыть Simple Wallet</a>
-            <button class="btn-cta" id="sKhloeTask-check" onclick="checkKhloeTask()" style="background: hsl(240 5% 14%); color: #f2f2f2; border: 1px solid hsl(240 5% 22%);">Проверить</button>
-            <div id="sKhloeTask-spinner" style="display: none; align-items: center; justify-content: center; gap: 10px; padding: 12px; color: hsl(0 0% 65%); font-size: 13px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-              <span>Проверяем...</span>
-            </div>
           </div>
         </div>
       </div>
@@ -5940,7 +5947,7 @@ registerTypewriterById('sArena', { text: 'Каждый день я буду да
 registerTypewriterById('sKhloeLocked', { text: 'У меня готово для тебя задание. Но сначала помоги Алексу с его заданием в хабе.', el: 'tw-sKhloeLocked', cursor: 'tw-cursor-sKhloeLocked', actions: 'sKhloeLocked-actions' });
 registerTypewriterById('sKhloeDay2', { text: 'В честь нашего знакомства — один ритуал тебе сегодня в подарок.\n\nА настоящие задания начнём завтра.', el: 'tw-sKhloeDay2', cursor: 'tw-cursor-sKhloeDay2', actions: 'sKhloeDay2-reward', extra: 'sKhloeDay2-actions' });
 registerTypewriterById('sKhloeAlexTask', { text: 'У меня для тебя социальное задание. За него получишь +10 к Ауре.', el: 'tw-sKhloeAlexTask', cursor: 'tw-cursor-sKhloeAlexTask', actions: 'sKhloeAlexTask-actions' });
-registerTypewriterById('sKhloeTask', { text: 'Привет! Вот твоё задание на сегодня.', el: 'tw-sKhloeTask', cursor: 'tw-cursor-sKhloeTask', actions: 'sKhloeTask-card-anim', extra: 'sKhloeTask-actions' });
+registerTypewriterById('sKhloeTask', { text: 'Привет! Вот твоё задание на сегодня.', el: 'tw-sKhloeTask', cursor: 'tw-cursor-sKhloeTask', actions: 'sKhloeTask-card-anim' });
 registerTypewriterById('sKhloeTaskDone', { text: 'Сегодня ритуал засчитан. Приходи завтра — будет новое задание.', el: 'tw-sKhloeTaskDone', cursor: 'tw-cursor-sKhloeTaskDone' });
 registerTypewriterById('sKhloeRitualClaimed', { text: 'Задание выполнено. +1 ритуал тебе в копилку.\n\nПриходи завтра — будет новое.', el: 'tw-sKhloeRitualClaimed', cursor: 'tw-cursor-sKhloeRitualClaimed', actions: 'sKhloeRitualClaimed-reward', extra: 'sKhloeRitualClaimed-actions' });
 
@@ -6105,49 +6112,54 @@ function completeKhloeDay2() {
 
 // ===== Хлоя: ежедневный цикл день 3+ (3 типа заданий по кругу) =====
 
-// Конфиг типов заданий. Иконка/цвет/инструкция/note — по решению Кима/Лиры на 29.04.
+// Конфиг типов заданий v2 (29.04 — hero-illustration variant).
+// Каждый тип меняет hero-фон, glow и SVG-силуэт. Шаги — emerald, акцент Хлои.
+// SVG = placeholder, заменим на иллюстрации fal.ai в едином стиле с Хлоёй.
 var khloeTaskTypes = {
   volume: {
-    icon: '📊',
-    iconBg: 'linear-gradient(135deg, hsl(160 70% 25%), hsl(160 80% 35%))',
-    iconBorder: 'hsl(160 70% 40%)',
-    label: 'ОБЪЁМ ТОРГОВ',
-    title: 'Сделай оборот на $20',
-    instructions: [
-      'Открой Simple Wallet',
-      'Перейди в раздел Trade',
+    accent: '#10b981',
+    heroBg: 'radial-gradient(ellipse at 50% 60%, hsl(160 70% 18%) 0%, hsl(240 5% 8%) 75%)',
+    heroGlow: 'radial-gradient(circle at 50% 55%, rgba(16,185,129,0.24) 0%, transparent 65%)',
+    heroShadow: '0 0 18px rgba(16,185,129,0.55)',
+    heroSvg: '<svg width="96" height="96" viewBox="0 0 96 96" fill="none"><rect x="10" y="62" width="14" height="22" rx="2" fill="#10b981" opacity="0.55"/><rect x="32" y="48" width="14" height="36" rx="2" fill="#10b981" opacity="0.72"/><rect x="54" y="32" width="14" height="52" rx="2" fill="#10b981" opacity="0.88"/><rect x="76" y="14" width="14" height="70" rx="2" fill="#10b981"/></svg>',
+    subtitle: 'Объём торгов за день',
+    amount: '$20',
+    steps: [
+      'Открой Simple Wallet и зайди в раздел Trade',
       'Соверши сделки на сумму $20 в любых парах',
-      'Можно несколько сделок — главное, чтобы суммарный оборот был $20'
+      'Возвращайся к Хлое за ритуалом'
     ],
-    note: 'Считается оборот в обе стороны (купил → продал = двойной оборот).'
+    note: 'Считается оборот в обе стороны (купил → продал = двойной оборот). Можно несколько сделок — главное, чтобы суммарный оборот был $20.'
   },
   buy: {
-    icon: '💎',
-    iconBg: 'linear-gradient(135deg, hsl(265 60% 30%), hsl(265 75% 45%))',
-    iconBorder: 'hsl(265 60% 50%)',
-    label: 'ПОКУПКА КРИПТЫ',
-    title: 'Купи крипты на $10',
-    instructions: [
-      'Открой Simple Wallet',
-      'Зайди в раздел Buy',
+    accent: '#a78bfa',
+    heroBg: 'radial-gradient(ellipse at 50% 60%, hsl(265 55% 22%) 0%, hsl(240 5% 8%) 75%)',
+    heroGlow: 'radial-gradient(circle at 50% 55%, rgba(167,139,250,0.24) 0%, transparent 65%)',
+    heroShadow: '0 0 18px rgba(167,139,250,0.55)',
+    heroSvg: '<svg width="96" height="96" viewBox="0 0 96 96" fill="none"><path d="M48 8 L86 38 L48 88 L10 38 Z" fill="#a78bfa" stroke="#c4b5fd" stroke-width="2" stroke-linejoin="round"/><path d="M48 8 L66 38 L48 88 L30 38 Z" fill="#c4b5fd" opacity="0.45"/><line x1="10" y1="38" x2="86" y2="38" stroke="#ddd6fe" stroke-width="1.5" opacity="0.75"/><line x1="48" y1="8" x2="48" y2="88" stroke="#ddd6fe" stroke-width="1" opacity="0.4"/></svg>',
+    subtitle: 'Покупка криптовалюты',
+    amount: '$10',
+    steps: [
+      'Открой Simple Wallet и зайди в раздел Buy',
       'Купи любую криптовалюту на сумму $10',
-      'Если на балансе нет долларов — сначала пополни баланс'
+      'Возвращайся к Хлое за ритуалом'
     ],
-    note: 'Учитывается сумма покупки, а не текущая стоимость купленного.'
+    note: 'Учитывается сумма покупки, а не текущая стоимость купленного. Если на балансе нет долларов — сначала пополни (см. задание «Пополнение»).'
   },
   deposit: {
-    icon: '💰',
-    iconBg: 'linear-gradient(135deg, hsl(40 70% 28%), hsl(40 85% 45%))',
-    iconBorder: 'hsl(40 70% 50%)',
-    label: 'ПОПОЛНЕНИЕ БАЛАНСА',
-    title: 'Пополни баланс на $10',
-    instructions: [
-      'Открой Simple Wallet',
-      'Зайди в раздел Wallet → Deposit',
-      'Пополни баланс на $10',
-      'Можно с внешнего кошелька (USDC/USDT) или с биржи (Binance, Bybit и др.)'
+    accent: '#eab308',
+    heroBg: 'radial-gradient(ellipse at 50% 60%, hsl(40 70% 22%) 0%, hsl(240 5% 8%) 75%)',
+    heroGlow: 'radial-gradient(circle at 50% 55%, rgba(234,179,8,0.24) 0%, transparent 65%)',
+    heroShadow: '0 0 18px rgba(234,179,8,0.55)',
+    heroSvg: '<svg width="96" height="96" viewBox="0 0 96 96" fill="none"><path d="M48 14 L48 56 M30 42 L48 60 L66 42" stroke="#eab308" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="14" y="62" width="68" height="24" rx="5" fill="rgba(234,179,8,0.18)" stroke="#eab308" stroke-width="2"/><rect x="60" y="71" width="14" height="6" rx="3" fill="#eab308"/></svg>',
+    subtitle: 'Пополнение баланса',
+    amount: '$10',
+    steps: [
+      'Открой Simple Wallet → Wallet → Deposit',
+      'Пополни баланс на $10 (USDC или USDT)',
+      'Возвращайся к Хлое за ритуалом'
     ],
-    note: 'Внутренние переводы между своими счетами Simple не считаются.'
+    note: 'Можно с внешнего кошелька (USDC/USDT) или с биржи (Binance, Bybit и др.). Внутренние переводы между своими счетами Simple не считаются.'
   }
 };
 
@@ -6170,44 +6182,48 @@ function openKhloeTask(type) {
   goToId('sKhloeTask');
 }
 
-// Применить content на task card по типу.
+// Применить content на task card по типу (v2 — hero-illustration variant).
 function applyKhloeTaskMode(type) {
   var cfg = khloeTaskTypes[type] || khloeTaskTypes.volume;
   var card = document.getElementById('sKhloeTask-card');
   if (!card) return;
   card.setAttribute('data-task-type', type);
 
-  var iconBg = document.getElementById('sKhloeTask-icon-bg');
-  if (iconBg) {
-    iconBg.style.background = cfg.iconBg;
-    iconBg.style.borderColor = cfg.iconBorder;
-  }
-  var icon = document.getElementById('sKhloeTask-icon');
-  if (icon) icon.textContent = cfg.icon;
-
-  var label = document.getElementById('sKhloeTask-label');
-  if (label) label.textContent = cfg.label;
-
-  var title = document.getElementById('sKhloeTask-title');
-  if (title) {
-    // Подсветить $XX зелёным
-    title.innerHTML = cfg.title.replace(/\$(\d+)/g, '<span style="color:#10b981;">$$$1</span>');
+  // Hero zone
+  var hero = document.getElementById('sKhloeTask-hero');
+  if (hero) hero.style.background = cfg.heroBg;
+  var heroGlow = document.getElementById('sKhloeTask-hero-glow');
+  if (heroGlow) heroGlow.style.background = cfg.heroGlow;
+  var heroSvg = document.getElementById('sKhloeTask-hero-svg');
+  if (heroSvg) {
+    heroSvg.innerHTML = cfg.heroSvg;
+    heroSvg.style.filter = 'drop-shadow(' + cfg.heroShadow + ')';
   }
 
-  var list = document.getElementById('sKhloeTask-list');
-  if (list) {
-    list.innerHTML = '';
-    cfg.instructions.forEach(function(line) {
+  // Subtitle + amount
+  var subtitle = document.getElementById('sKhloeTask-subtitle');
+  if (subtitle) subtitle.textContent = cfg.subtitle;
+  var amount = document.getElementById('sKhloeTask-amount');
+  if (amount) amount.innerHTML = '<span style="color:' + cfg.accent + ';">' + cfg.amount + '</span>';
+
+  // Steps (numbered via CSS counter)
+  var steps = document.getElementById('sKhloeTask-steps');
+  if (steps) {
+    steps.innerHTML = '';
+    cfg.steps.forEach(function(line) {
       var li = document.createElement('li');
       li.textContent = line;
-      list.appendChild(li);
+      steps.appendChild(li);
     });
   }
 
+  // Note (свёрнуто по умолчанию)
   var note = document.getElementById('sKhloeTask-note');
   if (note) note.textContent = cfg.note;
+  var noteWrap = document.getElementById('sKhloeTask-note-wrap');
+  if (noteWrap) noteWrap.removeAttribute('open');
 
-  // Reset spinner UI на случай повторного захода
+  // Reset CTA UI на случай повторного захода
   var btn = document.getElementById('sKhloeTask-check');
   var spinner = document.getElementById('sKhloeTask-spinner');
   if (btn) btn.style.display = '';
