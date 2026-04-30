@@ -6825,6 +6825,17 @@ goTo = function(n) {
   Object.keys(typewriterScreens).forEach(k => resetTypewriter(parseInt(k)));
   origGoTo(n);
 
+  // sKhloeTask: ensure card content (steps + SVG) is populated even when landed without explicit openKhloeTask().
+  // Without this, screen rendered with empty <ol> + empty SVG hero on direct hash/anchor navigation.
+  if (screens[current] && screens[current].id === 'sKhloeTask') {
+    var ktCard = document.getElementById('sKhloeTask-card');
+    var ktSteps = document.getElementById('sKhloeTask-steps');
+    if (ktCard && ktSteps && ktSteps.children.length === 0) {
+      var existingType = ktCard.getAttribute('data-task-type') || 'volume';
+      if (typeof applyKhloeTaskMode === 'function') applyKhloeTaskMode(existingType);
+    }
+  }
+
   // CoachMarks: show ONCE after registration (no progress), then REMOVE forever
   if (screens[current] && screens[current].id === 's11') {
     var cmOv = document.getElementById('coachmark-overlay');
