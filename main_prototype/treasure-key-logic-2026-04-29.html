@@ -322,11 +322,51 @@
     <li><strong>Список миграций</strong>, если меняется схема (новые поля у user: <code>key_inventory</code>, <code>key_claimed_at</code>, <code>last_task_completed_date</code>).</li>
   </ol>
 
-  <h2>Что меняется в прототипе</h2>
-  <p>После согласования с Антоном — Кай добавит:</p>
+  <h2>Кто выдаёт ритуалы</h2>
+  <p>Логика handoff в SW (важно для бэка — какой service триггерит +1 ритуал):</p>
   <ul>
-    <li>Новые экраны: «Окно ключа открыто» (пт 00–11 UTC), «Окно закрыто, ждём следующую пятницу», «Стек тает» (визуал decay).</li>
-    <li>Demo-toggles в sidebar: имитация дня недели, имитация UTC-времени, скип на конкретное состояние стека.</li>
+    <li><strong>Мира</strong> — пока юзер проходит её квест (первые ~10 дней в Simple World). За каждый завершённый день квеста → <span class="green-text">+1 ритуал</span>.</li>
+    <li><strong>Хлоя</strong> — после прохождения серии Миры. За выполнение её ежедневного задания (volume / buy / deposit в Simple Wallet) → <span class="green-text">+1 ритуал</span>.</li>
+    <li><strong>Без перерыва:</strong> когда Мира заканчивает квест, Хлоя сразу подхватывает — у юзера каждый день есть способ получить ритуал.</li>
+  </ul>
+  <p>В коде: <code>RitualService.CheckInAsync()</code> вызывается при claim-е любого квеста Миры (см. <code>QuestService.cs:665-677</code>) и при подтверждении задания у Хлои (<code>POST /khloe/check</code> со <code>status=claimed</code>).</p>
+
+  <h2>Что уже реализовано в прототипе</h2>
+  <p>Все экраны с новой логикой залиты на GH Pages, можно посмотреть live:</p>
+  <p>🔗 <strong><a href="https://stanislavs-ui.github.io/simpleworld-prototypes/main_prototype/" style="color: var(--green); text-decoration: none;">https://stanislavs-ui.github.io/simpleworld-prototypes/main_prototype/</a></strong></p>
+
+  <h3>Обновлённые экраны</h3>
+  <ul>
+    <li><strong>15. Ритуал</strong> (<code>s15</code>) — новые тексты под decay-логику, блок «Где собрать ритуалы» (Мира / Хлоя)</li>
+    <li><strong>16. Сокровищница</strong> (<code>s16</code>) — capsule «100–1000 USDC», динамический countdown, 4 состояния (default / window-open / window-closed / has-key), блоки «Что внутри» (gold accent) + «Как получить ключ» (green accent)</li>
+    <li><strong>16.1 Сокровищница открыта</strong> (<code>s16_opened</code>) — roulette-анимация награды</li>
+  </ul>
+
+  <h3>Новые экраны</h3>
+  <ul>
+    <li><strong>89. Ритуал сгорел</strong> (<code>sRitualBurned</code>) — показывается после 00:00 UTC если юзер пропустил день. Текст «-1», stack chip «6/7», CTA на задание. <em>(В проде может быть toast вместо полноэкранного экрана — на согласование)</em></li>
+    <li><strong>90. Ключ сгорел</strong> (<code>sKeyExpired</code>) — показывается если юзер не открыл сундук за неделю. CTA «Понятно» — сбрасывает ключ.</li>
+  </ul>
+
+  <h3>Демо-режимы s16 (sidebar секция «Сокровищница — режимы»)</h3>
+  <ul>
+    <li>▸ Без ключа (стек &lt;7) — дефолт</li>
+    <li>▸ Окно ключа открыто — зелёный месседж «Можно забрать ключ — до 12:00 UTC»</li>
+    <li>▸ Окно закрыто (пропустил) — оранжевый месседж «Время забрать ключ прошло»</li>
+    <li>▸ Ключ в инвентаре — CTA «Открыть ключом» активна</li>
+  </ul>
+
+  <h3>Сопутствующие тексты обновлены</h3>
+  <ul>
+    <li>Мира day 7 диалог (<code>sD7a</code>) — упоминание «пул 100–1000 USDC» вместо старого «500 USDC на всех»</li>
+    <li>Coach marks step 4–5 (туториал на Home) — корректная формулировка «собери 7 ритуалов, забери ключ в пятницу»</li>
+    <li>i18n RU + EN — все строки s15/s16 синхронизированы</li>
+  </ul>
+
+  <h2>Связанные артефакты</h2>
+  <ul>
+    <li><strong>Decision Log:</strong> D202 в <code>_bmad-output/project-status.md</code> (полная запись новой логики)</li>
+    <li><strong>Live прототип:</strong> <a href="https://stanislavs-ui.github.io/simpleworld-prototypes/main_prototype/" style="color: var(--green); text-decoration: none;">main_prototype/</a></li>
   </ul>
 
   <div class="footer">
