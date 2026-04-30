@@ -4471,44 +4471,35 @@ tailwind.config = {
       <div class="screen" id="sRitualBurned" data-name="Ритуал сгорел" style="justify-content: center; align-items: center; padding-top: 8px;">
         <div class="flex flex-col w-full" style="align-items: center; text-align: center;">
 
-          <!-- Visual: burning ritual icon -->
-          <div style="position: relative; width: 140px; height: 140px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
-            <div style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 55%, rgba(239,68,68,0.28) 0%, transparent 65%); filter: blur(12px);"></div>
-            <svg width="120" height="120" viewBox="0 0 120 120" fill="none" style="position: relative;">
-              <defs>
-                <radialGradient id="ritualBurnedGrad" cx="0.5" cy="0.5" r="0.5">
-                  <stop offset="0%" stop-color="#7f1d1d" stop-opacity="0.6"/>
-                  <stop offset="100%" stop-color="#1f0a0a" stop-opacity="0.3"/>
-                </radialGradient>
-              </defs>
-              <circle cx="60" cy="60" r="46" fill="url(#ritualBurnedGrad)" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
-              <text x="60" y="72" text-anchor="middle" font-size="36" font-weight="800" font-family="Inter, system-ui, sans-serif" fill="#ef4444" opacity="0.85">−1</text>
-            </svg>
+          <!-- Visual: −1 text only, no circle -->
+          <div style="position: relative; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
+            <div style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 55%, rgba(239,68,68,0.18) 0%, transparent 65%); filter: blur(16px);"></div>
+            <span style="font-size: 72px; font-weight: 900; color: #ef4444; letter-spacing: -2px; position: relative;">−1</span>
           </div>
 
           <!-- Title -->
           <div class="text-[20px] font-bold" style="color: #f2f2f2; margin-bottom: 10px;">Ритуал сгорел</div>
 
           <!-- Body -->
-          <div class="text-[13px]" style="color: hsl(0 0% 60%); line-height: 1.7; max-width: 280px; margin-bottom: 8px;">
+          <div class="text-[13px]" style="color: #f2f2f2; line-height: 1.7; max-width: 280px; margin-bottom: 8px;">
             Ты пропустил день без задания. Один ритуал сгорел.
           </div>
 
           <!-- Stack chip -->
           <div style="margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(239,68,68,0.10); border: 1px solid rgba(239,68,68,0.28); border-radius: 999px;">
-            <span style="color: hsl(0 0% 70%); font-size: 11px; font-weight: 600;">Стек ритуалов:</span>
+            <span style="color: #f2f2f2; font-size: 11px; font-weight: 600;">Стек ритуалов:</span>
             <span style="color: #ef4444; font-size: 13px; font-weight: 800;">6 / 7</span>
           </div>
 
           <!-- Note -->
-          <div class="text-[12px]" style="color: hsl(0 0% 45%); line-height: 1.6; max-width: 280px; margin-top: 24px; font-style: italic;">
+          <div class="text-[12px]" style="color: #f2f2f2; line-height: 1.6; max-width: 280px; margin-top: 24px; font-style: italic; opacity: 0.7;">
             Выполни задание сегодня — и стек начнёт восстанавливаться.
           </div>
 
           <!-- CTAs -->
           <div class="w-full" style="margin-top: 28px; display: flex; flex-direction: column; gap: 10px;">
             <button class="btn-cta" onclick="goToId('sArena')" style="text-align: center;">К заданию у Хлои</button>
-            <button class="btn-reply" onclick="goTo(12)">На главную</button>
+            <button class="btn-reply" onclick="goTo(12)" style="text-align: center;">На главную</button>
           </div>
 
         </div>
@@ -4548,11 +4539,11 @@ tailwind.config = {
           <div class="text-[22px] font-bold" style="color: #f2f2f2; margin-bottom: 12px;">Ключ сгорел</div>
 
           <!-- Body -->
-          <div class="text-[13px]" style="color: hsl(0 0% 60%); line-height: 1.7; max-width: 300px; margin-bottom: 16px;">
+          <div class="text-[13px]" style="color: #f2f2f2; line-height: 1.7; max-width: 300px; margin-bottom: 16px;">
             Ты не открыл сокровищницу за неделю — ключ сгорел.
           </div>
 
-          <div class="text-[12px]" style="color: hsl(0 0% 50%); line-height: 1.7; max-width: 300px; padding: 14px 16px; background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px;">
+          <div class="text-[12px]" style="color: #f2f2f2; line-height: 1.7; max-width: 300px; padding: 14px 16px; background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 12px;">
             Не переживай — собери 7 новых ритуалов и забери следующий ключ в пятницу с 00:00 до 12:00 UTC.
           </div>
 
