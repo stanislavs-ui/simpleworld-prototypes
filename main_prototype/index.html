@@ -4341,7 +4341,7 @@ tailwind.config = {
                 </div>
 
                 <!-- 3 numbered steps -->
-                <ol id="sKhloeTask-steps" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;"></ol>
+                <ol id="sKhloeTask-steps" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px;"></ol>
 
                 <!-- Expandable note -->
                 <details id="sKhloeTask-note-wrap" style="margin-top: 14px;">
@@ -4373,7 +4373,7 @@ tailwind.config = {
             </div>
 
             <style>
-              #sKhloeTask-steps li { position: relative; padding-left: 36px; font-size: 14px; color: hsl(0 0% 82%); line-height: 1.5; min-height: 28px; display: flex; align-items: center; }
+              #sKhloeTask-steps li { position: relative; padding-left: 40px; padding-top: 4px; font-size: 14px; color: hsl(0 0% 82%); line-height: 1.5; min-height: 48px; }
               #sKhloeTask-steps li::before { counter-increment: khloestep; content: counter(khloestep); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: hsl(240 5% 8%); border: 1px solid hsl(142 35% 22%); color: hsl(160 70% 55%); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1; }
               #sKhloeTask-steps { counter-reset: khloestep; }
               #sKhloeTask-note-wrap[open] summary svg { transform: rotate(180deg); transition: transform 0.2s; }
@@ -6376,7 +6376,7 @@ var khloeTaskTypes = {
       'Купи любую криптовалюту на сумму от $10',
       'Возвращайся к Хлое за ритуалом'
     ],
-    note: 'Учитывается сумма покупки, а не текущая стоимость купленного. Если на балансе нет долларов — сначала пополни (см. задание «Пополнение»).'
+    note: 'Учитывается сумма покупки, а не текущая стоимость купленного. Если на балансе нет долларов — сначала пополни.'
   },
   deposit: {
     accent: '#eab308',
