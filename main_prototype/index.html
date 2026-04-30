@@ -1548,8 +1548,8 @@ tailwind.config = {
             <button id="s16-open-btn" class="btn-cta" data-i18n="s16_btn_open" disabled onclick="try{openTreasure()}catch(e){alert(e.message)}" style="opacity: 0.4; cursor: not-allowed; margin-top: 16px; text-align: center;">Открыть ключом</button>
             <div id="s16-no-key" class="text-[11px]" data-i18n="s16_no_key" style="color: hsl(0 0% 60%); margin-top: 10px;">У тебя пока нет ключа. Собери 7 ритуалов и забери ключ в пятницу с 00:00 до 12:00 UTC.</div>
             <div id="s16-has-key" class="text-[11px]" data-i18n="s16_has_key" style="display: none; color: #f2f2f2; margin-top: 16px; font-weight: 700;">У тебя есть ключ. Открой сокровищницу.</div>
-            <div id="s16-window-closed" class="text-[11px]" data-i18n="s16_window_closed" style="display: none; color: hsl(38 80% 60%); margin-top: 10px;">Окно ключа закрыто. Следующее окно — в пятницу с 00:00 до 12:00 UTC.</div>
-            <div id="s16-window-open" class="text-[11px]" data-i18n="s16_window_open" style="display: none; color: hsl(142 70% 55%); margin-top: 10px; font-weight: 700;">Окно ключа открыто. Забери ключ до 12:00 UTC.</div>
+            <div id="s16-window-closed" class="text-[11px]" data-i18n="s16_window_closed" style="display: none; color: hsl(38 80% 60%); margin-top: 10px;">Время забрать ключ прошло. Следующая возможность — в пятницу с 00:00 до 12:00 UTC.</div>
+            <div id="s16-window-open" class="text-[11px]" data-i18n="s16_window_open" style="display: none; color: hsl(142 70% 55%); margin-top: 10px; font-weight: 700;">Можно забрать ключ — до 12:00 UTC.</div>
           </div>
 
           <!-- How it works (gold accent) -->
@@ -5160,8 +5160,8 @@ const i18n = {
     s16_btn_open: "Открыть ключом",
     s16_no_key: "У тебя пока нет ключа. Собери 7 ритуалов и забери ключ в пятницу с 00:00 до 12:00 UTC.",
     s16_has_key: "У тебя есть ключ. Открой сокровищницу.",
-    s16_window_open: "Окно ключа открыто. Забери ключ до 12:00 UTC.",
-    s16_window_closed: "Окно ключа закрыто. Следующее окно — в пятницу с 00:00 до 12:00 UTC.",
+    s16_window_open: "Можно забрать ключ — до 12:00 UTC.",
+    s16_window_closed: "Время забрать ключ прошло. Следующая возможность — в пятницу с 00:00 до 12:00 UTC.",
     s16o_title: "Сокровищница",
     s16o_eyebrow: "Награда получена",
     s16o_btn_claim: "В Хранилище",
@@ -5655,8 +5655,8 @@ const i18n = {
     s16_btn_open: "Open with key",
     s16_no_key: "You don't have a key yet. Collect 7 rituals and claim the key on Friday from 00:00 to 12:00 UTC.",
     s16_has_key: "You have a key. Open the treasury.",
-    s16_window_open: "Key window is open. Claim your key before 12:00 UTC.",
-    s16_window_closed: "Key window is closed. Next window — Friday from 00:00 to 12:00 UTC.",
+    s16_window_open: "You can claim your key — before 12:00 UTC.",
+    s16_window_closed: "Time to claim the key has passed. Next chance — Friday from 00:00 to 12:00 UTC.",
     s16o_title: "Treasury",
     s16o_eyebrow: "Reward earned",
     s16o_btn_claim: "To Vault",
