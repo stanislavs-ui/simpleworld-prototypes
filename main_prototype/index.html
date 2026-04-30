@@ -1541,7 +1541,9 @@ tailwind.config = {
 
           <!-- Amount + button -->
           <div style="background: hsl(240 5% 7%); border: 1px solid hsl(240 5% 16%); border-radius: 14px; padding: 24px; text-align: center; margin-bottom: 12px;">
-            <div class="font-label text-[28px] font-extrabold" style="color: #f2f2f2;">100–1000 USDC</div>
+            <div style="display: inline-block; background: #ffffff; border: 1px solid #ffffff; border-radius: 14px; padding: 10px 20px;">
+              <span class="font-label text-[28px] font-extrabold" style="color: #000000; letter-spacing: -0.5px;">100–1000 USDC</span>
+            </div>
             <div class="text-[12px]" data-i18n="s16_amount_sub" style="color: #f2f2f2; margin-top: 8px; line-height: 1.6;">Сумма пула зависит от того, сколько активных жителей было в Simple World на этой неделе.</div>
             <button id="s16-open-btn" class="btn-cta" data-i18n="s16_btn_open" disabled onclick="try{openTreasure()}catch(e){alert(e.message)}" style="opacity: 0.4; cursor: not-allowed; margin-top: 16px; text-align: center;">Открыть ключом</button>
             <div id="s16-no-key" class="text-[11px]" data-i18n="s16_no_key" style="color: hsl(0 0% 60%); margin-top: 10px;">У тебя пока нет ключа. Собери 7 ритуалов и забери ключ в пятницу с 00:00 до 12:00 UTC.</div>
