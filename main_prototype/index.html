@@ -4325,16 +4325,32 @@ tailwind.config = {
           <div id="sKhloeTask-card-anim" style="margin-top: 16px; opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease;">
             <div id="sKhloeTask-card" data-task-type="volume" style="background: hsl(240 5% 11%); border: 1px solid hsl(240 5% 18%); border-radius: 18px; overflow: hidden;">
 
-              <!-- Hero zone: eyebrow type label + icon -->
-              <div id="sKhloeTask-hero" style="position: relative; height: 168px; background: hsl(240 5% 9%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; overflow: hidden;">
-                <div id="sKhloeTask-type" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: hsl(0 0% 55%); text-transform: uppercase;">ОБЪЁМ</div>
+              <!-- Progress block: ritual streak -->
+              <div style="padding: 16px 20px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px;">
+                  <span style="font-size: 10px; font-weight: 700; color: hsl(0 0% 60%); letter-spacing: 1.6px; text-transform: uppercase;">Ритуалы недели</span>
+                  <span style="font-size: 11px; font-weight: 700; color: hsl(0 0% 78%); font-variant-numeric: tabular-nums;"><span id="sKhloeTask-progress-text">0 / 7</span></span>
+                </div>
+                <div id="sKhloeTask-progress-dots" style="display: flex; gap: 5px;">
+                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
+                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
+                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
+                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
+                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
+                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
+                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
+                </div>
+              </div>
+
+              <!-- Hero zone: just the icon -->
+              <div id="sKhloeTask-hero" style="position: relative; height: 124px; background: transparent; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                 <div id="sKhloeTask-hero-svg" style="position: relative; z-index: 1; filter: none;"></div>
               </div>
 
               <!-- Body -->
-              <div style="padding: 22px 20px 18px;">
-                <!-- Big task title (replaces subtitle + amount) -->
-                <div id="sKhloeTask-title" style="text-align: center; font-size: 22px; font-weight: 700; color: #f3f4f6; line-height: 1.25; letter-spacing: -0.3px; margin-bottom: 24px; padding: 0 6px;">Соверши оборот от $20</div>
+              <div style="padding: 0 20px 18px;">
+                <!-- Big task title (type + amount in one phrase) -->
+                <div id="sKhloeTask-title" style="text-align: center; font-size: 24px; font-weight: 700; color: #f3f4f6; line-height: 1.2; letter-spacing: -0.4px; margin-bottom: 24px; padding: 0 6px;">Объём торгов на $20</div>
 
                 <!-- 3 numbered steps -->
                 <ol id="sKhloeTask-steps" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;"></ol>
@@ -6346,24 +6362,38 @@ function completeKhloeDay2() {
 var khloeTaskTypes = {
   volume: {
     accent: '#10b981',
-    heroBg: 'hsl(240 5% 9%)',
+    heroBg: 'transparent',
     heroGlow: 'transparent',
     heroShadow: '',
-    typeLabel: 'ОБЪЁМ',
-    heroSvg: '<svg width="108" height="64" viewBox="0 0 108 64" fill="none">' +
-      '<polyline points="6,38 22,28 38,32 54,16 70,20 86,10 102,14" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
-      '<g fill="#10b981" opacity="0.55">' +
-      '<rect x="6" y="48" width="6" height="12" rx="1"/>' +
-      '<rect x="22" y="44" width="6" height="16" rx="1"/>' +
-      '<rect x="38" y="50" width="6" height="10" rx="1"/>' +
-      '<rect x="54" y="42" width="6" height="18" rx="1"/>' +
-      '<rect x="70" y="46" width="6" height="14" rx="1"/>' +
-      '<rect x="86" y="40" width="6" height="20" rx="1"/>' +
-      '<rect x="102" y="44" width="0" height="0"/>' +
+    // Candlestick chart + volume bars below — universal "trading volume" iconography
+    heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
+      // Candlestick 1 (down)
+      '<line x1="14" y1="14" x2="14" y2="56" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>' +
+      '<rect x="9" y="22" width="10" height="24" fill="#10b981" opacity="0.32" stroke="#10b981" stroke-width="1.2"/>' +
+      // Candlestick 2 (up)
+      '<line x1="38" y1="6" x2="38" y2="50" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>' +
+      '<rect x="33" y="14" width="10" height="28" fill="#10b981"/>' +
+      // Candlestick 3 (down)
+      '<line x1="62" y1="18" x2="62" y2="60" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>' +
+      '<rect x="57" y="26" width="10" height="26" fill="#10b981" opacity="0.32" stroke="#10b981" stroke-width="1.2"/>' +
+      // Candlestick 4 (up, big)
+      '<line x1="86" y1="2" x2="86" y2="48" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>' +
+      '<rect x="81" y="8" width="10" height="32" fill="#10b981"/>' +
+      // Candlestick 5 (up)
+      '<line x1="110" y1="10" x2="110" y2="46" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>' +
+      '<rect x="105" y="16" width="10" height="24" fill="#10b981"/>' +
+      // Volume bars at bottom
+      '<g fill="#10b981" opacity="0.5">' +
+      '<rect x="9" y="76" width="10" height="14" rx="1.2"/>' +
+      '<rect x="33" y="72" width="10" height="18" rx="1.2"/>' +
+      '<rect x="57" y="78" width="10" height="12" rx="1.2"/>' +
+      '<rect x="81" y="68" width="10" height="22" rx="1.2"/>' +
+      '<rect x="105" y="74" width="10" height="16" rx="1.2"/>' +
       '</g>' +
-      '<line x1="0" y1="62" x2="108" y2="62" stroke="#10b981" stroke-width="1" opacity="0.25"/>' +
+      // Baseline
+      '<line x1="2" y1="92" x2="146" y2="92" stroke="#10b981" stroke-width="1" opacity="0.25"/>' +
       '</svg>',
-    title: 'Соверши оборот от $20',
+    title: 'Объём торгов на $20',
     steps: [
       'Открой Simple Wallet',
       'Купи-продай крипту на $20',
@@ -6373,16 +6403,26 @@ var khloeTaskTypes = {
   },
   buy: {
     accent: '#a78bfa',
-    heroBg: 'hsl(240 5% 9%)',
+    heroBg: 'transparent',
     heroGlow: 'transparent',
     heroShadow: '',
-    typeLabel: 'ПОКУПКА',
-    heroSvg: '<svg width="108" height="64" viewBox="0 0 108 64" fill="none">' +
-      '<polyline points="6,52 24,42 40,46 58,30 76,34 96,12" stroke="#a78bfa" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
-      '<path d="M88 12 L96 12 L96 20" stroke="#a78bfa" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
-      '<line x1="0" y1="62" x2="108" y2="62" stroke="#a78bfa" stroke-width="1" opacity="0.25"/>' +
+    // Trending up line + arrow head (Lucide-style trending-up)
+    heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
+      // Baseline grid (subtle)
+      '<line x1="2" y1="92" x2="146" y2="92" stroke="#a78bfa" stroke-width="1" opacity="0.2"/>' +
+      // Trend line
+      '<polyline points="10,76 36,58 58,66 86,38 110,46 134,12" stroke="#a78bfa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+      // Arrow head at top right
+      '<polyline points="118 12 134 12 134 28" stroke="#a78bfa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+      // Plot dots at vertices (subtle)
+      '<g fill="#a78bfa">' +
+      '<circle cx="36" cy="58" r="2.5"/>' +
+      '<circle cx="58" cy="66" r="2.5"/>' +
+      '<circle cx="86" cy="38" r="2.5"/>' +
+      '<circle cx="110" cy="46" r="2.5"/>' +
+      '</g>' +
       '</svg>',
-    title: 'Купи крипту от $10',
+    title: 'Покупка крипты на $10',
     steps: [
       'Открой Simple Wallet',
       'Купи любую крипту от $10',
@@ -6392,17 +6432,21 @@ var khloeTaskTypes = {
   },
   deposit: {
     accent: '#eab308',
-    heroBg: 'hsl(240 5% 9%)',
+    heroBg: 'transparent',
     heroGlow: 'transparent',
     heroShadow: '',
-    typeLabel: 'ПОПОЛНЕНИЕ',
-    heroSvg: '<svg width="108" height="68" viewBox="0 0 108 68" fill="none">' +
-      '<rect x="20" y="28" width="68" height="34" rx="4" stroke="#eab308" stroke-width="2.4" fill="none"/>' +
-      '<line x1="20" y1="38" x2="88" y2="38" stroke="#eab308" stroke-width="1.4" opacity="0.45"/>' +
-      '<circle cx="74" cy="50" r="2.5" fill="#eab308"/>' +
-      '<path d="M54 4 V20 M44 14 L54 24 L64 14" stroke="#eab308" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+    // Wallet body + arrow going down INTO it
+    heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
+      // Down arrow (above wallet)
+      '<path d="M74 8 V40 M58 30 L74 46 L90 30" stroke="#eab308" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+      // Wallet body
+      '<rect x="22" y="50" width="104" height="42" rx="6" stroke="#eab308" stroke-width="2.6" fill="none"/>' +
+      // Card slot (horizontal line)
+      '<line x1="22" y1="62" x2="126" y2="62" stroke="#eab308" stroke-width="1.5" opacity="0.4"/>' +
+      // Chip/dot
+      '<circle cx="108" cy="78" r="3.5" fill="#eab308"/>' +
       '</svg>',
-    title: 'Пополни баланс от $10',
+    title: 'Пополнение баланса на $10',
     steps: [
       'Открой Simple Wallet',
       'Пополни баланс от $10 (USDC/USDT)',
@@ -6441,10 +6485,6 @@ function applyKhloeTaskMode(type) {
   // Hero zone
   var hero = document.getElementById('sKhloeTask-hero');
   if (hero) hero.style.background = cfg.heroBg;
-  var heroGlow = document.getElementById('sKhloeTask-hero-glow');
-  if (heroGlow) heroGlow.style.background = cfg.heroGlow;
-  var typeEl = document.getElementById('sKhloeTask-type');
-  if (typeEl) typeEl.textContent = cfg.typeLabel || '';
   var heroSvg = document.getElementById('sKhloeTask-hero-svg');
   if (heroSvg) {
     heroSvg.innerHTML = cfg.heroSvg;
@@ -6454,6 +6494,9 @@ function applyKhloeTaskMode(type) {
   // Title
   var titleEl = document.getElementById('sKhloeTask-title');
   if (titleEl) titleEl.textContent = cfg.title || '';
+
+  // Progress block — sync with current ritual streak (same source as home-ritual-dots)
+  updateKhloeTaskProgress();
 
   // Steps (numbered via CSS counter)
   var steps = document.getElementById('sKhloeTask-steps');
@@ -6479,6 +6522,32 @@ function applyKhloeTaskMode(type) {
   if (btn) btn.style.display = '';
   if (spinner) spinner.style.display = 'none';
   if (notYet) { notYet.style.display = 'none'; notYet.style.opacity = '0'; }
+}
+
+// Считает накопленные ритуалы недели: дни Миры + засчитанные дни Хлои.
+// Капается на 7 для отображения (после 7 — следующий цикл, в боевом коде reset по пятнице).
+function getKhloeRitualCount() {
+  var miraCount = (JSON.parse(localStorage.getItem('sw-mira-days') || '[]')).length;
+  var khloeCount = 0;
+  for (var n = 3; n <= 50; n++) {
+    if (localStorage.getItem('sw-khloe-day-' + n + '-claimed') === '1') khloeCount++;
+  }
+  return Math.min(7, miraCount + khloeCount);
+}
+
+function updateKhloeTaskProgress() {
+  var count = getKhloeRitualCount();
+  var txt = document.getElementById('sKhloeTask-progress-text');
+  if (txt) txt.textContent = count + ' / 7';
+  var dotsContainer = document.getElementById('sKhloeTask-progress-dots');
+  if (dotsContainer) {
+    var segs = dotsContainer.children;
+    for (var i = 0; i < segs.length; i++) {
+      var filled = i < count;
+      segs[i].style.background = filled ? '#10b981' : 'hsl(240 5% 14%)';
+      segs[i].style.borderColor = filled ? '#10b981' : 'hsl(240 5% 22%)';
+    }
+  }
 }
 
 // Проверка задания (мок 1.5s).
