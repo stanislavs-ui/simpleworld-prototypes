@@ -6497,6 +6497,8 @@ function openKhloeTask(type) {
     type = getKhloeTaskType(day);
   }
   applyKhloeTaskMode(type);
+  // Persist the chosen task variant so hash-restore on reload can replay it.
+  try { localStorage.setItem('sw-khloe-task-current-type', type); } catch (e) {}
   goToId('sKhloeTask');
 }
 
@@ -6949,12 +6951,15 @@ goTo = function(n) {
   origGoTo(n);
 
   // sKhloeTask: ensure card content (steps + SVG) is populated even when landed without explicit openKhloeTask().
-  // Without this, screen rendered with empty <ol> + empty SVG hero on direct hash/anchor navigation.
+  // Reload-friendly: prefer the persisted task type (volume/buy/deposit) over the HTML default.
   if (screens[current] && screens[current].id === 'sKhloeTask') {
     var ktCard = document.getElementById('sKhloeTask-card');
     var ktSteps = document.getElementById('sKhloeTask-steps');
     if (ktCard && ktSteps && ktSteps.children.length === 0) {
-      var existingType = ktCard.getAttribute('data-task-type') || 'volume';
+      var savedType = (function () {
+        try { return localStorage.getItem('sw-khloe-task-current-type'); } catch (e) { return null; }
+      })();
+      var existingType = savedType || ktCard.getAttribute('data-task-type') || 'volume';
       if (typeof applyKhloeTaskMode === 'function') applyKhloeTaskMode(existingType);
     }
   }
