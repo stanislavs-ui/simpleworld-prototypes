@@ -4323,12 +4323,12 @@ tailwind.config = {
 
           <!-- Task Card — hero-illustration variant (29.04 v2) -->
           <div id="sKhloeTask-card-anim" style="margin-top: 16px; opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease;">
-            <div id="sKhloeTask-card" data-task-type="volume" style="background: hsl(240 5% 11%); border: 1px solid hsl(142 35% 22%); border-radius: 18px; overflow: hidden; box-shadow: 0 0 32px rgba(16,185,129,0.18);">
+            <div id="sKhloeTask-card" data-task-type="volume" style="background: hsl(240 5% 11%); border: 1px solid hsl(240 5% 18%); border-radius: 18px; overflow: hidden;">
 
               <!-- Hero zone: full-width SVG placeholder, will be replaced with fal.ai illustration -->
-              <div id="sKhloeTask-hero" style="position: relative; height: 150px; background: radial-gradient(ellipse at 50% 60%, hsl(160 70% 18%) 0%, hsl(240 5% 8%) 75%); display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                <div id="sKhloeTask-hero-glow" style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 55%, rgba(16,185,129,0.22) 0%, transparent 65%); pointer-events: none;"></div>
-                <div id="sKhloeTask-hero-svg" style="position: relative; z-index: 1; filter: drop-shadow(0 0 16px rgba(16,185,129,0.5));"></div>
+              <div id="sKhloeTask-hero" style="position: relative; height: 150px; background: hsl(240 5% 9%); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <div id="sKhloeTask-hero-glow" style="position: absolute; inset: 0; background: transparent; pointer-events: none;"></div>
+                <div id="sKhloeTask-hero-svg" style="position: relative; z-index: 1; filter: none;"></div>
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 48px; background: linear-gradient(to bottom, transparent, hsl(240 5% 11%)); pointer-events: none;"></div>
               </div>
 
@@ -4345,7 +4345,7 @@ tailwind.config = {
 
                 <!-- Expandable note -->
                 <details id="sKhloeTask-note-wrap" style="margin-top: 14px;">
-                  <summary style="cursor: pointer; font-size: 12px; color: hsl(160 70% 50%); user-select: none; list-style: none; display: inline-flex; align-items: center; gap: 4px;">
+                  <summary style="cursor: pointer; font-size: 12px; color: hsl(0 0% 60%); user-select: none; list-style: none; display: inline-flex; align-items: center; gap: 4px;">
                     <span>Подробнее</span>
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                   </summary>
@@ -4374,7 +4374,7 @@ tailwind.config = {
 
             <style>
               #sKhloeTask-steps li { position: relative; padding-left: 40px; padding-top: 4px; font-size: 14px; color: hsl(0 0% 82%); line-height: 1.5; min-height: 48px; }
-              #sKhloeTask-steps li::before { counter-increment: khloestep; content: counter(khloestep); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: hsl(240 5% 8%); border: 1px solid hsl(142 35% 22%); color: hsl(160 70% 55%); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1; }
+              #sKhloeTask-steps li::before { counter-increment: khloestep; content: counter(khloestep); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: hsl(240 5% 8%); border: 1px solid hsl(240 5% 18%); color: hsl(0 0% 88%); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1; }
               #sKhloeTask-steps { counter-reset: khloestep; }
               #sKhloeTask-note-wrap[open] summary svg { transform: rotate(180deg); transition: transform 0.2s; }
               #sKhloeTask-note-wrap summary svg { transition: transform 0.2s; }
@@ -6350,10 +6350,10 @@ function completeKhloeDay2() {
 var khloeTaskTypes = {
   volume: {
     accent: '#10b981',
-    heroBg: 'radial-gradient(ellipse at 50% 60%, hsl(160 70% 18%) 0%, hsl(240 5% 8%) 75%)',
-    heroGlow: 'radial-gradient(circle at 50% 55%, rgba(16,185,129,0.24) 0%, transparent 65%)',
-    heroShadow: '0 0 18px rgba(16,185,129,0.55)',
-    heroSvg: '<svg width="96" height="96" viewBox="0 0 96 96" fill="none"><rect x="10" y="62" width="14" height="22" rx="2" fill="#10b981" opacity="0.55"/><rect x="32" y="48" width="14" height="36" rx="2" fill="#10b981" opacity="0.72"/><rect x="54" y="32" width="14" height="52" rx="2" fill="#10b981" opacity="0.88"/><rect x="76" y="14" width="14" height="70" rx="2" fill="#10b981"/></svg>',
+    heroBg: 'hsl(240 5% 9%)',
+    heroGlow: 'transparent',
+    heroShadow: '',
+    heroSvg: '<svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#10b981" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 28 H56"/><path d="M48 20 L56 28 L48 36"/><path d="M66 52 H24"/><path d="M32 44 L24 52 L32 60"/></svg>',
     subtitle: 'Объём торгов за день',
     amount: '$20',
     steps: [
@@ -6365,10 +6365,10 @@ var khloeTaskTypes = {
   },
   buy: {
     accent: '#a78bfa',
-    heroBg: 'radial-gradient(ellipse at 50% 60%, hsl(265 55% 22%) 0%, hsl(240 5% 8%) 75%)',
-    heroGlow: 'radial-gradient(circle at 50% 55%, rgba(167,139,250,0.24) 0%, transparent 65%)',
-    heroShadow: '0 0 18px rgba(167,139,250,0.55)',
-    heroSvg: '<svg width="96" height="96" viewBox="0 0 96 96" fill="none"><path d="M48 8 L86 38 L48 88 L10 38 Z" fill="#a78bfa" stroke="#c4b5fd" stroke-width="2" stroke-linejoin="round"/><path d="M48 8 L66 38 L48 88 L30 38 Z" fill="#c4b5fd" opacity="0.45"/><line x1="10" y1="38" x2="86" y2="38" stroke="#ddd6fe" stroke-width="1.5" opacity="0.75"/><line x1="48" y1="8" x2="48" y2="88" stroke="#ddd6fe" stroke-width="1" opacity="0.4"/></svg>',
+    heroBg: 'hsl(240 5% 9%)',
+    heroGlow: 'transparent',
+    heroShadow: '',
+    heroSvg: '<svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#a78bfa" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 60 L30 44 L42 54 L66 22"/><path d="M50 22 H66 V38"/></svg>',
     subtitle: 'Покупка криптовалюты',
     amount: '$10',
     steps: [
@@ -6380,10 +6380,10 @@ var khloeTaskTypes = {
   },
   deposit: {
     accent: '#eab308',
-    heroBg: 'radial-gradient(ellipse at 50% 60%, hsl(40 70% 22%) 0%, hsl(240 5% 8%) 75%)',
-    heroGlow: 'radial-gradient(circle at 50% 55%, rgba(234,179,8,0.24) 0%, transparent 65%)',
-    heroShadow: '0 0 18px rgba(234,179,8,0.55)',
-    heroSvg: '<svg width="104" height="104" viewBox="0 0 104 104" fill="none"><defs><radialGradient id="coinFace" cx="0.4" cy="0.32" r="0.75"><stop offset="0%" stop-color="#fef3c7"/><stop offset="42%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#a16207"/></radialGradient></defs><circle cx="52" cy="52" r="40" fill="#7c3a00"/><circle cx="52" cy="52" r="36" fill="url(#coinFace)" stroke="#fde047" stroke-width="0.8"/><circle cx="52" cy="52" r="28" fill="none" stroke="#7c3a00" stroke-width="1.5" opacity="0.45"/><text x="52" y="65" text-anchor="middle" font-size="34" font-weight="900" font-family="Inter, system-ui, -apple-system, sans-serif" fill="#7c3a00">$</text><ellipse cx="40" cy="36" rx="16" ry="6.5" fill="#fef9c3" opacity="0.55"/></svg>',
+    heroBg: 'hsl(240 5% 9%)',
+    heroGlow: 'transparent',
+    heroShadow: '',
+    heroSvg: '<svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#eab308" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M40 14 V44"/><path d="M28 34 L40 46 L52 34"/><path d="M14 54 V60 A4 4 0 0 0 18 64 H62 A4 4 0 0 0 66 60 V54"/></svg>',
     subtitle: 'Пополнение баланса',
     amount: '$10',
     steps: [
@@ -6429,14 +6429,14 @@ function applyKhloeTaskMode(type) {
   var heroSvg = document.getElementById('sKhloeTask-hero-svg');
   if (heroSvg) {
     heroSvg.innerHTML = cfg.heroSvg;
-    heroSvg.style.filter = 'drop-shadow(' + cfg.heroShadow + ')';
+    heroSvg.style.filter = cfg.heroShadow ? 'drop-shadow(' + cfg.heroShadow + ')' : 'none';
   }
 
   // Subtitle + amount
   var subtitle = document.getElementById('sKhloeTask-subtitle');
   if (subtitle) subtitle.textContent = cfg.subtitle;
   var amount = document.getElementById('sKhloeTask-amount');
-  if (amount) amount.innerHTML = '<span style="color:' + cfg.accent + ';">' + cfg.amount + '</span>';
+  if (amount) amount.innerHTML = '<span style="color:#f3f4f6;">' + cfg.amount + '</span>';
 
   // Steps (numbered via CSS counter)
   var steps = document.getElementById('sKhloeTask-steps');
