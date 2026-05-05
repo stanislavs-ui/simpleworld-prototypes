@@ -4342,16 +4342,14 @@ tailwind.config = {
                     <span>Подробнее</span>
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                   </summary>
-                  <div id="sKhloeTask-note" style="font-size: 13px; color: #f3f4f6; line-height: 1.6; margin-top: 12px; padding: 12px 14px; background: hsl(240 5% 8%); border-radius: 10px; text-align: center;">
-                    Считается любой обмен крипты — например, USDC на ETH или SOL на BTC. Можно одной сделкой или несколькими — общая сумма за день должна быть от $20. Обмены между стейблкоинами (USDC ↔ USDT, DAI и т.п.) не засчитываются.
-                  </div>
+                  <div id="sKhloeTask-note" style="font-size: 13px; color: #f3f4f6; line-height: 1.55; margin-top: 12px; padding: 16px 14px; background: hsl(240 5% 8%); border-radius: 10px;"></div>
                 </details>
               </div>
 
               <!-- CTAs (separate area) -->
               <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px;">
                 <a class="btn-cta" href="https://simple.app" target="_blank" rel="noopener" style="text-align: center; text-decoration: none; display: block;">Открыть Simple Wallet</a>
-                <button class="btn-cta" id="sKhloeTask-check" onclick="checkKhloeTask()" style="background: hsl(240 5% 14%); color: #f2f2f2; border: 1px solid hsl(240 5% 22%);">Проверить</button>
+                <button class="btn-cta" id="sKhloeTask-check" onclick="checkKhloeTask()" style="background: hsl(240 5% 14%); color: #f2f2f2; border: 1px solid hsl(240 5% 22%); text-align: center;">Проверить</button>
                 <div id="sKhloeTask-spinner" style="display: none; align-items: center; justify-content: center; gap: 10px; padding: 12px; color: hsl(0 0% 65%); font-size: 13px;">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
                   <span>Проверяем...</span>
@@ -6364,11 +6362,28 @@ var khloeTaskTypes = {
       '</svg>',
     title: 'Жители, чей объём торговли составит $20 и более, получат один ритуал.',
     steps: [
-      'Открой Simple Wallet',
+      'Открой некастодиальный кошелёк в Simple Wallet',
       'Сделай обмен любой криптовалютной пары кроме стейблкоинов на сумму от $20',
-      'Вернись к Хлое'
+      'Вернись к Хлое и нажми «Проверить»'
     ],
-    note: 'Считается любой обмен крипты — например, USDC на ETH или SOL на BTC. Можно одной сделкой или несколькими — общая сумма за день должна быть от $20. Обмены между стейблкоинами (USDC ↔ USDT, DAI и т.п.) не засчитываются.'
+    note: '<div style="display: flex; flex-direction: column; gap: 16px; text-align: center;">' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">Какие сделки засчитываются?</div>' +
+        '<div style="color: hsl(0 0% 80%);">Любой обмен крипты — например, USDC на ETH или SOL на BTC.</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">Можно разбить на несколько сделок?</div>' +
+        '<div style="color: hsl(0 0% 80%);">Да. Главное — общая сумма за день от $20.</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">Какие обмены не засчитываются?</div>' +
+        '<div style="color: hsl(0 0% 80%);">Обмены между стейблкоинами (USDC ↔ USDT, DAI и т.п.).</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">Задание не засчиталось — что делать?</div>' +
+        '<div style="color: hsl(0 0% 80%);">Подожди несколько минут — иногда есть задержка. Если не помогло — напиши в поддержку или в чат комьюнити.</div>' +
+      '</div>' +
+      '</div>'
   },
   buy: {
     accent: '#f3f4f6',
@@ -6390,11 +6405,28 @@ var khloeTaskTypes = {
       '</svg>',
     title: 'Жители, чья покупка крипты составит $10 и более, получат один ритуал.',
     steps: [
-      'Открой Simple Wallet',
-      'Купи любую крипту от $10',
-      'Вернись к Хлое'
+      'Открой некастодиальный кошелёк в Simple Wallet',
+      'Купи любую крипту на сумму от $10',
+      'Вернись к Хлое и нажми «Проверить»'
     ],
-    note: 'Считается сумма покупки. Текущая стоимость купленной крипты не важна — если она потом упадёт, ритуал всё равно получишь. Если на балансе нет средств — сначала пополни.'
+    note: '<div style="display: flex; flex-direction: column; gap: 16px; text-align: center;">' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">Какие покупки засчитываются?</div>' +
+        '<div style="color: hsl(0 0% 80%);">Любая покупка крипты на сумму от $10 — например, ETH, BTC, SOL.</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">А если стоимость купленного упадёт?</div>' +
+        '<div style="color: hsl(0 0% 80%);">Не важно. Считается сумма покупки на момент сделки, а не текущая стоимость.</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">Что делать, если на балансе нет средств?</div>' +
+        '<div style="color: hsl(0 0% 80%);">Сначала пополни баланс — например, с внешнего кошелька или с биржи.</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">Задание не засчиталось — что делать?</div>' +
+        '<div style="color: hsl(0 0% 80%);">Подожди несколько минут — иногда есть задержка. Если не помогло — напиши в поддержку или в чат комьюнити.</div>' +
+      '</div>' +
+      '</div>'
   },
   deposit: {
     accent: '#f3f4f6',
@@ -6411,11 +6443,28 @@ var khloeTaskTypes = {
       '</svg>',
     title: 'Жители, чьё пополнение баланса составит $10 и более, получат один ритуал.',
     steps: [
-      'Открой Simple Wallet',
-      'Пополни баланс от $10 (USDC/USDT)',
-      'Вернись к Хлое'
+      'Открой некастодиальный кошелёк в Simple Wallet',
+      'Пополни баланс на сумму от $10 (USDC/USDT)',
+      'Вернись к Хлое и нажми «Проверить»'
     ],
-    note: 'Засчитывается пополнение с внешнего источника: с другого кошелька (USDC/USDT) или с биржи (Binance, Bybit и др.). Переводы между своими счетами Simple не считаются.'
+    note: '<div style="display: flex; flex-direction: column; gap: 16px; text-align: center;">' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">Откуда можно пополнить?</div>' +
+        '<div style="color: hsl(0 0% 80%);">С внешнего кошелька (USDC/USDT) или с биржи (Binance, Bybit и др.).</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">Какая минимальная сумма?</div>' +
+        '<div style="color: hsl(0 0% 80%);">$10. Можно одним переводом или несколькими — суммируется.</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">Внутренние переводы засчитываются?</div>' +
+        '<div style="color: hsl(0 0% 80%);">Нет. Переводы между своими счетами Simple не считаются.</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-weight: 700; color: #f3f4f6; margin-bottom: 6px;">Задание не засчиталось — что делать?</div>' +
+        '<div style="color: hsl(0 0% 80%);">Подожди несколько минут — может быть задержка сети. Если не помогло — напиши в поддержку или в чат комьюнити.</div>' +
+      '</div>' +
+      '</div>'
   }
 };
 
@@ -6475,7 +6524,7 @@ function applyKhloeTaskMode(type) {
 
   // Note (свёрнуто по умолчанию)
   var note = document.getElementById('sKhloeTask-note');
-  if (note) note.textContent = cfg.note;
+  if (note) note.innerHTML = cfg.note;
   var noteWrap = document.getElementById('sKhloeTask-note-wrap');
   if (noteWrap) noteWrap.removeAttribute('open');
 
