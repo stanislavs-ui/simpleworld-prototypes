@@ -6405,14 +6405,15 @@ var khloeTaskTypes = {
     typeLabel: 'ПОКУПКА КРИПТЫ',
     progressCurrent: 4,
     progressTarget: 10,
-    // Directional purchase: $ → ₿ (single arrow shows fiat/stable → crypto direction)
+    // Single coin ₿ with "+" badge — clear "acquire/buy crypto" semantic, visually distinct from 2-coin swap
     heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
-      '<circle cx="38" cy="50" r="26" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
-      '<text x="38" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">$</text>' +
-      '<circle cx="110" cy="50" r="26" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
-      '<text x="110" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">₿</text>' +
-      '<line x1="64" y1="50" x2="84" y2="50" stroke="#f3f4f6" stroke-width="2.4" stroke-linecap="round"/>' +
-      '<polyline points="78 44 84 50 78 56" stroke="#f3f4f6" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+      // Main coin
+      '<circle cx="68" cy="54" r="32" stroke="#f3f4f6" stroke-width="2.6" fill="hsl(240 5% 11%)"/>' +
+      '<text x="68" y="66" text-anchor="middle" font-size="32" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">₿</text>' +
+      // "+" badge in top-right (filled white circle, dark plus inside)
+      '<circle cx="104" cy="22" r="14" fill="#f3f4f6" stroke="hsl(240 5% 11%)" stroke-width="2.4"/>' +
+      '<line x1="104" y1="14" x2="104" y2="30" stroke="hsl(240 5% 11%)" stroke-width="2.6" stroke-linecap="round"/>' +
+      '<line x1="96" y1="22" x2="112" y2="22" stroke="hsl(240 5% 11%)" stroke-width="2.6" stroke-linecap="round"/>' +
       '</svg>',
     title: 'Жители, чья покупка криптовалюты составит $10 и более, получат один ритуал.',
     steps: [
