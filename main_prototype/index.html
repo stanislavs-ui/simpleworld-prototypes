@@ -4335,8 +4335,8 @@ tailwind.config = {
 
               <!-- Body -->
               <div style="padding: 0 20px 18px;">
-                <!-- Description (smaller, neutral) -->
-                <div id="sKhloeTask-title" style="text-align: center; font-size: 13px; font-weight: 400; color: hsl(0 0% 70%); line-height: 1.55; margin-bottom: 22px; padding: 0 6px;">Жители, чей объём торговли составит $20 и более, получат один ритуал.</div>
+                <!-- Description (smaller, white) -->
+                <div id="sKhloeTask-title" style="text-align: center; font-size: 13px; font-weight: 400; color: #f3f4f6; line-height: 1.55; margin-bottom: 22px; padding: 0 6px;">Жители, чей объём торговли составит $20 и более, получат один ритуал.</div>
 
                 <!-- 3 numbered steps -->
                 <ol id="sKhloeTask-steps" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;"></ol>
@@ -4371,7 +4371,7 @@ tailwind.config = {
             </div>
 
             <style>
-              #sKhloeTask-steps li { position: relative; padding-left: 42px; font-size: 14px; color: hsl(0 0% 82%); line-height: 1.4; min-height: 32px; display: flex; align-items: center; }
+              #sKhloeTask-steps li { position: relative; padding-left: 42px; font-size: 14px; color: #f3f4f6; line-height: 1.4; min-height: 32px; display: flex; align-items: center; }
               #sKhloeTask-steps li::before { counter-increment: khloestep; content: counter(khloestep); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 50%; background: hsl(240 5% 8%); border: 1px solid hsl(240 5% 18%); color: hsl(0 0% 88%); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1; }
               #sKhloeTask-steps { counter-reset: khloestep; }
               #sKhloeTask-note-wrap[open] summary svg { transform: rotate(180deg); transition: transform 0.2s; }
@@ -6370,7 +6370,7 @@ var khloeTaskTypes = {
     title: 'Жители, чей объём торговли составит $20 и более, получат один ритуал.',
     steps: [
       'Открой Simple Wallet',
-      'Купи-продай крипту на $20',
+      'Сделай обмен любой криптовалютной пары кроме стейблкоинов на сумму от $20 и более (например, USDC в эфир)',
       'Вернись к Хлое'
     ],
     note: 'Оборот считается в обе стороны (купил → продал = двойной оборот). Можно несколько сделок — главное, чтобы суммарный оборот был от $20.'
