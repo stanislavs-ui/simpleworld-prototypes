@@ -4325,32 +4325,18 @@ tailwind.config = {
           <div id="sKhloeTask-card-anim" style="margin-top: 16px; opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease;">
             <div id="sKhloeTask-card" data-task-type="volume" style="background: hsl(240 5% 11%); border: 1px solid hsl(240 5% 18%); border-radius: 18px; overflow: hidden;">
 
-              <!-- Progress block: ritual streak -->
-              <div style="padding: 16px 20px 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px;">
-                  <span style="font-size: 10px; font-weight: 700; color: hsl(0 0% 60%); letter-spacing: 1.6px; text-transform: uppercase;">Ритуалы недели</span>
-                  <span style="font-size: 11px; font-weight: 700; color: hsl(0 0% 78%); font-variant-numeric: tabular-nums;"><span id="sKhloeTask-progress-text">0 / 7</span></span>
-                </div>
-                <div id="sKhloeTask-progress-dots" style="display: flex; gap: 5px;">
-                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
-                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
-                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
-                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
-                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
-                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
-                  <div style="flex: 1; height: 6px; border-radius: 3px; background: hsl(240 5% 14%); border: 1px solid hsl(240 5% 22%);"></div>
-                </div>
-              </div>
+              <!-- Type heading (big bold) -->
+              <div id="sKhloeTask-type" style="padding: 22px 20px 0; text-align: center; font-size: 22px; font-weight: 800; color: #f3f4f6; letter-spacing: 0.5px; text-transform: uppercase; line-height: 1.15;">ТОРГОВЫЙ ОБЪЁМ</div>
 
               <!-- Hero zone: just the icon -->
-              <div id="sKhloeTask-hero" style="position: relative; height: 124px; background: transparent; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+              <div id="sKhloeTask-hero" style="position: relative; height: 116px; background: transparent; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                 <div id="sKhloeTask-hero-svg" style="position: relative; z-index: 1; filter: none;"></div>
               </div>
 
               <!-- Body -->
               <div style="padding: 0 20px 18px;">
-                <!-- Big task title (type + amount in one phrase) -->
-                <div id="sKhloeTask-title" style="text-align: center; font-size: 24px; font-weight: 700; color: #f3f4f6; line-height: 1.2; letter-spacing: -0.4px; margin-bottom: 24px; padding: 0 6px;">Объём торгов на $20</div>
+                <!-- Description (smaller, neutral) -->
+                <div id="sKhloeTask-title" style="text-align: center; font-size: 13px; font-weight: 400; color: hsl(0 0% 70%); line-height: 1.55; margin-bottom: 22px; padding: 0 6px;">Жители, чей объём торговли составит $20 и более, получат один ритуал.</div>
 
                 <!-- 3 numbered steps -->
                 <ol id="sKhloeTask-steps" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;"></ol>
@@ -6361,26 +6347,27 @@ function completeKhloeDay2() {
 // SVG = placeholder, заменим на иллюстрации fal.ai в едином стиле с Хлоёй.
 var khloeTaskTypes = {
   volume: {
-    accent: '#10b981',
+    accent: '#f3f4f6',
     heroBg: 'transparent',
     heroGlow: 'transparent',
     heroShadow: '',
+    typeLabel: 'ТОРГОВЫЙ ОБЪЁМ',
     // Token-pair swap: two coins (₿ ↔ $) with bidirectional swap arrows — DeFi-standard
     heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
       // Left coin (₿)
-      '<circle cx="38" cy="50" r="26" stroke="#10b981" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
-      '<text x="38" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#10b981" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">₿</text>' +
+      '<circle cx="38" cy="50" r="26" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
+      '<text x="38" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">₿</text>' +
       // Right coin ($)
-      '<circle cx="110" cy="50" r="26" stroke="#10b981" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
-      '<text x="110" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#10b981" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">$</text>' +
+      '<circle cx="110" cy="50" r="26" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
+      '<text x="110" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">$</text>' +
       // Top swap arrow: left → right
-      '<line x1="64" y1="34" x2="84" y2="34" stroke="#10b981" stroke-width="2.4" stroke-linecap="round"/>' +
-      '<polyline points="78 28 84 34 78 40" stroke="#10b981" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<line x1="64" y1="34" x2="84" y2="34" stroke="#f3f4f6" stroke-width="2.4" stroke-linecap="round"/>' +
+      '<polyline points="78 28 84 34 78 40" stroke="#f3f4f6" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
       // Bottom swap arrow: right → left
-      '<line x1="84" y1="66" x2="64" y2="66" stroke="#10b981" stroke-width="2.4" stroke-linecap="round"/>' +
-      '<polyline points="70 60 64 66 70 72" stroke="#10b981" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<line x1="84" y1="66" x2="64" y2="66" stroke="#f3f4f6" stroke-width="2.4" stroke-linecap="round"/>' +
+      '<polyline points="70 60 64 66 70 72" stroke="#f3f4f6" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
       '</svg>',
-    title: 'Объём торгов на $20',
+    title: 'Жители, чей объём торговли составит $20 и более, получат один ритуал.',
     steps: [
       'Открой Simple Wallet',
       'Купи-продай крипту на $20',
@@ -6389,27 +6376,24 @@ var khloeTaskTypes = {
     note: 'Оборот считается в обе стороны (купил → продал = двойной оборот). Можно несколько сделок — главное, чтобы суммарный оборот был от $20.'
   },
   buy: {
-    accent: '#a78bfa',
+    accent: '#f3f4f6',
     heroBg: 'transparent',
     heroGlow: 'transparent',
     heroShadow: '',
+    typeLabel: 'ПОКУПКА КРИПТЫ',
     // Trending up line + arrow head (Lucide-style trending-up)
     heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
-      // Baseline grid (subtle)
-      '<line x1="2" y1="92" x2="146" y2="92" stroke="#a78bfa" stroke-width="1" opacity="0.2"/>' +
-      // Trend line
-      '<polyline points="10,76 36,58 58,66 86,38 110,46 134,12" stroke="#a78bfa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
-      // Arrow head at top right
-      '<polyline points="118 12 134 12 134 28" stroke="#a78bfa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
-      // Plot dots at vertices (subtle)
-      '<g fill="#a78bfa">' +
+      '<line x1="2" y1="92" x2="146" y2="92" stroke="#f3f4f6" stroke-width="1" opacity="0.2"/>' +
+      '<polyline points="10,76 36,58 58,66 86,38 110,46 134,12" stroke="#f3f4f6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+      '<polyline points="118 12 134 12 134 28" stroke="#f3f4f6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+      '<g fill="#f3f4f6">' +
       '<circle cx="36" cy="58" r="2.5"/>' +
       '<circle cx="58" cy="66" r="2.5"/>' +
       '<circle cx="86" cy="38" r="2.5"/>' +
       '<circle cx="110" cy="46" r="2.5"/>' +
       '</g>' +
       '</svg>',
-    title: 'Покупка крипты на $10',
+    title: 'Жители, чья покупка крипты составит $10 и более, получат один ритуал.',
     steps: [
       'Открой Simple Wallet',
       'Купи любую крипту от $10',
@@ -6418,22 +6402,19 @@ var khloeTaskTypes = {
     note: 'Учитывается сумма покупки, а не текущая стоимость купленного. Если на балансе нет средств — сначала пополни.'
   },
   deposit: {
-    accent: '#eab308',
+    accent: '#f3f4f6',
     heroBg: 'transparent',
     heroGlow: 'transparent',
     heroShadow: '',
+    typeLabel: 'ПОПОЛНЕНИЕ БАЛАНСА',
     // Wallet body + arrow going down INTO it
     heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
-      // Down arrow (above wallet)
-      '<path d="M74 8 V40 M58 30 L74 46 L90 30" stroke="#eab308" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
-      // Wallet body
-      '<rect x="22" y="50" width="104" height="42" rx="6" stroke="#eab308" stroke-width="2.6" fill="none"/>' +
-      // Card slot (horizontal line)
-      '<line x1="22" y1="62" x2="126" y2="62" stroke="#eab308" stroke-width="1.5" opacity="0.4"/>' +
-      // Chip/dot
-      '<circle cx="108" cy="78" r="3.5" fill="#eab308"/>' +
+      '<path d="M74 8 V40 M58 30 L74 46 L90 30" stroke="#f3f4f6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+      '<rect x="22" y="50" width="104" height="42" rx="6" stroke="#f3f4f6" stroke-width="2.6" fill="none"/>' +
+      '<line x1="22" y1="62" x2="126" y2="62" stroke="#f3f4f6" stroke-width="1.5" opacity="0.4"/>' +
+      '<circle cx="108" cy="78" r="3.5" fill="#f3f4f6"/>' +
       '</svg>',
-    title: 'Пополнение баланса на $10',
+    title: 'Жители, чьё пополнение баланса составит $10 и более, получат один ритуал.',
     steps: [
       'Открой Simple Wallet',
       'Пополни баланс от $10 (USDC/USDT)',
@@ -6469,6 +6450,10 @@ function applyKhloeTaskMode(type) {
   if (!card) return;
   card.setAttribute('data-task-type', type);
 
+  // Type heading
+  var typeEl = document.getElementById('sKhloeTask-type');
+  if (typeEl) typeEl.textContent = cfg.typeLabel || '';
+
   // Hero zone
   var hero = document.getElementById('sKhloeTask-hero');
   if (hero) hero.style.background = cfg.heroBg;
@@ -6478,12 +6463,9 @@ function applyKhloeTaskMode(type) {
     heroSvg.style.filter = cfg.heroShadow ? 'drop-shadow(' + cfg.heroShadow + ')' : 'none';
   }
 
-  // Title
+  // Description
   var titleEl = document.getElementById('sKhloeTask-title');
   if (titleEl) titleEl.textContent = cfg.title || '';
-
-  // Progress block — sync with current ritual streak (same source as home-ritual-dots)
-  updateKhloeTaskProgress();
 
   // Steps (numbered via CSS counter)
   var steps = document.getElementById('sKhloeTask-steps');
