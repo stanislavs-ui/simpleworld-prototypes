@@ -4337,13 +4337,13 @@ tailwind.config = {
               <!-- BLOCK 2: Steps + Note -->
               <div style="background: hsl(240 5% 11%); border: 1px solid hsl(240 5% 18%); border-radius: 18px; padding: 20px;">
                 <ol id="sKhloeTask-steps" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;"></ol>
-                <details id="sKhloeTask-note-wrap" style="margin-top: 14px;">
-                  <summary style="cursor: pointer; font-size: 12px; color: hsl(0 0% 60%); user-select: none; list-style: none; display: inline-flex; align-items: center; gap: 4px;">
+                <details id="sKhloeTask-note-wrap" style="margin-top: 16px;">
+                  <summary style="cursor: pointer; font-size: 13px; font-weight: 600; color: #f3f4f6; user-select: none; list-style: none; display: flex; justify-content: center; align-items: center; gap: 6px;">
                     <span>Подробнее</span>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                   </summary>
-                  <div id="sKhloeTask-note" style="font-size: 12px; color: hsl(0 0% 60%); line-height: 1.55; margin-top: 10px; padding: 10px 12px; background: hsl(240 5% 8%); border-radius: 8px;">
-                    Считается оборот в обе стороны (купил → продал = двойной оборот).
+                  <div id="sKhloeTask-note" style="font-size: 13px; color: #f3f4f6; line-height: 1.6; margin-top: 12px; padding: 12px 14px; background: hsl(240 5% 8%); border-radius: 10px; text-align: left;">
+                    Считается любая покупка или продажа крипты на сумму $20 за день. Можно одной сделкой или несколькими — суммируется. Обмены между стейблкоинами (USDC ↔ USDT, DAI и т.п.) не засчитываются.
                   </div>
                 </details>
               </div>
@@ -6368,7 +6368,7 @@ var khloeTaskTypes = {
       'Сделай обмен любой криптовалютной пары кроме стейблкоинов на сумму от $20',
       'Вернись к Хлое'
     ],
-    note: 'Оборот считается в обе стороны (купил → продал = двойной оборот). Можно несколько сделок — главное, чтобы суммарный оборот был от $20.'
+    note: 'Считается любая покупка или продажа крипты на сумму $20 за день. Можно одной сделкой или несколькими — суммируется. Обмены между стейблкоинами (USDC ↔ USDT, DAI и т.п.) не засчитываются.'
   },
   buy: {
     accent: '#f3f4f6',
@@ -6394,7 +6394,7 @@ var khloeTaskTypes = {
       'Купи любую крипту от $10',
       'Вернись к Хлое'
     ],
-    note: 'Учитывается сумма покупки, а не текущая стоимость купленного. Если на балансе нет средств — сначала пополни.'
+    note: 'Считается сумма покупки. Текущая стоимость купленной крипты не важна — если она потом упадёт, ритуал всё равно получишь. Если на балансе нет средств — сначала пополни.'
   },
   deposit: {
     accent: '#f3f4f6',
@@ -6415,7 +6415,7 @@ var khloeTaskTypes = {
       'Пополни баланс от $10 (USDC/USDT)',
       'Вернись к Хлое'
     ],
-    note: 'Можно с внешнего кошелька (USDC/USDT) или с биржи (Binance, Bybit и др.). Внутренние переводы между своими счетами Simple не считаются.'
+    note: 'Засчитывается пополнение с внешнего источника: с другого кошелька (USDC/USDT) или с биржи (Binance, Bybit и др.). Переводы между своими счетами Simple не считаются.'
   }
 };
 
