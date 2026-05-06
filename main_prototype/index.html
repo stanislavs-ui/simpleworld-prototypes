@@ -6460,18 +6460,14 @@ var khloeTaskTypes = {
     typeLabel: 'ПОПОЛНЕНИЕ БАЛАНСА',
     progressCurrent: 0,
     progressTarget: 10,
-    // Banknote → terminal slot — universal "deposit/top-up" metaphor
+    // Money bag with $ — classic universal "money/funds" iconography
     heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
-      // Banknote (above)
-      '<rect x="42" y="10" width="64" height="28" rx="2" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
-      '<text x="74" y="31" text-anchor="middle" font-size="16" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">$</text>' +
-      // Down arrow
-      '<line x1="74" y1="44" x2="74" y2="54" stroke="#f3f4f6" stroke-width="2.6" stroke-linecap="round"/>' +
-      '<polyline points="68 48 74 54 80 48" stroke="#f3f4f6" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-      // Terminal device
-      '<rect x="22" y="60" width="104" height="32" rx="4" stroke="#f3f4f6" stroke-width="2.6" fill="hsl(240 5% 11%)"/>' +
-      // Slot opening (recessed dark groove)
-      '<rect x="40" y="74" width="68" height="4" rx="1" fill="hsl(240 5% 4%)" stroke="#f3f4f6" stroke-width="1.4"/>' +
+      // Bag body with tied top (two peaks at neck)
+      '<path d="M 36 56 C 36 44, 46 38, 52 36 L 56 26 L 60 36 L 88 36 L 92 26 L 96 36 C 102 38, 112 44, 112 56 L 112 72 C 112 86, 96 92, 74 92 C 52 92, 36 86, 36 72 Z" stroke="#f3f4f6" stroke-width="2.6" fill="hsl(240 5% 11%)" stroke-linejoin="round"/>' +
+      // Tie wrap (subtle horizontal line at neck)
+      '<line x1="58" y1="36" x2="90" y2="36" stroke="#f3f4f6" stroke-width="1.6" opacity="0.45"/>' +
+      // $ symbol
+      '<text x="74" y="76" text-anchor="middle" font-size="32" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">$</text>' +
       '</svg>',
     title: 'Жители, чьё пополнение баланса составит $10 и более, получат один ритуал.',
     steps: [
