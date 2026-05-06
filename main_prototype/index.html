@@ -6460,17 +6460,14 @@ var khloeTaskTypes = {
     typeLabel: 'ПОПОЛНЕНИЕ БАЛАНСА',
     progressCurrent: 0,
     progressTarget: 10,
-    // Money bag with $ — rounded bulb body, cinched top with rope + folded wrinkles
+    // Money bag with $ — sack-style with clear neck and rope tie (verified via render)
     heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
-      // Bag body (rounded bulb shape)
-      '<path d="M 50 38 Q 36 50, 36 68 Q 36 90, 74 92 Q 112 90, 112 68 Q 112 50, 98 38 Z" stroke="#f3f4f6" stroke-width="2.6" fill="hsl(240 5% 11%)" stroke-linejoin="round"/>' +
-      // Rope tie (thick horizontal at neck)
-      '<line x1="50" y1="38" x2="98" y2="38" stroke="#f3f4f6" stroke-width="3" stroke-linecap="round"/>' +
-      // Two folded wrinkles above rope (V-shapes representing tied fabric folds)
-      '<path d="M 56 38 L 64 24 L 72 38" stroke="#f3f4f6" stroke-width="2.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>' +
-      '<path d="M 76 38 L 84 24 L 92 38" stroke="#f3f4f6" stroke-width="2.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>' +
+      // Bag body with neck (single path: bag → up to neck → across → down → curve)
+      '<path d="M 36 60 C 36 44, 48 38, 58 36 L 58 26 L 90 26 L 90 36 C 100 38, 112 44, 112 60 C 112 86, 92 94, 74 94 C 56 94, 36 86, 36 60 Z" stroke="#f3f4f6" stroke-width="2.8" fill="hsl(240 5% 11%)" stroke-linejoin="round" stroke-linecap="round"/>' +
+      // Rope tie at neck (thick horizontal)
+      '<line x1="56" y1="38" x2="92" y2="38" stroke="#f3f4f6" stroke-width="3.2" stroke-linecap="round"/>' +
       // $ symbol
-      '<text x="74" y="76" text-anchor="middle" font-size="32" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">$</text>' +
+      '<text x="74" y="74" text-anchor="middle" font-size="30" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">$</text>' +
       '</svg>',
     title: 'Жители, чьё пополнение баланса составит $10 и более, получат один ритуал.',
     steps: [
