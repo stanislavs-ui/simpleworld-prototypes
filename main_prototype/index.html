@@ -6412,15 +6412,20 @@ var khloeTaskTypes = {
     typeLabel: 'ПОКУПКА КРИПТЫ',
     progressCurrent: 4,
     progressTarget: 10,
-    // Single coin ₿ with "+" badge — clear "acquire/buy crypto" semantic, visually distinct from 2-coin swap
+    // Shopping cart with ₿ coin — universal "buy" iconography, distinct from swap/wallet shapes
     heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
-      // Main coin
-      '<circle cx="68" cy="54" r="32" stroke="#f3f4f6" stroke-width="2.6" fill="hsl(240 5% 11%)"/>' +
-      '<text x="68" y="66" text-anchor="middle" font-size="32" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">₿</text>' +
-      // "+" badge in top-right (filled white circle, dark plus inside)
-      '<circle cx="104" cy="22" r="14" fill="#f3f4f6" stroke="hsl(240 5% 11%)" stroke-width="2.4"/>' +
-      '<line x1="104" y1="14" x2="104" y2="30" stroke="hsl(240 5% 11%)" stroke-width="2.6" stroke-linecap="round"/>' +
-      '<line x1="96" y1="22" x2="112" y2="22" stroke="hsl(240 5% 11%)" stroke-width="2.6" stroke-linecap="round"/>' +
+      // Handle (horizontal segment)
+      '<line x1="8" y1="22" x2="26" y2="22" stroke="#f3f4f6" stroke-width="2.6" stroke-linecap="round"/>' +
+      // Handle to basket
+      '<line x1="26" y1="22" x2="40" y2="42" stroke="#f3f4f6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>' +
+      // Basket (trapezoid)
+      '<path d="M40 42 H118 L108 74 H50 Z" stroke="#f3f4f6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+      // Wheels
+      '<circle cx="60" cy="86" r="6" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
+      '<circle cx="98" cy="86" r="6" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
+      // ₿ coin inside cart
+      '<circle cx="78" cy="56" r="12" stroke="#f3f4f6" stroke-width="2" fill="hsl(240 5% 11%)"/>' +
+      '<text x="78" y="62" text-anchor="middle" font-size="15" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">₿</text>' +
       '</svg>',
     title: 'Жители, чья покупка криптовалюты составит $10 и более, получат один ритуал.',
     steps: [
