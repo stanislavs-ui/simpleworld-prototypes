@@ -6460,12 +6460,15 @@ var khloeTaskTypes = {
     typeLabel: 'ПОПОЛНЕНИЕ БАЛАНСА',
     progressCurrent: 0,
     progressTarget: 10,
-    // Money bag with $ — classic universal "money/funds" iconography
+    // Money bag with $ — rounded bulb body, cinched top with rope + folded wrinkles
     heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
-      // Bag body with tied top (two peaks at neck)
-      '<path d="M 36 56 C 36 44, 46 38, 52 36 L 56 26 L 60 36 L 88 36 L 92 26 L 96 36 C 102 38, 112 44, 112 56 L 112 72 C 112 86, 96 92, 74 92 C 52 92, 36 86, 36 72 Z" stroke="#f3f4f6" stroke-width="2.6" fill="hsl(240 5% 11%)" stroke-linejoin="round"/>' +
-      // Tie wrap (subtle horizontal line at neck)
-      '<line x1="58" y1="36" x2="90" y2="36" stroke="#f3f4f6" stroke-width="1.6" opacity="0.45"/>' +
+      // Bag body (rounded bulb shape)
+      '<path d="M 50 38 Q 36 50, 36 68 Q 36 90, 74 92 Q 112 90, 112 68 Q 112 50, 98 38 Z" stroke="#f3f4f6" stroke-width="2.6" fill="hsl(240 5% 11%)" stroke-linejoin="round"/>' +
+      // Rope tie (thick horizontal at neck)
+      '<line x1="50" y1="38" x2="98" y2="38" stroke="#f3f4f6" stroke-width="3" stroke-linecap="round"/>' +
+      // Two folded wrinkles above rope (V-shapes representing tied fabric folds)
+      '<path d="M 56 38 L 64 24 L 72 38" stroke="#f3f4f6" stroke-width="2.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<path d="M 76 38 L 84 24 L 92 38" stroke="#f3f4f6" stroke-width="2.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>' +
       // $ symbol
       '<text x="74" y="76" text-anchor="middle" font-size="32" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">$</text>' +
       '</svg>',
