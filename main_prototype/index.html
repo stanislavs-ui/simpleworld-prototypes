@@ -4328,7 +4328,7 @@ tailwind.config = {
               <!-- BLOCK 1: Type + Icon + Description -->
               <div style="background: hsl(240 5% 11%); border: 1px solid hsl(240 5% 18%); border-radius: 18px; overflow: hidden; padding-bottom: 22px;">
                 <div id="sKhloeTask-type" style="padding: 22px 20px 0; text-align: center; font-size: 22px; font-weight: 800; color: #f3f4f6; letter-spacing: 0.5px; text-transform: uppercase; line-height: 1.15;">ТОРГОВЫЙ ОБЪЁМ</div>
-                <div id="sKhloeTask-hero" style="position: relative; height: 116px; background: transparent; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <div id="sKhloeTask-hero" style="position: relative; height: 144px; background: transparent; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                   <div id="sKhloeTask-hero-svg" style="position: relative; z-index: 1; filter: none;"></div>
                 </div>
                 <div id="sKhloeTask-title" style="text-align: center; font-size: 13px; font-weight: 400; color: #f3f4f6; line-height: 1.55; padding: 0 26px;">Жители, чей объём торговли составит $20 и более, получат один ритуал.</div>
@@ -6365,17 +6365,13 @@ var khloeTaskTypes = {
     progressCurrent: 12,
     progressTarget: 20,
     // Token-pair swap: two coins (₿ ↔ $) with bidirectional swap arrows — DeFi-standard
-    heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
-      // Left coin (₿)
+    heroSvg: '<svg width="200" height="135" viewBox="0 0 148 100" fill="none">' +
       '<circle cx="38" cy="50" r="26" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
       '<text x="38" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">₿</text>' +
-      // Right coin ($)
       '<circle cx="110" cy="50" r="26" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
       '<text x="110" y="60" text-anchor="middle" font-size="26" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">$</text>' +
-      // Top swap arrow: left → right
       '<line x1="64" y1="34" x2="84" y2="34" stroke="#f3f4f6" stroke-width="2.4" stroke-linecap="round"/>' +
       '<polyline points="78 28 84 34 78 40" stroke="#f3f4f6" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-      // Bottom swap arrow: right → left
       '<line x1="84" y1="66" x2="64" y2="66" stroke="#f3f4f6" stroke-width="2.4" stroke-linecap="round"/>' +
       '<polyline points="70 60 64 66 70 72" stroke="#f3f4f6" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
       '</svg>',
@@ -6412,20 +6408,17 @@ var khloeTaskTypes = {
     typeLabel: 'ПОКУПКА КРИПТЫ',
     progressCurrent: 4,
     progressTarget: 10,
-    // Shopping cart with ₿ coin — universal "buy" iconography, distinct from swap/wallet shapes
-    heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
-      // Handle (horizontal segment)
+    // Shopping cart with ₿ coin — wrapped in g translate(0,-7) for vertical centering in hero
+    heroSvg: '<svg width="200" height="135" viewBox="0 0 148 100" fill="none">' +
+      '<g transform="translate(0, -7)">' +
       '<line x1="8" y1="22" x2="26" y2="22" stroke="#f3f4f6" stroke-width="2.6" stroke-linecap="round"/>' +
-      // Handle to basket
       '<line x1="26" y1="22" x2="40" y2="42" stroke="#f3f4f6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>' +
-      // Basket (trapezoid)
       '<path d="M40 42 H118 L108 74 H50 Z" stroke="#f3f4f6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
-      // Wheels
       '<circle cx="60" cy="86" r="6" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
       '<circle cx="98" cy="86" r="6" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
-      // ₿ coin inside cart
       '<circle cx="78" cy="56" r="12" stroke="#f3f4f6" stroke-width="2" fill="hsl(240 5% 11%)"/>' +
       '<text x="78" y="62" text-anchor="middle" font-size="15" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">₿</text>' +
+      '</g>' +
       '</svg>',
     title: 'Жители, чья покупка криптовалюты составит $10 и более, получат один ритуал.',
     steps: [
@@ -6460,17 +6453,15 @@ var khloeTaskTypes = {
     typeLabel: 'ПОПОЛНЕНИЕ БАЛАНСА',
     progressCurrent: 0,
     progressTarget: 10,
-    // Wallet (Tabler-icons geometry) + USDT (₮) coin dropping in from above — verified via render
-    heroSvg: '<svg width="148" height="100" viewBox="0 0 148 100" fill="none">' +
-      // Wallet
-      '<g transform="translate(41.5, 42) scale(2.5)" stroke="#f3f4f6" stroke-width="0.96" fill="hsl(240 5% 11%)" stroke-linejoin="round" stroke-linecap="round">' +
+    // Wallet (Tabler-icons) + USDT (₮) coin dropping in — bigger + vertically centered
+    heroSvg: '<svg width="200" height="135" viewBox="0 0 148 100" fill="none">' +
+      '<g transform="translate(41.6, 33.6) scale(2.7)" stroke="#f3f4f6" stroke-width="0.9" fill="hsl(240 5% 11%)" stroke-linejoin="round" stroke-linecap="round">' +
       '<path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12"/>' +
       '<path d="M20 12v4h-4a2 2 0 0 1 0 -4h4"/>' +
       '</g>' +
-      // USDT coin (above wallet, slightly overlapping like falling in)
-      '<circle cx="74" cy="36" r="14" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
-      '<circle cx="74" cy="36" r="10.5" stroke="#f3f4f6" stroke-width="1.2" fill="none" opacity="0.6"/>' +
-      '<text x="74" y="41.5" text-anchor="middle" font-size="13" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">₮</text>' +
+      '<circle cx="74" cy="24" r="16" stroke="#f3f4f6" stroke-width="2.4" fill="hsl(240 5% 11%)"/>' +
+      '<circle cx="74" cy="24" r="12" stroke="#f3f4f6" stroke-width="1.2" fill="none" opacity="0.6"/>' +
+      '<text x="74" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#f3f4f6" stroke="none" font-family="-apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif">₮</text>' +
       '</svg>',
     title: 'Жители, чьё пополнение баланса составит $10 и более, получат один ритуал.',
     steps: [
