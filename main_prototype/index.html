@@ -4619,7 +4619,14 @@ function goTo(n) {
   if (current >= total) current = total - 1;
   screens[current].classList.add('active');
   updateNav();
-  location.hash = current + 1;
+  // Preserve khloe-task type in hash so reload restores the correct variant (volume/buy/deposit)
+  var hashStr = String(current + 1);
+  if (screens[current] && screens[current].id === 'sKhloeTask') {
+    var t = '';
+    try { t = localStorage.getItem('sw-khloe-task-current-type') || ''; } catch (e) {}
+    if (t) hashStr = hashStr + ':' + t;
+  }
+  location.hash = hashStr;
 
   // Screen 2 (Alex Appears): hide typing dots after bubble appears
   if (current === 2) {
@@ -7107,7 +7114,14 @@ goTo = function(n) {
 };
 
 // Restore screen from URL hash on reload (MUST be after goTo is wrapped)
-const hashScreen = parseInt(location.hash.replace('#', ''));
+// Hash format: "79" (just screen idx) or "79:buy" (screen idx + khloe task type)
+const rawHash = location.hash.replace('#', '');
+const hashParts = rawHash.split(':');
+const hashScreen = parseInt(hashParts[0]);
+const hashTaskType = hashParts[1];
+if (hashTaskType && /^(volume|buy|deposit)$/.test(hashTaskType)) {
+  try { localStorage.setItem('sw-khloe-task-current-type', hashTaskType); } catch (e) {}
+}
 if (hashScreen >= 2 && hashScreen <= total) {
   goTo(hashScreen);
 } else {
