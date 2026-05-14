@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>SIMPLE WORLD — Roadmap нового UGC-квеста</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0b0f;
+    --bg-card: #12141c;
+    --bg-elevated: #181b26;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.16);
+    --text: #ffffff;
+    --text-dim: #ffffff;
+    --text-muted: #ffffff;
+    --neon: #5DFFA0;
+    --neon-glow: rgba(93,255,160,0.25);
+    --gold: #F4B83A;
+    --indigo: #818cf8;
+    --emerald: #10b981;
+    --rose: #fb7185;
+    --cyan: #67e8f9;
+  }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  body {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .brand img {
+    height: 96px;
+    width: auto;
+    display: block;
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    color: #ffffff;
+  }
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+  .dates {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+  .dates .start { color: var(--text-dim); }
+  .dates .arrow { color: var(--neon); }
+  .dates .end {
+    color: var(--neon);
+    font-weight: 600;
+  }
+  .total {
+    margin-top: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 0.12em;
+  }
+  .total b { color: var(--neon); font-weight: 600; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin: 56px 0 24px;
+    padding-left: 4px;
+    text-indent: 0.35em;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: linear-gradient(180deg,
+      var(--neon) 0%,
+      var(--neon) 88%,
+      var(--gold) 100%
+    );
+    opacity: 0.35;
+  }
+  .phase {
+    --progress: 0%;
+    position: relative;
+    margin-bottom: 20px;
+    padding: 20px 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: border-color 0.2s;
+    overflow: hidden;
+  }
+  .phase::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg,
+        transparent 0%,
+        rgba(255,255,255,0.10) 25%,
+        rgba(255,255,255,0.22) 50%,
+        rgba(255,255,255,0.10) 75%,
+        transparent 100%
+      ),
+      linear-gradient(135deg,
+        rgba(93,255,160,0.16) 0%,
+        rgba(16,185,129,0.22) 35%,
+        rgba(93,255,160,0.28) 60%,
+        rgba(16,185,129,0.18) 85%,
+        rgba(93,255,160,0.20) 100%
+      );
+    background-size: 220% 100%, 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 0% 50%, 0 0;
+    clip-path: inset(0 calc(100% - var(--progress, 0%)) 0 0);
+    animation: liquid-shimmer 4.5s ease-in-out infinite;
+    pointer-events: none;
+    border-radius: inherit;
+    z-index: 0;
+    transition: clip-path 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @keyframes liquid-shimmer {
+    0%   { background-position: -50% 50%, 0 0; }
+    50%  { background-position: 150% 50%, 0 0; }
+    100% { background-position: -50% 50%, 0 0; }
+  }
+  .phase.phase-complete {
+    border-color: rgba(93,255,160,0.45);
+    box-shadow: 0 0 24px rgba(93,255,160,0.18);
+  }
+  .phase.phase-complete .phase-progress {
+    color: var(--neon);
+    text-shadow: 0 0 8px var(--neon-glow);
+  }
+  .phase > * { position: relative; z-index: 1; }
+  .phase:hover {
+    border-color: var(--border-strong);
+  }
+  .phase::before {
+    content: '';
+    position: absolute;
+    left: -29px;
+    top: 28px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--neon);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 12px var(--neon-glow);
+    z-index: 2;
+  }
+  .phase-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .phase-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--neon);
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  .phase-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+    min-width: 200px;
+  }
+  .phase-weeks {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    padding: 5px 10px;
+    background: var(--bg-elevated);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    line-height: 1.2;
+  }
+  .phase-dates {
+    font-size: 10px;
+    color: var(--text-dim);
+    opacity: 0.75;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .phase-progress {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--neon);
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+
+  /* CHECKLIST */
+  .checklist {
+    list-style: none;
+    margin-top: 4px;
+  }
+  .checklist li {
+    position: relative;
+    padding: 6px 0 6px 26px;
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.55;
+    transition: opacity 0.2s, color 0.2s, transform 0.15s;
+    cursor: pointer;
+    user-select: none;
+  }
+  .checklist li:hover {
+    color: var(--neon);
+  }
+  .checklist li:hover::before {
+    border-color: var(--neon);
+  }
+  .checklist li:active {
+    transform: translateY(1px);
+  }
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    background: transparent;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .checklist li.done::before {
+    background: var(--neon);
+    border-color: var(--neon);
+    box-shadow: 0 0 8px var(--neon-glow);
+  }
+  .checklist li.done {
+    text-decoration: line-through;
+    opacity: 0.55;
+  }
+
+  /* SPECIAL PHASES */
+  .phase.phase-logic::before {
+    background: var(--emerald);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 12px rgba(16,185,129,0.45);
+  }
+  .phase.phase-logic .phase-num { color: var(--emerald); }
+
+  .phase.phase-design::before {
+    background: var(--cyan);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 12px rgba(103,232,249,0.4);
+  }
+  .phase.phase-design .phase-num { color: var(--cyan); }
+
+  .phase.phase-qa {
+    border-color: rgba(244,184,58,0.22);
+  }
+  .phase.phase-qa::before {
+    background: var(--gold);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 12px rgba(244,184,58,0.4);
+  }
+  .phase.phase-qa .phase-num { color: var(--gold); }
+
+  .phase.phase-launch {
+    border-color: rgba(244,184,58,0.3);
+  }
+  .phase.phase-launch::before {
+    background: var(--gold);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 16px rgba(244,184,58,0.5);
+  }
+  .phase.phase-launch .phase-num { color: var(--gold); }
+
+  /* PARALLEL TRACKS */
+  .tracks {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 32px;
+    width: calc(100vw - 48px);
+    max-width: 1280px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .track {
+    padding: 18px 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--indigo);
+    border-radius: 12px;
+  }
+  @media (max-width: 760px) {
+    .tracks {
+      grid-template-columns: 1fr;
+      width: 100%;
+      left: 0;
+      transform: none;
+    }
+  }
+  .track-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--indigo);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .track-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .track-body {
+    color: var(--text-dim);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* WORKING DOCS */
+  .docs {
+    margin-top: 32px;
+    padding: 24px 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    border-left: 3px solid var(--rose);
+  }
+  .docs-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--rose);
+    letter-spacing: 0.2em;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .docs-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .docs-list li {
+    color: var(--text-dim);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .docs-list li strong {
+    display: block;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  /* FINAL CAPSULE */
+  .final {
+    margin-top: 56px;
+    padding: 36px 32px;
+    background: linear-gradient(135deg, rgba(244,184,58,0.08) 0%, rgba(93,255,160,0.05) 100%);
+    border: 1px solid rgba(244,184,58,0.3);
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .final::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .final-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.45em;
+    color: var(--gold);
+    margin-bottom: 14px;
+    text-indent: 0.45em;
+  }
+  .final-date {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.02em;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--neon) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .final-sub {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 32px 16px; }
+    h1 { font-size: 28px; }
+    .final-date { font-size: 32px; }
+    .phase { padding: 16px 18px; }
+    .timeline { padding-left: 24px; }
+    .phase::before { left: -21px; }
+  }
+
+  /* PRINT / PDF */
+  @page {
+    size: A4 portrait;
+    margin: 14mm 12mm;
+  }
+  @media print {
+    html, body {
+      background: var(--bg) !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      max-width: 100%;
+      padding: 0;
+    }
+    header,
+    .phase,
+    .track,
+    .final {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .section-title {
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+    .timeline {
+      break-inside: auto;
+    }
+    .tracks {
+      width: 100%;
+      max-width: 100%;
+      left: 0;
+      transform: none;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .final {
+      break-before: auto;
+      page-break-before: auto;
+    }
+    .phase {
+      box-shadow: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><img src="../assets/brand/logo-on-dark-transparent.png" alt="Simple World"></div>
+  <h1>Roadmap нового UGC-квеста</h1>
+  <p class="subtitle">Путь от концепта до запуска</p>
+  <div class="dates">
+    <span class="start">старт: 13.05.2026</span>
+    <span class="arrow">→</span>
+    <span class="end">запуск: 15.07.2026</span>
+  </div>
+  <div class="total">всего: <b>9 недель</b></div>
+</header>
+
+<div class="section-title">8 фаз нового квеста</div>
+
+<div class="timeline">
+
+  <div class="phase" style="--progress: 0%;">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 01</span>
+      <span class="phase-title">Концепция, исследование и структура</span>
+      <span class="phase-weeks"><span>1,5 недели</span><span class="phase-dates">13.05 — 22.05</span></span>
+      <span class="phase-progress">0%</span>
+    </div>
+    <ul class="checklist">
+      <li>Механика UGC-квеста</li>
+      <li>Бриф квеста</li>
+      <li>Точка входа в квест</li>
+      <li>Связь с другими персонажами (Алекс, Мира, AI-персонажи юзеров в комьюнити)</li>
+      <li>Как создать бесконечный квест</li>
+      <li>Экономика квеста (юнит-экономика, пожизненная ценность юзера, сходимость)</li>
+      <li>Прогноз бюджета выплат на первый месяц</li>
+      <li>Анализ лучших практик по модулям</li>
+      <li>Метрики успеха релиза</li>
+    </ul>
+  </div>
+
+  <div class="phase phase-logic" style="--progress: 0%;">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 02</span>
+      <span class="phase-title">Логика и механика</span>
+      <span class="phase-weeks"><span>1 неделя</span><span class="phase-dates">23.05 — 29.05</span></span>
+      <span class="phase-progress">0%</span>
+    </div>
+    <ul class="checklist">
+      <li>Логика взаимодействий: что происходит при каждом действии («нажал → получил → дальше»)</li>
+      <li>Сценарии веток</li>
+      <li>Лестница наград за задание (деньги, артефакты, бейджи, опыт, статус)</li>
+      <li>Лестница наград сокровищницы</li>
+      <li>Роль ритуала в этом квесте</li>
+      <li>Разделение наград по типу метрик (просмотры, лайки, ретвиты, подписчики, комментарии)</li>
+      <li>Повышенная реферальная награда для контент-мейкеров</li>
+      <li>Возврат юзера и пуши</li>
+      <li>Подсказки и помощь внутри квеста</li>
+    </ul>
+  </div>
+
+  <div class="phase" style="--progress: 0%;">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 03</span>
+      <span class="phase-title">Тексты и сценарии</span>
+      <span class="phase-weeks"><span>1 неделя</span><span class="phase-dates">30.05 — 05.06</span></span>
+      <span class="phase-progress">0%</span>
+    </div>
+    <ul class="checklist">
+      <li>Имена ключевых сущностей (Хост, AI-персонаж, уровень, ритуал, артефакт, бейдж)</li>
+      <li>Диалоги Хоста на всех экранах квеста</li>
+      <li>Тон и характер Хоста</li>
+      <li>Сценарии серии Хоста после онбординга (2-я, 3-я, 4-я неделя)</li>
+      <li>Методики по TikTok (гайды от Хоста: как снимать, чтобы заходило)</li>
+      <li>Тексты подсказок и тултипов</li>
+      <li>Тексты пушей и писем-возвратов</li>
+      <li>Тексты тизерной кампании</li>
+    </ul>
+  </div>
+
+  <div class="phase phase-design" style="--progress: 0%;">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 04</span>
+      <span class="phase-title">Дизайн Хоста и экранов</span>
+      <span class="phase-weeks"><span>1 неделя</span><span class="phase-dates">06.06 — 12.06</span></span>
+      <span class="phase-progress">0%</span>
+    </div>
+    <ul class="checklist">
+      <li>Визуальный паспорт Хоста: образ, характер, эмоции</li>
+      <li>Ассеты персонажа (варианты, состояния)</li>
+      <li>Дизайн всех экранов квеста</li>
+      <li>Состояния и переходы между экранами</li>
+      <li>Иллюстрации и иконки для механик</li>
+    </ul>
+  </div>
+
+  <div class="phase" style="--progress: 0%;">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 05</span>
+      <span class="phase-title">Прототип и технический план</span>
+      <span class="phase-weeks"><span>1 неделя</span><span class="phase-dates">13.06 — 19.06</span></span>
+      <span class="phase-progress">0%</span>
+    </div>
+    <ul class="checklist">
+      <li>PRD квеста</li>
+      <li>Интерактивный прототип в HTML</li>
+      <li>Декомпозиция в эпики и истории</li>
+      <li>Оценки сроков по эпикам</li>
+      <li>Схема данных и архитектура</li>
+      <li>Интеграции: соц-площадки, Wallet, аналитика, ИИ-проверка контента</li>
+    </ul>
+  </div>
+
+  <div class="phase" style="--progress: 0%;">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 06</span>
+      <span class="phase-title">Разработка</span>
+      <span class="phase-weeks"><span>2 недели</span><span class="phase-dates">20.06 — 03.07</span></span>
+      <span class="phase-progress">0%</span>
+    </div>
+    <ul class="checklist">
+      <li>Бэкенд: сервисы, БД, интеграции</li>
+      <li>Фронтенд: экраны, состояния, переходы</li>
+      <li>Интеграция с соц-площадками (привязка аккаунтов)</li>
+      <li>Интеграция с Wallet и выплаты</li>
+      <li>ИИ-проверка контента (разработка)</li>
+      <li>Аналитика и события трекинга</li>
+      <li>Мониторинг ошибок и план реагирования на сбои</li>
+    </ul>
+  </div>
+
+  <div class="phase phase-qa" style="--progress: 0%;">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 07</span>
+      <span class="phase-title">Тестирование</span>
+      <span class="phase-weeks"><span>1 неделя</span><span class="phase-dates">04.07 — 10.07</span></span>
+      <span class="phase-progress">0%</span>
+    </div>
+    <ul class="checklist">
+      <li>Функциональные сценарии и краевые случаи</li>
+      <li>Регрессия старых квестов Алекса и Миры</li>
+      <li>Нагрузочное тестирование</li>
+      <li>Мобильные устройства</li>
+      <li>Дашборд метрик команды готов</li>
+      <li>Релиз-кандидат</li>
+    </ul>
+  </div>
+
+  <div class="phase phase-launch" style="--progress: 0%;">
+    <div class="phase-header">
+      <span class="phase-num">PHASE 08</span>
+      <span class="phase-title">Подготовка к запуску и релиз</span>
+      <span class="phase-weeks"><span>несколько дней</span><span class="phase-dates">11.07 — 14.07</span></span>
+      <span class="phase-progress">0%</span>
+    </div>
+    <ul class="checklist">
+      <li>Финальный чек-лист запуска</li>
+      <li>Прогон на стейдже</li>
+      <li>Инвайт-лист и сегменты аудитории</li>
+      <li>Финальные материалы анонса</li>
+      <li>Релиз</li>
+      <li>Наблюдение и оперативные правки</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="section-title">Параллельные треки</div>
+
+<div class="tracks">
+
+  <div class="track">
+    <div class="track-label">ТРЕК 1</div>
+    <div class="track-title">SMM-агент</div>
+    <div class="track-body">
+      Создание и полноценная настройка SMM-агента: голос, инструкции, форматы, площадки, ритм публикаций. Цель — каналы растут без ручного вмешательства. Идёт параллельно с основными фазами.
+    </div>
+  </div>
+
+  <div class="track">
+    <div class="track-label">ТРЕК 2</div>
+    <div class="track-title">Support-агент</div>
+    <div class="track-body">
+      Полноценная настройка агента поддержки: база знаний, сценарии, тон, эскалация. К моменту релиза агент берёт на себя массовый поток вопросов. Параллельный трек без жёстких сроков.
+    </div>
+  </div>
+
+  <div class="track">
+    <div class="track-label">ТРЕК 3</div>
+    <div class="track-title">Пересмотр старой версии</div>
+    <div class="track-body">
+      Доработка квестов Алекса и Миры: вычистка длиннот, фиксы накопленных багов, добавление недостающего. Цель — собрать единую цельную версию продукта к запуску. Идёт параллельно, без блокировки основной timeline.
+    </div>
+  </div>
+
+  <div class="track">
+    <div class="track-label">ТРЕК 4</div>
+    <div class="track-title">План анонса и тизерная кампания</div>
+    <div class="track-body">
+      Тизерная кампания за 2–3 недели до 15.07: материалы, сегменты аудитории для первых инвайтов, сценарии анонсов на каналах. Дана и Ника ведут, активный старт с фазы 05.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    const STORAGE_KEY = 'ugc-quest-roadmap-progress-v1';
+    const saved = (() => {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+      catch (e) { return {}; }
+    })();
+
+    document.querySelectorAll('.phase').forEach((phase, phaseIdx) => {
+      const items = Array.from(phase.querySelectorAll('.checklist li'));
+      const progressEl = phase.querySelector('.phase-progress');
+
+      items.forEach((item, idx) => {
+        const key = `p${phaseIdx}_i${idx}`;
+        if (saved[key]) item.classList.add('done');
+
+        item.addEventListener('click', () => {
+          item.classList.toggle('done');
+          const newKey = `p${phaseIdx}_i${idx}`;
+          if (item.classList.contains('done')) saved[newKey] = true;
+          else delete saved[newKey];
+          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); } catch (e) {}
+          updateProgress();
+        });
+      });
+
+      function updateProgress() {
+        const total = items.length;
+        if (!total) return;
+        const done = phase.querySelectorAll('.checklist li.done').length;
+        const pct = Math.round((done / total) * 100);
+        phase.style.setProperty('--progress', pct + '%');
+        if (progressEl) progressEl.textContent = pct + '%';
+        if (pct === 100) phase.classList.add('phase-complete');
+        else phase.classList.remove('phase-complete');
+      }
+
+      updateProgress();
+    });
+  })();
+</script>
+
+</body>
+</html>

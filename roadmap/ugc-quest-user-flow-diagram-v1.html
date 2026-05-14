@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>SIMPLE WORLD — UGC-квест: схема пользовательского пути</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0b0f;
+    --bg-card: #12141c;
+    --bg-elevated: #181b26;
+    --border: rgba(255,255,255,0.08);
+    --text: #ffffff;
+    --text-dim: rgba(255,255,255,0.65);
+    --neon: #5DFFA0;
+    --neon-glow: rgba(93,255,160,0.25);
+    --emerald: #10b981;
+    --emerald-glow: rgba(16,185,129,0.35);
+    --cyan: #67e8f9;
+    --cyan-glow: rgba(103,232,249,0.35);
+    --gold: #F4B83A;
+    --indigo: #818cf8;
+    --rose: #fb7185;
+  }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+  body {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .brand img {
+    height: 96px;
+    width: auto;
+    display: block;
+  }
+  h1 {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .legend-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+  .lb-neon { background: var(--neon); box-shadow: 0 0 6px var(--neon-glow); }
+  .lb-emerald { background: var(--emerald); box-shadow: 0 0 6px var(--emerald-glow); }
+  .lb-cyan { background: var(--cyan); box-shadow: 0 0 6px var(--cyan-glow); }
+  .lb-gold { background: var(--gold); }
+
+  /* CANVAS */
+  .canvas {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* NODE */
+  .node {
+    position: relative;
+    background: var(--bg-card);
+    border: 1.5px solid var(--neon);
+    border-radius: 14px;
+    padding: 16px 22px;
+    min-width: 280px;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(93,255,160,0.08);
+    z-index: 2;
+  }
+  .node-icon {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .node-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--neon);
+    margin-bottom: 6px;
+  }
+  .node-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .node-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.45;
+  }
+
+  /* USER node — circle, distinct */
+  .node-user {
+    width: 90px;
+    height: 90px;
+    min-width: 0;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(93,255,160,0.12) 0%, rgba(16,185,129,0.18) 100%);
+    border: 2px solid var(--neon);
+    box-shadow: 0 0 24px rgba(93,255,160,0.20);
+  }
+  .node-user .node-icon {
+    font-size: 38px;
+    margin-bottom: 0;
+  }
+
+  /* DECISION node (diamond style) */
+  .node-decision {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(244,184,58,0.15);
+    background: linear-gradient(180deg, var(--bg-card) 0%, rgba(244,184,58,0.06) 100%);
+  }
+  .node-decision .node-label { color: var(--gold); }
+
+  /* Branch nodes */
+  .node-emerald {
+    border-color: var(--emerald);
+    box-shadow: 0 0 18px var(--emerald-glow);
+  }
+  .node-emerald .node-label { color: var(--emerald); }
+
+  .node-cyan {
+    border-color: var(--cyan);
+    box-shadow: 0 0 18px var(--cyan-glow);
+  }
+  .node-cyan .node-label { color: var(--cyan); }
+
+  /* ARROW */
+  .arrow {
+    width: 2px;
+    height: 38px;
+    background: var(--neon);
+    opacity: 0.6;
+    position: relative;
+    z-index: 1;
+  }
+  .arrow::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: -4px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid var(--neon);
+    opacity: 1;
+  }
+  .arrow.gold { background: var(--gold); }
+  .arrow.gold::after { border-top-color: var(--gold); }
+  .arrow.emerald { background: var(--emerald); }
+  .arrow.emerald::after { border-top-color: var(--emerald); }
+  .arrow.cyan { background: var(--cyan); }
+  .arrow.cyan::after { border-top-color: var(--cyan); }
+  .arrow.loop {
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--neon) 0px,
+      var(--neon) 4px,
+      transparent 4px,
+      transparent 9px
+    );
+    background-color: transparent;
+  }
+
+  /* FORK */
+  .fork-zone {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 0;
+  }
+  .fork-line-top {
+    height: 24px;
+    width: 2px;
+    background: var(--gold);
+    margin: 0 auto;
+    opacity: 0.6;
+  }
+  .fork-horizontal {
+    height: 2px;
+    background: linear-gradient(90deg, var(--emerald) 0%, var(--gold) 50%, var(--cyan) 100%);
+    margin: 0 auto;
+    width: 70%;
+    opacity: 0.7;
+    position: relative;
+  }
+  .fork-down {
+    height: 28px;
+    width: 2px;
+    opacity: 0.6;
+    position: relative;
+  }
+  .fork-down::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: -4px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid currentColor;
+  }
+  .fork-down.left {
+    background: var(--emerald);
+    color: var(--emerald);
+    margin-left: 15%;
+  }
+  .fork-down.right {
+    background: var(--cyan);
+    color: var(--cyan);
+    margin-right: 15%;
+    margin-left: auto;
+  }
+
+  .branches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 8px;
+  }
+  .branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .branch-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+  .branch-tag.a {
+    color: var(--emerald);
+    border: 1px solid var(--emerald);
+    background: rgba(16,185,129,0.06);
+  }
+  .branch-tag.b {
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+    background: rgba(103,232,249,0.06);
+  }
+
+  /* MERGE */
+  .merge-zone {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 28px;
+  }
+  .merge-arms {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    height: 30px;
+    position: relative;
+  }
+  .merge-arm {
+    width: 2px;
+    height: 30px;
+    margin: 0 auto;
+    opacity: 0.6;
+  }
+  .merge-arm.left { background: var(--emerald); }
+  .merge-arm.right { background: var(--cyan); }
+  .merge-horizontal {
+    width: 70%;
+    height: 2px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, var(--emerald) 0%, var(--neon) 50%, var(--cyan) 100%);
+    opacity: 0.6;
+  }
+  .merge-down {
+    width: 2px;
+    height: 28px;
+    background: var(--neon);
+    margin: 0 auto;
+    opacity: 0.6;
+    position: relative;
+  }
+  .merge-down::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: -4px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid var(--neon);
+  }
+
+  /* TASKS row */
+  .tasks-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 12px;
+  }
+  .task {
+    background: var(--bg-card);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .task-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .task-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .task-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  /* REWARD node */
+  .node-reward {
+    border-color: var(--gold);
+    box-shadow: 0 0 22px rgba(244,184,58,0.20);
+    background: linear-gradient(180deg, var(--bg-card) 0%, rgba(244,184,58,0.08) 100%);
+  }
+  .node-reward .node-label { color: var(--gold); }
+
+  /* LOOP */
+  .loop-wrap {
+    position: relative;
+    margin-top: 32px;
+    width: 100%;
+    max-width: 720px;
+  }
+  .loop-card {
+    background: var(--bg-card);
+    border: 1.5px dashed var(--neon);
+    border-radius: 14px;
+    padding: 18px 22px;
+    text-align: center;
+    position: relative;
+  }
+  .loop-icon {
+    font-size: 28px;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .loop-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--neon);
+    margin-bottom: 4px;
+  }
+  .loop-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  /* PROGRESSION TABLE */
+  .progression {
+    width: 100%;
+    max-width: 720px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--neon);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(93,255,160,0.08);
+  }
+  .prog-header,
+  .prog-row {
+    display: grid;
+    grid-template-columns: 64px repeat(4, 1fr);
+    align-items: center;
+  }
+  .prog-header {
+    background: rgba(93,255,160,0.10);
+    border-bottom: 1px solid rgba(93,255,160,0.3);
+  }
+  .prog-header .prog-cell {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--neon);
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px 6px;
+  }
+  .prog-header .prog-cell:first-child {
+    color: var(--text-dim);
+  }
+  .prog-row {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s;
+  }
+  .prog-row:last-child { border-bottom: 0; }
+  .prog-row:hover { background: rgba(93,255,160,0.04); }
+  .prog-cell {
+    padding: 12px 6px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .prog-cell:first-child {
+    color: var(--neon);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+  }
+  .prog-row.tier-mid .prog-cell { color: rgba(255,255,255,0.85); }
+  .prog-row.tier-high .prog-cell { color: var(--gold); }
+  .prog-row.tier-high .prog-cell:first-child { color: var(--gold); }
+
+  /* FORK with REFERRAL */
+  .fork-after-1000 {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 0;
+    position: relative;
+  }
+  .fork-1000-top {
+    height: 24px;
+    width: 2px;
+    background: var(--gold);
+    margin: 0 auto;
+    opacity: 0.7;
+  }
+  .fork-1000-label {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    padding: 6px 14px;
+    border: 1px solid var(--gold);
+    border-radius: 100px;
+    margin: 0 auto 8px;
+    display: inline-block;
+    background: rgba(244,184,58,0.06);
+  }
+  .fork-1000-center {
+    text-align: center;
+    margin: 0 auto;
+  }
+  .fork-1000-horiz {
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon) 0%, var(--gold) 50%, var(--indigo) 100%);
+    width: 75%;
+    margin: 0 auto;
+    opacity: 0.7;
+  }
+  .fork-1000-down {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 75%;
+    margin: 0 auto;
+  }
+  .fork-1000-arm {
+    height: 28px;
+    width: 2px;
+    opacity: 0.7;
+    position: relative;
+    margin: 0 auto;
+  }
+  .fork-1000-arm.left {
+    background: var(--neon);
+    color: var(--neon);
+  }
+  .fork-1000-arm.right {
+    background: var(--indigo);
+    color: var(--indigo);
+  }
+  .fork-1000-arm::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: -4px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid currentColor;
+  }
+  .branches-after-1000 {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 40px;
+    width: 100%;
+    max-width: 1080px;
+    margin-top: 6px;
+    align-items: flex-start;
+  }
+  .branch-content,
+  .branch-referral {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .branch-tag-large {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 14px;
+  }
+  .branch-tag-large.content {
+    color: var(--neon);
+    border: 1px solid var(--neon);
+    background: rgba(93,255,160,0.06);
+  }
+  .branch-tag-large.referral {
+    color: var(--indigo);
+    border: 1px solid var(--indigo);
+    background: rgba(129,140,248,0.06);
+  }
+  .referral-card {
+    width: 100%;
+    background: var(--bg-card);
+    border: 1.5px solid var(--indigo);
+    border-radius: 14px;
+    padding: 24px 22px;
+    text-align: center;
+    box-shadow: 0 0 22px rgba(129,140,248,0.12);
+  }
+  .referral-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .referral-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .referral-percent {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--indigo);
+    margin: 12px 0 4px;
+  }
+  .referral-percent-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .referral-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .progression.continued {
+    margin: 0;
+  }
+
+  /* Mobile */
+  @media (max-width: 760px) {
+    body { padding: 32px 16px; }
+    h1 { font-size: 22px; }
+    .node { min-width: 0; max-width: 100%; }
+    .branches { grid-template-columns: 1fr; gap: 32px; }
+    .fork-down { display: none; }
+    .merge-arms { grid-template-columns: 1fr; }
+    .merge-arm { display: none; }
+    .merge-horizontal { display: none; }
+    .prog-header, .prog-row { grid-template-columns: 48px repeat(4, 1fr); }
+    .prog-cell { font-size: 11px; padding: 10px 4px; }
+    .branches-after-1000 { grid-template-columns: 1fr; gap: 28px; }
+    .fork-1000-horiz { width: 90%; }
+    .fork-1000-down { width: 90%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><img src="../assets/brand/logo-on-dark-transparent.png" alt="Simple World"></div>
+  <h1>UGC-квест: схема пути юзера</h1>
+  <p class="subtitle">От первого шага до бесконечной прогрессии</p>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-box lb-neon"></span>основной путь</div>
+  <div class="legend-item"><span class="legend-box lb-gold"></span>развилка / выбор</div>
+  <div class="legend-item"><span class="legend-box lb-emerald"></span>ветка новичка</div>
+  <div class="legend-item"><span class="legend-box lb-cyan"></span>ветка знающего</div>
+</div>
+
+<div class="canvas">
+
+  <!-- USER -->
+  <div class="node node-user">
+    <span class="node-icon">🧍</span>
+  </div>
+  <div class="arrow"></div>
+
+  <!-- STEP 01: HOST WELCOME -->
+  <div class="node">
+    <span class="node-icon">🧙</span>
+    <div class="node-label">STEP 01</div>
+    <div class="node-title">Встреча с Хостом</div>
+    <div class="node-desc">Хост приветствует юзера, рассказывает суть квеста</div>
+  </div>
+  <div class="arrow"></div>
+
+  <!-- STEP 02: CREATE AI CHARACTER -->
+  <div class="node">
+    <span class="node-icon">🎨</span>
+    <div class="node-label">STEP 02</div>
+    <div class="node-title">Создание AI-персонажа</div>
+    <div class="node-desc">Юзер собирает своего персонажа через ИИ</div>
+  </div>
+  <div class="arrow"></div>
+
+  <!-- STEP 03: BACK TO HOST -->
+  <div class="node">
+    <span class="node-icon">🧙</span>
+    <div class="node-label">STEP 03</div>
+    <div class="node-title">Возврат к Хосту</div>
+    <div class="node-desc">Юзер показывает своего персонажа</div>
+  </div>
+  <div class="arrow gold"></div>
+
+  <!-- STEP 04: FORK -->
+  <div class="node node-decision">
+    <span class="node-icon">❓</span>
+    <div class="node-label">STEP 04 · РАЗВИЛКА</div>
+    <div class="node-title">Какой у тебя уровень?</div>
+    <div class="node-desc">«я с нуля» / «я уже что-то умею»</div>
+  </div>
+
+  <!-- FORK ZONE -->
+  <div class="fork-zone">
+    <div class="fork-line-top"></div>
+    <div class="fork-horizontal"></div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 900px; margin: 0 auto;">
+      <div class="fork-down left"></div>
+      <div class="fork-down right"></div>
+    </div>
+  </div>
+
+  <!-- BRANCHES -->
+  <div class="branches">
+    <!-- A: BEGINNER -->
+    <div class="branch">
+      <span class="branch-tag a">ВЕТКА А · НОВИЧОК</span>
+      <div class="node node-emerald">
+        <span class="node-icon">📚</span>
+        <div class="node-label">STEP 05A</div>
+        <div class="node-title">База с нуля</div>
+        <div class="node-desc">Обучающий блок: ключевые понятия квеста с самого начала</div>
+      </div>
+      <div class="arrow emerald"></div>
+      <div class="node node-emerald">
+        <span class="node-icon">🛤️</span>
+        <div class="node-label">STEP 06A</div>
+        <div class="node-title">Сценарий для новичка</div>
+        <div class="node-desc">Свой путь, адаптированный под старт с нуля</div>
+      </div>
+    </div>
+
+    <!-- B: EXPERIENCED -->
+    <div class="branch">
+      <span class="branch-tag b">ВЕТКА Б · ЗНАЮЩИЙ</span>
+      <div class="node node-cyan">
+        <span class="node-icon">📝</span>
+        <div class="node-label">STEP 05B</div>
+        <div class="node-title">Квиз на уровень</div>
+        <div class="node-desc">Юзер проходит тест, определяется реальный уровень</div>
+      </div>
+      <div class="arrow cyan"></div>
+      <div class="node node-cyan">
+        <span class="node-icon">🛤️</span>
+        <div class="node-label">STEP 06B</div>
+        <div class="node-title">Сценарий по уровню</div>
+        <div class="node-desc">Свой путь, адаптированный под уже имеющийся уровень</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MERGE -->
+  <div class="merge-zone">
+    <div class="merge-arms">
+      <div class="merge-arm left"></div>
+      <div class="merge-arm right"></div>
+    </div>
+    <div class="merge-horizontal"></div>
+    <div class="merge-down"></div>
+  </div>
+
+  <!-- TASKS HUB -->
+  <div class="node">
+    <span class="node-icon">🎯</span>
+    <div class="node-label">STEP 07</div>
+    <div class="node-title">Задания квеста</div>
+    <div class="node-desc">Юзер берёт задание у Хоста и идёт снимать контент</div>
+  </div>
+  <div class="arrow"></div>
+
+  <!-- PROGRESSION TABLE: rows 1-2 (before fork) -->
+  <div class="progression">
+    <div class="prog-header">
+      <div class="prog-cell">Уровень</div>
+      <div class="prog-cell">👁 Просмотры</div>
+      <div class="prog-cell">❤ Лайки</div>
+      <div class="prog-cell">💬 Комментарии</div>
+      <div class="prog-cell">👥 Подписчики</div>
+    </div>
+    <div class="prog-row">
+      <div class="prog-cell">L1</div>
+      <div class="prog-cell">500</div>
+      <div class="prog-cell">500</div>
+      <div class="prog-cell">500</div>
+      <div class="prog-cell">500</div>
+    </div>
+    <div class="prog-row">
+      <div class="prog-cell">L2</div>
+      <div class="prog-cell">1 000</div>
+      <div class="prog-cell">1 000</div>
+      <div class="prog-cell">1 000</div>
+      <div class="prog-cell">1 000</div>
+    </div>
+  </div>
+
+  <!-- FORK AFTER 1000 -->
+  <div class="fork-after-1000">
+    <div class="fork-1000-top"></div>
+    <div class="fork-1000-center">
+      <span class="fork-1000-label">РАЗВИЛКА · ПОСЛЕ 1 000</span>
+    </div>
+    <div class="fork-1000-horiz"></div>
+    <div class="fork-1000-down">
+      <div class="fork-1000-arm left"></div>
+      <div class="fork-1000-arm right"></div>
+    </div>
+  </div>
+
+  <!-- TWO BRANCHES: continue content OR go to referral -->
+  <div class="branches-after-1000">
+
+    <!-- LEFT BRANCH: continue progression -->
+    <div class="branch-content">
+      <span class="branch-tag-large content">СВОЙ КОНТЕНТ · ПОВЫШЕННАЯ НАГРАДА</span>
+      <div class="progression continued">
+        <div class="prog-header">
+          <div class="prog-cell">Уровень</div>
+          <div class="prog-cell">👁 Просмотры</div>
+          <div class="prog-cell">❤ Лайки</div>
+          <div class="prog-cell">💬 Комментарии</div>
+          <div class="prog-cell">👥 Подписчики</div>
+        </div>
+        <div class="prog-row tier-mid">
+          <div class="prog-cell">L3</div>
+          <div class="prog-cell">5 000</div>
+          <div class="prog-cell">5 000</div>
+          <div class="prog-cell">5 000</div>
+          <div class="prog-cell">5 000</div>
+        </div>
+        <div class="prog-row tier-mid">
+          <div class="prog-cell">L4</div>
+          <div class="prog-cell">10 000</div>
+          <div class="prog-cell">10 000</div>
+          <div class="prog-cell">10 000</div>
+          <div class="prog-cell">10 000</div>
+        </div>
+        <div class="prog-row tier-mid">
+          <div class="prog-cell">L5</div>
+          <div class="prog-cell">20 000</div>
+          <div class="prog-cell">20 000</div>
+          <div class="prog-cell">20 000</div>
+          <div class="prog-cell">20 000</div>
+        </div>
+        <div class="prog-row tier-mid">
+          <div class="prog-cell">L6</div>
+          <div class="prog-cell">50 000</div>
+          <div class="prog-cell">50 000</div>
+          <div class="prog-cell">50 000</div>
+          <div class="prog-cell">50 000</div>
+        </div>
+        <div class="prog-row tier-mid">
+          <div class="prog-cell">L7</div>
+          <div class="prog-cell">100 000</div>
+          <div class="prog-cell">100 000</div>
+          <div class="prog-cell">100 000</div>
+          <div class="prog-cell">100 000</div>
+        </div>
+        <div class="prog-row tier-high">
+          <div class="prog-cell">L8</div>
+          <div class="prog-cell">200 000</div>
+          <div class="prog-cell">200 000</div>
+          <div class="prog-cell">200 000</div>
+          <div class="prog-cell">200 000</div>
+        </div>
+        <div class="prog-row tier-high">
+          <div class="prog-cell">L9</div>
+          <div class="prog-cell">500 000</div>
+          <div class="prog-cell">500 000</div>
+          <div class="prog-cell">500 000</div>
+          <div class="prog-cell">500 000</div>
+        </div>
+        <div class="prog-row tier-high">
+          <div class="prog-cell">L10</div>
+          <div class="prog-cell">1 000 000</div>
+          <div class="prog-cell">1 000 000</div>
+          <div class="prog-cell">1 000 000</div>
+          <div class="prog-cell">1 000 000</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT BRANCH: referral program -->
+    <div class="branch-referral">
+      <span class="branch-tag-large referral">РЕФЕРАЛЬНАЯ ПРОГРАММА</span>
+      <div class="referral-card">
+        <span class="referral-icon">🤝</span>
+        <div class="referral-title">Привод друзей</div>
+        <div class="referral-percent">+%</div>
+        <div class="referral-percent-sub">повышенный процент</div>
+        <div class="referral-desc">
+          Юзер уходит из лестницы своего контента в реферальную программу — получает повышенный процент с друзей, которых привёл в продукт.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="arrow loop" style="margin-top: 32px;"></div>
+
+  <!-- LOOP -->
+  <div class="loop-wrap">
+    <div class="loop-card">
+      <span class="loop-icon">♾️</span>
+      <div class="loop-title">БЕСКОНЕЧНАЯ ПРОГРЕССИЯ</div>
+      <div class="loop-desc">После L10 потолки растут дальше — квест не «проходится», в нём растут</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

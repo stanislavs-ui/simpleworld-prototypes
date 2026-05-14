@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>SIMPLE WORLD — Текущий брейншторм UGC-квеста</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0b0f;
+    --bg-card: #12141c;
+    --bg-elevated: #181b26;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.16);
+    --text: #ffffff;
+    --neon: #5DFFA0;
+    --neon-glow: rgba(93,255,160,0.25);
+    --amber: #FBBF24;
+    --amber-glow: rgba(251,191,36,0.25);
+    --dim: rgba(255,255,255,0.35);
+    --indigo: #818cf8;
+  }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .brand img {
+    height: 96px;
+    width: auto;
+    display: block;
+  }
+  h1 {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  .subtitle {
+    color: var(--text);
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .stamp .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 8px var(--amber-glow);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .legend-box {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+  }
+  .lb-known { background: var(--neon); box-shadow: 0 0 8px var(--neon-glow); }
+  .lb-now { background: var(--amber); box-shadow: 0 0 8px var(--amber-glow); }
+  .lb-future { border: 1.5px dashed var(--dim); background: transparent; }
+
+  /* FLOW */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .step {
+    width: 100%;
+    max-width: 480px;
+    padding: 18px 24px;
+    border-radius: 14px;
+    text-align: center;
+    position: relative;
+  }
+  .step.known {
+    background: var(--bg-card);
+    border: 1.5px solid var(--neon);
+    box-shadow: 0 0 24px rgba(93,255,160,0.08);
+  }
+  .step.now {
+    background: linear-gradient(180deg, var(--bg-card) 0%, rgba(251,191,36,0.08) 100%);
+    border: 1.5px solid var(--amber);
+    box-shadow: 0 0 24px rgba(251,191,36,0.12);
+  }
+  .step.future {
+    background: var(--bg-card);
+    border: 1.5px dashed var(--dim);
+    opacity: 0.85;
+  }
+  .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--neon);
+    margin-bottom: 6px;
+    text-indent: 0.2em;
+  }
+  .step.now .step-num { color: var(--amber); }
+  .step.future .step-num { color: var(--dim); }
+  .step-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .step-desc {
+    font-size: 13px;
+    color: #ffffff;
+    line-height: 1.55;
+  }
+
+  /* ARROW */
+  .arrow {
+    width: 2px;
+    height: 36px;
+    background: var(--neon);
+    opacity: 0.55;
+    margin: 0;
+  }
+  .arrow.now { background: var(--amber); }
+  .arrow.future {
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--dim) 0px,
+      var(--dim) 4px,
+      transparent 4px,
+      transparent 9px
+    );
+    background-color: transparent;
+    opacity: 0.7;
+  }
+  .arrow::after {
+    content: '';
+    position: relative;
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid var(--neon);
+    margin-left: -5px;
+    top: 100%;
+  }
+  .arrow.now::after { border-top-color: var(--amber); }
+  .arrow.future::after { border-top-color: var(--dim); }
+
+  /* FORK */
+  .fork {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+  }
+  .fork-arrows {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 760px;
+    position: relative;
+    height: 60px;
+  }
+  .fork-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 16px;
+    background: var(--neon);
+    opacity: 0.55;
+  }
+  .fork-horiz {
+    position: absolute;
+    top: 16px;
+    left: 25%;
+    right: 25%;
+    height: 2px;
+    background: var(--neon);
+    opacity: 0.55;
+  }
+  .fork-down {
+    position: absolute;
+    top: 16px;
+    width: 2px;
+    height: 44px;
+    background: var(--neon);
+    opacity: 0.55;
+  }
+  .fork-down.left { left: 25%; }
+  .fork-down.right { right: 25%; transform: translateX(2px); }
+  .fork-down::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: -4px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid var(--neon);
+  }
+
+  .branches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 920px;
+  }
+  .branch-label {
+    text-align: center;
+    margin-bottom: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--neon);
+    padding: 6px 14px;
+    border: 1px solid rgba(93,255,160,0.4);
+    border-radius: 100px;
+    display: inline-block;
+  }
+  .branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .branch .step { max-width: 100%; }
+  .branch .arrow { height: 28px; }
+
+  /* SIDE NOTES */
+  .note {
+    margin-top: 56px;
+    padding: 22px 26px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    border-radius: 12px;
+  }
+  .note-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    margin-bottom: 10px;
+  }
+  .note-body {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* AHEAD BLOCK */
+  .ahead {
+    margin-top: 48px;
+  }
+  .ahead-title {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: #ffffff;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    text-indent: 0.35em;
+  }
+  .ahead-hint {
+    text-align: center;
+    font-size: 12px;
+    color: #ffffff;
+    opacity: 0.7;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+  .ahead-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .ahead-item {
+    padding: 16px 18px;
+    border: 1.5px dashed var(--dim);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    user-select: none;
+  }
+  .ahead-item:hover {
+    border-color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.04);
+  }
+  .ahead-item.checked {
+    background: linear-gradient(180deg, var(--bg-card) 0%, rgba(93,255,160,0.12) 100%);
+    border: 1.5px solid var(--neon);
+    box-shadow: 0 0 18px rgba(93,255,160,0.18);
+  }
+  .ahead-item.checked .ahead-item-title {
+    color: var(--neon);
+  }
+  .ahead-item-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #ffffff;
+  }
+  .ahead-item-desc {
+    font-size: 12px;
+    color: #ffffff;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 720px) {
+    body { padding: 32px 16px; }
+    h1 { font-size: 24px; }
+    .branches { grid-template-columns: 1fr; gap: 32px; }
+    .fork-arrows { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><img src="../assets/brand/logo-on-dark-transparent.png" alt="Simple World"></div>
+  <h1>UGC-квест — текущая схема брейншторма</h1>
+  <p class="subtitle">Где мы сейчас, что уже продумано, что ещё впереди</p>
+  <div class="stamp">
+    <span class="dot"></span>
+    <span>13.05.2026 · Минимально продумано — можем передумать несколько раз</span>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-box lb-known"></span>Продумано в минимальном виде</div>
+  <div class="legend-item"><span class="legend-box lb-now"></span>Брейнштормим прямо сейчас</div>
+  <div class="legend-item"><span class="legend-box lb-future"></span>Впереди — ещё будем думать</div>
+</div>
+
+<div class="flow">
+
+  <div class="step known">
+    <div class="step-num">STEP 01</div>
+    <div class="step-title">Юзер встречается с Хостом</div>
+    <div class="step-desc">Вход в новый квест: новый персонаж знакомится с юзером, объясняет суть. Отдельный квест, доступен любому юзеру независимо от прохождения других квестов в продукте</div>
+  </div>
+  <div class="arrow"></div>
+
+  <div class="step known">
+    <div class="step-num">STEP 02</div>
+    <div class="step-title">Создание персонажа юзера через AI</div>
+    <div class="step-desc">Хост помогает юзеру собрать своего AI-персонажа, который будет действовать в квесте</div>
+  </div>
+  <div class="arrow"></div>
+
+  <div class="step known">
+    <div class="step-num">STEP 03</div>
+    <div class="step-title">Возврат к Хосту</div>
+    <div class="step-desc">Юзер показывает созданного персонажа Хосту</div>
+  </div>
+  <div class="arrow"></div>
+
+  <div class="step known">
+    <div class="step-num">STEP 04 · РАЗВИЛКА</div>
+    <div class="step-title">Хост спрашивает про level юзера</div>
+    <div class="step-desc">Юзер сам выбирает: «я с нуля, ничего не знаю» / «я уже что-то умею, давай проверим»</div>
+  </div>
+
+  <div class="fork">
+    <div class="fork-arrows">
+      <div class="fork-line"></div>
+      <div class="fork-horiz"></div>
+      <div class="fork-down left"></div>
+      <div class="fork-down right"></div>
+    </div>
+
+    <div class="branches">
+
+      <div class="branch">
+        <div class="branch-label">ВЕТКА А · НОВИЧОК</div>
+        <div class="step known">
+          <div class="step-num">STEP 05A</div>
+          <div class="step-title">База с нуля</div>
+          <div class="step-desc">Юзер идёт в обучающий блок, узнаёт ключевые понятия квеста с самого начала</div>
+        </div>
+        <div class="arrow now"></div>
+        <div class="step now">
+          <div class="step-num">STEP 06A</div>
+          <div class="step-title">Сценарий для новичка</div>
+          <div class="step-desc">Свой путь по квесту, адаптированный под старт с нуля</div>
+        </div>
+      </div>
+
+      <div class="branch">
+        <div class="branch-label">ВЕТКА Б · ЗНАЮЩИЙ</div>
+        <div class="step known">
+          <div class="step-num">STEP 05B</div>
+          <div class="step-title">Квиз на определение уровня</div>
+          <div class="step-desc">Юзер проходит тест, по результатам — определяется его реальный уровень</div>
+        </div>
+        <div class="arrow now"></div>
+        <div class="step now">
+          <div class="step-num">STEP 06B</div>
+          <div class="step-title">Сценарий по уровню</div>
+          <div class="step-desc">Свой путь по квесту, адаптированный под уже имеющийся уровень</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="note">
+  <div class="note-label">⚠ ЗАМЕТКА</div>
+  <div class="note-body">
+    Сейчас зафиксированы шаги 01–05A/05B — структура входа, развилка по level и сразу следующий шаг в каждой ветке (база с нуля либо квиз).
+    Шаги 06A/06B (сценарии веток) — то, что брейнштормим прямо сейчас и можем переформулировать несколько раз.
+  </div>
+</div>
+
+<div class="ahead">
+  <div class="ahead-title">Что ещё впереди обсуждать</div>
+  <div class="ahead-grid">
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Сценарии веток</div>
+      <div class="ahead-item-desc">Шаги 06A и 06B — конкретные действия юзера в каждой ветке, что делает после развилки</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Лестница наград за задание</div>
+      <div class="ahead-item-desc">Что получает юзер за каждое задание: денежная награда, артефакты, бейджи, опыт, статус</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Лестница наград сокровищницы</div>
+      <div class="ahead-item-desc">Отдельная лестница — что выпадает из сокровищницы в зависимости от уровня юзера</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Роль ритуала</div>
+      <div class="ahead-item-desc">Что значит «совершить ритуал» в этом квесте, какое место он занимает в loop, как ритуал связан с наградами</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Глоссарий и имена сущностей</div>
+      <div class="ahead-item-desc">Хост, AI-персонаж, уровень, ритуал, артефакт, бейдж — финальные названия, синхрон с глобальным глоссарием SW</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Бесконечная прогрессия и потолки</div>
+      <div class="ahead-item-desc">Квест без финала: лестницы потолков по метрикам (2 млрд лайков → 5 млрд → 10 млрд и дальше). Юзер не «проходит» квест, он растёт в нём. Структура потолков и их размеры</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Пересечения с другими персонажами</div>
+      <div class="ahead-item-desc">Где AI-персонаж юзера встречается с Алексом, Мирой и другими. Развитие персонажа, структура уровней, взаимодействия между персонажами других игроков в комьюнити, призы за это</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Методики по TikTok</div>
+      <div class="ahead-item-desc">Как правильно снимать контент, чтобы он заходил и виралился — гайды, скрипты, шаблоны от Хоста / встроенные в квест</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Повышенная реферальная награда для контент-мейкеров</div>
+      <div class="ahead-item-desc">Юзеры, которые выбирают снимать контент самостоятельно, получают увеличенную реферальную ставку — как поощрение и как смысл выбора</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Тон и характер Хоста</div>
+      <div class="ahead-item-desc">Кто такой Хост как личность, как разговаривает с юзером, чем отличается от Алекса / Миры / Хлои</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Точка входа в новый квест</div>
+      <div class="ahead-item-desc">Откуда юзер попадает в квест — из тапалки, из World, из лендинга, через push — и где он его находит в продукте</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Развитие потока юзера и плато по метрикам</div>
+      <div class="ahead-item-desc">Как помогать юзеру, который застрял на пути к следующей планке — не достиг ещё нужных метрик, контент не выстреливает. Чем поддерживаем, как разворачиваем, что предлагаем</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Связь с Wallet и выплатами</div>
+      <div class="ahead-item-desc">Как денежная награда из квеста доходит до юзера, через Simple Wallet — линковка, выплаты, минимальный вывод</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Антифрод и модерация контента</div>
+      <div class="ahead-item-desc">Как проверяем, что юзер реально снял контент сам, а не накрутил/спарсил. Минимальный набор без переусложнения</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Разделение наград по типу метрик</div>
+      <div class="ahead-item-desc">Награды отдельно за просмотры, лайки, ретвиты, подписчиков, комментарии и т.д. Разные ставки и пороги под каждый тип</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Верификация контента через ИИ</div>
+      <div class="ahead-item-desc">AI проверяет: реальный ли контент, соответствует ли заданию, не накрутка ли метрик. Решает что засчитывать, что нет</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Экономика квеста в целом</div>
+      <div class="ahead-item-desc">Юнит-экономика: сколько мы платим за активного юзера, какой LTV, ROI на канале. Сходимость по модели</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Социальные платформы</div>
+      <div class="ahead-item-desc">Где юзер снимает: только TikTok или + Instagram Reels, YouTube Shorts, X/Twitter. Разные правила и пороги под платформу</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Привязка соц-аккаунтов</div>
+      <div class="ahead-item-desc">Как юзер подключает свой TikTok / Instagram / другие к квесту — чтобы метрики считались автоматически</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Лидерборды и рейтинги</div>
+      <div class="ahead-item-desc">Есть ли рейтинги среди контент-мейкеров, по какой метрике, какие бонусы у топа</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Анонс и маркетинг квеста</div>
+      <div class="ahead-item-desc">Как привлекаем юзеров в новый квест — каналы, материалы, тизер, лендинг, первая волна</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Возврат юзера и пуши</div>
+      <div class="ahead-item-desc">Как возвращаем юзера в квест между сессиями — нотификации, push, email, бот-напоминания</div>
+    </div>
+
+    <div class="ahead-item">
+      <div class="ahead-item-title">Подсказки и помощь внутри квеста</div>
+      <div class="ahead-item-desc">Что делать, если юзер застрял или не понимает шаг — help-флоу, тултипы, переспрос у Хоста</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.ahead-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      item.classList.toggle('checked');
+    });
+  });
+</script>
+
+</body>
+</html>
