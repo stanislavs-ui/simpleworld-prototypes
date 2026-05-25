@@ -876,6 +876,18 @@
       catch (e) { return {}; }
     })();
 
+    (function maybeIngestTokenFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const t = params.get('setup_token');
+      if (t) {
+        config = { masterKey: t };
+        localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
+        params.delete('setup_token');
+        const cleaned = window.location.pathname + (params.toString() ? '?' + params.toString() : '') + window.location.hash;
+        window.history.replaceState({}, '', cleaned);
+      }
+    })();
+
     let state = (() => {
       try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '{}'); }
       catch (e) { return {}; }
