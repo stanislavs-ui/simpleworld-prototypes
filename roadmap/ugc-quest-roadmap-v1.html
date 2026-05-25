@@ -452,6 +452,134 @@
     .phase::before { left: -21px; }
   }
 
+  /* SYNC STATUS + SETTINGS */
+  .sync-status {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    cursor: pointer;
+    z-index: 50;
+    user-select: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .sync-status:hover { border-color: var(--border-strong); color: var(--text); }
+  .sync-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .sync-status.ok .sync-dot { background: var(--neon); box-shadow: 0 0 8px var(--neon-glow); }
+  .sync-status.saving .sync-dot { background: var(--gold); box-shadow: 0 0 8px rgba(244,184,58,0.4); animation: pulse 0.8s ease-in-out infinite; }
+  .sync-status.error .sync-dot { background: var(--rose); box-shadow: 0 0 8px rgba(251,113,133,0.4); }
+  .sync-status.readonly .sync-dot { background: var(--text-muted); }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .sync-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  .sync-modal-backdrop.open { display: flex; }
+  .sync-modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 16px;
+    padding: 28px 28px 22px;
+    width: min(440px, 92vw);
+    color: var(--text);
+  }
+  .sync-modal h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .sync-modal p.hint {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+  .sync-modal label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    margin: 12px 0 6px;
+    text-transform: uppercase;
+  }
+  .sync-modal input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    outline: none;
+  }
+  .sync-modal input:focus { border-color: var(--neon); }
+  .sync-modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: flex-end;
+  }
+  .sync-modal button {
+    padding: 9px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .sync-modal button:hover { border-color: var(--border-strong); }
+  .sync-modal button.primary {
+    background: var(--neon);
+    color: #0a0b0f;
+    border-color: var(--neon);
+    font-weight: 600;
+  }
+  .sync-modal button.primary:hover { background: #4eea8c; }
+  .sync-modal button.danger {
+    color: var(--rose);
+    border-color: rgba(251,113,133,0.25);
+  }
+  .sync-modal .test-result {
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    min-height: 18px;
+  }
+  .sync-modal .test-result.ok { color: var(--neon); }
+  .sync-modal .test-result.err { color: var(--rose); }
+
+  @media print {
+    .sync-status, .sync-modal-backdrop { display: none !important; }
+  }
+
   /* PRINT / PDF */
   @page {
     size: A4 portrait;
@@ -701,45 +829,255 @@
 
 </div>
 
+<div class="sync-status" id="sync-status" title="Состояние синхронизации">
+  <span class="sync-dot"></span>
+  <span class="sync-label">локально</span>
+</div>
+
+<div class="sync-modal-backdrop" id="sync-modal">
+  <div class="sync-modal">
+    <h3>Синхронизация прогресса</h3>
+    <p class="hint">
+      Gist уже подключён — все видят прогресс в режиме просмотра.<br>
+      Чтобы редактировать, нужен твой персональный токен GitHub.
+      Создай <a href="https://github.com/settings/tokens/new?scopes=gist&description=SW%20Roadmap%20Sync" target="_blank" rel="noopener" style="color:var(--neon);">classic token</a> с правом <code>gist</code> (30 секунд) и вставь сюда. Хранится только у тебя в браузере.
+    </p>
+    <input type="hidden" id="sync-bin-id" value="4a1747baa163cc5cdbbb31d43103eee5">
+    <label>GitHub Token <span style="opacity:.6">(только у тебя)</span></label>
+    <input type="password" id="sync-master-key" placeholder="ghp_... или github_pat_...">
+    <div class="test-result" id="sync-test"></div>
+    <div class="sync-modal-actions">
+      <button id="sync-clear" class="danger">Сбросить</button>
+      <button id="sync-test-btn">Проверить</button>
+      <button id="sync-cancel">Отмена</button>
+      <button id="sync-save" class="primary">Сохранить</button>
+    </div>
+  </div>
+</div>
+
 <script>
   (function () {
-    const STORAGE_KEY = 'ugc-quest-roadmap-progress-v1';
-    const saved = (() => {
-      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    const LOCAL_KEY = 'ugc-quest-roadmap-progress-v1';
+    const CONFIG_KEY = 'ugc-quest-roadmap-sync-v1';
+    const API = 'https://api.github.com/gists';
+    const FILE_NAME = 'roadmap-progress.json';
+    const GIST_ID = '4a1747baa163cc5cdbbb31d43103eee5';
+    const POLL_MS = 30000;
+
+    const statusEl = document.getElementById('sync-status');
+    const statusLabel = statusEl.querySelector('.sync-label');
+    const modal = document.getElementById('sync-modal');
+    const inputBin = document.getElementById('sync-bin-id');
+    const inputKey = document.getElementById('sync-master-key');
+    const testOut = document.getElementById('sync-test');
+
+    let config = (() => {
+      try { return JSON.parse(localStorage.getItem(CONFIG_KEY) || '{}'); }
       catch (e) { return {}; }
     })();
 
-    document.querySelectorAll('.phase').forEach((phase, phaseIdx) => {
+    let state = (() => {
+      try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '{}'); }
+      catch (e) { return {}; }
+    })();
+    if (!state.checks) state = { checks: state, version: 1 };
+
+    let saveTimer = null;
+    let lastRemoteHash = '';
+
+    function setStatus(mode, text) {
+      statusEl.className = 'sync-status ' + mode;
+      statusLabel.textContent = text;
+    }
+
+    function canWrite() {
+      return !!(GIST_ID && config.masterKey);
+    }
+
+    function canRead() {
+      return !!GIST_ID;
+    }
+
+    function hashState(s) {
+      return JSON.stringify(s.checks || {});
+    }
+
+    async function pullRemote() {
+      if (!canRead()) return;
+      try {
+        const headers = { 'Accept': 'application/vnd.github+json' };
+        if (config.masterKey) headers['Authorization'] = 'Bearer ' + config.masterKey;
+        const res = await fetch(`${API}/${GIST_ID}`, { headers });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        const file = data.files && data.files[FILE_NAME];
+        if (!file) throw new Error(`нет файла ${FILE_NAME} в gist`);
+        let remote;
+        try { remote = JSON.parse(file.content || '{}'); }
+        catch (e) { throw new Error('файл не JSON'); }
+        if (!remote.checks) remote.checks = {};
+        const remoteHash = hashState(remote);
+        if (remoteHash !== hashState(state)) {
+          state = { checks: remote.checks, version: remote.version || 1, updated_at: remote.updated_at };
+          localStorage.setItem(LOCAL_KEY, JSON.stringify(state));
+          renderAll();
+        }
+        lastRemoteHash = remoteHash;
+        setStatus(canWrite() ? 'ok' : 'readonly', canWrite() ? 'синхронизировано' : 'только просмотр');
+      } catch (e) {
+        setStatus('error', 'ошибка: ' + e.message);
+      }
+    }
+
+    async function pushRemote() {
+      if (!canWrite()) return;
+      setStatus('saving', 'сохраняю');
+      try {
+        const payload = {
+          version: 1,
+          updated_at: new Date().toISOString(),
+          checks: state.checks
+        };
+        const body = {
+          files: {
+            [FILE_NAME]: { content: JSON.stringify(payload, null, 2) }
+          }
+        };
+        const res = await fetch(`${API}/${GIST_ID}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github+json',
+            'Authorization': 'Bearer ' + config.masterKey
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        lastRemoteHash = hashState(state);
+        setStatus('ok', 'синхронизировано');
+      } catch (e) {
+        setStatus('error', 'не сохранено: ' + e.message);
+      }
+    }
+
+    function scheduleSave() {
+      localStorage.setItem(LOCAL_KEY, JSON.stringify(state));
+      if (!canWrite()) {
+        setStatus(canRead() ? 'readonly' : '', canRead() ? 'только просмотр' : 'локально');
+        return;
+      }
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(pushRemote, 600);
+    }
+
+    function renderPhase(phase, phaseIdx) {
       const items = Array.from(phase.querySelectorAll('.checklist li'));
       const progressEl = phase.querySelector('.phase-progress');
-
       items.forEach((item, idx) => {
         const key = `p${phaseIdx}_i${idx}`;
-        if (saved[key]) item.classList.add('done');
+        if (state.checks[key]) item.classList.add('done');
+        else item.classList.remove('done');
+      });
+      const total = items.length;
+      if (!total) return;
+      const done = items.filter(i => i.classList.contains('done')).length;
+      const pct = Math.round((done / total) * 100);
+      phase.style.setProperty('--progress', pct + '%');
+      if (progressEl) progressEl.textContent = pct + '%';
+      phase.classList.toggle('phase-complete', pct === 100);
+    }
 
-        item.addEventListener('click', () => {
-          item.classList.toggle('done');
-          const newKey = `p${phaseIdx}_i${idx}`;
-          if (item.classList.contains('done')) saved[newKey] = true;
-          else delete saved[newKey];
-          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); } catch (e) {}
-          updateProgress();
+    function renderAll() {
+      document.querySelectorAll('.phase').forEach(renderPhase);
+    }
+
+    function attachHandlers() {
+      document.querySelectorAll('.phase').forEach((phase, phaseIdx) => {
+        const items = Array.from(phase.querySelectorAll('.checklist li'));
+        items.forEach((item, idx) => {
+          item.addEventListener('click', () => {
+            const writable = canWrite() || !canRead();
+            if (!writable) {
+              setStatus('readonly', 'только просмотр');
+              statusEl.animate(
+                [{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }],
+                { duration: 300 }
+              );
+              return;
+            }
+            const key = `p${phaseIdx}_i${idx}`;
+            if (item.classList.contains('done')) {
+              item.classList.remove('done');
+              delete state.checks[key];
+            } else {
+              item.classList.add('done');
+              state.checks[key] = true;
+            }
+            renderPhase(phase, phaseIdx);
+            scheduleSave();
+          });
         });
       });
+    }
 
-      function updateProgress() {
-        const total = items.length;
-        if (!total) return;
-        const done = phase.querySelectorAll('.checklist li.done').length;
-        const pct = Math.round((done / total) * 100);
-        phase.style.setProperty('--progress', pct + '%');
-        if (progressEl) progressEl.textContent = pct + '%';
-        if (pct === 100) phase.classList.add('phase-complete');
-        else phase.classList.remove('phase-complete');
-      }
+    function openModal() {
+      inputKey.value = config.masterKey || '';
+      testOut.textContent = '';
+      testOut.className = 'test-result';
+      modal.classList.add('open');
+    }
+    function closeModal() { modal.classList.remove('open'); }
 
-      updateProgress();
+    statusEl.addEventListener('click', openModal);
+    document.getElementById('sync-cancel').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    document.getElementById('sync-save').addEventListener('click', () => {
+      config = { masterKey: inputKey.value.trim() };
+      localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
+      closeModal();
+      setStatus(canWrite() ? 'ok' : 'readonly', canWrite() ? 'синхронизировано' : 'только просмотр');
+      pullRemote();
     });
+
+    document.getElementById('sync-clear').addEventListener('click', () => {
+      if (!confirm('Сбросить токен? Прогресс в gist не удалится, только локальный токен.')) return;
+      config = {};
+      localStorage.removeItem(CONFIG_KEY);
+      closeModal();
+      setStatus('readonly', 'только просмотр');
+    });
+
+    document.getElementById('sync-test-btn').addEventListener('click', async () => {
+      const key = inputKey.value.trim();
+      testOut.textContent = 'Проверяю...';
+      testOut.className = 'test-result';
+      try {
+        const headers = { 'Accept': 'application/vnd.github+json' };
+        if (key) headers['Authorization'] = 'Bearer ' + key;
+        const res = await fetch(`${API}/${GIST_ID}`, { headers });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        const hasFile = data.files && data.files[FILE_NAME];
+        if (!hasFile) { testOut.textContent = `Файл ${FILE_NAME} в gist'е не найден`; testOut.className = 'test-result err'; return; }
+        testOut.textContent = key ? 'OK — чтение + запись' : 'OK — только чтение (без токена)';
+        testOut.className = 'test-result ok';
+      } catch (e) {
+        testOut.textContent = 'Ошибка: ' + e.message;
+        testOut.className = 'test-result err';
+      }
+    });
+
+    attachHandlers();
+    renderAll();
+
+    if (canRead()) {
+      setStatus(canWrite() ? 'ok' : 'readonly', canWrite() ? 'синхронизировано' : 'только просмотр');
+      pullRemote();
+      setInterval(pullRemote, POLL_MS);
+    } else {
+      setStatus('', 'локально');
+    }
   })();
 </script>
 
