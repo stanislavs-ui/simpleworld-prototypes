@@ -4435,11 +4435,9 @@ tailwind.config = {
           </div>
           <div id="sKhloeRitualClaimed-reward" style="margin-top: 24px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; opacity: 0; transform: translateY(6px); transition: opacity 0.5s ease, transform 0.5s ease;">
             <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; background: rgba(16,185,129,0.10); border: 1px solid rgba(16,185,129,0.28); border-radius: 999px;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
               <span style="color: #f2f2f2; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">+1 ритуал</span>
             </div>
             <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; background: rgba(168,85,247,0.10); border: 1px solid rgba(168,85,247,0.28); border-radius: 999px;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#a855f7" stroke="none"><path d="M12 2l1.6 5.4L19 9l-5.4 1.6L12 16l-1.6-5.4L5 9l5.4-1.6z"/></svg>
               <span style="color: #f2f2f2; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">+10 ауры</span>
             </div>
           </div>
@@ -6191,7 +6189,7 @@ registerTypewriterById('sKhloeDay2', { text: 'В честь нашего зна�
 registerTypewriterById('sKhloeAlexTask', { text: 'У меня для тебя социальное задание. За него получишь +10 к Ауре.', el: 'tw-sKhloeAlexTask', cursor: 'tw-cursor-sKhloeAlexTask', actions: 'sKhloeAlexTask-actions' });
 registerTypewriterById('sKhloeTask', { text: 'Привет! Вот твоё задание на сегодня.', el: 'tw-sKhloeTask', cursor: 'tw-cursor-sKhloeTask', actions: 'sKhloeTask-card-anim' });
 registerTypewriterById('sKhloeTaskDone', { text: 'Сегодня ритуал засчитан. Приходи завтра — будет новое задание.', el: 'tw-sKhloeTaskDone', cursor: 'tw-cursor-sKhloeTaskDone' });
-registerTypewriterById('sKhloeRitualClaimed', { text: 'Задание выполнено. Лови ритуал и ауру.\n\nПриходи завтра — будет новое.', el: 'tw-sKhloeRitualClaimed', cursor: 'tw-cursor-sKhloeRitualClaimed', actions: 'sKhloeRitualClaimed-reward', extra: 'sKhloeRitualClaimed-actions' });
+registerTypewriterById('sKhloeRitualClaimed', { text: 'Задание выполнено. Лови ритуал и ауру.\n\nПриходи завтра — будет новое задание.', el: 'tw-sKhloeRitualClaimed', cursor: 'tw-cursor-sKhloeRitualClaimed', actions: 'sKhloeRitualClaimed-reward', extra: 'sKhloeRitualClaimed-actions' });
 
 function runTypewriter(screenIndex) {
   const cfg = typewriterScreens[screenIndex];
