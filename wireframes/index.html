@@ -660,6 +660,8 @@
   <div class="sidebar-item" onclick="goTo(123)">123. Погружение 4а (нет)</div>
   <div class="sidebar-item" onclick="goTo(124)">124. Погружение 4б (пара)</div>
   <div class="sidebar-item" onclick="goTo(125)">125. Погружение 4в (актив)</div>
+  <div class="sidebar-item" onclick="goTo(130)">130. Погружение: лента</div>
+  <div class="sidebar-item" onclick="goTo(131)">131. Погружение: деньги</div>
   <div class="sidebar-item" onclick="goTo(126)">126. Карта возможностей 1</div>
   <div class="sidebar-item" onclick="goTo(127)">127. Карта возможностей 2</div>
   <div class="sidebar-item" onclick="goTo(128)">128. Первое действие</div>
@@ -3208,22 +3210,21 @@
 <div class="screen" id="s123">
   <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
   <div class="bubble mark-bubble">TikTok — это не клуб звёзд.<br><br>Лента показывает новые ролики людям<br>сразу — даже если у тебя ноль<br>подписчиков. Поэтому там зарабатывают<br>обычные люди. Покажу на примерах.</div>
-  <button class="btn-primary" onclick="goTo(126)">Дальше</button>
-  <div class="design-note">🆕 ОТКРЫТО: содержимое самого погружения (2-3 экрана «как тут зарабатывают» + примеры) — следующий слой, вместе с Касом (реальные примеры).</div>
+  <button class="btn-primary" onclick="goTo(130)">Дальше</button>
 </div>
 
 <!-- SCREEN 124: Погружение 4б — «пара постов» -->
 <div class="screen" id="s124">
   <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
   <div class="bubble mark-bubble">Значит, кнопка «опубликовать»<br>тебе уже знакома.<br><br>Осталось понять, почему одни ролики<br>взлетают, а другие — нет.<br>Это не удача. Это механика. Разберём.</div>
-  <button class="btn-primary" onclick="goTo(126)">Дальше</button>
+  <button class="btn-primary" onclick="goTo(130)">Дальше</button>
 </div>
 
 <!-- SCREEN 125: Погружение 4в — «активно веду» -->
 <div class="screen" id="s125">
   <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
   <div class="bubble mark-bubble">О, так мы почти коллеги.<br>Тогда без азбуки.<br><br>Здесь твои ролики начнут приносить<br>не только просмотры. Как — покажу.</div>
-  <button class="btn-primary" onclick="goTo(126)">Дальше</button>
+  <button class="btn-primary" onclick="goTo(130)">Дальше</button>
 </div>
 
 <!-- SCREEN 126: Карта возможностей 5.1 (без сумм, D-V3) -->
@@ -3256,6 +3257,22 @@
   <div class="design-note">🆕 ОТКРЫТО: величины (аура за день 1, опыт персонажу) — Вера (nonmoney-rewards-v1.md §Открыто-2).</div>
 </div>
 
+<!-- SCREEN 130: Погружение — механика ленты (общий после веток) -->
+<div class="screen" id="s130">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">Смотри, как это устроено.<br><br>Лента TikTok не спрашивает, сколько<br>у тебя подписчиков. Показывает ролик<br>горстке людей. Зашло — показывает<br>следующей. И так дальше.</div>
+  <button class="btn-primary" onclick="goTo(131)">Дальше</button>
+  <div class="design-note">Погружение, общий экран после веток 4а/4б/4в. Тон Фазы 1 = вызов. Механика ленты — факт, не выдуманный пример (Кас: реального SW-ролика пока нет).</div>
+</div>
+
+<!-- SCREEN 131: Погружение — просмотры = деньги (без сумм, D-V3) -->
+<div class="screen" id="s131">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">И главное — здесь просмотры<br>превращаются в деньги. Настоящие.<br><br>Не сразу и не по щелчку.<br>Но по-честному. Покажу по дороге.</div>
+  <button class="btn-primary" onclick="goTo(126)">Дальше</button>
+  <div class="design-note">Просмотры → деньги (модель оплаты за просмотры D229), без цифр (D-V3). Дальше — карта возможностей (s126).</div>
+</div>
+
     </div><!-- /phone-content -->
     <div class="phone-home"></div>
   </div><!-- /phone -->
@@ -3282,7 +3299,7 @@
 </div><!-- /main -->
 
 <script>
-var TOTAL = 129;
+var TOTAL = 131;
 var current = 1;
 var removedScreens = [4, 5, 9, 10, 14, 33, 35, 36, 37, 38, 39, 40, 41, 42, 56, 57, 58, 59, 60, 61, 62, 63, 64, 68, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103];
 
@@ -3390,6 +3407,8 @@ var screenNames = {
   123: '123. Креатор · Погружение 4а (нет)',
   124: '124. Креатор · Погружение 4б (пара)',
   125: '125. Креатор · Погружение 4в (актив)',
+  130: '130. Креатор · Погружение: лента',
+  131: '131. Креатор · Погружение: деньги',
   126: '126. Креатор · Карта возможностей 1',
   127: '127. Креатор · Карта возможностей 2',
   128: '128. Креатор · Первое действие',
