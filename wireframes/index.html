@@ -170,9 +170,11 @@
   .char-dot { width: 10px; height: 10px; border-radius: 50%; }
   .char-dot.alex { background: #4A90D9; }
   .char-dot.mira { background: #9B59B6; }
+  .char-dot.mark { background: #E07B39; }
   .char-name { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
   .char-name.alex { color: #4A90D9; }
   .char-name.mira { color: #9B59B6; }
+  .char-name.mark { color: #C2611E; }
 
   .bubble {
     background: #f5f5f5;
@@ -191,6 +193,10 @@
   .bubble.alex-bubble {
     border-color: #b4d4fe;
     background: #f0f7ff;
+  }
+  .bubble.mark-bubble {
+    border-color: #f5cba7;
+    background: #fff7ef;
   }
 
   /* ========== BUTTONS ========== */
@@ -642,6 +648,22 @@
   <div class="sidebar-item" onclick="goTo(81)">81. Карта мира</div>
   <div class="sidebar-item" onclick="goTo(82)">82. Алекс: заполни профиль</div>
   <div class="sidebar-item" onclick="goTo(83)">83. Подписка на Телеграм</div>
+
+  <div class="sidebar-section">Креатор-квест · Марк — День 1</div>
+  <div class="sidebar-item" onclick="goTo(116)">116. Встреча 1</div>
+  <div class="sidebar-item" onclick="goTo(117)">117. Встреча 2</div>
+  <div class="sidebar-item" onclick="goTo(118)">118. Встреча 3</div>
+  <div class="sidebar-item" onclick="goTo(119)">119. AI-персонаж (до)</div>
+  <div class="sidebar-item" onclick="goTo(120)">120. AI-персонаж (после)</div>
+  <div class="sidebar-item" onclick="goTo(121)">121. Опрос: подводка</div>
+  <div class="sidebar-item" onclick="goTo(122)">122. Опрос: аккаунт?</div>
+  <div class="sidebar-item" onclick="goTo(123)">123. Погружение 4а (нет)</div>
+  <div class="sidebar-item" onclick="goTo(124)">124. Погружение 4б (пара)</div>
+  <div class="sidebar-item" onclick="goTo(125)">125. Погружение 4в (актив)</div>
+  <div class="sidebar-item" onclick="goTo(126)">126. Карта возможностей 1</div>
+  <div class="sidebar-item" onclick="goTo(127)">127. Карта возможностей 2</div>
+  <div class="sidebar-item" onclick="goTo(128)">128. Первое действие</div>
+  <div class="sidebar-item" onclick="goTo(129)">129. Закрытие дня 1</div>
 </div>
 
 <!-- ========== TOP NAV ========== -->
@@ -3116,6 +3138,124 @@
   <div class="design-note">Экран баланса. Три условия вывода: 100⚡ ауры + 5 USDT минимум + 10 дней в проекте. Аура: Алекс 10⚡/день (за квест). Жители НЕ дают ауру. После вывода аура обнуляется. Golden path: ежедневные квесты 10 дней = 100⚡.</div>
 </div>
 
+<!-- ============================================================ -->
+<!-- КРЕАТОР-КВЕСТ (МАРК) — ДЕНЬ 1 / Локация «Мастерская»        -->
+<!-- Источник текста: creator-series-day1-mark-v1.md (D253)      -->
+<!-- ============================================================ -->
+
+<!-- SCREEN 116: Марк — встреча 1.1 -->
+<div class="screen" id="s116">
+  <div class="visual" style="min-height: 100px; background: #fff3e8; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <div style="width: 80px; height: 80px; background: #E07B39; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; color: white;">М</div>
+    <div style="font-size: 10px; color: #C2611E; margin-top: 6px; font-weight: 700; letter-spacing: 1px;">МАРК · МАСТЕРСКАЯ</div>
+  </div>
+  <div class="typing">...</div>
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">Привет. Я Марк.<br><br>Год назад я боялся камеры так,<br>что удалял видео до публикации.<br>Все до единого.</div>
+  <button class="btn-primary" onclick="goTo(117)">Дальше</button>
+  <div class="design-note">Вход в локацию «Мастерская» — сразу реплика Марка, без рамки локации (решение Стаса 17.06). Режим Фазы 1 = вызов.</div>
+</div>
+
+<!-- SCREEN 117: Марк — встреча 1.2 -->
+<div class="screen" id="s117">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">Сейчас мои ролики смотрят тысячи.<br>Нет, я не звезда. Я просто понял,<br>как это устроено. По шагам.<br><br>Предлагаю пройти этот путь вместе.</div>
+  <button class="btn-primary" onclick="goTo(118)">Дальше</button>
+</div>
+
+<!-- SCREEN 118: Марк — встреча 1.3 -->
+<div class="screen" id="s118">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">Сегодня — никаких съёмок. Обещаю.<br><br>Сегодня создадим твоего AI-персонажа.<br>Он будет расти вместе с тобой.<br>А расти тут есть куда — покажу.</div>
+  <button class="btn-primary" onclick="goTo(119)">Создать персонажа</button>
+</div>
+
+<!-- SCREEN 119: AI-персонаж — перед генерацией (блок 2.1) -->
+<div class="screen" id="s119">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">Это будет твой персонаж в Simple World.<br>Каждый шаг нашего пути даёт ему опыт.<br><br>Зачем его качать — покажу по дороге.<br>Пока просто создай. Это минута.</div>
+  <div class="visual" style="min-height: 90px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 12px;">[ генерация аватара — техбаза E18 S1+S2 ]</div>
+  <button class="btn-primary" onclick="goTo(120)">Создать</button>
+  <div class="design-note">Диалог поверх готовой техбазы генерации аватара (5 попыток). В белой оболочке — заглушка визуала.</div>
+</div>
+
+<!-- SCREEN 120: AI-персонаж — после генерации (блок 2.2) -->
+<div class="screen" id="s120">
+  <div class="visual" style="min-height: 90px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 12px;">[ созданный персонаж · Уровень 1 ]</div>
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">Отличный вид. Серьёзно.<br><br>Уровень 1 — как у всех в начале.<br>Но это ненадолго. От тебя зависит.</div>
+  <button class="btn-primary" onclick="goTo(121)">Дальше</button>
+</div>
+
+<!-- SCREEN 121: Опрос — подводка Марка (блок 3.1) -->
+<div class="screen" id="s121">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">Теперь три быстрых вопроса.<br>Это не экзамен — настройка.<br><br>Чтобы я вёл тебя по твоему пути,<br>а не по среднему.</div>
+  <button class="btn-primary" onclick="goTo(122)">Начать настройку</button>
+</div>
+
+<!-- SCREEN 122: Опрос — вопрос про аккаунт (развилка А, D241) -->
+<div class="screen" id="s122">
+  <div style="font-size: 13px; font-weight: 700; margin-bottom: 4px;">Вопрос 1 из 3</div>
+  <div style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">TikTok-аккаунт у тебя есть?</div>
+  <button class="quiz-option" onclick="goTo(123)">Нет аккаунта</button>
+  <button class="quiz-option" onclick="goTo(124)">Постил пару раз</button>
+  <button class="quiz-option" onclick="goTo(125)">Активно веду</button>
+  <div class="design-note">Опрос D241 = 3 вопроса (аккаунт / жанр / темп). В белой оболочке ветвление только по 1-му вопросу (аккаунт → погружение 4а/4б/4в). Жанр и темп — следующий слой.</div>
+</div>
+
+<!-- SCREEN 123: Погружение 4а — «нет аккаунта» -->
+<div class="screen" id="s123">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">TikTok — это не клуб звёзд.<br><br>Лента показывает новые ролики людям<br>сразу — даже если у тебя ноль<br>подписчиков. Поэтому там зарабатывают<br>обычные люди. Покажу на примерах.</div>
+  <button class="btn-primary" onclick="goTo(126)">Дальше</button>
+  <div class="design-note">🆕 ОТКРЫТО: содержимое самого погружения (2-3 экрана «как тут зарабатывают» + примеры) — следующий слой, вместе с Касом (реальные примеры).</div>
+</div>
+
+<!-- SCREEN 124: Погружение 4б — «пара постов» -->
+<div class="screen" id="s124">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">Значит, кнопка «опубликовать»<br>тебе уже знакома.<br><br>Осталось понять, почему одни ролики<br>взлетают, а другие — нет.<br>Это не удача. Это механика. Разберём.</div>
+  <button class="btn-primary" onclick="goTo(126)">Дальше</button>
+</div>
+
+<!-- SCREEN 125: Погружение 4в — «активно веду» -->
+<div class="screen" id="s125">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">О, так мы почти коллеги.<br>Тогда без азбуки.<br><br>Здесь твои ролики начнут приносить<br>не только просмотры. Как — покажу.</div>
+  <button class="btn-primary" onclick="goTo(126)">Дальше</button>
+</div>
+
+<!-- SCREEN 126: Карта возможностей 5.1 (без сумм, D-V3) -->
+<div class="screen" id="s126">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">Стоп. Пока не убегай —<br>смотри, что уже близко:<br><br>Печать «Основы» — первая веха.<br>Артефакт — предмет с пользой.<br>Деньги за первое видео — настоящие.<br>И это только начало пути.</div>
+  <button class="btn-primary" onclick="goTo(127)">Дальше</button>
+</div>
+
+<!-- SCREEN 127: Карта возможностей 5.2 -->
+<div class="screen" id="s127">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">Цифры обещать не буду —<br>не люблю сказки.<br><br>Покажу по факту. Каждый раз.</div>
+  <button class="btn-primary" onclick="goTo(128)">Дальше</button>
+</div>
+
+<!-- SCREEN 128: Первое микро-действие 6.1 -->
+<div class="screen" id="s128">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">И последнее на сегодня.<br>Одно действие. Без камеры.<br><br>Посмотри один ролик — его снял<br>человек, начавший с нуля.<br>Просто посмотри. Это всё.</div>
+  <div class="visual" style="min-height: 90px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 12px;">[ ролик-пример — подбор Каса ]</div>
+  <button class="btn-primary" onclick="goTo(129)">Посмотреть ролик</button>
+</div>
+
+<!-- SCREEN 129: Закрытие дня 6.2 -->
+<div class="screen" id="s129">
+  <div class="char-label"><div class="char-dot mark"></div><div class="char-name mark">МАРК</div></div>
+  <div class="bubble mark-bubble">День 1 — твой. Аура получена,<br>персонажу — первый опыт.<br><br>Завтра покажу, как лента решает,<br>кому показать твой ролик. Приходи.</div>
+  <button class="btn-primary" onclick="goTo(116)">Пройти заново</button>
+  <div class="design-note">🆕 ОТКРЫТО: величины (аура за день 1, опыт персонажу) — Вера (nonmoney-rewards-v1.md §Открыто-2).</div>
+</div>
+
     </div><!-- /phone-content -->
     <div class="phone-home"></div>
   </div><!-- /phone -->
@@ -3142,7 +3282,7 @@
 </div><!-- /main -->
 
 <script>
-var TOTAL = 115;
+var TOTAL = 129;
 var current = 1;
 var removedScreens = [4, 5, 9, 10, 14, 33, 35, 36, 37, 38, 39, 40, 41, 42, 56, 57, 58, 59, 60, 61, 62, 63, 64, 68, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103];
 
@@ -3239,7 +3379,21 @@ var screenNames = {
   73: '73. Забрать',
   74: '74. Missed Day',
   75: '75. Quiz Fail',
-  76: '76. Surprise Bonus'
+  76: '76. Surprise Bonus',
+  116: '116. Креатор · Марк: встреча 1',
+  117: '117. Креатор · Марк: встреча 2',
+  118: '118. Креатор · Марк: встреча 3',
+  119: '119. Креатор · AI-персонаж (до)',
+  120: '120. Креатор · AI-персонаж (после)',
+  121: '121. Креатор · Опрос: подводка',
+  122: '122. Креатор · Опрос: аккаунт?',
+  123: '123. Креатор · Погружение 4а (нет)',
+  124: '124. Креатор · Погружение 4б (пара)',
+  125: '125. Креатор · Погружение 4в (актив)',
+  126: '126. Креатор · Карта возможностей 1',
+  127: '127. Креатор · Карта возможностей 2',
+  128: '128. Креатор · Первое действие',
+  129: '129. Креатор · Закрытие дня 1'
 };
 
 // Auto-advance code input fields
