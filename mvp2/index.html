@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Simple World — MVP 2 (редизайн)</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; background:#05070d; font-family:'DM Sans',-apple-system,system-ui,sans-serif; color:#f2f2f2; }
+  .screen { position:fixed; inset:0; display:none; }
+  .screen.active { display:block; }
+
+  /* ===== Экран 1: мир-герой (net-v1, зафиксирован D273) ===== */
+  #s1 { background:#000 url('assets/world-hero-network-v1.png') center / cover no-repeat; }
+  #s1::after { content:''; position:absolute; inset:0;
+    background:radial-gradient(120% 80% at 50% 18%, transparent 55%, rgba(0,0,0,.55) 100%); pointer-events:none; }
+
+  .top { position:absolute; top:56px; left:0; right:0; text-align:center; z-index:5; }
+  .brand { font-size:13px; letter-spacing:3px; font-weight:700; color:#f2f2f2; }
+  .tag { font-size:12px; color:hsl(0 0% 62%); margin-top:6px; }
+
+  .pin { position:absolute; transform:translate(-50%,-50%); z-index:6; text-align:center; }
+  .pin .label { display:inline-block; background:rgba(0,0,0,.45); backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:6px 12px; white-space:nowrap; }
+  .pin .name { font-size:11px; font-weight:700; color:#f2f2f2; }
+  .pin .sub { font-size:9px; color:hsl(0 0% 60%); display:flex; align-items:center; gap:5px; justify-content:center; margin-top:3px; }
+  .dot { width:7px; height:7px; border-radius:50%; background:#22c55e; box-shadow:0 0 8px rgba(34,197,94,.8); animation:pulse 2s infinite; }
+  .locked .label { opacity:.72; }
+  .lock { font-size:9px; color:hsl(0 0% 55%); margin-top:2px; }
+  .node { width:10px; height:10px; border-radius:50%; margin:0 auto 6px; background:#56e0ff;
+    box-shadow:0 0 10px 2px rgba(86,224,255,.8); }
+  .node.gold { background:#eab308; box-shadow:0 0 12px 3px rgba(234,179,8,.8); }
+  .node.dim { background:#8aa; box-shadow:0 0 6px rgba(140,170,170,.5); }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:.5} }
+
+  .bottom { position:absolute; left:20px; right:20px; bottom:40px; z-index:6;
+    display:flex; flex-direction:column; gap:10px; max-width:420px; margin:0 auto; }
+  .cta { width:100%; padding:15px; border:none; border-radius:14px; background:#22c55e; color:#04210f;
+    font:700 16px 'DM Sans',sans-serif; cursor:pointer;
+    box-shadow:0 0 20px rgba(34,197,94,.45); animation:glow 2.4s infinite; }
+  @keyframes glow { 0%,100%{box-shadow:0 0 12px rgba(34,197,94,.35)} 50%{box-shadow:0 0 26px rgba(34,197,94,.6)} }
+  .ghost { background:none; border:none; color:hsl(0 0% 70%); font-size:13px; cursor:pointer; }
+
+  /* переключатель версий (всегда доступен) */
+  .switch { position:fixed; top:14px; right:14px; z-index:20; display:flex; gap:6px; }
+  .switch a { font-size:10px; font-weight:700; text-decoration:none; padding:5px 10px; border-radius:8px;
+    background:rgba(0,0,0,.5); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.14); color:#bbb; }
+  .switch a.on { color:#56e0ff; border-color:rgba(86,224,255,.5); }
+
+  /* ===== Экран 2: статус работ ===== */
+  #s2 { background:#05070d; overflow-y:auto; }
+  .wrap { max-width:420px; margin:0 auto; padding:72px 24px 48px; }
+  h1 { font-size:20px; margin-bottom:6px; }
+  .muted { color:hsl(0 0% 60%); font-size:13px; line-height:1.5; }
+  .plan { margin:24px 0; display:flex; flex-direction:column; gap:10px; }
+  .step { background:#10141f; border:1px solid #232a3a; border-radius:12px; padding:14px 16px; }
+  .step b { font-size:13px; display:block; margin-bottom:3px; }
+  .step span { font-size:12px; color:hsl(0 0% 60%); }
+  .step.done { border-color:rgba(86,224,255,.4); }
+  .badge { font-size:9px; font-weight:700; color:#56e0ff; letter-spacing:1px; }
+  .links { display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+  .links a { display:block; text-align:center; padding:13px; border-radius:12px; text-decoration:none;
+    font-size:14px; font-weight:700; background:#10141f; border:1px solid #232a3a; color:#f2f2f2; }
+  .links a:hover { border-color:#56e0ff; }
+</style>
+</head>
+<body>
+
+<div class="switch">
+  <a href="../main_prototype/">MVP 1</a>
+  <a class="on" href="#">MVP 2</a>
+</div>
+
+<!-- Экран 1 — мир-герой -->
+<div class="screen active" id="s1">
+  <div class="top">
+    <div class="brand">SIMPLE WORLD</div>
+    <div class="tag">Мир, который строят его жители</div>
+  </div>
+
+  <div class="pin" style="top:43%; left:42%;">
+    <div class="node gold"></div>
+    <div class="label"><div class="name">Хаб</div><div class="sub"><span class="dot"></span>Новое задание</div></div>
+  </div>
+  <div class="pin" style="top:60%; left:24%;">
+    <div class="node"></div>
+    <div class="label"><div class="name">Академия</div></div>
+  </div>
+  <div class="pin locked" style="top:30%; left:64%;">
+    <div class="node dim"></div>
+    <div class="label"><div class="name">Портал</div><div class="lock">🔒 откроется позже</div></div>
+  </div>
+  <div class="pin locked" style="top:70%; left:55%;">
+    <div class="node dim"></div>
+    <div class="label"><div class="name">Арена</div><div class="lock">🔒 откроется позже</div></div>
+  </div>
+
+  <div class="bottom">
+    <button class="cta" onclick="go('s2')">Заглянуть</button>
+    <button class="ghost" onclick="go('s2')">Уже в мире? Войти</button>
+  </div>
+</div>
+
+<!-- Экран 2 — статус редизайна -->
+<div class="screen" id="s2">
+  <div class="wrap">
+    <h1>MVP 2 — в работе</h1>
+    <p class="muted">Редизайн онбординга: 7 экранов сворачиваем в 3. Мир-герой зафиксирован (D273): планета с сетью огней-узлов = локации и жители.</p>
+
+    <div class="plan">
+      <div class="step done"><span class="badge">ГОТОВО</span><b>Э1 — Мир (герой)</b><span>Живой мир + тэглайн + один тап вперёд. База net-v1 зафиксирована.</span></div>
+      <div class="step"><span class="badge" style="color:#8aa">В РАБОТЕ</span><b>Э2 — Алекс + взгляд в мир</b><span>Встреча, «Заглянуть», крючок «зачем»: люди строят, зарабатывают, Сокровищница.</span></div>
+      <div class="step"><span class="badge" style="color:#8aa">В РАБОТЕ</span><b>Э3 — Назови себя</b><span>Ник за награду, email позже. UI-хаб с 4 локациями — следом.</span></div>
+    </div>
+
+    <div class="links">
+      <a href="planet-3d.html">🌍 3D-демо: покрутить планету</a>
+      <a href="#" onclick="go('s1');return false;">← Назад к экрану 1</a>
+      <a href="../">↕ Выбор версии (MVP 1 / MVP 2)</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -3,41 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple World — Prototypes</title>
+  <title>Simple World — выбор версии</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
     .container { max-width: 480px; width: 100%; padding: 40px 24px; }
     h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: #fff; }
     .subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
-    .card { display: block; background: #151520; border: 1px solid #2a2a3a; border-radius: 12px; padding: 20px; margin-bottom: 12px; text-decoration: none; color: inherit; transition: border-color 0.2s, background 0.2s; }
-    .card:hover { border-color: #4ade80; background: #1a1a28; }
-    .card h2 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 4px; }
-    .card p { font-size: 13px; color: #888; }
-    .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
-    .badge-main { background: #4ade8033; color: #4ade80; }
-    .badge-dark { background: #818cf833; color: #818cf8; }
+    .card { display: block; background: #151520; border: 1px solid #2a2a3a; border-radius: 14px; padding: 22px; margin-bottom: 14px; text-decoration: none; color: inherit; transition: border-color 0.2s, background 0.2s; }
+    .card h2 { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+    .card p { font-size: 13px; color: #888; line-height: 1.45; }
+    .badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
+    .mvp1 { border-color: #2f3a2f; }
+    .mvp1:hover { border-color: #4ade80; background: #1a1a28; }
+    .badge-mvp1 { background: #4ade8033; color: #4ade80; }
+    .mvp2 { border-color: #223442; }
+    .mvp2:hover { border-color: #56e0ff; background: #131a26; }
+    .badge-mvp2 { background: #56e0ff26; color: #56e0ff; }
+    .divider { color: #555; font-size: 12px; margin: 26px 0 12px; letter-spacing: 1px; text-transform: uppercase; }
+    .small { padding: 14px 18px; }
+    .small h2 { font-size: 14px; }
+    .small:hover { border-color: #818cf8; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Simple World</h1>
-    <p class="subtitle">Prototypes & Wireframes</p>
-    <a class="card" href="./wireframes/">
-      <h2>Wireframes v3 <span class="badge badge-main">main</span></h2>
-      <p>Белый прототип — 115 экранов, полный user flow</p>
+    <p class="subtitle">Выбери версию прототипа</p>
+
+    <a class="card mvp1" href="./main_prototype/">
+      <h2>MVP 1 <span class="badge badge-mvp1">текущая версия</span></h2>
+      <p>То, что есть сейчас: полный прототип — онбординг, серия Евы, квесты Алекса, Сокровищница. Для сравнения «до».</p>
     </a>
-    <a class="card" href="./main_prototype/">
-      <h2>Main Prototype <span class="badge badge-dark">main</span></h2>
-      <p>Тёмная версия — game UI, серия Миры, квесты Алекса</p>
+
+    <a class="card mvp2" href="./mvp2/">
+      <h2>MVP 2 <span class="badge badge-mvp2">редизайн · в работе</span></h2>
+      <p>Новая версия: онбординг 7→3 экрана, мир-герой «планета-сеть» (D273), 3D-демо вращения. Пополняется по мере редизайна.</p>
     </a>
-    <a class="card" href="./main_prototype/index-standalone.html">
-      <h2>Main Standalone</h2>
-      <p>Автономная версия (без CDN зависимостей)</p>
+
+    <div class="divider">Служебные</div>
+
+    <a class="card small" href="./main_prototype/desktop/">
+      <h2>MVP 1 — десктоп</h2>
     </a>
-    <a class="card" href="./main_prototype/desktop/">
-      <h2>Desktop Version</h2>
-      <p>Десктопная адаптация прототипа</p>
+    <a class="card small" href="./wireframes/">
+      <h2>Wireframes v3 (ч/б, 115 экранов)</h2>
     </a>
   </div>
 </body>
